@@ -147,6 +147,16 @@ function getPages()
 	        	         ]
 	        },
 	        
+	        {"id":"reportSinisterDet", "url":"pages/sinister/reportSinisterDet.html",
+	        	"header":{
+		        	"url":"pages/general/header.html"
+		        },
+		        "leftPanel":{
+		        	"id":"sinisterListNav",
+		        	"url":"pages/general/left_panel.html"
+		        }
+	        },
+	        
 	        //Leo's scripts
 	        
 	        {"id":"DatosMecanico", "url":"pages/profile/mechanic.html"},

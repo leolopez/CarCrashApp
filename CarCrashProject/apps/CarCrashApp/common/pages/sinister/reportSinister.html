@@ -1,0 +1,31 @@
+<!-- ------------------------Sinister------------------------ -->
+<div data-role="page" id="{id}" class="ui-page-header-fixed ui-page-footer-fixed">
+	<div role="main" class="ui-content">
+		<h3 align="center" style="margin-top: 0;">Reportar siniestro</h3>
+		<div class="ui-body ui-body-a ui-corner-all">
+			<div id="map-canvas" style="width:100%;"></div>
+		</div>
+		<br/>
+		<div class="ui-body ui-body-a ui-corner-all">
+			<a href="#" onclick="getLocation();" class="ui-btn ui-corner-all">Actualizar Ubicación</a>
+			<div class="ui-field-contain" style="margin-top:0 margin-bottom: 0;">
+					<select name="selectAuto" id="selectAuto">
+						<option value="0" selected="selected">Seleccionar automovil</option>
+						<option value="1">Acura</option>
+						<option value="2">Mustang</option>
+						<option value="3">Ferrari</option>
+						<option value="4">Civic</option>
+					</select>
+				</div>
+			</div>
+	<!-- <a href="#popupDialog" data-rel="popup" data-position-to="window" data-transition="pop" class="ui-btn ui-btn-red ui-corner-all">Reportar</a> -->
+	</div>
+	<div data-hide-during-focus="false" data-tap-toggle="false" data-role="footer" data-position="fixed" data-fullscreen="true">
+		<div data-role="navbar">
+			<ul>
+				<li><a href="#reportSinisterPop" data-rel="popup" data-position-to="window" data-transition="pop" onclick="reportar('#reportSinisterDet');">Siniestro</a></li>
+				<li><a href="#reportSinisterPop" data-rel="popup" data-position-to="window" data-transition="pop" onclick="reportar('#theftsList');">Robo</a></li>
+			</ul>
+		</div><!-- /navbar -->
+	</div>	
+</div><!-- pageIncidete -->
