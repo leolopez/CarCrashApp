@@ -29,13 +29,14 @@ function wlCommonInit(){
 			if(obj.header && obj.header != "false")
 			{
 				$.get(obj.header.url, function(data){
+					var headerHTML = data.replace("{saveButton}",obj.header.saveButton);
 					if(obj.leftPanel)
 					{
-						$("#" + obj.id).append(data.replace("{leftPanel}", "#" + obj.leftPanel.id));
+						$("#" + obj.id).append(headerHTML.replace("{leftPanel}", "#" + obj.leftPanel.id));
 					}
 					else
 					{
-						$("#" + obj.id).append(data);
+						$("#" + obj.id).append(headerHTML);
 					}
 				});
 			}
@@ -71,7 +72,8 @@ function getPages()
 	//Examples:
 	//for adding a header:
 	////"header":{
-	////	"url":"pages/general/header.html",	        		
+	////	"url":"pages/general/header.html",
+	////	"saveButton":"savePolicy();"
 	////}
 	//for adding a panel:
 	////"leftPanel":{
@@ -93,6 +95,61 @@ function getPages()
 	return [
 	        {"id":"login", "url":"pages/account/login.html"},
 	        
-	        {"id":"signup", "url":"pages/account/signup.html"}
+	        {"id":"signup", "url":"pages/account/signup.html"},
+	        
+	        {"id":"theftsList", "url":"pages/sinister/theftsList.html", 
+	        	"header":{
+		        	"url":"pages/general/header.html"
+		        },
+		        "leftPanel":{
+		        	"id":"theftsListNav",
+		        	"url":"pages/general/left_panel.html"
+		        }
+	        },
+	        
+	        {"id":"sinisterList", "url":"pages/sinister/sinisterList.html",
+	        	"header":{
+		        	"url":"pages/general/header.html"
+		        },
+		        "leftPanel":{
+		        	"id":"sinisterListNav",
+		        	"url":"pages/general/left_panel.html"
+		        }
+	        },
+	        
+	        {"id":"sinisterReport", "url":"pages/sinister/reportSinister.html",
+	        	"header":{
+	        		"url":"pages/general/header.html"
+	        	},
+	        	"leftPanel":{
+	        		"id":"reportSinisterNav",
+	        		"url":"pages/general/left_panel.html"
+	        	},
+	        	"popup":[
+	        	         {
+	        	        	 "url":"pages/general/popup.html",
+	        	        	 "id":"reportSinisterPop", 
+	        	        	 "header":"Reportar?", 
+	        	        	 "title":"Esta seguro que desea levantar un reporte?", 
+	        	        	 "content":"Esta accion enviara su ubicacion y datos a su aseguradora.", 
+	        	        	 "okButton":{"action":"sendIncidenteInfo();","location":"#","text":"OK"}, 
+	        	        	 "cancelButton":{"action":"","location":"#","text":"Cancel"}
+	        	         }
+	        	         ]
+	        },
+	        
+	        //Leo's scripts
+	        
+	        {"id":"DatosMecanico", "url":"pages/profile/mechanic.html"},
+	        
+		    {"id":"DatosMedicos", "url":"pages/profile/medical.html"},
+			
+		    {"id":"AgregarPoliza", "url":"pages/profile/policiesContent.html"},
+			
+		    {"id":"perfil", "url":"pages/profile/profile.html"},
+			
+		    {"id":"poliza", "url":"pages/profile/showPolicies.html"},
+			
+		    {"id":"AlertasPoliza", "url":"pages/policyAlert/policiesAlert.html"}
 	];
 }
