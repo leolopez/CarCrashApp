@@ -159,7 +159,16 @@ function getPages()
 	        
 	        //Leo's scripts
 	        
-	        {"id":"DatosMecanico", "url":"pages/profile/mechanic.html"},
+	        {"id":"DatosMecanico", "url":"pages/profile/mechanic.html",
+	        	"header":{
+	        		"url":"pages/general/header.html",
+	        		"saveButton":"saveMechanicData();"
+	        	},
+	        	"leftPanel":{
+	        		"id":"mechanicNav",
+	        		"url":"pages/general/left_panel.html"
+	        	}
+	        },
 	        
 		    {"id":"DatosMedicos", "url":"pages/profile/medical.html"},
 			
