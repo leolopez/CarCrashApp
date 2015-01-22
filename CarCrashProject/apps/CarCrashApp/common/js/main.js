@@ -60,8 +60,8 @@ function wlCommonInit(){
 			}
 		});
 	});
-	location.href = "#login"; //First page to show
-	setTimeout("$('a').attr('data-transition','slide');", 1000); //general app transition
+	setTimeout("location.href = '#login';", 300); //First page to show
+	setTimeout("$('a').attr('data-transition','slide');", 300); //general app transition
 }
 
 //Pages array to load on index
