@@ -211,6 +211,7 @@ function initPolicyVehicleDataInfo(){
 			 WL.Logger.debug("Retrieve success" +  JSON.stringify(arrayResults));
 			if(arrayResults.length>0){
 				var index;
+				
 				for (index = 0; index < arrayResults.length; ++index) {				   
 					
 					initPolicyToList(arrayResults[index].json.Serie,arrayResults[index].json.insurance,
