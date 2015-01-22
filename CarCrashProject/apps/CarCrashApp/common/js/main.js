@@ -61,8 +61,17 @@ function wlCommonInit(){
 			}
 		});
 	});
-	setTimeout("location.href = '#login';", 700); //First page to show
-	setTimeout("$('a').attr('data-transition','slide');", 700); //general app transition
+	
+	setTimeout("initializeData();", 700);
+}
+
+function initializeData()
+{
+	location.href = '#login'; //First page to show
+	$('a').attr('data-transition','slide');	//general app transition
+	$("a[href='#sinisterReport']").click(function(){
+    	getLocation();
+    });
 }
 
 //Pages array to load on index
