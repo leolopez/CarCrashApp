@@ -310,6 +310,7 @@ subMarkParam,modelParam,colorParam, carPictureParam,holderParam){
 		// Handle failure for any of the previous JSONStore operation.
 		//(startTransaction, add, remove).
 
+		
 		WL.JSONStore.rollbackTransaction()
 
 		.always(function () {
