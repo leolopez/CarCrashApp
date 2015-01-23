@@ -113,12 +113,11 @@
 		var color=$("#txtColor");
 		var holder=$("#txtHolder");		
 		
-		policy=	 $("#txtPolicyNo");
-		 policyDate=	 $("#txtPolicyDate");
-		 aseg=$('#selectInsurance :selected');
+		
 		if(policyDate.val().trim().length>0&&policy.val().trim().length>0&&aseg.val()!="0"){ 				    	
 		    	setPolicyVehicleDataTransaction(policy,policyDate,aseg,plates,serie,vehicleType,mark,subMark,model,color,color,holder);
-		    	 addPolicyToList(serie.val(),aseg.val(),policyDate.val());	     
+		    	 addPolicyToList(serie.val(),aseg.val(),policyDate.val());
+		    	 alert('Datos guardados con exito.');
 		    } else {
 		       
 		    }		    
