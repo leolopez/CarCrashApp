@@ -170,14 +170,57 @@ function getPages()
 	        	}
 	        },
 	        
-		    {"id":"DatosMedicos", "url":"pages/profile/medical.html"},
+		    {"id":"DatosMedicos", "url":"pages/profile/medical.html",
+	        	"header":{
+	        		"url":"pages/general/header.html",
+	        		"saveButton":"saveUserMedicalData();"
+	        	}, 
+	        	"leftPanel":{
+	        		"id":"medicalNav",
+	        		"url":"pages/general/left_panel.html"
+	        	}
+	        	},
 			
-		    {"id":"AgregarPoliza", "url":"pages/profile/policiesContent.html"},
+		    {"id":"AgregarPoliza", "url":"pages/profile/policiesContent.html",
+	        	"header":{
+	        		"url":"pages/general/header.html",
+	        		"saveButton":"savePolicy();"
+	        	},
+	        	"leftPanel":{
+	        		"id":"policyNav",
+	        		"url":"pages/general/left_panel.html"
+	        	}
+	        	},
 			
-		    {"id":"perfil", "url":"pages/profile/profile.html"},
+		    {"id":"perfil", "url":"pages/profile/profile.html",
+	        	"header":{
+	        		"url":"pages/general/header.html",
+	        		"saveButton":"saveAnyPerfil();"
+	        	},
+	        	"leftPanel":{
+	        		"id":"profileNav",
+	        		"url":"pages/general/left_panel.html"
+	        	}
+	        	},
 			
-		    {"id":"poliza", "url":"pages/profile/showPolicies.html"},
+		    {"id":"poliza", "url":"pages/profile/showPolicies.html",
+	        	"header":{
+	        		"url":"pages/general/header.html"
+	        	},
+	        	"leftPanel":{
+	        		"id":"showPolicyNav",
+	        		"url":"pages/general/left_panel.html"
+	        	}
+	        	},
 			
-		    {"id":"AlertasPoliza", "url":"pages/policyAlert/policiesAlert.html"}
+		    {"id":"AlertasPoliza", "url":"pages/policyAlert/policiesAlert.html",
+	        	"header":{
+	        		"url":"pages/general/header.html"
+	        	},
+	        	"leftPanel":{
+	        		"id":"alertsNav",
+	        		"url":"pages/general/left_panel.html"
+	        	}
+	        	}
 	];
 }

@@ -1,17 +1,14 @@
 
-		$(
-		
+					
 		function initPerfil(){
-		$("#listCountries").hide();
-		$("#listMarks").hide();
-		$("#listSubMarks").hide();
-		$("#listCities").hide();
-		$("#policyCont").hide();
-				
-		   
-		}
-		);				
-		
+			$("#listCountries").hide();
+			$("#listMarks").hide();
+			$("#listSubMarks").hide();
+			$("#listCities").hide();
+			$("#policyCont").hide();
+					
+			   
+			}
 		var navigation=0;
 		var selectedPolizaData;
 		function j(){
@@ -55,7 +52,7 @@
 		}		
 				
 		$(document).on('pagebeforeshow','#perfil',function(e,data){    
-		    
+			initPerfil();
 		var n=	$("#txtProfileName");
 		var n1=	$("#txtFirstName");
 		var n2=	$("#txtLastName");
@@ -65,14 +62,16 @@
 		initPerfilDataInfo(n,n1,n2,n3,n4,n5); 	 				  
 		});			
 		
-		function savePerfil(){						
+		function savePerfil(){
+			
 			var pname =	$("#txtProfileName");
 			var firstName=	$("#txtFirstName");
 			var lastName=	$("#txtLastName");
 			var cellPhone=$("#txtCellPhone");
 			var serachCity=$("#searchCity");
 			var empresa=$("#txtEmpresa");						
-			setDataToTransaction(pname,firstName,lastName,cellPhone,serachCity,empresa);			
+			setDataToTransaction(pname,firstName,lastName,cellPhone,serachCity,empresa);
+			alert('Datos guardados con exito.');
 		}
 		function saveAnyPerfil(){						
 			switch(navigation){

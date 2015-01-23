@@ -113,9 +113,10 @@
 		var color=$("#txtColor");
 		var holder=$("#txtHolder");		
 		
-			 var newAmount = "2";
-
-		    if(newAmount != '') {		    	
+		policy=	 $("#txtPolicyNo");
+		 policyDate=	 $("#txtPolicyDate");
+		 aseg=$('#selectInsurance :selected');
+		if(policyDate.val().trim().length>0&&policy.val().trim().length>0&&aseg.val()!="0"){ 				    	
 		    	setPolicyVehicleDataTransaction(policy,policyDate,aseg,plates,serie,vehicleType,mark,subMark,model,color,color,holder);
 		    	 addPolicyToList(serie.val(),aseg.val(),policyDate.val());	     
 		    } else {
