@@ -26,44 +26,19 @@ function initPerfilDataInfo(namep, firstnamep, lastnamep, cellPhonep,cityp,enter
 				  limit: 1
 				};
 		WL.JSONStore.get(collectionName).findAll(options).then(function (arrayResults) {			
-		if(arrayResults.length>0){
-			var v=	JSON.stringify(arrayResults).split("{");		 
-		var t=v[2].split(":");    
-		
-		setData(t[0].replace('"','').replace('"',''),t[1].split(",")[0].replace('"','').replace('"',''),namep,firstnamep,lastnamep,cellPhonep,cityp,enterprisep);
-		setData(t[1].split(",")[1].replace('"','').replace('"',''),t[2].split(",")[0].replace('"','').replace('"',''),namep,firstnamep,lastnamep,cellPhonep,cityp,enterprisep);
-		setData(t[2].split(",")[1].replace('"','').replace('"',''),t[3].split(",")[0].replace('"','').replace('"',''),namep,firstnamep,lastnamep,cellPhonep,cityp,enterprisep);
-		setData(t[3].split(",")[1].replace('"','').replace('"',''),t[4].split(",")[0].replace('"','').replace('"',''),namep,firstnamep,lastnamep,cellPhonep,cityp,enterprisep);
-		setData(t[4].split(",")[1].replace('"','').replace('"',''),t[5].split(",")[0].replace('"','').replace('"',''),namep,firstnamep,lastnamep,cellPhonep,cityp,enterprisep);
-		setData(t[5].split(",")[1].replace('"','').replace('"',''),t[6].split(",")[0].replace('"','').replace('"','').replace(']','').replace('}}',''),namep,firstnamep,lastnamep,cellPhonep,cityp,enterprisep);			  
+		if(arrayResults.length>0){			
+			namep.val(arrayResults[0].json.name);								
+				firstnamep.val(arrayResults[0].json.firstname);				
+				lastnamep.val(arrayResults[0].json.lastname);				
+				cityp.val(arrayResults[0].json.city);				
+				cellPhonep.val(arrayResults[0].json.cellPhone);				
+				enterprisep.val(arrayResults[0].json.enterprise);			
 		}
 		});
 	});	
 	}
 
-function setData(data,value,namep,firstnamep,lastnamep,cellPhonep,cityp,enterprisep){
-	switch(data){
-	case "name":		
-		
-		namep.val(value);
-	break;
-	case "firstname":		
-		firstnamep.val(value);
-		break;
-	case "lastname":
-		lastnamep.val(value);
-		break;
-	case "city":
-		cityp.val(value);
-		break;
-	case "cellPhone":
-		cellPhonep.val(value);
-		break;
-	case "enterprise":
-		enterprisep.val(value);
-		break;
-	};	
-}
+
 
 function initPolicyDataInfo(namep, firstnamep, lastnamep, cellPhonep,cityp,enterprisep){
 	
@@ -110,34 +85,16 @@ function initMedicalDataInfo(imssp, bloodTypep, alergicsp, clinicalConditionsp){
 				};
 		WL.JSONStore.get(collectionName).findAll(options).then(function (arrayResults) {			
 		if(arrayResults.length>0){
-			var v=	JSON.stringify(arrayResults).split("{");		 
-		var t=v[2].split(":");    
-		
-		setMedicalData(t[0].replace('"','').replace('"',''),t[1].split(",")[0].replace('"','').replace('"',''),imssp, bloodTypep, alergicsp, clinicalConditionsp);
-		setMedicalData(t[1].split(",")[1].replace('"','').replace('"',''),t[2].split(",")[0].replace('"','').replace('"',''),imssp, bloodTypep, alergicsp, clinicalConditionsp);
-		setMedicalData(t[2].split(",")[1].replace('"','').replace('"',''),t[3].split(",")[0].replace('"','').replace('"',''),imssp, bloodTypep, alergicsp, clinicalConditionsp);
-		setMedicalData(t[3].split(",")[1].replace('"','').replace('"',''),t[4].split(",")[0].replace('"','').replace('"','').replace(']','').replace('}}',''),imssp, bloodTypep, alergicsp, clinicalConditionsp);
+			imssp.val(arrayResults[0].json.IMSS);
+			bloodTypep.val(arrayResults[0].json.bloodType);
+			alergicsp.val(arrayResults[0].json.alergics);
+			clinicalConditionsp.val(arrayResults[0].json.clinicalConditions);
 		}
 		});
 	});	
 	}
 
-function setMedicalData(data,value,imssp, bloodTypep, alergicsp, clinicalConditionsp){
-	switch(data){
-	case "IMSS":			
-		imssp.val(value);
-	break;
-	case "bloodType":		
-		bloodTypep.val(value);
-		break;
-	case "alergics":
-		alergicsp.val(value);
-		break;
-	case "clinicalConditions":
-		clinicalConditionsp.val(value);
-		break;
-	};	
-}
+
 
 function initMechanicDataInfo(MechanicNameParam, MechanicFirstNameParam, MechanicLastNameParam, MechanicCellPhoneParam,MechanicAddressParam){
 	
@@ -146,7 +103,7 @@ function initMechanicDataInfo(MechanicNameParam, MechanicFirstNameParam, Mechani
     var collections = {
     		MechanicData : {
                 searchFields: {MechanicName: 'string',  MechanicFirstName: 'string', MechanicLastName: 'string', MechanicCellPhone: 'string',
-                	MechanicAddressParam: 'string'}
+                	MechanicAddress: 'string'}
             } 
     };  
 	    
@@ -158,38 +115,18 @@ function initMechanicDataInfo(MechanicNameParam, MechanicFirstNameParam, Mechani
 				};
 		WL.JSONStore.get(collectionName).findAll(options).then(function (arrayResults) {			
 		if(arrayResults.length>0){
-			var v=	JSON.stringify(arrayResults).split("{");		 
-		var t=v[2].split(":");    
-		
-		setMechanicData(t[0].replace('"','').replace('"',''),t[1].split(",")[0].replace('"','').replace('"',''),MechanicNameParam, MechanicFirstNameParam, MechanicLastNameParam, MechanicCellPhoneParam,MechanicAddressParam);
-		setMechanicData(t[1].split(",")[1].replace('"','').replace('"',''),t[2].split(",")[0].replace('"','').replace('"',''),MechanicNameParam, MechanicFirstNameParam, MechanicLastNameParam, MechanicCellPhoneParam,MechanicAddressParam);
-		setMechanicData(t[2].split(",")[1].replace('"','').replace('"',''),t[3].split(",")[0].replace('"','').replace('"',''),MechanicNameParam, MechanicFirstNameParam, MechanicLastNameParam, MechanicCellPhoneParam,MechanicAddressParam);
-		setMechanicData(t[3].split(",")[1].replace('"','').replace('"',''),t[4].split(",")[0].replace('"','').replace('"',''),MechanicNameParam, MechanicFirstNameParam, MechanicLastNameParam, MechanicCellPhoneParam,MechanicAddressParam);		
-		setMechanicData(t[4].split(",")[1].replace('"','').replace('"',''),t[5].split(",")[0].replace('"','').replace('"','').replace(']','').replace('}}',''),MechanicNameParam, MechanicFirstNameParam, MechanicLastNameParam, MechanicCellPhoneParam,MechanicAddressParam);
+			MechanicNameParam.val(arrayResults[0].json.MechanicName);
+			MechanicFirstNameParam.val(arrayResults[0].json.MechanicFirstName);
+			MechanicLastNameParam.val(arrayResults[0].json.MechanicLastName);
+			MechanicCellPhoneParam.val(arrayResults[0].json.MechanicCellPhone);
+			MechanicAddressParam.val(arrayResults[0].json.MechanicAddress);
+			
 		}
 		});
 	});	
 	}
 
-function setMechanicData(data,value,MechanicNameParam, MechanicFirstNameParam, MechanicLastNameParam, MechanicCellPhoneParam,MechanicAddressParam){
-	switch(data){
-	case "MechanicName":			
-		MechanicNameParam.val(value);
-	break;
-	case "MechanicFirstName":		
-		MechanicFirstNameParam.val(value);
-		break;
-	case "MechanicLastName":
-		MechanicLastNameParam.val(value);
-		break;
-	case "MechanicCellPhone":
-		MechanicCellPhoneParam.val(value);
-		break;
-		case "MechanicAddress":
-			MechanicAddressParam.val(value);
-			break;
-	};	
-}
+
 
 
 function initPolicyVehicleDataInfo(){

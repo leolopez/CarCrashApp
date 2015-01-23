@@ -141,7 +141,7 @@ function setMechanicDataTransaction(MechanicNameParam, MechanicFirstNameParam, M
     	    var collections = {
     	    		MechanicData : {
     	                searchFields: {MechanicName: 'string',  MechanicFirstName: 'string', MechanicLastName: 'string', MechanicCellPhone: 'string',
-    	                	MechanicAddressParam: 'string'}
+    	                	MechanicAddress: 'string'}
     	            } 
     	    };   
     	    
