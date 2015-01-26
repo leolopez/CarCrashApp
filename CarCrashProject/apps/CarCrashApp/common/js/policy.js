@@ -24,12 +24,12 @@
 			$("#vehicleCont").show();
 			policyNavigation=0;
 			}else{				
-				alert("Ingrese todos los datos");
+				alert("Enter all required data");
 			} 
 			}
 		
 		function policiesAlert(){						
-				alert('La poliza 3GCEC28K4WG132181 esta por caducar.');
+				alert('Expired policy: 3GCEC28K4WG132181');
 		}
 		
 		
@@ -117,7 +117,7 @@
 		if(policyDate.val().trim().length>0&&policy.val().trim().length>0&&aseg.text().trim().length>0){ 				    	
 		    	setPolicyVehicleDataTransaction(policy,policyDate,aseg,plates,serie,vehicleType,mark,subMark,model,color,color,holder);
 		    	 addPolicyToList(serie.val(),aseg.text(),policyDate.val());
-		    	 alert('Datos guardados con exito.');
+		    	 alert('Data saved successfully');
 		    } else {
 		       
 		    }		    
