@@ -157,6 +157,16 @@ function getPages()
 		        }
 	        },
 	        
+	        {"id":"contacts", "url":"pages/contacts.html",
+	        	"header":{
+	        		"url":"pages/general/header.html"
+	        	},
+	        	"leftPanel":{
+	        		"id":"contactsNav",
+	        		"url":"pages/general/left_panel.html"
+	        	}
+	        },
+	        
 	        //Leo's scripts
 	        
 	        {"id":"DatosMecanico", "url":"pages/profile/mechanic.html",
