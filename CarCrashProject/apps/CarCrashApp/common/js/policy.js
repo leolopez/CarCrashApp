@@ -16,8 +16,8 @@
 		function initVehicle(){			  	
 	 policy=	 $("#txtPolicyNo");
 		 policyDate=	 $("#txtPolicyDate");
-		 aseg=$('#selectInsurance :selected');
-		if(policyDate.val().trim().length>0&&policy.val().trim().length>0&&aseg.val()!="0"){ 
+		 aseg=$('#selectInsurance option:selected');
+		if(policyDate.val().trim().length>0&&policy.val().trim().length>0&&aseg.text().trim().length>0){ 
 			$("#listMarks").hide();
 			$("#listSubMarks").hide();
 			$("#policyCont").hide();
@@ -114,9 +114,9 @@
 		var holder=$("#txtHolder");		
 		
 		
-		if(policyDate.val().trim().length>0&&policy.val().trim().length>0&&aseg.val()!="0"){ 				    	
+		if(policyDate.val().trim().length>0&&policy.val().trim().length>0&&aseg.text().trim().length>0){ 				    	
 		    	setPolicyVehicleDataTransaction(policy,policyDate,aseg,plates,serie,vehicleType,mark,subMark,model,color,color,holder);
-		    	 addPolicyToList(serie.val(),aseg.val(),policyDate.val());
+		    	 addPolicyToList(serie.val(),aseg.text(),policyDate.val());
 		    	 alert('Datos guardados con exito.');
 		    } else {
 		       
