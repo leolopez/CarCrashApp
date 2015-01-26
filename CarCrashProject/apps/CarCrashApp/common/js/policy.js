@@ -133,7 +133,7 @@ function initPolicyToList(name,insurance,policyDate){
 			        '<img height="100%" src="http://i.ndtvimg.com/auto/makers/10/63/ferrari-458-italia-01.jpg"> '+
 				    '<h2>'+name.trim()+'</h2>'+
 				    '<p>'+insurance.trim()+'</p>'+
-				    '<p>'+policyDate.trim()+'</p>'+
+				    '<p> Expiration: '+policyDate.trim()+'</p>'+
 				   ' </a>'+
 				   ' </li>');		
 		}
@@ -191,3 +191,5 @@ function initPolicyToList(name,insurance,policyDate){
 			        },
 			        { quality: 50, destinationType: navigator.camera.DestinationType.FILE_URI, sourceType : navigator.camera.PictureSourceType.CAMERA});
 		}
+		
+		
