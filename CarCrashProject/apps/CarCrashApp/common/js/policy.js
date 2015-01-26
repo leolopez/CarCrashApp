@@ -191,5 +191,23 @@ function initPolicyToList(name,insurance,policyDate){
 			        },
 			        { quality: 50, destinationType: navigator.camera.DestinationType.FILE_URI, sourceType : navigator.camera.PictureSourceType.CAMERA});
 		}
+		var showDate=0;
 		
+		$(document).on('pagebeforeshow', '#AgregarPoliza', function(){       
+		if(showDate==0){
+			var now = new Date();
+			
+		/*	$('#txtPolicyDate').mobiscroll().date({
+		        invalid: { daysOfWeek: [0, 6], daysOfMonth: ['5/1', '12/24', '12/25'] },
+		        theme: 'ios',
+		        display: 'inline',
+		        mode: 'scroller',
+		        dateOrder: 'dd mm yy',
+		        dateFormat : "dd-mm-yy",
+		        endYear: now.getFullYear() + 50
+		    });
+		    */
+			showDate=1;
+		}
+		});
 		
