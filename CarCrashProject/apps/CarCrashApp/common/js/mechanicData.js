@@ -12,7 +12,7 @@
 		function saveMechanicData(){	
 			getMechanicValues();
 			setMechanicDataTransaction(vMechanicName,vMechanicFirstName,vMechanicLastName,vMechanicCellPhone,vMechanicAddress);
-			alert('Datos guardados con exito.');
+			alert('Data saved successfully');
 		}
 		
 		function getMechanicValues(){

@@ -9,37 +9,37 @@
     			<div role="main" class="ui-content">
     		
     			<div id="policyCont"  >  
-    			<h3 align="center">Polizas.</h3>   				   			    				    				
+    			<h3 align="center">Policies.</h3>   				   			    				    				
 <div style="margin-top:0 margin-bottom: 0;" class="ui-body ui-body-a ui-corner-all">	    				    				
-    				No. Poliza     				
+    				Policy Number     				
     				<input  id="txtPolicyNo"  type="text"/>     				
-    				Vencimiento Poliza			
-    				<input  id="txtPolicyDate"  type="text"/>     				
-    				Aseguradora    				    				
+    				Policy Expiration			
+    				<input  id="txtPolicyDate" onkeypress="false" placeholder="dd/mm/yyyy"  type="text"/>     				
+    				Insurance    				    				
     				<div class="ui-field-contain" style="margin-top:0 margin-bottom: 0;">
 							<select name="selectInsurance" id="selectInsurance">
-								<option value="0" selected="selected">Seleccionar</option>
+								<option value="0" selected="selected">Select an insurance</option>
 								<option value="1">Mapfre</option>
 								<option value="2">AXXA</option>
 							</select>
 						</div>     				
-    				    <input onclick="initVehicle();"  id="txtAseg" type="button" value="Siguiente"/> </td> </tr>     				   				
+    				    <input onclick="initVehicle();"  id="txtAseg" type="button" value="Next"/> </td> </tr>     				   				
     				    				</div>
     				    				</div>
     				<div id="vehicleCont"  >    				   			    				
-    					<h3 align="center">Vehiculo</h3> 
+    					<h3 align="center">Vehicle</h3> 
 <div style="margin-top:0 margin-bottom: 0;" class="ui-body ui-body-a ui-corner-all">    				   				
-    				Placas
+    				Plates
     				<input  id="txtPlates" type="text" /> 
-    				Serie
+    				Series
     				<input  id="txtSeries" type="text" /> 
-    			Tipo de Vehiculo 
-    				<input  id="txtVehicleType" type="text" /> 
-    				Marca     				
+    			    Vehicle Type
+    				<input   id="txtVehicleType" type="text" /> 
+    				Mark     				
     				<input type="search" data-iconpos="center"  readonly="readonly" name="search" onclick="initMarks();"  id="searchMark"/> </td> </tr>
-    				SubMarca
+    				SubMark
     				<input type="search" readonly="readonly" onclick="initMarks();" name="search"  id="searchSubMark"> </td> </tr>
-    				Modelo 
+    				Model
     				<input  id="txtModel" type="text" />
     				Color
     				<input  id="txtColor" type="text" />
@@ -48,11 +48,11 @@
 	    				<div id="carPhotos" style="padding: 10px 10px 0px 10px;" align="center">
 	    					<div id="carPhotoCube" style="width: 70px; height: 70px; border: thin; border-style: dashed; display: inline-block;"></div>
 	    				</div>
-	    				<a href="#" onclick="takeCarPicture();" class="ui-btn ui-corner-all">Tomar Foto</a>
+	    				<a href="#" onclick="takeCarPicture();" class="ui-btn ui-corner-all">Take picture</a>
 	    			</div>
     				
-    				<hr></hr>
-    				Nombre del Titular 
+    				<hr></hr> 
+    				Owner Name
     				<input  id="txtHolder" type="text" />     				
     				
     				</div>    				
@@ -88,13 +88,13 @@
     			
     			<div data-role="popup" id="popupDialogMark" data-dismissible="false" style="max-width:400px; margin-top: 0;">
 					<div data-role="header" data-theme="a">
-						<h1>Confirmar?</h1>
+						<h1>Confirm?</h1>
 					</div>
 					<div role="main" class="ui-content">
-						<h3 class="ui-title">Ha elegido lo siguiente:</h3>
-						<p>Marca: </p>
+						<h3 class="ui-title">Selection Details:</h3>
+						<p>Mark: </p>
 						<p><label id="lblMarkSelected" ></label> </p>
-						<p>SubMarca: </p>
+						<p>SubMark: </p>
 						<p><label id="lblSubMarkSelected" ></label> </p>
 						<a href="#" class="ui-btn ui-corner-all ui-shadow ui-btn-inline ui-btn-b" data-rel="back">Cancel</a>
 						<a href=""  onclick="markSelected();" class="ui-btn ui-corner-all ui-shadow ui-btn-inline ui-btn-b" data-rel="back" data-transition="flow">OK</a>
@@ -104,7 +104,7 @@
     			<div data-tap-toggle="false" data-hide-during-focus="false" data-role="footer" data-position="fixed" data-fullscreen="true" class="bottomFooter">
 	   				<div data-role="navbar" data-iconpos="top">
 	   					<ul>
-	   					<li><a href="#poliza" >Registros</a></li>
+	   					<li><a href="#poliza" >List of records</a></li>
 							
 						</ul>
 					</div><!-- /navbar -->

@@ -286,7 +286,7 @@ subMarkParam,modelParam,colorParam, carPictureParam,holderParam){
 		
 		// Data to add, you probably want to get
 		// this data from a network call (e.g. Adapter).
-		var data = [{PolicyNo: policyNoParam.val().trim(), PolicyDate: policyDateParam.val().trim(), insurance: insuranceParam.val().trim(),
+		var data = [{PolicyNo: policyNoParam.val().trim(), PolicyDate: policyDateParam.val().trim(), insurance: insuranceParam.text().trim(),
 			Plates: platesParam.val().trim(),Serie: serieParam.val().trim(),VehicleType: vehicleTypeParam.val().trim(),Mark: markParam.val().trim(),
 			SubMark: subMarkParam.val().trim(),Model: modelParam.val().trim(),Color: colorParam.val().trim(),carPicture: carPictureParam.val().trim(),
 			Holder: holderParam.val().trim()

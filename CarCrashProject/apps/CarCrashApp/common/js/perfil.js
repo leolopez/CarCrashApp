@@ -71,7 +71,7 @@
 			var serachCity=$("#searchCity");
 			var empresa=$("#txtEmpresa");						
 			setDataToTransaction(pname,firstName,lastName,cellPhone,serachCity,empresa);
-			alert('Datos guardados con exito.');
+			alert('Data saved successfully');
 		}
 		function saveAnyPerfil(){						
 			switch(navigation){

@@ -24,12 +24,12 @@
 			$("#vehicleCont").show();
 			policyNavigation=0;
 			}else{				
-				alert("Ingrese todos los datos");
+				alert("Enter all required data");
 			} 
 			}
 		
 		function policiesAlert(){						
-				alert('La poliza 3GCEC28K4WG132181 esta por caducar.');
+				alert('Expired policy: 3GCEC28K4WG132181');
 		}
 		
 		
@@ -117,7 +117,7 @@
 		if(policyDate.val().trim().length>0&&policy.val().trim().length>0&&aseg.text().trim().length>0){ 				    	
 		    	setPolicyVehicleDataTransaction(policy,policyDate,aseg,plates,serie,vehicleType,mark,subMark,model,color,color,holder);
 		    	 addPolicyToList(serie.val(),aseg.text(),policyDate.val());
-		    	 alert('Datos guardados con exito.');
+		    	 alert('Data saved successfully');
 		    } else {
 		       
 		    }		    
@@ -133,7 +133,7 @@ function initPolicyToList(name,insurance,policyDate){
 			        '<img height="100%" src="http://i.ndtvimg.com/auto/makers/10/63/ferrari-458-italia-01.jpg"> '+
 				    '<h2>'+name.trim()+'</h2>'+
 				    '<p>'+insurance.trim()+'</p>'+
-				    '<p>'+policyDate.trim()+'</p>'+
+				    '<p> Expiration: '+policyDate.trim()+'</p>'+
 				   ' </a>'+
 				   ' </li>');		
 		}
@@ -191,3 +191,23 @@ function initPolicyToList(name,insurance,policyDate){
 			        },
 			        { quality: 50, destinationType: navigator.camera.DestinationType.FILE_URI, sourceType : navigator.camera.PictureSourceType.CAMERA});
 		}
+		var showDate=0;
+		
+		$(document).on('pagebeforeshow', '#AgregarPoliza', function(){       
+		if(showDate==0){
+			var now = new Date();
+			
+		/*	$('#txtPolicyDate').mobiscroll().date({
+		        invalid: { daysOfWeek: [0, 6], daysOfMonth: ['5/1', '12/24', '12/25'] },
+		        theme: 'ios',
+		        display: 'inline',
+		        mode: 'scroller',
+		        dateOrder: 'dd mm yy',
+		        dateFormat : "dd-mm-yy",
+		        endYear: now.getFullYear() + 50
+		    });
+		    */
+			showDate=1;
+		}
+		});
+		
