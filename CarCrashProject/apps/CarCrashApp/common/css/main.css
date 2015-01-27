@@ -21,8 +21,8 @@
 .bottomFooter
 {
 	bottom:0; 
-	position:absolute !important; 
-	top: auto !important; 
+	position: fixed !important; 
+	/*top: auto !important;*/
 	width:100%;
 	/*padding-top: 10px; /*Footer blank space fix*/
 }
