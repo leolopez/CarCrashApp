@@ -30,6 +30,14 @@ function wlCommonInit(){
 			{
 				$.get(obj.header.url, function(data){
 					var headerHTML = data.replace("{saveButton}",obj.header.saveButton);
+					if(device.platform == "iOS" && parseFloat(device.version) >= 7.0)
+					{
+						headerHTML = headerHTML.replace("{headerStyle}","style='padding-top:20px;'").replace("{leftStyle}","style='margin-top:20px;'").replace("{rightStyle}","style='margin-top:20px;'");
+					}
+					else
+					{
+						headerHTML = headerHTML.replace("{headerStyle}","").replace("{leftStyle}","").replace("{rightStyle}","");
+					}
 					if(obj.leftPanel)
 					{
 						$("#" + obj.id).append(headerHTML.replace("{leftPanel}", "#" + obj.leftPanel.id));
