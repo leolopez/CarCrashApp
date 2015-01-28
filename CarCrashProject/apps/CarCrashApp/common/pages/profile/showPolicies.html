@@ -34,7 +34,7 @@
 </div>  
  			    							
 				</div>				
-<div data-role="popup" id="popupDialogEliminar" data-dismissible="false" style="max-width:400px; margin-top: 0;">
+<div data-role="popup" id="popupDialogEliminar"  data-dismissible="false" style="max-width:400px; margin-top: 0;">
 					<div data-role="header" data-theme="a">
 						<h1>Eliminar?</h1>
 					</div>
@@ -50,8 +50,8 @@
 	   				<div data-role="navbar" data-iconpos="top">
 	   					<ul>	   					
 							<li><a href="#AgregarPoliza" data-icon="plus">New</a></li>
-							<li><a href="#popupDialogEliminar"  data-rel="popup" data-position-to="window"
-				 data-transition="pop" id="yesPolicy"  data-icon="delete">Delete</a></li>
+							<li><a href="#popupDialogEliminar" data-rel="popup" data-position-to="origin"
+				 data-transition="pop" id="yesPolicy" onclick="    setTimeout(function () {  }, 500);"  data-icon="delete">Delete</a></li>
 						</ul>
 					</div><!-- /navbar -->
 	   			</div>	

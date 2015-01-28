@@ -211,3 +211,8 @@ function initPolicyToList(name,insurance,policyDate){
 		}
 		});
 		
+		jQuery.fn.center = function () {
+		    this.css("position","center");
+		    return this;
+		};
+		
