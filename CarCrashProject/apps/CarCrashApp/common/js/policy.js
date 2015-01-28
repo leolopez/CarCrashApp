@@ -211,8 +211,10 @@ function initPolicyToList(name,insurance,policyDate){
 		}
 		});
 		
-		jQuery.fn.center = function () {
-		    this.css("position","center");
-		    return this;
-		};
-		
+		function popUpListPolicy(){
+			
+			$('.ui-popup-container').css({
+		        top: 50,
+		          bottom:50
+		    }); 
+		}

@@ -6,8 +6,7 @@
     			
     			<div role="main" class="ui-content">
     			<h3 align="center">List of records.</h3> 
-    				    				    			    				    			  				   			    				    				    			
-    			<div >
+    				    				    			    				    			  				   			    				    				    			   			
     			<ul id="listPolicy" data-role="listview" data-inset="true">
     <li><a href="#" onclick="initSelectedPolicy(this);">
         <img height="100%" src="http://www.euik.com/wp-content/uploads/2012/02/acura-tsx.jpg">
@@ -31,7 +30,7 @@
     </a>
     </li>
 </ul>
-</div>  
+ 
  			    							
 				</div>				
 <div data-role="popup" id="popupDialogEliminar"  data-dismissible="false" style="max-width:400px; margin-top: 0;">
@@ -46,11 +45,11 @@
 						<a href=""  data-rel="back" id="yesPolicy" onclick="" class="ui-btn ui-corner-all ui-shadow ui-btn-inline ui-btn-b" >OK</a>
 						</div>
 				</div> 
-    			<div data-tap-toggle="false" data-hide-during-focus="false" data-role="footer" data-position="fixed" data-fullscreen="true" class="bottomFooter">
+    			<div id="posFooter" data-tap-toggle="false" data-hide-during-focus="false" data-role="footer" data-position="fixed" data-fullscreen="true" class="bottomFooter">
 	   				<div data-role="navbar" data-iconpos="top">
 	   					<ul>	   					
 							<li><a href="#AgregarPoliza" data-icon="plus">New</a></li>
-							<li><a href="#popupDialogEliminar" data-rel="popup" data-position-to="window" data-transition="pop" id="yesPolicy"  data-icon="delete">Delete</a></li>
+							<li><a href="#popupDialogEliminar" onclick="popUpListPolicy();" data-rel="popup" data-position-to="window" data-transition="pop" id="yesPolicy"  data-icon="delete">Delete</a></li>
 						</ul>
 					</div><!-- /navbar -->
 	   			</div>	
