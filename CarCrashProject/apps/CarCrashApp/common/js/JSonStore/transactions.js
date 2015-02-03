@@ -10,8 +10,13 @@
     IBM HAS NO OBLIGATION TO PROVIDE MAINTENANCE, SUPPORT, UPDATES, ENHANCEMENTS OR MODIFICATIONS TO THE SAMPLE SOURCE CODE.
 
  */ 
-
+var initPass =0;
 function setDataToTransaction(namep, firstnamep, lastnamep, cellPhonep,cityp,enterprisep){
+	
+	
+	
+	 
+	
 	var collectionName = 'perfil';    
 
     	    var collections = {
@@ -23,6 +28,9 @@ function setDataToTransaction(namep, firstnamep, lastnamep, cellPhonep,cityp,ent
     	    
     	    WL.JSONStore.init(collections).then(function () {   			
    			   WL.JSONStore.get(collectionName).clear(); 
+   		}).fail(function (errorObject) {		   			   			
+   			
+   			
    		});
 	  
      WL.JSONStore.init(collections)	 	  
@@ -48,33 +56,34 @@ function setDataToTransaction(namep, firstnamep, lastnamep, cellPhonep,cityp,ent
 				// Mark data as dirty (true = yes, false = no), default true.
 				markDirty: true
 		};
-
+		
 		// Get an accessor to the people collection and add data.
+		
 		return WL.JSONStore.get(collectionName).add(data,addOptions);
 	})
 	.then(function () {
-
-		return WL.JSONStore.commitTransaction();
+		alert('Data saved successfully');	
+		 WL.JSONStore.commitTransaction();
 	})
-	.then(function () {
-     	
-       
-     })
 	.fail(function (errorObject) {		
 		// Handle failure for any of the previous JSONStore operation.
 		//(startTransaction, add, remove).
-
+			
+		alert("Error: "+errorObject.msg);
 		WL.JSONStore.rollbackTransaction()
 
-		.always(function () {
-			
-		});
-	});
+		.fail(function (errorObjects) {
+				
+		});		
+	
+		
+	});				
 
 }
 
 
 function setDataToPolicyTransaction(policyp, seriep, platesp, vehicleTypep,markp,submarkp,modelp,colorp,holderp,conductorp){
+	
 	var  collectionName = 'poliza'; 
 	    
     	    var collections = {
@@ -85,11 +94,13 @@ function setDataToPolicyTransaction(policyp, seriep, platesp, vehicleTypep,markp
     	            } 
     	    };    
     	    
-    	     WL.JSONStore.init(collections).then(function () {
+    	     WL.JSONStore.init(collections,encripData()).then(function () {
     			   WL.JSONStore.get(collectionName).clear(); 
-    		});
+    		}).fail(function (errorObject) {		   			   			
+       				
+       		});
 	  
-     WL.JSONStore.init(collections)	 	  
+     WL.JSONStore.init(collections,encripData())	 	  
 	.then(function () {
 		return WL.JSONStore.startTransaction();
 	})
@@ -117,6 +128,7 @@ function setDataToPolicyTransaction(policyp, seriep, platesp, vehicleTypep,markp
 		return WL.JSONStore.get(collectionName).add(data,addOptions);
 	})
 	.then(function () {
+		alert('Data saved successfully');
 		return WL.JSONStore.commitTransaction();
 	})
 	.then(function () {
@@ -125,17 +137,19 @@ function setDataToPolicyTransaction(policyp, seriep, platesp, vehicleTypep,markp
 	.fail(function (errorObject) {		
 		// Handle failure for any of the previous JSONStore operation.
 		//(startTransaction, add, remove).
-		 
+		alert("Error: "+errorObject.msg);
 		WL.JSONStore.rollbackTransaction()
 
 		.always(function () {
 			
 		});
+			
 	});
 
 }
 
 function setMechanicDataTransaction(MechanicNameParam, MechanicFirstNameParam, MechanicLastNameParam, MechanicCellPhoneParam,MechanicAddressParam){
+	
 	var collectionName = 'MechanicData';    
 
     	    var collections = {
@@ -147,6 +161,8 @@ function setMechanicDataTransaction(MechanicNameParam, MechanicFirstNameParam, M
     	    
     	    WL.JSONStore.init(collections).then(function () {   			
    			   WL.JSONStore.get(collectionName).clear(); 
+   		}).fail(function (errorObject) {		   			   			
+   			
    		});
 	  
      WL.JSONStore.init(collections)	 	  
@@ -177,7 +193,7 @@ function setMechanicDataTransaction(MechanicNameParam, MechanicFirstNameParam, M
 		return WL.JSONStore.get(collectionName).add(data,addOptions);
 	})
 	.then(function () {
-
+		alert('Data saved successfully');
 		return WL.JSONStore.commitTransaction();
 	})
 	.then(function () {
@@ -187,17 +203,20 @@ function setMechanicDataTransaction(MechanicNameParam, MechanicFirstNameParam, M
 	.fail(function (errorObject) {		
 		// Handle failure for any of the previous JSONStore operation.
 		//(startTransaction, add, remove).
-
+		alert("Error: "+errorObject.msg);
 		WL.JSONStore.rollbackTransaction()
 
 		.always(function () {
 			
 		});
+				
 	});
+
 
 }
 
 function setMedicalDataTransaction(imssp, bloodTypep, alergicsp, clinicalConditionsp){
+	
 	var collectionName = 'MedicalData';    
 
     	    var collections = {
@@ -209,6 +228,8 @@ function setMedicalDataTransaction(imssp, bloodTypep, alergicsp, clinicalConditi
     	    
     	    WL.JSONStore.init(collections).then(function () {   			
    			   WL.JSONStore.get(collectionName).clear(); 
+   		}).fail(function (errorObject) {		   			   			
+   			
    		});
 	  
      WL.JSONStore.init(collections)	 	  
@@ -239,26 +260,28 @@ function setMedicalDataTransaction(imssp, bloodTypep, alergicsp, clinicalConditi
 		return WL.JSONStore.get(collectionName).add(data,addOptions);
 	})
 	.then(function () {
-
+		alert('Data saved successfully');
 		return WL.JSONStore.commitTransaction();
 	})
 	.fail(function (errorObject) {		
 		// Handle failure for any of the previous JSONStore operation.
 		//(startTransaction, add, remove).
-
+		alert("Error: "+errorObject.msg);
 		WL.JSONStore.rollbackTransaction()
 
 		.always(function () {
 			
 		});
+			
 	});
+
 
 }
 
 function setPolicyVehicleDataTransaction(policyNoParam,
 		policyDateParam, insuranceParam, platesParam,serieParam,vehicleTypeParam,markParam,
 subMarkParam,modelParam,colorParam, carPictureParam,holderParam){
-	
+
 	var collectionName = 'PolicyVehicle';    
 
     	    var collections = {
@@ -303,20 +326,46 @@ subMarkParam,modelParam,colorParam, carPictureParam,holderParam){
 		return WL.JSONStore.get(collectionName).add(data,addOptions);
 	})
 	.then(function () {
-
+		
+		alert('Data saved successfully');
 		return WL.JSONStore.commitTransaction();
 	})
 	.fail(function (errorObject) {		
 		// Handle failure for any of the previous JSONStore operation.
 		//(startTransaction, add, remove).
-
 		
+		alert("Error: "+errorObject.msg);
 		WL.JSONStore.rollbackTransaction()
 
 		.always(function () {
 			
 		});
+		
 	});
 
+}
+
+function encripData(){
+	
+	
+	
+	return options = { 
+			   username: 'solutia', //default: 'jsonstore'
+			   password: 'sol12', //default: no encryption
+				   localKeyGen : false
+			};
+}
+
+function cleaningData(){
+	WL.JSONStore.closeAll()
+
+	.then(function () {
+	  // Handle success.
+	})
+
+	.fail(function (errorObject) {
+	  // Handle failure.
+	});
+	
 }
 

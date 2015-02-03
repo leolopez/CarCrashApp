@@ -12,6 +12,8 @@
  */ 
 function initPerfilDataInfo(namep, firstnamep, lastnamep, cellPhonep,cityp,enterprisep){
 	
+	
+	
 	 var collections = {
 	            perfil : {
 	                searchFields: {name: 'string', firstname: 'string', lastname: 'string', cellPhone: 'string',
@@ -142,8 +144,8 @@ function initPolicyVehicleDataInfo(){
 	            } 
 	    };   
 	    
-	WL.JSONStore.init(collections).then(function () {		
-		
+	WL.JSONStore.init(collections).then(function () {						 
+		  
 		WL.JSONStore.get(collectionName).findAll().then(function (arrayResults) {			
 			 WL.Logger.debug("Retrieve success" +  JSON.stringify(arrayResults));
 			if(arrayResults.length>0){

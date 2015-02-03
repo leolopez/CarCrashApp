@@ -11,8 +11,7 @@
 		
 		function saveMechanicData(){	
 			getMechanicValues();
-			setMechanicDataTransaction(vMechanicName,vMechanicFirstName,vMechanicLastName,vMechanicCellPhone,vMechanicAddress);
-			alert('Data saved successfully');
+			setMechanicDataTransaction(vMechanicName,vMechanicFirstName,vMechanicLastName,vMechanicCellPhone,vMechanicAddress);						
 		}
 		
 		function getMechanicValues(){

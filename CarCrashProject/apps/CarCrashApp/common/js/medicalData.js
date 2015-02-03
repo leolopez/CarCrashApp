@@ -11,7 +11,7 @@
 		function saveUserMedicalData(){
 			getMedicalValues();
 			setMedicalDataTransaction(noImss,vBloodType,vAlergics,vClinicalConditions);	
-			alert('Data saved successfully');
+			
 		}
 		function getMedicalValues(){
 			noImss =	$("#txtNoIMSS");
