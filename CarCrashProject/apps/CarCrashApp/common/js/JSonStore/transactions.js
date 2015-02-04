@@ -11,11 +11,7 @@
 
  */ 
 var initPass =0;
-function setDataToTransaction(namep, firstnamep, lastnamep, cellPhonep,cityp,enterprisep){
-	
-	
-	
-	 
+function setDataToTransaction(namep, firstnamep, lastnamep, cellPhonep,cityp,enterprisep){				 
 	
 	var collectionName = 'perfil';    
 
@@ -281,7 +277,6 @@ function setMedicalDataTransaction(imssp, bloodTypep, alergicsp, clinicalConditi
 function setPolicyVehicleDataTransaction(policyNoParam,
 		policyDateParam, insuranceParam, platesParam,serieParam,vehicleTypeParam,markParam,
 subMarkParam,modelParam,colorParam, carPictureParam,holderParam){
-
 	var collectionName = 'PolicyVehicle';    
 
     	    var collections = {
@@ -325,8 +320,8 @@ subMarkParam,modelParam,colorParam, carPictureParam,holderParam){
 		// Get an accessor to the people collection and add data.
 		return WL.JSONStore.get(collectionName).add(data,addOptions);
 	})
-	.then(function () {
-		
+	.then(function () {		
+		addPolicyToList(serieParam.val().trim(),insuranceParam.text().trim(),policyDateParam.val().trim());
 		alert('Data saved successfully');
 		return WL.JSONStore.commitTransaction();
 	})

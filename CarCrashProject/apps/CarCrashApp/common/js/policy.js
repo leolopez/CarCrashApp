@@ -115,14 +115,7 @@
 		
 		
 		if(policyDate.val().trim().length>0&&policy.val().trim().length>0&&aseg.text().trim().length>0){ 				    	
-		    	var status=setPolicyVehicleDataTransaction(policy,policyDate,aseg,plates,serie,vehicleType,mark,subMark,model,color,color,holder);		    			    	 
-		    	 var ms=status.trim();		 			
-		 			if(ms.length>0&&ms=="saved"){
-		 				 addPolicyToList(serie.val(),aseg.text(),policyDate.val());
-		 				alert('Data saved successfully');							
-		 			}else if(ms.length>0&&ms!="saved"){
-		 				alert('Error: '+ms);									
-		 			}		    	 		    	 
+		    	setPolicyVehicleDataTransaction(policy,policyDate,aseg,plates,serie,vehicleType,mark,subMark,model,color,color,holder);		    			    	 		    			    			 					    	 		    	 
 		    } else {
 		       
 		    }		    
