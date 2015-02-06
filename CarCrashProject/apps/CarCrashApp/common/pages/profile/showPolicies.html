@@ -5,7 +5,7 @@
     			
     			
     			<div role="main" class="ui-content">
-    			<h3 align="center">List of records.</h3> 
+    			<h3 align="center" id="h3RecordsList">List of records.</h3> 
     				    				    			    				    			  				   			    				    				    			   			
     			<ul id="listPolicy" data-role="listview" data-inset="true">
     <li><a href="#" onclick="initSelectedPolicy(this);">
@@ -26,7 +26,7 @@
         <img height="100%" src="http://i.ndtvimg.com/auto/makers/10/63/ferrari-458-italia-01.jpg">
     <h2>Ferrari</h2>
     <p>Mapfre</p>
-    <p>Expiration 15/10/2016</p>
+    <p> <span id="cc" >Expiration: </span> 15/10/2016</p>
     </a>
     </li>
 </ul>
@@ -35,10 +35,10 @@
 				</div>				
 <div data-role="popup" id="popupDialogEliminar"  data-dismissible="false" style="max-width:400px; margin-top: 0;">
 					<div data-role="header" data-theme="a">
-						<h1>Eliminar?</h1>
+						<h1 id="h1ConfirmPolicy">Eliminar?</h1>
 					</div>
 					<div role="main" class="ui-content">
-						<h3 class="ui-title">Desea eliminar el registro seleccionado?</h3>
+						<h3 id="h3DeletePolicy" class="ui-title">Desea eliminar el registro seleccionado?</h3>
 						<p></p>
 						<p><label id="lblPolicySelected" ></label> </p>
 						<a href="#" id="cancelPolicy" class="ui-btn ui-corner-all ui-shadow ui-btn-inline ui-btn-b" data-rel="back">Cancel</a>
@@ -48,8 +48,8 @@
     			<div id="posFooter" data-tap-toggle="false" data-hide-during-focus="false" data-role="footer" data-position="fixed" data-fullscreen="true" class="bottomFooter">
 	   				<div data-role="navbar" data-iconpos="top">
 	   					<ul>	   					
-							<li><a href="#AgregarPoliza" data-icon="plus">New</a></li>
-							<li><a href="#popupDialogEliminar" onclick="popUpListPolicy();" data-rel="popup" data-position-to="window" data-transition="pop" id="yesPolicy"  data-icon="delete">Delete</a></li>
+							<li><a id="aAddPolicy" href="#AgregarPoliza" data-icon="plus">New</a></li>
+							<li><a id="aDeletePolicy" href="#popupDialogEliminar" onclick="popUpListPolicy();" data-rel="popup" data-position-to="window" data-transition="pop" id="yesPolicy"  data-icon="delete">Delete</a></li>
 						</ul>
 					</div><!-- /navbar -->
 	   			</div>	

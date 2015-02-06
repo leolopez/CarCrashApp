@@ -2,28 +2,18 @@
     		<div data-role="page" id="{id}" class="ui-page-header-fixed ui-page-footer-fixed">
     		      			   			
     			<div role="main" class="ui-content">
-    				<h3 align="center" style="margin-top: 0;">Medical Data</h3>
-    				<div style="margin-top:0 margin-bottom: 0;" class="ui-body ui-body-a ui-corner-all">    					    				    				
-    				IMSS Number     				
-    				<input  id="txtNoIMSS"  type="text"/>     			
-    				blood type
+    				<h3 id="h3MedicalData" align="center" style="margin-top: 0;">Medical Data</h3>
+    				<div style="margin-top:0 margin-bottom: 0;" class="ui-body ui-body-a ui-corner-all">
+    				<label id="lblIMSSNum">IMSS Number</label>    					    				    				    				     				
+    				<input  id="txtNoIMSS"  type="text"/>  
+    				<label id="lblBloodType">Blood type</label>    			    				
     				<input  id="txtBloodType" type="text" /> 
-    				Allergies 
+    				<label id="lblAllergies">Allergies</label>    				 
     				<input  id="txtAlergics" type="text" /> 
-    				Conditions 
+    				<label id="lblConditions">Conditions</label>    				 
     				<input  id="txtClinicalConditions" type="text" />    				    				
     				</div>
-    				<div data-role="popup" id="popupDialogMedicalData" data-dismissible="false" style="max-width:400px; margin-top: 0;">
-					<div data-role="header" data-theme="a">
-						<h1>Informacion</h1>
-					</div>
-					<div role="main" class="ui-content">
-						<h3 class="ui-title">Datos guardados con exito.</h3>						
-						<div class="ui-body">
-						<a  href="" id="policySaved" class="ui-btn ui-corner-all ui-shadow ui-btn-inline ui-btn-b" data-rel="back">OK</a>
-						</div>
-						</div>
-				</div>
+    				
     			</div>
 				 
 				 

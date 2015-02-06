@@ -58,7 +58,7 @@ function setDataToTransaction(namep, firstnamep, lastnamep, cellPhonep,cityp,ent
 		return WL.JSONStore.get(collectionName).add(data,addOptions);
 	})
 	.then(function () {
-		alert('Data saved successfully');	
+		alert(Messages.msgDataSaved);	
 		 WL.JSONStore.commitTransaction();
 	})
 	.fail(function (errorObject) {		
@@ -124,7 +124,7 @@ function setDataToPolicyTransaction(policyp, seriep, platesp, vehicleTypep,markp
 		return WL.JSONStore.get(collectionName).add(data,addOptions);
 	})
 	.then(function () {
-		alert('Data saved successfully');
+		alert(Messages.msgDataSaved);
 		return WL.JSONStore.commitTransaction();
 	})
 	.then(function () {
@@ -189,7 +189,7 @@ function setMechanicDataTransaction(MechanicNameParam, MechanicFirstNameParam, M
 		return WL.JSONStore.get(collectionName).add(data,addOptions);
 	})
 	.then(function () {
-		alert('Data saved successfully');
+		alert(Messages.msgDataSaved);
 		return WL.JSONStore.commitTransaction();
 	})
 	.then(function () {
@@ -256,7 +256,7 @@ function setMedicalDataTransaction(imssp, bloodTypep, alergicsp, clinicalConditi
 		return WL.JSONStore.get(collectionName).add(data,addOptions);
 	})
 	.then(function () {
-		alert('Data saved successfully');
+		alert(Messages.msgDataSaved);
 		return WL.JSONStore.commitTransaction();
 	})
 	.fail(function (errorObject) {		
@@ -322,7 +322,7 @@ subMarkParam,modelParam,colorParam, carPictureParam,holderParam){
 	})
 	.then(function () {		
 		addPolicyToList(serieParam.val().trim(),insuranceParam.text().trim(),policyDateParam.val().trim());
-		alert('Data saved successfully');
+		alert(Messages.msgDataSaved);
 		return WL.JSONStore.commitTransaction();
 	})
 	.fail(function (errorObject) {		

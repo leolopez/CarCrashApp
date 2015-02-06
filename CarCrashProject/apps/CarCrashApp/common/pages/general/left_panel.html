@@ -1,43 +1,43 @@
-<div data-role="panel" id="{id}" data-position-fixed="true" class="ui-panel ui-panel-position-left ui-panel-display-push ui-body-inherit ui-panel-animate ui-panel-open">
+<div  data-role="panel" id="{id}" data-position-fixed="true" class="ui-panel ui-panel-position-left ui-panel-display-push ui-body-inherit ui-panel-animate ui-panel-open">
 	<div class="ui-panel-inner">
-    	<ul data-role="listview" class="ui-listview">
+    	<ul id="ulLeftPanel" data-role="listview" class="ui-listview">
     		<li data-role="list-divider" role="heading" class="ui-li-divider ui-bar-inherit">Car Crash</li>
     		<li style="border-bottom-width: 2px; border-top-width:0;" data-role="collapsible"   data-iconpos="left" data-inset="false">
-				<h2 style="margin:0">Profile</h2>
+				<h2 tit="h2Profile" style="margin:0">Profile</h2>
   				<ul data-role="listview">
     				<li>
-    					<a href="#perfil" class="ui-btn ui-btn-icon-right ui-icon-carat-r">Account</a>
+    					<a sel="aAccount" href="#perfil" class="ui-btn ui-btn-icon-right ui-icon-carat-r">Account</a>
 					</li>        		
 					<li>
-						<a href="#poliza">Vehicles/Policies</a>
+						<a sel="aPoliza" href="#poliza">Vehicles/Policies</a>
 					</li> 
 					<li>
-	        			<a href="#DatosMedicos" class="ui-btn ui-btn-icon-right ui-icon-carat-r">Medical data</a>
+	        			<a sel="aMedicalData" href="#DatosMedicos" class="ui-btn ui-btn-icon-right ui-icon-carat-r">Medical data</a>
 	        		</li>       
     				<li>
-	        			<a href="#DatosMecanico" class="ui-btn ui-btn-icon-right ui-icon-carat-r">Mechanic contact</a>
+	        			<a sel="aMechanicContact" href="#DatosMecanico" class="ui-btn ui-btn-icon-right ui-icon-carat-r">Mechanic contact</a>
 	        		</li>			        		
   				</ul> 
 			</li>
 	       	<li data-role="collapsible" data-iconpos="left" data-inset="false">
-	       		<h2 style="margin:0">Sinister</h2>
+	       		<h2 tit="aSinister" style="margin:0">Sinister</h2>
 	       		<ul data-role="listview">
 		       		<li>
-		        		<a href="#sinisterReport" class="ui-btn ui-btn-icon-right ui-icon-carat-r">Report incident</a>
+		        		<a sel="aLiReportIncident" href="#sinisterReport" class="ui-btn ui-btn-icon-right ui-icon-carat-r">Report incident</a>
 		        	</li>
 		        	<li>
-		        		<a href="#theftsList" class="ui-btn ui-btn-icon-right ui-icon-carat-r">Thefts List</a>
+		        		<a sel="aLiTheftsList" href="#theftsList" class="ui-btn ui-btn-icon-right ui-icon-carat-r">Thefts List</a>
 		        	</li>
 		        	<li>
-		        		<a href="#sinisterList" class="ui-btn ui-btn-icon-right ui-icon-carat-r">Sinisters List</a>
+		        		<a  sel="aLiSinistersList" href="#sinisterList" class="ui-btn ui-btn-icon-right ui-icon-carat-r">Sinisters List</a>
 		        	</li>
 	        	</ul>
 	        </li>
 	       	<li>
-	       		<a href="#AlertasPoliza" onclick="policiesAlert();" class="ui-btn ui-btn-icon-right ui-icon-carat-r">Alerts</a>
+	       		<a  sel="aLiAlerts" href="#AlertasPoliza" onclick="policiesAlert();" class="ui-btn ui-btn-icon-right ui-icon-carat-r">Alerts</a>
     		</li>
     		<li>
-    			<a href="#contacts" class="ui-btn ui-btn-icon-right ui-icon-carat-r">Contacts</a>
+    			<a  sel="aContacts" href="#contacts" class="ui-btn ui-btn-icon-right ui-icon-carat-r">Contacts</a>
     		</li>
     	</ul>
     </div>

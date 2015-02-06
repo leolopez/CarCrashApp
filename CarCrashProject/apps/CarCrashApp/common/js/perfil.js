@@ -1,5 +1,8 @@
 
-					
+$(
+initLeftPanelTranslations()
+);
+		
 		function initPerfil(){
 			$("#listCountries").hide();
 			$("#listMarks").hide();

@@ -15,13 +15,13 @@ function sendIncidenteInfo()
 		}
 		else
 		{
-			alert('Debe seleccionar el automovil siniestrado.');
+			alert(Messages.selectAuto);
 			parent.history.back();
 		}
 	}
 	else
 	{
-		alert('Su ubicación no puede ser leída.');
+		alert(Messages.alertLocation);
 		parent.history.back();
 	}
 }
@@ -60,3 +60,7 @@ function reportar(page)
 {
 	sPageNav = page;
 }
+
+$(document).on('pagebeforeshow','#sinisterReport',function(e,data){    
+	initSinisterPopUpTranslations(); 				  
+});	
