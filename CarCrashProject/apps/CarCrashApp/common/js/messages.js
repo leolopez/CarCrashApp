@@ -31,7 +31,7 @@ Messages = {
 		h3DeletePolicy:"Desea eliminar el registro seleccionado?",
 		aAddPolicy:"Nuevo",
 		aDeletePolicy:"Eliminar",
-		spnExpiration:"Expiracion: ",
+		spnExpiration:"Expiración: ",
 		//Medical data translations
 		lblIMSSNum:"No. IMSS",	
 		lblBloodType:"Tipo de sangre",	
@@ -39,26 +39,26 @@ Messages = {
 		lblConditions:"Padecimientos",
 		h3MedicalData:"Datos Medicos",
 		//Mechanic data translations
-		h3MechanicDetails:"Introduzca los datos de un mecanico automotriz.",
+		h3MechanicDetails:"Introduzca los datos de un mecánico automotriz.",
 		lblMechanicName:"Nombre",
 		lblMechanicFirstName:"Ap. Paterno",
 		lblMechanicLastName:"Ap. Materno",
 		lblMechanicCellPhone:"Celular",
 		lblMechanicAddress:"Domicilio",
 		//Add policy translations
-		h3AddPolicies:"Poliza.",
-		lblPolicyNum:"No. Poliza",
-		lblPolicyExpiration:"Expiracion de la Poliza",
+		h3AddPolicies:"Póliza.",
+		lblPolicyNum:"No. Póliza",
+		lblPolicyExpiration:"Expiración de la Póliza",
 		opNoneInsurance:"Seleccionar Aseguradora",
 		lblInsurance:"Aseguradora",
 		placeholderDateFormat:"dd/mm/aaaa",
 		txtAseg:"Siguiente",
 		aRecordsList:"Listado de Registros",
 		//Add Vehicle translations
-		h3Vehicle: "Vehiculo",
+		h3Vehicle: "Vehículo",
 		lblPlates:"Placa",
 		lblSeries:"Serie",
-		lblVehicleType:"Tipo de Vehiculo",
+		lblVehicleType:"Tipo de Vehículo",
 		lblMark:"Marca",
 		lblSubMark:"SubMarca",
 		lblModel:"Modelo",
@@ -68,8 +68,8 @@ Messages = {
 		h1ConfirmMark:"Confirmar?",
 		pMark:"Marca:",
 		pSubMark:"SubMarca:",
-		h3SelectedMark:"Detalles de seleccion:",
-		msgDataSaved:"Datos guardados con exito.",
+		h3SelectedMark:"Detalles de selección:",
+		msgDataSaved:"Datos guardados con éxito.",
 		// Report Sinister Translations
 		h3ReportIncident:"Reportar incidente",
 		aActualizeLocation:"Actualizar ubicación",
@@ -77,7 +77,7 @@ Messages = {
 		aRepSinister:"Rep. Siniestro",
 		aRepTheft:"Rep. Robo",
 		alertLocation:"Su ubicación no puede ser leída.",
-		selectAuto:"Debe seleccionar el automovil siniestrado.",
+		selectAuto:"Debe seleccionar el automóvil siniestrado.",
 		
 		//Report Sinister Det Translations
 		aTakeSinisterPic:"Tomar Foto",
@@ -100,7 +100,7 @@ Messages = {
 		//left panel Translations
 		h2Profile:"Perfil",
 		aAccount:"Cuenta",
-		aPoliza:"Vehiculos/Pólizas",
+		aPoliza:"Vehículos/Pólizas",
 		aMedicalData:"Datos Medicos",
 		aMechanicContact:"Contacto Mecánico",
 		aSinister:"Siniestro",
@@ -118,7 +118,7 @@ Messages = {
 		txtCelular:"Celular",
 		aSignIn:"Iniciar Sesión",
 		aHelp:"Ayuda",
-		logInHelpText:"Introduzca su E-mail y Password",
+		logInHelpText:"Introduzca su E-mail y contraseña",
 		date:"Fecha",
 		report:"Reporte",
 		//Sinister Pop Up Translations
@@ -129,7 +129,7 @@ Messages = {
 
 	function setSpanish(){
 		Messages.placeholderDateFormat = "dd/mm/aaaa";
-		Messages.msgDataSaved = "Datos guardados con exito";
+		Messages.msgDataSaved = "Datos guardados con éxito";
 		Messages.opOff = "No";
 		Messages.opOn = "Si";
 		Messages.aHelp = "Ayuda";		
@@ -193,7 +193,7 @@ Messages = {
 		Messages.h3DeletePolicy = "Desea eliminar el registro seleccionado?";
 		Messages.aAddPolicy = "Nuevo";
 		Messages.aDeletePolicy = "Eliminar"; 
-		Messages.spnExpiration = "Expiracion: ";
+		Messages.spnExpiration = "Expiración: ";
 	}
 	
 	function setSpanishMedicalData(){
@@ -205,7 +205,7 @@ Messages = {
 	}
 	
 	function setSpanishMechanicData(){
-		Messages.h3MechanicDetails = "Introduzca los datos de un mecanico automotriz.";
+		Messages.h3MechanicDetails = "Introduzca los datos de un mecánico automotriz.";
 		Messages.lblMechanicName = "Nombre";
 		Messages.lblMechanicFirstName = "Ap. Paterno";
 		Messages.lblMechanicLastName = "Ap. Materno";
@@ -214,18 +214,18 @@ Messages = {
 	}
 	
 	function setSpanishAddPolicy(){
-		Messages.h3AddPolicies = "Poliza";
-		Messages.lblPolicyNum = "No. Poliza";
-		Messages.lblPolicyExpiration = "Expiracion de la Poliza";
+		Messages.h3AddPolicies = "Póliza";
+		Messages.lblPolicyNum = "No. Póliza";
+		Messages.lblPolicyExpiration = "Expiración de la Póliza";
 		Messages.opNoneInsurance = "Seleccionar Aseguradora";
 		Messages.lblInsurance = "Aseguradora";	
 		Messages.txtAseg = "Siguiente";
 		Messages.aRecordsList = "Listado de registros";
 		// Vehicle Seccion
-		Messages.h3Vehicle = "Vehiculo";
+		Messages.h3Vehicle = "Vehículo";
 		Messages.lblPlates = "Placas";
 		Messages.lblSeries = "Serie";
-		Messages.lblVehicleType = "Tipo de Vehiculo";
+		Messages.lblVehicleType = "Tipo de Vehículo";
 		Messages.lblMark = "Marca";
 		Messages.lblSubMark = "SubMarca";
 		Messages.lblModel = "Modelo";
@@ -235,7 +235,7 @@ Messages = {
 		Messages.h1ConfirmMark = "Confirmar?";
 		Messages.pMark = "Marca:";
 		Messages.pSubMark = "SubMarca:";
-		Messages.h3SelectedMark = "Detalles de seleccion:";		
+		Messages.h3SelectedMark = "Detalles de selección:";		
 	}
 	
 	function setSpanishReportSinister(){
@@ -245,7 +245,7 @@ Messages = {
 		Messages.aRepSinister = "Rep. Siniestro";
 		Messages.aRepTheft="Rep. Robo";
 		Messages.alertLocation="Su ubicación no puede ser leída.";
-		Messages.selectAuto="Debe seleccionar el automovil siniestrado.";	
+		Messages.selectAuto="Debe seleccionar el automóvil siniestrado.";	
 	}
 	
 	function setSpanishReportSinisterDet(){
@@ -280,7 +280,7 @@ Messages = {
 		Messages.h2Profile = "Perfil";
 		Messages.aAccount = "Cuenta";
 		Messages.aMedicalData = "Datos Medicos"; 
-		Messages.aPoliza = "Vehiculos/Pólizas";
+		Messages.aPoliza = "Vehículos/Pólizas";
 		Messages.aMechanicContact = "Contacto Mecánico";
 		Messages.aSinister = "Siniestro";
 		Messages.aLiAlerts = "Alertas";
