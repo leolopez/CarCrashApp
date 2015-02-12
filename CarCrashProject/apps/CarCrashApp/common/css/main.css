@@ -26,6 +26,15 @@
 	width:100%;
 	/*padding-top: 10px; /*Footer blank space fix*/
 }
+/*
+For iOS place:
 
+div[data-role='header'][data-position='fixed']{
+	margin-top:20px;
+}
+div[data-role='panel']{
+	margin-top:19px;
+}
+*/
 
 
