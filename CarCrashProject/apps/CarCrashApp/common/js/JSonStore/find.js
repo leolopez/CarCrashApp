@@ -133,7 +133,7 @@ function initMechanicDataInfo(MechanicNameParam, MechanicFirstNameParam, Mechani
 
 function initPolicyVehicleDataInfo(){
 	
-	var collectionName = 'PolicyVehicle';    
+	  
 
 	  var collections = {
 	    		PolicyVehicle : {
@@ -145,23 +145,28 @@ function initPolicyVehicleDataInfo(){
 	    };   
 	    
 	WL.JSONStore.init(collections).then(function () {						 
-		  
-		WL.JSONStore.get(collectionName).findAll().then(function (arrayResults) {			
-			 WL.Logger.debug("Retrieve success" +  JSON.stringify(arrayResults));
-			if(arrayResults.length>0){
-				var index;
-				$('#listPolicy').empty();
-				for (index = 0; index < arrayResults.length; ++index) {				   
-					
-					initPolicyToList(arrayResults[index].json.Serie,arrayResults[index].json.insurance,
-							arrayResults[index].json.PolicyDate);
-				}														
-		} 
-		});
+		finAllPolicies();	
 	});	
 	}
 
-var t;
+function finAllPolicies(){
+	var collectionName = 'PolicyVehicle';  
+	
+	WL.JSONStore.get(collectionName).findAll().then(function (arrayResults) {			
+		 WL.Logger.debug("Retrieve success" +  JSON.stringify(arrayResults));
+		if(arrayResults.length>0){
+			var index;
+			$('#listPolicy').empty();
+			for (index = 0; index < arrayResults.length; ++index) {				   
+				
+				initPolicyToList(arrayResults[index].json.Serie,arrayResults[index].json.insurance,
+						arrayResults[index].json.PolicyDate, arrayResults[index]._id);
+			}														
+	} 
+	});
+}
+
+var jsonstoreResultsWrapperObject;
 
 function findPolicyVehicle(serieParam,insuranceParam,policyDateParam){
 	var collectionName = 'PolicyVehicle';
@@ -206,7 +211,7 @@ function findPolicyVehicle(serieParam,insuranceParam,policyDateParam){
 		
 	  // arrayResults = [{_id: 1, json: {name: 'carlos', age: 99}}]
 		//$('#lblPolicyDetalis').text(arrayResults[0].json.Serie);
-		b(arrayResults);
+		
 	
 	})
 
@@ -220,12 +225,89 @@ function findPolicyVehicle(serieParam,insuranceParam,policyDateParam){
 	
 }
 
-function b(g){
+function jsonstoreResultsWrapper(result){
 	
-	t=g;
+	jsonstoreResultsWrapperObject=result;
 }
 
-function alertc(){
-	alert(JSON.stringify(t));
+
+function findByIdPolicyVehicle(id){
+	var collectionName = 'PolicyVehicle';
+
+	  var collections = {
+	    		PolicyVehicle : {
+	                searchFields: {PolicyNo: 'string', PolicyDate: 'string', insurance: 'string', Plates: 'string', Serie: 'string'
+	                	, VehicleType: 'string', Mark: 'string', SubMark: 'string', Model: 'string', Color: 'string'
+	                		, carPicture: 'string', Holder: 'string'
+	                	}
+	            } 
+	    }; 
+	
+
+	var options = {
+	  // Returns a maximum of 1 documents, default no limit.
+	  limit: 1,
+
+	  // Skip 0 documents, default no offset.
+	  offset: 0
+	  
+	};
+	
+	
+	 WL.JSONStore.init(collections).then(function () {
+		
+		
+		WL.JSONStore.get(collectionName)
+
+	// Alternatives:
+	// - findById(1, options) which locates documents by their _id field
+	// - findAll(options) which returns all documents
+	// - find({'name': 'carlos', age: 10}, options) which finds all documents
+	// that match the query.
+	.findById(parseInt(id), options)
+
+	.then(function (arrayResults) {		
+		jsonstoreResultsWrapperObject=null;
+		jsonstoreResultsWrapper(arrayResults);	  	
+	})
+
+	.fail(function (errorObject) {
+	  // Handle failure.
+	});		
+	
+	});
+	
 }
 
+function getJsonstoreResultsWrapperObject(){
+	
+	return jsonstoreResultsWrapperObject;
+}
+
+function updateJsonCollection(collectionName, docs){
+	
+
+	// Documents will be located with their '_id' field 
+	// and replaced with the data in the 'json' field.
+	
+
+	var options = {
+
+	  // Mark data as dirty (true = yes, false = no), default true.
+	  markDirty: true
+	};
+
+	WL.JSONStore.get(collectionName)
+
+	.replace(docs, options)
+
+	.then(function (numberOfDocumentsReplaced) {
+	  // Handle success.
+		alert("updated");
+	})
+
+	.fail(function (errorObject) {
+	  // Handle failure.
+	});
+	
+}

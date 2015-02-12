@@ -16,19 +16,19 @@
     				<label id="lblPolicyExpiration">Policy Expiration</label>    				    							
     				<input  id="txtPolicyDate"  placeholder="dd/mm/yyyy"  type="date"/>     				    				        								    				
     				<div class="ui-field-contain" style="margin-top:0 margin-bottom: 0;">
-    				<label id="lblInsurance">Insurance</label> 
-							<select name="selectInsurance" id="selectInsurance">
+    				<div> <label id="lblInsurance">Insurance</label> </div>
+					<div>		<select name="selectInsurance" id="selectInsurance">
 								<option id="opNoneInsurance" value="0" selected="selected">Select an insurance</option>
 								<option value="1">Mapfre</option>
 								<option value="2">AXXA</option>
-							</select>
+							</select></div>
 						</div>     				
     				    <input onclick="initVehicle();"  id="txtAseg" type="button" value="Next"/>     				   				
     				    				</div>
     				    				</div>
     				<div id="vehicleCont"  >    				   			    				
     					<h3 id="h3Vehicle" align="center">Vehicle</h3> 
-<div style="margin-top:0 margin-bottom: 0;" class="ui-body ui-body-a ui-corner-all">
+<div style=" margin-bottom: 0;" class="ui-body ui-body-a ui-corner-all">
 					<label id="lblPlates">Plates</label>     				   				    				
     				<input  id="txtPlates" type="text" /> 
     				<label id="lblSeries">Series</label> 

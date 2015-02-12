@@ -321,7 +321,8 @@ subMarkParam,modelParam,colorParam, carPictureParam,holderParam){
 		return WL.JSONStore.get(collectionName).add(data,addOptions);
 	})
 	.then(function () {		
-		addPolicyToList(serieParam.val().trim(),insuranceParam.text().trim(),policyDateParam.val().trim());
+		//addPolicyToList(serieParam.val().trim(),insuranceParam.text().trim(),policyDateParam.val().trim());
+		finAllPolicies();	
 		alert(Messages.msgDataSaved);
 		return WL.JSONStore.commitTransaction();
 	})

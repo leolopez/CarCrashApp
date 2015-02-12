@@ -75,13 +75,16 @@
 		 var seriesSelected;
 		 var insuranceSelected;
 		 var expirationSelected;
+		 var policyId;
 		 
 		function initSelectedPolicy(v){
 			  listitem = $(v).parent( "li" );	
 			   seriesSelected=jQuery(v).find("h2");
 				 insuranceSelected=jQuery(v).children("p:first");
 				 expirationSelected=jQuery(v).children("p:last");
-			findPolicyVehicle(seriesSelected.text(),insuranceSelected.text(),expirationSelected.text().split(":")[1]);
+				 policyId=jQuery(v).children("input:hidden").val();
+				
+			//indPolicyVehicle(seriesSelected.text(),insuranceSelected.text(),expirationSelected.text().split(":")[1]);
 			//alertc();
 			popUpListPolicy();		
 		}		
@@ -126,24 +129,38 @@
 		
 		
 		if(policyDate.val().trim().length>0&&policy.val().trim().length>0&&aseg.text().trim().length>0){ 				    	
-		    	setPolicyVehicleDataTransaction(policy,policyDate,aseg,plates,serie,vehicleType,mark,subMark,model,color,color,holder);		    			    	 		    			    			 					    	 		    	 
+			if(!updatedPolicy){ 
+		    	setPolicyVehicleDataTransaction(policy,policyDate,aseg,plates,serie,vehicleType,mark,subMark,model,color,color,holder);		
+			}else{
+				
+				var docs = [{_id: parseInt(policyId), json: {
+					PolicyNo: policy.val().trim(), PolicyDate: policyDate.val().trim(), insurance: aseg.text().trim(),
+					Plates: plates.val().trim(),Serie: serie.val().trim(),VehicleType: vehicleType.val().trim(),Mark: mark.val().trim(),
+					SubMark: subMark.val().trim(),Model: model.val().trim(),Color: color.val().trim(),carPicture: color.val().trim(),
+					Holder: holder.val().trim()
+					}
+				
+				}];
+				var c='PolicyVehicle';
+				updateJsonCollection(c,docs);								
+			}
 		    } else {
 		       
 		    }		    
 		   
 		}
-		function addPolicyToList(name,insurance,policyDate){			
-			initPolicyToList(name,insurance,policyDate);
+		function addPolicyToList(name,insurance,policyDate,id){			
+			initPolicyToList(name,insurance,policyDate,id);
 	        
 		}
-function initPolicyToList(name,insurance,policyDate){
+function initPolicyToList(name,insurance,policyDate,id){
 			
 			$('#listPolicy').append('<li class="ui-li-has-thumb ui-last-child" ><a data-rel="popup" data-position-to="window" data-transition="pop" href="#popupShosPolicyDetails" onclick="initSelectedPolicy(this);" class="ui-btn ui-btn-icon-right ui-icon-carat-r" > ' +
 			        '<img height="100%" src="http://i.ndtvimg.com/auto/makers/10/63/ferrari-458-italia-01.jpg"> '+
 				    '<h2>'+name.trim()+'</h2>'+
 				    '<p>'+insurance.trim()+'</p>'+
 				    '<p>'+Messages.spnExpiration+policyDate.trim()+'</p>'+
-				    ' <input type="hidden" value="2" />'+
+				    ' <input type="hidden" value="'+id+'" />'+
 				   ' </a>'+
 				   ' </li>');		
 		}
@@ -234,3 +251,33 @@ function initPolicyToList(name,insurance,policyDate){
 			setTimeout(function() { $( "#popupDialogEliminar" ).popup( "open" ).attr('data-transition','pop'); }, 300 );
 		}
 		
+		var updatedPolicy=false;
+		function initPolicyDetails(){			
+			findByIdPolicyVehicle(policyId);
+			setTimeout(
+					function() { 
+				var data=getJsonstoreResultsWrapperObject();
+				
+					$("#txtSeries").val(data[0].json.Serie);
+					$("#txtPlates").val(data[0].json.Plates);
+				$("#txtVehicleType").val(data[0].json.VehicleType);
+				$("#searchMark").val(data[0].json.Mark);
+				$("#searchSubMark").val(data[0].json.SubMark);
+				$("#txtModel").val(data[0].json.Model);
+				$("#txtColor").val(data[0].json.Color);
+				$("#txtHolder").val(data[0].json.Holder);
+				 policy=	 $("#txtPolicyNo");
+				 policy.val(data[0].json.PolicyNo);
+				 policyDate=	 $("#txtPolicyDate");
+				 policyDate.val(data[0].json.PolicyDate);	
+				
+				 
+				 $( "select" ).selectmenu();
+				  $('#selectInsurance option:contains("'+data[0].json.insurance+'")').attr('selected', true);
+				  $( "select" ).selectmenu( "refresh", true );
+				  aseg=  $("#selectInsurance option:selected");				 
+					location.href="#AgregarPoliza"; 										
+					updatedPolicy=true;
+				}, 300 );						
+		
+		}
