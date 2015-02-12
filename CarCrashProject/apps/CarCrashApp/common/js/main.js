@@ -85,11 +85,12 @@ function initializeData()
 	
 	location.href = '#login'; //First page to show
 	$('a').attr('data-transition','slide');	//general app transition
+	
+	initLanguage();
+	
 	$("a[href='#sinisterReport']").click(function(){
     	getLocation();
     });
-	
-	initLanguage();
 }
 
 //Pages array to load on index
