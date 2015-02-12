@@ -30,8 +30,12 @@
 For iOS place:
 
 div[data-role='header'][data-position='fixed']{
-	margin-top:20px;
+	padding-top:20px;
 }
+div[data-role='header'][data-position='fixed'] a[tag='a']{
+    margin-top:20px;
+}
+
 div[data-role='panel']{
 	margin-top:19px;
 }
