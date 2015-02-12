@@ -160,3 +160,72 @@ function initPolicyVehicleDataInfo(){
 		});
 	});	
 	}
+
+var t;
+
+function findPolicyVehicle(serieParam,insuranceParam,policyDateParam){
+	var collectionName = 'PolicyVehicle';
+
+	  var collections = {
+	    		PolicyVehicle : {
+	                searchFields: {PolicyNo: 'string', PolicyDate: 'string', insurance: 'string', Plates: 'string', Serie: 'string'
+	                	, VehicleType: 'string', Mark: 'string', SubMark: 'string', Model: 'string', Color: 'string'
+	                		, carPicture: 'string', Holder: 'string'
+	                	}
+	            } 
+	    }; 
+	// Find all documents that match the queries.
+	var queryPart1 = WL.JSONStore.QueryPart()
+	                   .equal('Serie', serieParam.trim())
+	                   .equal('PolicyDate',policyDateParam.trim())
+	                   .equal('insurance',insuranceParam.trim() );
+
+	var options = {
+	  // Returns a maximum of 1 documents, default no limit.
+	  limit: 1,
+
+	  // Skip 0 documents, default no offset.
+	  offset: 0
+	  
+	};
+	
+	
+	 WL.JSONStore.init(collections).then(function () {
+		
+		
+		WL.JSONStore.get(collectionName)
+
+	// Alternatives:
+	// - findById(1, options) which locates documents by their _id field
+	// - findAll(options) which returns all documents
+	// - find({'name': 'carlos', age: 10}, options) which finds all documents
+	// that match the query.
+	.advancedFind([queryPart1], options)
+
+	.then(function (arrayResults) {
+		
+	  // arrayResults = [{_id: 1, json: {name: 'carlos', age: 99}}]
+		//$('#lblPolicyDetalis').text(arrayResults[0].json.Serie);
+		b(arrayResults);
+	
+	})
+
+	.fail(function (errorObject) {
+	  // Handle failure.
+	});
+	
+	
+	
+	});
+	
+}
+
+function b(g){
+	
+	t=g;
+}
+
+function alertc(){
+	alert(JSON.stringify(t));
+}
+

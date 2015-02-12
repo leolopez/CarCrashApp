@@ -25,7 +25,7 @@ function removetPolicyVehicleDataInfo(serieParam,insuranceParam,policyDateParam)
 	            } 
 	    };   
 	    
-	WL.JSONStore.init(collections).then(function () {		
+	  	WL.JSONStore.init(collections).then(function () {		
 		
 		// Remove all documents that match the queries.
 		var queries = [{ insurance:insuranceParam.trim(), PolicyDate:policyDateParam.trim(),Serie:serieParam.trim()}];
@@ -39,7 +39,7 @@ function removetPolicyVehicleDataInfo(serieParam,insuranceParam,policyDateParam)
 				markDirty: true
 		};
 
-		 WL.JSONStore.get(collectionName).remove(queries, options);
+		return WL.JSONStore.get(collectionName).remove(queries, options);
 		
 	}).fail(function (errorObject) {
 		// Handle failure.

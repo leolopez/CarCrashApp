@@ -32,6 +32,8 @@ Messages = {
 		aAddPolicy:"Nuevo",
 		aDeletePolicy:"Eliminar",
 		spnExpiration:"Expiración: ",
+		h3SelectPolicyOp:"Seleccione una opción: ",
+		aPolicyDetails:"Detalles",
 		//Medical data translations
 		lblIMSSNum:"No. IMSS",	
 		lblBloodType:"Tipo de sangre",	
@@ -194,6 +196,9 @@ Messages = {
 		Messages.aAddPolicy = "Nuevo";
 		Messages.aDeletePolicy = "Eliminar"; 
 		Messages.spnExpiration = "Expiración: ";
+		Messages.h3SelectPolicyOp = "Seleccione una opción: "; 
+		Messages.aPolicyDetails = "Detalles";
+		
 	}
 	
 	function setSpanishMedicalData(){
@@ -332,6 +337,8 @@ function setEnglishProfile(){
 		Messages.aAddPolicy = "New";
 		Messages.aDeletePolicy = "Delete";
 		Messages.spnExpiration = "Expiration: ";
+		Messages.h3SelectPolicyOp = "Select an option: "; 
+		Messages.aPolicyDetails = "Details";
 	}
 	
 	function setEnglishMedicalData(){

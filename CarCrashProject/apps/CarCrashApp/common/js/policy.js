@@ -71,14 +71,26 @@
 			$("#listPolicy").append(listItem);			
 		}
 		 var listitem;
+		 var aparent;
+		 var seriesSelected;
+		 var insuranceSelected;
+		 var expirationSelected;
+		 
 		function initSelectedPolicy(v){
-			  listitem = $(v).parent( "li" );				
-			selectedPolizaData=$(listitem).text();
-			
-			//$("#lblPolicySelected").text(""+$(listitem).text());
+			  listitem = $(v).parent( "li" );	
+			   seriesSelected=jQuery(v).find("h2");
+				 insuranceSelected=jQuery(v).children("p:first");
+				 expirationSelected=jQuery(v).children("p:last");
+			findPolicyVehicle(seriesSelected.text(),insuranceSelected.text(),expirationSelected.text().split(":")[1]);
+			//alertc();
+			popUpListPolicy();		
 		}		
 				
-		function policyDeleted(){			
+		function policyDeleted(){	
+			
+			removetPolicyVehicleDataInfo(seriesSelected.text(),insuranceSelected.text(),expirationSelected.text().split(":")[1]);
+			
+			
 			 var item2 = $("#listPolicy").find(listitem);
 			    item2.remove();			    	
 			    ondeletedUpdatePolicy();
@@ -126,11 +138,12 @@
 		}
 function initPolicyToList(name,insurance,policyDate){
 			
-			$('#listPolicy').append('<li class="ui-li-has-thumb ui-last-child" ><a data-transition="slide" onclick="initSelectedPolicy(this);" class="ui-btn ui-btn-icon-right ui-icon-carat-r" href=""> ' +
+			$('#listPolicy').append('<li class="ui-li-has-thumb ui-last-child" ><a data-rel="popup" data-position-to="window" data-transition="pop" href="#popupShosPolicyDetails" onclick="initSelectedPolicy(this);" class="ui-btn ui-btn-icon-right ui-icon-carat-r" > ' +
 			        '<img height="100%" src="http://i.ndtvimg.com/auto/makers/10/63/ferrari-458-italia-01.jpg"> '+
 				    '<h2>'+name.trim()+'</h2>'+
 				    '<p>'+insurance.trim()+'</p>'+
 				    '<p>'+Messages.spnExpiration+policyDate.trim()+'</p>'+
+				    ' <input type="hidden" value="2" />'+
 				   ' </a>'+
 				   ' </li>');		
 		}
@@ -214,5 +227,10 @@ function initPolicyToList(name,insurance,policyDate){
 		        top: 50,
 		          bottom:50
 		    }); 
+		}					
+		
+		function initDeletePolicy(){
+			$( "#popupShosPolicyDetails" ).popup( "close" );
+			setTimeout(function() { $( "#popupDialogEliminar" ).popup( "open" ).attr('data-transition','pop'); }, 300 );
 		}
 		

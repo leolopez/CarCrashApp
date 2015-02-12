@@ -303,6 +303,9 @@ function initShowPoliciesTranslations(){
 	    $("#h3DeletePolicy").text(Messages.h3DeletePolicy);
 	    $("#aAddPolicy").text(Messages.aAddPolicy);
 	    $("#aDeletePolicy").text(Messages.aDeletePolicy); 
+	    $("#h3SelectPolicyOp").text(Messages.h3SelectPolicyOp);
+	    $("#aPolicyDetails").text(Messages.aPolicyDetails); 
+	    $("#h1PolicyDetail").text(Messages.h3RecordsList); 	    	    
 }
 
 function initMedicalDataTranslations(){
