@@ -311,3 +311,36 @@ function updateJsonCollection(collectionName, docs){
 	});
 	
 }
+
+function isJSONStoreDocRegistered(collectionName,collections,queryPart1){
+	//use this function inside   WL.JSONStore.init(collections);	 
+	
+	
+	var options = {
+			  // Returns a maximum of 1 documents, default no limit.
+			  limit: 1,
+
+			  // Skip 0 documents, default no offset.
+			  offset: 0
+			  
+			};													
+				
+				WL.JSONStore.get(collectionName)
+			// Alternatives:
+			// - findById(1, options) which locates documents by their _id field
+			// - findAll(options) which returns all documents
+			// - find({'name': 'carlos', age: 10}, options) which finds all documents
+			// that match the query.
+			.advancedFind([queryPart1], options)
+
+			.then(function (arrayResults) {							  				
+				jsonstoreResultsWrapperObject=null;
+				jsonstoreResultsWrapper(arrayResults);	
+			})
+
+			.fail(function (errorObject) {
+			  // Handle failure.
+			});
+					
+			
+}

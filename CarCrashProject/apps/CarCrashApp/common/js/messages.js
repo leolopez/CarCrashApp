@@ -134,7 +134,9 @@ Messages = {
 		Messages.msgDataSaved = "Datos guardados con éxito";
 		Messages.opOff = "No";
 		Messages.opOn = "Si";
-		Messages.aHelp = "Ayuda";		
+		Messages.aHelp = "Ayuda";
+		Messages.dataExist = "El registro ya existe";
+		Messages.requiredData = "Ingrese los datos solicitados";	
 		
 		setSpanishProfile();
 		setSpanishShowPolicies();
@@ -158,6 +160,8 @@ Messages = {
 		Messages.opOff = "No";
 		Messages.opOn = "Yes";
 		Messages.aHelp = "Help";
+		Messages.dataExist = "Data already exist";
+		Messages.requiredData = "Enter all required data";		
 		
 		setEnglishProfile();
 		setEnglishShowPolicies();

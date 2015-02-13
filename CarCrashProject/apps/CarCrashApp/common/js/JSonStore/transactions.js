@@ -292,52 +292,72 @@ subMarkParam,modelParam,colorParam, carPictureParam,holderParam){
 	  
      WL.JSONStore.init(collections)	 	  
 	.then(function () {
-
-		return WL.JSONStore.startTransaction();
-	})
-
-	.then(function () {
-
-		// Handle startTransaction success.
-		// You can call every JSONStore API method except:
-		// init, destroy, removeCollection, and closeAll.
 		
-		// Data to add, you probably want to get
-		// this data from a network call (e.g. Adapter).
-		var data = [{PolicyNo: policyNoParam.val().trim(), PolicyDate: policyDateParam.val().trim(), insurance: insuranceParam.text().trim(),
-			Plates: platesParam.val().trim(),Serie: serieParam.val().trim(),VehicleType: vehicleTypeParam.val().trim(),Mark: markParam.val().trim(),
-			SubMark: subMarkParam.val().trim(),Model: modelParam.val().trim(),Color: colorParam.val().trim(),carPicture: carPictureParam.val().trim(),
-			Holder: holderParam.val().trim()
-        	}];
-
-		// Optional options for add.
-		var addOptions = {
-
-				// Mark data as dirty (true = yes, false = no), default true.
-				markDirty: true
-		};
-
-		// Get an accessor to the people collection and add data.
-		return WL.JSONStore.get(collectionName).add(data,addOptions);
-	})
-	.then(function () {		
-		//addPolicyToList(serieParam.val().trim(),insuranceParam.text().trim(),policyDateParam.val().trim());
-		finAllPolicies();	
-		alert(Messages.msgDataSaved);
-		return WL.JSONStore.commitTransaction();
-	})
-	.fail(function (errorObject) {		
-		// Handle failure for any of the previous JSONStore operation.
-		//(startTransaction, add, remove).
+		var queryPart1 = WL.JSONStore.QueryPart()
+		.equal('PolicyNo', policyNoParam.val().trim())
+        .equal('PolicyDate',policyDateParam.val().trim())
+        .equal('insurance', insuranceParam.text().trim())
+        .equal('Plates',platesParam.val().trim())
+        .equal('Serie', serieParam.val().trim())
+        .equal('VehicleType',vehicleTypeParam.val().trim())
+        .equal('Mark', markParam.val().trim())
+        .equal('SubMark', subMarkParam.val().trim())
+        .equal('Model',modelParam.val().trim())
+        .equal('Color', colorParam.val().trim())
+        .equal('carPicture',colorParam.val().trim())
+        .equal('Holder',holderParam.val().trim());
 		
-		alert("Error: "+errorObject.msg);
-		WL.JSONStore.rollbackTransaction()
-
-		.always(function () {
-			
-		});
+		isJSONStoreDocRegistered(collectionName,collections,queryPart1);
+		var exists=getJsonstoreResultsWrapperObject();
 		
-	});
+		if(exists==undefined){ 
+
+		 WL.JSONStore.startTransaction().then(function () {
+
+				// Handle startTransaction success.
+				// You can call every JSONStore API method except:
+				// init, destroy, removeCollection, and closeAll.
+				
+				// Data to add, you probably want to get
+				// this data from a network call (e.g. Adapter).
+				var data = [{PolicyNo: policyNoParam.val().trim(), PolicyDate: policyDateParam.val().trim(), insurance: insuranceParam.text().trim(),
+					Plates: platesParam.val().trim(),Serie: serieParam.val().trim(),VehicleType: vehicleTypeParam.val().trim(),Mark: markParam.val().trim(),
+					SubMark: subMarkParam.val().trim(),Model: modelParam.val().trim(),Color: colorParam.val().trim(),carPicture: carPictureParam.val().trim(),
+					Holder: holderParam.val().trim()
+		        	}];
+
+				// Optional options for add.
+				var addOptions = {
+
+						// Mark data as dirty (true = yes, false = no), default true.
+						markDirty: true
+				};
+
+				// Get an accessor to the people collection and add data.
+				return WL.JSONStore.get(collectionName).add(data,addOptions);
+			})
+			.then(function () {		
+				//addPolicyToList(serieParam.val().trim(),insuranceParam.text().trim(),policyDateParam.val().trim());															
+				finAllPolicies();	
+				alert(Messages.msgDataSaved);
+				 WL.JSONStore.commitTransaction();				
+			})
+			.fail(function (errorObject) {		
+				// Handle failure for any of the previous JSONStore operation.
+				//(startTransaction, add, remove).
+				
+				alert("Error: "+errorObject.msg);
+				WL.JSONStore.rollbackTransaction()
+
+				.always(function () {
+					
+				});
+				
+			});
+			}else{								
+				alert(Messages.dataExist);			
+			}
+	});	
 
 }
 
