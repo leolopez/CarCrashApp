@@ -61,8 +61,7 @@
 			$("#listSubMarks").show();			
 			markData=mark;
 			policyNavigation=3;
-			next=false;
-			
+			next=false;			
 		}		
 		         
 		var submarkData;
@@ -70,8 +69,7 @@
 			submarkData=submark;
 			$("#lblMarkSelected").text(""+$(markData).text());
 			$("#lblSubMarkSelected").text(""+$(submarkData).text());
-			next=true;
-			
+			next=true;			
 		}
 		
 		function addPolicy(){
@@ -91,10 +89,7 @@
 			   seriesSelected=jQuery(v).find("h2");
 				 insuranceSelected=jQuery(v).children("p:first");
 				 expirationSelected=jQuery(v).children("p:last");
-				 policyId=jQuery(v).children("input:hidden").val();
-				
-			//indPolicyVehicle(seriesSelected.text(),insuranceSelected.text(),expirationSelected.text().split(":")[1]);
-			//alertc();
+				 policyId=jQuery(v).children("input:hidden").val();							
 			popUpListPolicy();		
 		}		
 				
@@ -333,6 +328,22 @@ function initPolicyToList(name,insurance,policyDate,id){
 					updatedPolicy=true;
 				}, 300 );						
 		
+		}
+		
+		function cleanPolicyInputs(){
+		$("#txtSeries").val("");
+		$("#txtPlates").val("");
+		$("#txtVehicleType").val("");
+		$("#searchMark").val("");
+		$("#searchSubMark").val("");
+		$("#txtModel").val("");
+		$("#txtColor").val("");
+		$("#txtHolder").val("");		  
+		$("#txtPolicyNo").val("");			
+		$("#txtPolicyDate").val("");									 
+		$( "select" ).selectmenu();
+		$('#selectInsurance option[value=0]').attr('selected', true);
+		$( "select" ).selectmenu( "refresh", true );			
 		}
 		
 		

@@ -20,7 +20,7 @@
 					<div>		<select name="selectInsurance" id="selectInsurance">
 								<option id="opNoneInsurance" value="0" selected="selected">Select an insurance</option>
 								<option value="1">Mapfre</option>
-								<option value="2">AXXA</option>
+								<option value="2">AXA</option>
 							</select></div>
 						</div>     				
     				    <input onclick="initVehicle();"  id="txtAseg" type="button" value="Next"/>     				   				
@@ -104,7 +104,7 @@
     			<div data-tap-toggle="false" data-hide-during-focus="false" data-role="footer" data-position="fixed" data-fullscreen="true" class="bottomFooter">
 	   				<div data-role="navbar" data-iconpos="top">
 	   					<ul>
-	   					<li><a id="aRecordsList" href="#poliza" >List of records</a></li>
+	   					<li><a id="aRecordsList" href="#poliza" onclick="cleanPolicyInputs();" >List of records</a></li>
 							
 						</ul>
 					</div><!-- /navbar -->
