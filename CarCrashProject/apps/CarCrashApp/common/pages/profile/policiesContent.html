@@ -11,8 +11,8 @@
     			<div id="policyCont"  >  
     			<h3 id="h3AddPolicies" align="center">Policies.</h3>   				   			    				    				
 <div style="margin-top:0 margin-bottom: 0;" class="ui-body ui-body-a ui-corner-all">
-					<label id="lblPolicyNum">Policy Number</label> 	    				    				    				     				
-    				<input  id="txtPolicyNo"  type="text"/>  
+					<label id="lblPolicyNum" >Policy Number</label> 	    				    				    				     				
+    				<input  id="txtPolicyNo" maxlength="30" type="text"/>  
     				<label id="lblPolicyExpiration">Policy Expiration</label>    				    							
     				<input  id="txtPolicyDate"  placeholder="dd/mm/yyyy"  type="date"/>     				    				        								    				
     				<div class="ui-field-contain" style="margin-top:0 margin-bottom: 0;">
@@ -30,19 +30,19 @@
     					<h3 id="h3Vehicle" align="center">Vehicle</h3> 
 <div style=" margin-bottom: 0;" class="ui-body ui-body-a ui-corner-all">
 					<label id="lblPlates">Plates</label>     				   				    				
-    				<input  id="txtPlates" type="text" /> 
+    				<input  id="txtPlates" maxlength="30" type="text" /> 
     				<label id="lblSeries">Series</label> 
-    				<input  id="txtSeries" type="text" /> 
+    				<input  id="txtSeries" maxlength="30" type="text" /> 
     			    <label id="lblVehicleType">Vehicle Type</label>
-    				<input   id="txtVehicleType" type="text" /> 
+    				<input   id="txtVehicleType" maxlength="30" type="text" /> 
     			    <label id="lblMark">Mark</label>     				
     				<input type="search" data-iconpos="center"  readonly="readonly" name="search" onclick="initMarks();"  id="searchMark"/>
     			    <label id="lblSubMark">SubMark</label>  
     				<input type="search" readonly="readonly" onclick="initMarks();" name="search"  id="searchSubMark">
     			    <label id="lblModel">Model</label> 
-    				<input  id="txtModel" type="text" />
+    				<input  id="txtModel" maxlength="30" type="text" />
     				<label id="lblColor">Color</label>
-    				<input  id="txtColor" type="text" />
+    				<input  id="txtColor" maxlength="25" type="text" />
     				
     				<div class="ui-body ui-body-a ui-corner-all">
 	    				<div id="carPhotos" style="padding: 10px 10px 0px 10px;" align="center">
@@ -53,7 +53,7 @@
     				
     				<hr></hr> 
     				<label id="lblOwnerName">Owner Name</label>
-    				<input  id="txtHolder" type="text" />     				
+    				<input  id="txtHolder" maxlength="40" type="text" />     				
     				
     				</div>    				
     				</div>

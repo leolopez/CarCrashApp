@@ -117,9 +117,43 @@
 			policyNavigation=0;
 		}		
 		$(document).on('pagebeforeshow','#AgregarPoliza',function(e,data){    			    
-		initPolicyPage();
-		
+		initPolicyPage();		
 		next=false;
+		
+		$('#txtPlates').keypress(function(key) {        		
+   		 if((key.charCode < 97 || key.charCode > 122) && (key.charCode < 65 || key.charCode > 90) && (key.charCode != 45)&& (key.charCode != 46)
+   				&& (key.charCode < 48 || key.charCode > 57)){
+       		 return false;
+       	 }else{             		
+       	        return true;
+       	    }
+		});
+   		$('#txtSeries').keypress(function(key) {        		
+   		 if((key.charCode < 97 || key.charCode > 122) && (key.charCode < 65 || key.charCode > 90) && (key.charCode < 48 || key.charCode > 57)){
+       		 return false;
+       	 }else{             		
+       	        return true;
+       	    }
+   		});
+   		$('#txtColor').keypress(function(key) {        		
+   		 if((key.charCode < 97 || key.charCode > 122) && (key.charCode < 65 || key.charCode > 90)){
+       		 return false;
+       	 }else{             		
+       	        return true;
+       	    }
+   		});
+   		$('#txtHolder').keypress(function(key) {
+   			
+   		 if((key.charCode < 97 || key.charCode > 122) && (key.charCode < 65 || key.charCode > 90) && (key.charCode != 32) 
+   				&& (key.charCode != 225)&& (key.charCode != 233)&& (key.charCode != 237)&& (key.charCode != 243)&& (key.charCode != 250)&& (key.charCode != 241)
+   				&& (key.charCode != 193)&& (key.charCode != 201)&& (key.charCode != 205)&& (key.charCode != 211)&& (key.charCode != 218)&&  (key.charCode != 209)
+   				){
+       		 return false;
+       	 }else{             		
+       	        return true;
+       	    }
+   		});
+   		 
 		});	
 		
 		$(document).on('pagebeforeshow','#poliza',function(e,data){    			    
@@ -300,3 +334,5 @@ function initPolicyToList(name,insurance,policyDate,id){
 				}, 300 );						
 		
 		}
+		
+		
