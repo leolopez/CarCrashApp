@@ -1,6 +1,7 @@
 
 $(
 initLeftPanelTranslations()
+
 );
 		
 		function initPerfil(){
@@ -8,10 +9,9 @@ initLeftPanelTranslations()
 			$("#listMarks").hide();
 			$("#listSubMarks").hide();
 			$("#listCities").hide();
-			$("#policyCont").hide();
-					
-			   
-			}
+			$("#policyCont").hide();												   
+			}				
+		
 		var navigation=0;
 		var selectedPolizaData;
 		function j(){

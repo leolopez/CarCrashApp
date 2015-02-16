@@ -18,7 +18,7 @@ function removetPolicyVehicleDataInfo(serieParam,insuranceParam,policyDateParam)
 
 	  var collections = {
 	    		PolicyVehicle : {
-	                searchFields: {PolicyNo: 'string', PolicyDate: 'string', insurance: 'string', Plates: 'string', Serie: 'string'
+	                searchFields: {mobileId: 'string',PolicyNo: 'string', PolicyDate: 'string', insurance: 'string', Plates: 'string', Serie: 'string'
 	                	, VehicleType: 'string', Mark: 'string', SubMark: 'string', Model: 'string', Color: 'string'
 	                		, carPicture: 'string', Holder: 'string'
 	                	}

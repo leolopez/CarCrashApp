@@ -16,7 +16,7 @@ function initPerfilDataInfo(namep, firstnamep, lastnamep, cellPhonep,cityp,enter
 	
 	 var collections = {
 	            perfil : {
-	                searchFields: {name: 'string', firstname: 'string', lastname: 'string', cellPhone: 'string',
+	                searchFields: {mobileId: 'string', name: 'string', firstname: 'string', lastname: 'string', cellPhone: 'string',
 	                	city: 'string', enterprise: 'string'}
 	            } 
 	    };
@@ -46,7 +46,7 @@ function initPolicyDataInfo(namep, firstnamep, lastnamep, cellPhonep,cityp,enter
 	
 	 var collections = {
 	            poliza : {
-	            	 searchFields: {policy: 'string', serie: 'string', plates: 'string', vehicleType: 'string',
+	            	 searchFields: {mobileId: 'string',policy: 'string', serie: 'string', plates: 'string', vehicleType: 'string',
  	                	mark: 'string', submark: 'string',model: 'string',color: 'string',holder: 'string',
  	                	conductor: 'string'}
 	            } 
@@ -74,7 +74,7 @@ function initMedicalDataInfo(imssp, bloodTypep, alergicsp, clinicalConditionsp){
 
     var collections = {
     		MedicalData : {
-                searchFields: {IMSS: 'string', bloodType: 'string', alergics: 'string', clinicalConditions: 'string'
+                searchFields: {mobileId: 'string',IMSS: 'string', bloodType: 'string', alergics: 'string', clinicalConditions: 'string'
                 	}
             } 
     }; 
@@ -104,7 +104,7 @@ function initMechanicDataInfo(MechanicNameParam, MechanicFirstNameParam, Mechani
 
     var collections = {
     		MechanicData : {
-                searchFields: {MechanicName: 'string',  MechanicFirstName: 'string', MechanicLastName: 'string', MechanicCellPhone: 'string',
+                searchFields: {mobileId: 'string',MechanicName: 'string',  MechanicFirstName: 'string', MechanicLastName: 'string', MechanicCellPhone: 'string',
                 	MechanicAddress: 'string'}
             } 
     };  
@@ -137,7 +137,7 @@ function initPolicyVehicleDataInfo(){
 
 	  var collections = {
 	    		PolicyVehicle : {
-	                searchFields: {PolicyNo: 'string', PolicyDate: 'string', insurance: 'string', Plates: 'string', Serie: 'string'
+	                searchFields: {mobileId: 'string',PolicyNo: 'string', PolicyDate: 'string', insurance: 'string', Plates: 'string', Serie: 'string'
 	                	, VehicleType: 'string', Mark: 'string', SubMark: 'string', Model: 'string', Color: 'string'
 	                		, carPicture: 'string', Holder: 'string'
 	                	}
@@ -173,7 +173,7 @@ function findPolicyVehicle(serieParam,insuranceParam,policyDateParam){
 
 	  var collections = {
 	    		PolicyVehicle : {
-	                searchFields: {PolicyNo: 'string', PolicyDate: 'string', insurance: 'string', Plates: 'string', Serie: 'string'
+	                searchFields: {mobileId: 'string',PolicyNo: 'string', PolicyDate: 'string', insurance: 'string', Plates: 'string', Serie: 'string'
 	                	, VehicleType: 'string', Mark: 'string', SubMark: 'string', Model: 'string', Color: 'string'
 	                		, carPicture: 'string', Holder: 'string'
 	                	}
@@ -236,7 +236,7 @@ function findByIdPolicyVehicle(id){
 
 	  var collections = {
 	    		PolicyVehicle : {
-	                searchFields: {PolicyNo: 'string', PolicyDate: 'string', insurance: 'string', Plates: 'string', Serie: 'string'
+	                searchFields: {mobileId: 'string',PolicyNo: 'string', PolicyDate: 'string', insurance: 'string', Plates: 'string', Serie: 'string'
 	                	, VehicleType: 'string', Mark: 'string', SubMark: 'string', Model: 'string', Color: 'string'
 	                		, carPicture: 'string', Holder: 'string'
 	                	}

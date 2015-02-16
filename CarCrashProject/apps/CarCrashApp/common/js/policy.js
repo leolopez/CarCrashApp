@@ -253,11 +253,15 @@ function initPolicyToList(name,insurance,policyDate,id){
 			break;				
 			}
 		}
-		
+		var picUri;
+		function getCarPictureUri(){
+			return picUri;			
+		}
 		function takeCarPicture()
 		{
 			navigator.camera.getPicture(
 			        function(data) {
+			        	picUri=data;
 			        	$('#carPhotoCube').hide();
 			        	var div = "<div style=\"width: 65px; height: 65px; border: thin; border-style: dashed; display: inline-block; padding: 5px 5px 5px 5px;\">";
 			        	var img = "<img src=\"" + data + "\" width=\"100%\" height=\"100%\" /></div>";

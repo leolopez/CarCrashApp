@@ -17,7 +17,7 @@ function setDataToTransaction(namep, firstnamep, lastnamep, cellPhonep,cityp,ent
 
     	    var collections = {
     	            perfil : {
-    	                searchFields: {name: 'string', firstname: 'string', lastname: 'string', cellPhone: 'string',
+    	                searchFields: {mobileId: 'string',name: 'string', firstname: 'string', lastname: 'string', cellPhone: 'string',
     	                	city: 'string', enterprise: 'string'}
     	            } 
     	    };   
@@ -43,7 +43,7 @@ function setDataToTransaction(namep, firstnamep, lastnamep, cellPhonep,cityp,ent
 		
 		// Data to add, you probably want to get
 		// this data from a network call (e.g. Adapter).
-		var data = [{name: namep.val().trim(), firstname: firstnamep.val().trim(), lastname: lastnamep.val().trim(), cellPhone: cellPhonep.val().trim(),
+		var data = [{mobileId: device.uuid.trim(),name: namep.val().trim(), firstname: firstnamep.val().trim(), lastname: lastnamep.val().trim(), cellPhone: cellPhonep.val().trim(),
         	city: cityp.val().trim(), enterprise: enterprisep.val().trim()}];
 
 		// Optional options for add.
@@ -84,7 +84,7 @@ function setDataToPolicyTransaction(policyp, seriep, platesp, vehicleTypep,markp
 	    
     	    var collections = {
     	            poliza : {
-    	                searchFields: {policy: 'string', serie: 'string', plates: 'string', vehicleType: 'string',
+    	                searchFields: {mobileId: 'string',policy: 'string', serie: 'string', plates: 'string', vehicleType: 'string',
     	                	mark: 'string', submark: 'string',model: 'string',color: 'string',holder: 'string',
     	                	conductor: 'string'}
     	            } 
@@ -108,7 +108,7 @@ function setDataToPolicyTransaction(policyp, seriep, platesp, vehicleTypep,markp
 		
 		// Data to add, you probably want to get
 		// this data from a network call (e.g. Adapter).
-		var data = [{policy: policyp.val().trim(), serie: seriep.val().trim(), plates: platesp.val().trim(),
+		var data = [{mobileId: device.uuid.trim(),policy: policyp.val().trim(), serie: seriep.val().trim(), plates: platesp.val().trim(),
 			vehicleType: vehicleTypep.val().trim(),	mark: markp.val().trim(),	submark: submarkp.val().trim(),			
 			model: modelp.val().trim(), color: colorp.val().trim(),
 			holder: holderp.val().trim(),conductor: conductorp.val().trim()}];
@@ -150,7 +150,7 @@ function setMechanicDataTransaction(MechanicNameParam, MechanicFirstNameParam, M
 
     	    var collections = {
     	    		MechanicData : {
-    	                searchFields: {MechanicName: 'string',  MechanicFirstName: 'string', MechanicLastName: 'string', MechanicCellPhone: 'string',
+    	                searchFields: {mobileId: 'string', MechanicName: 'string',  MechanicFirstName: 'string', MechanicLastName: 'string', MechanicCellPhone: 'string',
     	                	MechanicAddress: 'string'}
     	            } 
     	    };   
@@ -175,7 +175,7 @@ function setMechanicDataTransaction(MechanicNameParam, MechanicFirstNameParam, M
 		
 		// Data to add, you probably want to get
 		// this data from a network call (e.g. Adapter).
-		var data = [{MechanicName: MechanicNameParam.val().trim(), MechanicFirstName: MechanicFirstNameParam.val().trim(), MechanicLastName: MechanicLastNameParam.val().trim(), MechanicCellPhone: MechanicCellPhoneParam.val().trim(),
+		var data = [{mobileId: device.uuid.trim(),MechanicName: MechanicNameParam.val().trim(), MechanicFirstName: MechanicFirstNameParam.val().trim(), MechanicLastName: MechanicLastNameParam.val().trim(), MechanicCellPhone: MechanicCellPhoneParam.val().trim(),
 			MechanicAddress: MechanicAddressParam.val().trim()}];
 
 		// Optional options for add.
@@ -217,7 +217,7 @@ function setMedicalDataTransaction(imssp, bloodTypep, alergicsp, clinicalConditi
 
     	    var collections = {
     	    		MedicalData : {
-    	                searchFields: {IMSS: 'string', bloodType: 'string', alergics: 'string', clinicalConditions: 'string'
+    	                searchFields: {mobileId: 'string',IMSS: 'string', bloodType: 'string', alergics: 'string', clinicalConditions: 'string'
     	                	}
     	            } 
     	    };   
@@ -242,7 +242,7 @@ function setMedicalDataTransaction(imssp, bloodTypep, alergicsp, clinicalConditi
 		
 		// Data to add, you probably want to get
 		// this data from a network call (e.g. Adapter).
-		var data = [{IMSS: imssp.val().trim(), bloodType: bloodTypep.val().trim(), alergics: alergicsp.val().trim(), clinicalConditions: clinicalConditionsp.val().trim()
+		var data = [{mobileId: device.uuid.trim(),IMSS: imssp.val().trim(), bloodType: bloodTypep.val().trim(), alergics: alergicsp.val().trim(), clinicalConditions: clinicalConditionsp.val().trim()
         	}];
 
 		// Optional options for add.
@@ -281,7 +281,7 @@ subMarkParam,modelParam,colorParam, carPictureParam,holderParam){
 
     	    var collections = {
     	    		PolicyVehicle : {
-    	                searchFields: {PolicyNo: 'string', PolicyDate: 'string', insurance: 'string', Plates: 'string', Serie: 'string'
+    	                searchFields: {mobileId: 'string',PolicyNo: 'string', PolicyDate: 'string', insurance: 'string', Plates: 'string', Serie: 'string'
     	                	, VehicleType: 'string', Mark: 'string', SubMark: 'string', Model: 'string', Color: 'string'
     	                		, carPicture: 'string', Holder: 'string'
     	                	}
@@ -320,7 +320,7 @@ subMarkParam,modelParam,colorParam, carPictureParam,holderParam){
 				
 				// Data to add, you probably want to get
 				// this data from a network call (e.g. Adapter).
-				var data = [{PolicyNo: policyNoParam.val().trim(), PolicyDate: policyDateParam.val().trim(), insurance: insuranceParam.text().trim(),
+				var data = [{mobileId: device.uuid.trim(),PolicyNo: policyNoParam.val().trim(), PolicyDate: policyDateParam.val().trim(), insurance: insuranceParam.text().trim(),
 					Plates: platesParam.val().trim(),Serie: serieParam.val().trim(),VehicleType: vehicleTypeParam.val().trim(),Mark: markParam.val().trim(),
 					SubMark: subMarkParam.val().trim(),Model: modelParam.val().trim(),Color: colorParam.val().trim(),carPicture: carPictureParam.val().trim(),
 					Holder: holderParam.val().trim()
