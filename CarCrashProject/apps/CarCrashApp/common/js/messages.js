@@ -126,7 +126,9 @@ Messages = {
 		//Sinister Pop Up Translations
 		popHeader:"Reportar?",
 		popTitle:"Esta seguro que desea levantar un reporte?",
-		popContent:"Esta acción enviara su ubicación y datos a su aseguradora."
+		popContent:"Esta acción enviara su ubicación y datos a su aseguradora.",
+		//general Translations
+		dataUpdate:"Datos actualizados con éxito"
 	};
 
 	function setSpanish(){
@@ -137,6 +139,7 @@ Messages = {
 		Messages.aHelp = "Ayuda";
 		Messages.dataExist = "El registro ya existe";
 		Messages.requiredData = "Ingrese los datos solicitados";	
+		Messages.dataUpdate = "Datos actualizados con éxito";
 		
 		setSpanishProfile();
 		setSpanishShowPolicies();
@@ -161,7 +164,8 @@ Messages = {
 		Messages.opOn = "Yes";
 		Messages.aHelp = "Help";
 		Messages.dataExist = "Data already exist";
-		Messages.requiredData = "Enter all required data";		
+		Messages.requiredData = "Enter all required data";
+		Messages.dataUpdate = "Data updated successfully";
 		
 		setEnglishProfile();
 		setEnglishShowPolicies();

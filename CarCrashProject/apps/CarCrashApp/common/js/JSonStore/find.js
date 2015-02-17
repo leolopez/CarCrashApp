@@ -303,7 +303,7 @@ function updateJsonCollection(collectionName, docs){
 
 	.then(function (numberOfDocumentsReplaced) {
 	  // Handle success.
-		alert("updated");
+		alert(Messages.dataUpdate);
 	})
 
 	.fail(function (errorObject) {
