@@ -19,7 +19,7 @@
 	 policy=	 $("#txtPolicyNo");
 		 policyDate=	 $("#txtPolicyDate");
 		 aseg=$('#selectInsurance option:selected');
-		if(policyDate.val().trim().length>0&&policy.val().trim().length>0&&aseg.text().trim().length>0){ 
+		if(policyDate.val().trim().length>0&&policy.val().trim().length>0&&parseInt(aseg.val())>0){ 
 			$("#listMarks").hide();
 			$("#listSubMarks").hide();
 			$("#policyCont").hide();
@@ -95,9 +95,7 @@
 				
 		function policyDeleted(){	
 			
-			removetPolicyVehicleDataInfo(seriesSelected.text(),insuranceSelected.text(),expirationSelected.text().split(":")[1]);
-			
-			
+			removetPolicyVehicleDataInfo(seriesSelected.text(),insuranceSelected.text(),expirationSelected.text().split(":")[1]);						
 			 var item2 = $("#listPolicy").find(listitem);
 			    item2.remove();			    	
 			    ondeletedUpdatePolicy();
@@ -168,13 +166,15 @@
 		var subMark=$("#searchSubMark");
 		var model=$("#txtModel");
 		var color=$("#txtColor");
-		var holder=$("#txtHolder");		
+		var holder=$("#txtHolder");	
+		var pic=getCarPictureUri();
 		
 		
 		if(policyDate.val().trim().length>0&&policy.val().trim().length>0&&aseg.text().trim().length>0
 			&&serie.val().trim().length>0&&plates.val().trim().length>0&&vehicleType.val().trim().length>0&&mark.val().trim().length>0	
 			&&subMark.val().trim().length>0&&model.val().trim().length>0&&color.val().trim().length>0&&holder.val().trim().length>0			
-		){ 				    	
+		){ 	
+			if(picUri.trim().length>0){ 
 			if(!updatedPolicy){ 
 				if(next){
 					initCountPolicies();
@@ -182,7 +182,7 @@
 							function() { 
 								var data=getJsonstoreResultsWrapperObject();
 								if(parseInt(data)<10){										
-									setPolicyVehicleDataTransaction(policy,policyDate,aseg,plates,serie,vehicleType,mark,subMark,model,color,color,holder);									
+									setPolicyVehicleDataTransaction(policy,policyDate,aseg,plates,serie,vehicleType,mark,subMark,model,color,pic,holder);									
 								}else{
 									alert(Messages.PoliciesLimitNo);							
 								}				
@@ -195,7 +195,7 @@
 				var docs = [{_id: parseInt(policyId), json: {
 					PolicyNo: policy.val().trim(), PolicyDate: policyDate.val().trim(), insurance: aseg.text().trim(),
 					Plates: plates.val().trim(),Serie: serie.val().trim(),VehicleType: vehicleType.val().trim(),Mark: mark.val().trim(),
-					SubMark: subMark.val().trim(),Model: model.val().trim(),Color: color.val().trim(),carPicture: color.val().trim(),
+					SubMark: subMark.val().trim(),Model: model.val().trim(),Color: color.val().trim(),carPicture: pic.trim(),
 					Holder: holder.val().trim()
 					}
 				
@@ -204,19 +204,23 @@
 				updateJsonCollection(c,docs);	
 				}
 			}
+			} else {		    			
+				alert(Messages.pictureMsg);			
+		    }
+			
 		    } else {		    			
 				alert(Messages.requiredData);			
 		    }		    
 		   
 		}
-		function addPolicyToList(name,insurance,policyDate,id){			
-			initPolicyToList(name,insurance,policyDate,id);
+		function addPolicyToList(name,insurance,policyDate,id,pic){			
+			initPolicyToList(name,insurance,policyDate,id,pic);
 	        
 		}
-function initPolicyToList(name,insurance,policyDate,id){
+function initPolicyToList(name,insurance,policyDate,id,pic){
 			
 			$('#listPolicy').append('<li class="ui-li-has-thumb ui-last-child" ><a data-rel="popup" data-position-to="window" data-transition="pop" href="#popupShosPolicyDetails" onclick="initSelectedPolicy(this);" class="ui-btn ui-btn-icon-right ui-icon-carat-r" > ' +
-			        '<img height="100%" src="http://i.ndtvimg.com/auto/makers/10/63/ferrari-458-italia-01.jpg"> '+
+			        '<img height="100%" src="'+pic.trim()+'"> '+
 				    '<h2>'+name.trim()+'</h2>'+
 				    '<p>'+insurance.trim()+'</p>'+
 				    '<p>'+Messages.spnExpiration+policyDate.trim()+'</p>'+
@@ -263,7 +267,7 @@ function initPolicyToList(name,insurance,policyDate,id){
 			break;				
 			}
 		}
-		var picUri;
+		var picUri="";
 		function getCarPictureUri(){
 			return picUri;			
 		}
@@ -272,10 +276,7 @@ function initPolicyToList(name,insurance,policyDate,id){
 			navigator.camera.getPicture(
 			        function(data) {
 			        	picUri=data;
-			        	$('#carPhotoCube').hide();
-			        	var div = "<div style=\"width: 65px; height: 65px; border: thin; border-style: dashed; display: inline-block; padding: 5px 5px 5px 5px;\">";
-			        	var img = "<img src=\"" + data + "\" width=\"100%\" height=\"100%\" /></div>";
-			            $('#carPhotos').append(div + img);
+			        	initPicture(data);
 			        },
 			        function(e) {
 			            console.log("Error getting picture: " + e);
@@ -335,9 +336,11 @@ function initPolicyToList(name,insurance,policyDate,id){
 				 policyDate=	 $("#txtPolicyDate");
 				 policyDate.val(data[0].json.PolicyDate);									 
 				 $( "select" ).selectmenu();
-				  $('#selectInsurance option:contains("'+data[0].json.insurance+'")').attr('selected', true);
-				  $( "select" ).selectmenu( "refresh", true );
-				  aseg=  $("#selectInsurance option:selected");				 
+				  $('#selectInsurance option:contains("'+data[0].json.insurance+'")').prop('selected', true);
+				  $( "select" ).selectmenu( "refresh", true );				  
+				  aseg=  $("#selectInsurance option:selected");	
+				  initPicture(data[0].json.carPicture);
+				  picUri=data[0].json.carPicture.trim();
 					location.href="#AgregarPoliza"; 										
 					updatedPolicy=true;
 				}, 300 );						
@@ -356,8 +359,11 @@ function initPolicyToList(name,insurance,policyDate,id){
 		$("#txtPolicyNo").val("");			
 		$("#txtPolicyDate").val("");									 
 		$( "select" ).selectmenu();
-		$('#selectInsurance option[value=0]').attr('selected', true);
-		$( "select" ).selectmenu( "refresh", true );			
+		$('#selectInsurance').prop('selectedIndex',0);
+		$( "select" ).selectmenu( "refresh", true );
+		cleanPicture();
+		aseg=  $("#selectInsurance option:selected");
+		picUri="";
 		}
 		
 		
@@ -387,5 +393,18 @@ function initPolicyToList(name,insurance,policyDate,id){
 			    }; 
 			countJSONStoreDocs(collectionName,collections);	
 				
+		}
+		
+		function initPicture(data){
+			$('#carPhotoCont').remove();
+			$('#carPhotoCube').hide();
+        	var div = "<div id=\"carPhotoCont\" style=\"width: 65px; height: 65px; border: thin; border-style: dashed; display: inline-block; padding: 5px 5px 5px 5px;\">";
+        	var img = "<img src=\"" + data + "\" width=\"100%\" height=\"100%\" /></div>";
+            $('#carPhotos').append(div + img);			
+		}
+		function cleanPicture(){
+			$('#carPhotos').empty();	      	
+        	var div ="<div id=\"carPhotoCube\" style=\"width: 70px; height: 70px; border: thin; border-style: dashed; display: inline-block;\"></div>";        	
+            $('#carPhotos').append(div);			
 		}
 		

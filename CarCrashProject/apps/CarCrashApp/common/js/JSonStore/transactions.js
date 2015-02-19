@@ -304,7 +304,7 @@ subMarkParam,modelParam,colorParam, carPictureParam,holderParam){
         .equal('SubMark', subMarkParam.val().trim())
         .equal('Model',modelParam.val().trim())
         .equal('Color', colorParam.val().trim())
-        .equal('carPicture',colorParam.val().trim())
+        .equal('carPicture',carPictureParam.trim())
         .equal('Holder',holderParam.val().trim());
 		
 		isJSONStoreDocRegistered(collectionName,collections,queryPart1);
@@ -324,7 +324,7 @@ subMarkParam,modelParam,colorParam, carPictureParam,holderParam){
 				// this data from a network call (e.g. Adapter).
 				var data = [{mobileId: device.uuid.trim(),PolicyNo: policyNoParam.val().trim(), PolicyDate: policyDateParam.val().trim(), insurance: insuranceParam.text().trim(),
 					Plates: platesParam.val().trim(),Serie: serieParam.val().trim(),VehicleType: vehicleTypeParam.val().trim(),Mark: markParam.val().trim(),
-					SubMark: subMarkParam.val().trim(),Model: modelParam.val().trim(),Color: colorParam.val().trim(),carPicture: carPictureParam.val().trim(),
+					SubMark: subMarkParam.val().trim(),Model: modelParam.val().trim(),Color: colorParam.val().trim(),carPicture: carPictureParam.trim(),
 					Holder: holderParam.val().trim()
 		        	}];
 

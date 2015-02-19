@@ -160,7 +160,7 @@ function finAllPolicies(){
 			for (index = 0; index < arrayResults.length; ++index) {				   
 				
 				initPolicyToList(arrayResults[index].json.Plates,arrayResults[index].json.insurance,
-						arrayResults[index].json.PolicyDate, arrayResults[index]._id);
+						arrayResults[index].json.PolicyDate, arrayResults[index]._id, arrayResults[index].json.carPicture);
 			}														
 	} 
 	});
