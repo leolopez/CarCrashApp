@@ -308,9 +308,11 @@ subMarkParam,modelParam,colorParam, carPictureParam,holderParam){
         .equal('Holder',holderParam.val().trim());
 		
 		isJSONStoreDocRegistered(collectionName,collections,queryPart1);
+		
+		setTimeout( function (){
 		var exists=getJsonstoreResultsWrapperObject();
 		
-		if(exists==undefined){ 
+		if(exists==undefined||exists.length==0){ 
 
 		 WL.JSONStore.startTransaction().then(function () {
 
@@ -354,9 +356,13 @@ subMarkParam,modelParam,colorParam, carPictureParam,holderParam){
 				});
 				
 			});
+		
+		
 			}else{								
 				alert(Messages.dataExist);			
 			}
+		}
+		 , 300);
 	});	
 
 }

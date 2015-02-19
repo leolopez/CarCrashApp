@@ -12,7 +12,7 @@
  */ 
 
 
-function removetPolicyVehicleDataInfo(serieParam,insuranceParam,policyDateParam){
+function removetPolicyVehicleDataInfo(platesParam,insuranceParam,policyDateParam){
 	
 	var collectionName = 'PolicyVehicle';    
 
@@ -28,7 +28,7 @@ function removetPolicyVehicleDataInfo(serieParam,insuranceParam,policyDateParam)
 	  	WL.JSONStore.init(collections).then(function () {		
 		
 		// Remove all documents that match the queries.
-		var queries = [{ insurance:insuranceParam.trim(), PolicyDate:policyDateParam.trim(),Serie:serieParam.trim()}];
+		var queries = [{ insurance:insuranceParam.trim(), PolicyDate:policyDateParam.trim(),Plates:platesParam.trim()}];
 
 		var options = {
 

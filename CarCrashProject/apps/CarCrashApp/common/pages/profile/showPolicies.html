@@ -8,28 +8,7 @@
     			<h3 align="center" id="h3RecordsList">List of records.</h3> 
     				    				    			    				    			  				   			    				    				    			   			
     			<ul id="listPolicy" data-role="listview" data-inset="true">
-    <li><a href="#" onclick="initSelectedPolicy(this);">
-        <img height="100%" src="http://www.euik.com/wp-content/uploads/2012/02/acura-tsx.jpg">
-    <h2>Acura</h2>
-    <p>AXXA</p>
-    <p>Expiration 15/12/2015</p>
-    </a>
-    </li>
-    <li><a href="#" onclick="initSelectedPolicy(this);">
-         <img height="100%" src="http://www.lakelandautoblog.com/wp-content/uploads/2014/09/C3252913MUST_GT500Shelby_jelly_mj.jpg">
-    <h2>Mustang</h2>
-    <p>Mapfre</p>
-     <p>Expiration 15/12/2016</p>
-    </a>
-    </li>
-    <li ><a data-rel="popup" data-position-to="window" data-transition="slide" href="#popupPolicyDetails" onclick="initSelectedPolicy(this);">  
-        <img height="100%" src="http://i.ndtvimg.com/auto/makers/10/63/ferrari-458-italia-01.jpg">
-    <h2>Ferrari</h2>
-    <p>Mapfre</p>
     
-    <p> <span id="cc" >Expiration: </span> 15/10/2016</p>
-    </a>
-    </li>
 </ul>
  
  			    							
@@ -62,7 +41,7 @@
     			<div id="posFooter" data-tap-toggle="false" data-hide-during-focus="false" data-role="footer" data-position="fixed" data-fullscreen="true" class="bottomFooter">
 	   				<div data-role="navbar" data-iconpos="top">
 	   					<ul>	   					
-							<li><a id="aAddPolicy" href="#AgregarPoliza" data-icon="plus">New</a></li>
+							<li><a id="aAddPolicy"  onclick="validNewPolicy();" data-icon="plus">New</a></li>
 						</ul>
 					</div><!-- /navbar -->
 	   			</div>	

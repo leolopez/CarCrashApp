@@ -34,6 +34,7 @@ Messages = {
 		spnExpiration:"Expiración: ",
 		h3SelectPolicyOp:"Seleccione una opción: ",
 		aPolicyDetails:"Detalles",
+		PoliciesLimitNo:"Solo se permite guardar un máximo de 10 registros.",
 		//Medical data translations
 		lblIMSSNum:"No. IMSS",	
 		lblBloodType:"Tipo de sangre",	
@@ -206,7 +207,7 @@ Messages = {
 		Messages.spnExpiration = "Expiración: ";
 		Messages.h3SelectPolicyOp = "Seleccione una opción: "; 
 		Messages.aPolicyDetails = "Detalles";
-		
+		Messages.PoliciesLimitNo = "Solo se permite guardar un máximo de 10 registros.";
 	}
 	
 	function setSpanishMedicalData(){
@@ -347,6 +348,7 @@ function setEnglishProfile(){
 		Messages.spnExpiration = "Expiration: ";
 		Messages.h3SelectPolicyOp = "Select an option: "; 
 		Messages.aPolicyDetails = "Details";
+		Messages.PoliciesLimitNo = "You only can save up to 10 records";
 	}
 	
 	function setEnglishMedicalData(){

@@ -159,7 +159,7 @@ function finAllPolicies(){
 			$('#listPolicy').empty();
 			for (index = 0; index < arrayResults.length; ++index) {				   
 				
-				initPolicyToList(arrayResults[index].json.Serie,arrayResults[index].json.insurance,
+				initPolicyToList(arrayResults[index].json.Plates,arrayResults[index].json.insurance,
 						arrayResults[index].json.PolicyDate, arrayResults[index]._id);
 			}														
 	} 
@@ -168,7 +168,7 @@ function finAllPolicies(){
 
 var jsonstoreResultsWrapperObject;
 
-function findPolicyVehicle(serieParam,insuranceParam,policyDateParam){
+function findPolicyVehicle(platesParam,insuranceParam,policyDateParam){
 	var collectionName = 'PolicyVehicle';
 
 	  var collections = {
@@ -181,7 +181,7 @@ function findPolicyVehicle(serieParam,insuranceParam,policyDateParam){
 	    }; 
 	// Find all documents that match the queries.
 	var queryPart1 = WL.JSONStore.QueryPart()
-	                   .equal('Serie', serieParam.trim())
+	                   .equal('Plates', platesParam.trim())
 	                   .equal('PolicyDate',policyDateParam.trim())
 	                   .equal('insurance',insuranceParam.trim() );
 
@@ -344,3 +344,4 @@ function isJSONStoreDocRegistered(collectionName,collections,queryPart1){
 					
 			
 }
+

@@ -177,7 +177,17 @@
 		){ 				    	
 			if(!updatedPolicy){ 
 				if(next){
-		    	setPolicyVehicleDataTransaction(policy,policyDate,aseg,plates,serie,vehicleType,mark,subMark,model,color,color,holder);	
+					initCountPolicies();
+					setTimeout(
+							function() { 
+								var data=getJsonstoreResultsWrapperObject();
+								if(parseInt(data)<10){										
+									setPolicyVehicleDataTransaction(policy,policyDate,aseg,plates,serie,vehicleType,mark,subMark,model,color,color,holder);									
+								}else{
+									alert(Messages.PoliciesLimitNo);							
+								}				
+								}, 300 );		
+		    		
 			}
 				
 			}else{
@@ -350,4 +360,32 @@ function initPolicyToList(name,insurance,policyDate,id){
 		$( "select" ).selectmenu( "refresh", true );			
 		}
 		
+		
+		function validNewPolicy(){
+			initCountPolicies();
+			setTimeout(
+					function() { 
+						var data=getJsonstoreResultsWrapperObject();
+						if(parseInt(data)<10){										
+						location.href="#AgregarPoliza"; 										
+						}else{
+							alert(Messages.PoliciesLimitNo);							
+						}				
+						}, 300 );										
+		}
+		
+		function initCountPolicies(){
+			var collectionName = 'PolicyVehicle';
+
+			  var collections = {
+			    		PolicyVehicle : {
+			                searchFields: {mobileId: 'string',PolicyNo: 'string', PolicyDate: 'string', insurance: 'string', Plates: 'string', Serie: 'string'
+			                	, VehicleType: 'string', Mark: 'string', SubMark: 'string', Model: 'string', Color: 'string'
+			                		, carPicture: 'string', Holder: 'string'
+			                	}
+			            } 
+			    }; 
+			countJSONStoreDocs(collectionName,collections);	
+				
+		}
 		
