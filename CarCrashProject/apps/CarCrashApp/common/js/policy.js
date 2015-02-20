@@ -334,8 +334,9 @@ function initPolicyToList(name,insurance,policyDate,id,pic){
 			setTimeout(
 					function() { 								
 				  location.href="#AgregarPoliza";	
-				  $(document).on('pagebeforeshow','#AgregarPoliza',function(e,data){ 
+				  $(document).on('pagebeforeshow','#AgregarPoliza',function(e,data1){ 
 					  var data=getJsonstoreResultsWrapperObject();
+					  if(data.length>0){ 
 						$('#searchMark').val(""+data[0].json.Mark);									
 						$("#searchSubMark").val(""+data[0].json.SubMark);
 							$("#txtSeries").val(data[0].json.Serie);
@@ -354,6 +355,7 @@ function initPolicyToList(name,insurance,policyDate,id,pic){
 						  aseg=  $("#selectInsurance option:selected");	
 						  initPicture(data[0].json.carPicture);
 						  picUri=data[0].json.carPicture.trim();
+					  }
 				  });
 				  
 					updatedPolicy=true;
