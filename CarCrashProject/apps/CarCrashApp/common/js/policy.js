@@ -329,32 +329,33 @@ function initPolicyToList(name,insurance,policyDate,id,pic){
 		
 		var updatedPolicy=false;
 		function initPolicyDetails(){
-			$("#searchMark").val("");					
-			$("#searchSubMark").val("");
+			cleanPolicyInputs();
 			findByIdPolicyVehicle(policyId);
 			setTimeout(
-					function() { 
-				var data=getJsonstoreResultsWrapperObject();
-				$("#searchMark").val(""+data[0].json.Mark);					
-				$("#searchSubMark").val(""+data[0].json.SubMark);
-					$("#txtSeries").val(data[0].json.Serie);
-					$("#txtPlates").val(data[0].json.Plates);
-				$("#txtVehicleType").val(data[0].json.VehicleType);
-				
-				$("#txtModel").val(data[0].json.Model);
-				$("#txtColor").val(data[0].json.Color);
-				$("#txtHolder").val(data[0].json.Holder);
-				 policy=	 $("#txtPolicyNo");
-				 policy.val(data[0].json.PolicyNo);
-				 policyDate=	 $("#txtPolicyDate");
-				 policyDate.val(data[0].json.PolicyDate);									 
-				 $( "select" ).selectmenu();
-				  $('#selectInsurance option:contains("'+data[0].json.insurance+'")').prop('selected', true);
-				  $( "select" ).selectmenu( "refresh", true );				  
-				  aseg=  $("#selectInsurance option:selected");	
-				  initPicture(data[0].json.carPicture);
-				  picUri=data[0].json.carPicture.trim();
-					location.href="#AgregarPoliza"; 										
+					function() { 								
+				  location.href="#AgregarPoliza";	
+				  $(document).on('pagebeforeshow','#AgregarPoliza',function(e,data){ 
+					  var data=getJsonstoreResultsWrapperObject();
+						$('#searchMark').val(""+data[0].json.Mark);									
+						$("#searchSubMark").val(""+data[0].json.SubMark);
+							$("#txtSeries").val(data[0].json.Serie);
+							$("#txtPlates").val(data[0].json.Plates);
+						$("#txtVehicleType").val(data[0].json.VehicleType);				
+						$("#txtModel").val(data[0].json.Model);
+						$("#txtColor").val(data[0].json.Color);
+						$("#txtHolder").val(data[0].json.Holder);
+						 policy=	 $("#txtPolicyNo");
+						 policy.val(data[0].json.PolicyNo);
+						 policyDate=	 $("#txtPolicyDate");
+						 policyDate.val(data[0].json.PolicyDate);									 
+						 $( "select" ).selectmenu();
+						  $('#selectInsurance option:contains("'+data[0].json.insurance+'")').prop('selected', true);
+						  $( "select" ).selectmenu( "refresh", true );				  
+						  aseg=  $("#selectInsurance option:selected");	
+						  initPicture(data[0].json.carPicture);
+						  picUri=data[0].json.carPicture.trim();
+				  });
+				  
 					updatedPolicy=true;
 				}, 300 );						
 		
