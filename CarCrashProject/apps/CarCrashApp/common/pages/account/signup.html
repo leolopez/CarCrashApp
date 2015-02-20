@@ -2,15 +2,15 @@
 	<div role="main" id="content" align="center" class="fullContent background-content ui-content">
 		<div style="margin:0 10px 0 10px;">
 			<h2 id="h2SignUp" style="color: white; text-shadow: none !important;">Sign Up</h2>
-			<input type="text" id="txtName" name="txtName" value="" placeholder="Name" />
-			<input type="date" id="txtNacimiento" name="txtNacimiento" value="" placeholder="Birth date"/>
-			<input type="text" id="txtPais" name="txtPais" value="" placeholder="Country" />
-			<input type="text" id="txtCiudad" name="txtCiudad" value="" placeholder="City" />
-			<input type="email" id="txtEmail" name="txtEmail" value="" placeholder="E-Mail" />
-			<input type="password" id="txtPass" name="txtPass" value="" placeholder="Password" />
-			<input type="password" id="txtPassConfirm" name="txtPassConfirm" value="" placeholder="Confirm password" />
-			<input type="tel" id="txtCelular" name="txtCelular" value="" placeholder="Phone number" />
-			<a href="#LogIn" id="aSignUp" onclick="alert('This is just a demo, please sign in with admin as user and admin as password');" class="ui-btn ui-btn ui-corner-all">Sign Up</a>
+			<form id="frmSignUp">
+				<input type="text" id="txtName" name="txtName" value="" placeholder="Name" required />
+				<input type="date" id="txtNacimiento" name="txtNacimiento" value="" placeholder="Birth date" required/>	
+				<input type="email" id="txtEmail" name="txtEmail" value="" placeholder="E-Mail" required />
+				<input type="password" id="txtPass" name="txtPass" value="" placeholder="Password" required />
+				<input type="password" id="txtPassConfirm" name="txtPassConfirm" value="" placeholder="Confirm password" required />
+				<input type="tel" id="txtCelular" name="txtCelular" value="" placeholder="Phone number" required />
+			</form>
+			<button id="aSignUp" onclick="signUp();">Sign Up</button>
 			<br/>
 			<br/>
 			<br/>

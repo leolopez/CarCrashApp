@@ -26,6 +26,12 @@
 	width:100%;
 	/*padding-top: 10px; /*Footer blank space fix*/
 }
+div.error{
+	font-size: small;
+}
+input:required:invalid, input:focus:invalid{
+	box-shadow: rgba(24,189,230,.20) 3px 3px 10px 5px inset !important;
+}
 /*
 For iOS place:
 
