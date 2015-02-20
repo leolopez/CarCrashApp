@@ -311,7 +311,12 @@ function initShowPoliciesTranslations(){
 	    $("#aDeletePolicy").text(Messages.aDeletePolicy); 
 	    $("#h3SelectPolicyOp").text(Messages.h3SelectPolicyOp);
 	    $("#aPolicyDetails").text(Messages.aPolicyDetails); 	   	
-	    $("#h1PolicyDetail").text(Messages.h1PolicyDetail); 		    
+	    $("#h1PolicyDetail").text(Messages.h1PolicyDetail); 
+	    $("#aSUdata").text(Messages.aSUdata);
+	    $("#aKeepEd").text(Messages.aKeepEd);
+	    $("#aRPoliza").text(Messages.aRPoliza);
+	    $("#liSelectPolicyOp").text(Messages.h3SelectPolicyOp);
+	    
 }
 
 function initMedicalDataTranslations(){

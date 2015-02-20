@@ -32,10 +32,13 @@ Messages = {
 		aAddPolicy:"Nuevo",
 		aDeletePolicy:"Eliminar",
 		spnExpiration:"Expiración: ",
-		h3SelectPolicyOp:"Seleccione una opción: ",
+		h3SelectPolicyOp:"Seleccione una opción ",
 		aPolicyDetails:"Detalles",
 		PoliciesLimitNo:"Solo se permite guardar un máximo de 10 registros.",
 		h1PolicyDetail:"Registros",
+		aSUdata:"Guardar/Actualizar",
+		aKeepEd:"Continuar editando",
+		aRPoliza:"Ir a registros",				
 		//Medical data translations
 		lblIMSSNum:"No. IMSS",	
 		lblBloodType:"Tipo de sangre",	
@@ -209,10 +212,13 @@ Messages = {
 		Messages.aAddPolicy = "Nuevo";
 		Messages.aDeletePolicy = "Eliminar"; 
 		Messages.spnExpiration = "Expiración: ";
-		Messages.h3SelectPolicyOp = "Seleccione una opción: "; 
+		Messages.h3SelectPolicyOp = "Seleccione una opción "; 
 		Messages.aPolicyDetails = "Detalles";
 		Messages.PoliciesLimitNo = "Solo se permite guardar un máximo de 10 registros.";
 		Messages.h1PolicyDetail="Registros";
+		Messages.aSUdata="Guardar/Actualizar";
+		Messages.aKeepEd="Continuar editando";
+		Messages.aRPoliza="Ir a registros";		
 	}
 	
 	function setSpanishMedicalData(){
@@ -355,6 +361,9 @@ function setEnglishProfile(){
 		Messages.aPolicyDetails = "Details";
 		Messages.PoliciesLimitNo = "You only can save up to 10 records";
 		Messages.h1PolicyDetail="Records";
+		Messages.aSUdata="Save/Update";
+		Messages.aKeepEd="Continue editing";
+		Messages.aRPoliza="Go to records";	
 	}
 	
 	function setEnglishMedicalData(){

@@ -278,7 +278,7 @@ function setPolicyVehicleDataTransaction(policyNoParam,
 		policyDateParam, insuranceParam, platesParam,serieParam,vehicleTypeParam,markParam,
 subMarkParam,modelParam,colorParam, carPictureParam,holderParam){
 	var collectionName = 'PolicyVehicle';    
-
+	jsonstoreResultsWrapper("false");
     	    var collections = {
     	    		PolicyVehicle : {
     	                searchFields: {mobileId: 'string',PolicyNo: 'string', PolicyDate: 'string', insurance: 'string', Plates: 'string', Serie: 'string'
@@ -342,7 +342,8 @@ subMarkParam,modelParam,colorParam, carPictureParam,holderParam){
 				//addPolicyToList(serieParam.val().trim(),insuranceParam.text().trim(),policyDateParam.val().trim());															
 				finAllPolicies();	
 				alert(Messages.msgDataSaved);
-				 WL.JSONStore.commitTransaction();				
+				 WL.JSONStore.commitTransaction();
+				 jsonstoreResultsWrapper("true");
 			})
 			.fail(function (errorObject) {		
 				// Handle failure for any of the previous JSONStore operation.

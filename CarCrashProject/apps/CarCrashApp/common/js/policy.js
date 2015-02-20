@@ -182,7 +182,18 @@
 							function() { 
 								var data=getJsonstoreResultsWrapperObject();
 								if(parseInt(data)<10){										
-									setPolicyVehicleDataTransaction(policy,policyDate,aseg,plates,serie,vehicleType,mark,subMark,model,color,pic,holder);									
+									setPolicyVehicleDataTransaction(policy,policyDate,aseg,plates,serie,vehicleType,mark,subMark,model,color,pic,holder);
+									
+									setTimeout(
+											function() { 
+												var data=getJsonstoreResultsWrapperObject();
+												if(data){										
+													policySaved=true;								
+												}else{
+													policySaved=false;						
+												}				
+												}, 300 );
+									
 								}else{
 									alert(Messages.PoliciesLimitNo);							
 								}				
@@ -364,6 +375,7 @@ function initPolicyToList(name,insurance,policyDate,id,pic){
 		cleanPicture();
 		aseg=  $("#selectInsurance option:selected");
 		picUri="";
+		policySaved=true;
 		}
 		
 		
@@ -373,7 +385,8 @@ function initPolicyToList(name,insurance,policyDate,id,pic){
 					function() { 
 						var data=getJsonstoreResultsWrapperObject();
 						if(parseInt(data)<10){										
-						location.href="#AgregarPoliza"; 										
+						location.href="#AgregarPoliza"; 
+						policySaved=true;
 						}else{
 							alert(Messages.PoliciesLimitNo);							
 						}				
@@ -406,5 +419,56 @@ function initPolicyToList(name,insurance,policyDate,id,pic){
 			$('#carPhotos').empty();	      	
         	var div ="<div id=\"carPhotoCube\" style=\"width: 70px; height: 70px; border: thin; border-style: dashed; display: inline-block;\"></div>";        	
             $('#carPhotos').append(div);			
+		}
+		
+		function validUnsavedPolicy(){
+			
+							
+							var serie=	$('#txtSeries');
+							var plates=	$("#txtPlates");
+							var vehicleType=$("#txtVehicleType");
+							var mark=$("#searchMark");
+							var subMark=$("#searchSubMark");
+							var model=$("#txtModel");
+							var color=$("#txtColor");
+							var holder=$("#txtHolder");	
+							var pic=getCarPictureUri();
+							 policy=	 $('#txtPolicyNo');
+							 policyDate=	 $("#txtPolicyDate");
+							 aseg=$('#selectInsurance option:selected');
+							
+								if(!policySaved||(policyDate.val().trim().length>1||policy.val().trim().length>1||(parseInt(aseg.val())>1)
+										||serie.val().trim().length>1||plates.val().trim().length>1||vehicleType.val().trim().length>0||mark.val().trim().length>1
+										||subMark.val().trim().length>1||model.val().trim().length>1||color.val().trim().length>1||holder.val().trim().length>1||pic.trim().length>1)){
+									
+								
+								if(policyDate.val().trim().length>0&&policy.val().trim().length>0&&(parseInt(aseg.val())>0)
+								&&serie.val().trim().length>0&&plates.val().trim().length>0&&vehicleType.val().trim().length>0&&mark.val().trim().length>0	
+								&&subMark.val().trim().length>0&&model.val().trim().length>0&&color.val().trim().length>0&&holder.val().trim().length>0&&pic.trim().length>0){
+								
+									$('#liSUdata').show();
+									
+								}else{
+									$('#liSUdata').hide();
+								}
+								if(policyDate.val().trim().length>0||policy.val().trim().length>0||(parseInt(aseg.val())>0)
+										||serie.val().trim().length>0||plates.val().trim().length>0||vehicleType.val().trim().length>0||mark.val().trim().length>0	
+										||subMark.val().trim().length>0||model.val().trim().length>0||color.val().trim().length>0||holder.val().trim().length>0||pic.trim().length>0){					
+											$('#liKeepEd').show();
+											
+										}else{
+											$('#liKeepEd').hide();
+										}
+								popUpListPolicy();
+								$( "#popupMenu" ).popup( "open" );
+								}else{
+									
+									 cleanPolicyInputs();
+									location.href="#poliza"; 
+								}
+								
+							
+										 			 
+							
 		}
 		
