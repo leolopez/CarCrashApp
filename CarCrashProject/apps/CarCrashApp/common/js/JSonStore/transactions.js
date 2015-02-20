@@ -18,7 +18,7 @@ function setDataToTransaction(namep, firstnamep, lastnamep, cellPhonep,cityp,ent
     	    var collections = {
     	            perfil : {
     	                searchFields: {mobileId: 'string',name: 'string', firstname: 'string', lastname: 'string', cellPhone: 'string',
-    	                	city: 'string', enterprise: 'string'}
+    	                	city: 'string', enterprise: 'string', birthDate: 'string',email: 'string',pass: 'string'}
     	            } 
     	    };   
     	    
@@ -44,7 +44,7 @@ function setDataToTransaction(namep, firstnamep, lastnamep, cellPhonep,cityp,ent
 		// Data to add, you probably want to get
 		// this data from a network call (e.g. Adapter).
 		var data = [{mobileId: device.uuid.trim(),name: namep.val().trim(), firstname: firstnamep.val().trim(), lastname: lastnamep.val().trim(), cellPhone: cellPhonep.val().trim(),
-        	city: cityp.val().trim(), enterprise: enterprisep.val().trim()}];
+        	city: cityp.val().trim(), enterprise: enterprisep.val().trim(), birthDate: '',email: '',pass: ''}];
 
 		// Optional options for add.
 		var addOptions = {
@@ -304,7 +304,7 @@ subMarkParam,modelParam,colorParam, carPictureParam,holderParam){
         .equal('SubMark', subMarkParam.val().trim())
         .equal('Model',modelParam.val().trim())
         .equal('Color', colorParam.val().trim())
-        .equal('carPicture',colorParam.val().trim())
+        .equal('carPicture',carPictureParam.trim())
         .equal('Holder',holderParam.val().trim());
 		
 		isJSONStoreDocRegistered(collectionName,collections,queryPart1);
@@ -324,7 +324,7 @@ subMarkParam,modelParam,colorParam, carPictureParam,holderParam){
 				// this data from a network call (e.g. Adapter).
 				var data = [{mobileId: device.uuid.trim(),PolicyNo: policyNoParam.val().trim(), PolicyDate: policyDateParam.val().trim(), insurance: insuranceParam.text().trim(),
 					Plates: platesParam.val().trim(),Serie: serieParam.val().trim(),VehicleType: vehicleTypeParam.val().trim(),Mark: markParam.val().trim(),
-					SubMark: subMarkParam.val().trim(),Model: modelParam.val().trim(),Color: colorParam.val().trim(),carPicture: carPictureParam.val().trim(),
+					SubMark: subMarkParam.val().trim(),Model: modelParam.val().trim(),Color: colorParam.val().trim(),carPicture: carPictureParam.trim(),
 					Holder: holderParam.val().trim()
 		        	}];
 

@@ -35,6 +35,7 @@ Messages = {
 		h3SelectPolicyOp:"Seleccione una opción: ",
 		aPolicyDetails:"Detalles",
 		PoliciesLimitNo:"Solo se permite guardar un máximo de 10 registros.",
+		h1PolicyDetail:"Registros",
 		//Medical data translations
 		lblIMSSNum:"No. IMSS",	
 		lblBloodType:"Tipo de sangre",	
@@ -129,7 +130,8 @@ Messages = {
 		popTitle:"Esta seguro que desea levantar un reporte?",
 		popContent:"Esta acción enviara su ubicación y datos a su aseguradora.",
 		//general Translations
-		dataUpdate:"Datos actualizados con éxito"
+		dataUpdate:"Datos actualizados con éxito",
+		pictureMsg: "Capture una foto"
 	};
 
 	function setSpanish(){
@@ -141,6 +143,7 @@ Messages = {
 		Messages.dataExist = "El registro ya existe";
 		Messages.requiredData = "Ingrese los datos solicitados";	
 		Messages.dataUpdate = "Datos actualizados con éxito";
+		Messages.pictureMsg= "Capture una foto";
 		
 		setSpanishProfile();
 		setSpanishShowPolicies();
@@ -167,6 +170,7 @@ Messages = {
 		Messages.dataExist = "Data already exist";
 		Messages.requiredData = "Enter all required data";
 		Messages.dataUpdate = "Data updated successfully";
+		Messages.pictureMsg= "Take a picture";
 		
 		setEnglishProfile();
 		setEnglishShowPolicies();
@@ -208,6 +212,7 @@ Messages = {
 		Messages.h3SelectPolicyOp = "Seleccione una opción: "; 
 		Messages.aPolicyDetails = "Detalles";
 		Messages.PoliciesLimitNo = "Solo se permite guardar un máximo de 10 registros.";
+		Messages.h1PolicyDetail="Registros";
 	}
 	
 	function setSpanishMedicalData(){
@@ -349,6 +354,7 @@ function setEnglishProfile(){
 		Messages.h3SelectPolicyOp = "Select an option: "; 
 		Messages.aPolicyDetails = "Details";
 		Messages.PoliciesLimitNo = "You only can save up to 10 records";
+		Messages.h1PolicyDetail="Records";
 	}
 	
 	function setEnglishMedicalData(){

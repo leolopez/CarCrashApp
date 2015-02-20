@@ -310,8 +310,8 @@ function initShowPoliciesTranslations(){
 	    $("#aAddPolicy").text(Messages.aAddPolicy);
 	    $("#aDeletePolicy").text(Messages.aDeletePolicy); 
 	    $("#h3SelectPolicyOp").text(Messages.h3SelectPolicyOp);
-	    $("#aPolicyDetails").text(Messages.aPolicyDetails); 
-	    $("#h1PolicyDetail").text(Messages.h3RecordsList); 	    	    
+	    $("#aPolicyDetails").text(Messages.aPolicyDetails); 	   	
+	    $("#h1PolicyDetail").text(Messages.h1PolicyDetail); 		    
 }
 
 function initMedicalDataTranslations(){
