@@ -11,13 +11,13 @@
 
  */ 
 function initPerfilDataInfo(namep, firstnamep, lastnamep, cellPhonep,cityp,enterprisep){
-	
-	
+	//any changes to profile docs use this method:
+	//WL.JSONStore.destroy();	
 	
 	 var collections = {
 	            perfil : {
 	                searchFields: {mobileId: 'string', name: 'string', firstname: 'string', lastname: 'string', cellPhone: 'string',
-	                	city: 'string', enterprise: 'string'}
+	                	city: 'string', enterprise: 'string',birthDate: 'string',email: 'string',pass: 'string'}
 	            } 
 	    };
 	    

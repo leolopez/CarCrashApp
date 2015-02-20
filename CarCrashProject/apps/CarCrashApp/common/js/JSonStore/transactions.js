@@ -18,7 +18,7 @@ function setDataToTransaction(namep, firstnamep, lastnamep, cellPhonep,cityp,ent
     	    var collections = {
     	            perfil : {
     	                searchFields: {mobileId: 'string',name: 'string', firstname: 'string', lastname: 'string', cellPhone: 'string',
-    	                	city: 'string', enterprise: 'string'}
+    	                	city: 'string', enterprise: 'string', birthDate: 'string',email: 'string',pass: 'string'}
     	            } 
     	    };   
     	    
@@ -44,7 +44,7 @@ function setDataToTransaction(namep, firstnamep, lastnamep, cellPhonep,cityp,ent
 		// Data to add, you probably want to get
 		// this data from a network call (e.g. Adapter).
 		var data = [{mobileId: device.uuid.trim(),name: namep.val().trim(), firstname: firstnamep.val().trim(), lastname: lastnamep.val().trim(), cellPhone: cellPhonep.val().trim(),
-        	city: cityp.val().trim(), enterprise: enterprisep.val().trim()}];
+        	city: cityp.val().trim(), enterprise: enterprisep.val().trim(), birthDate: '',email: '',pass: ''}];
 
 		// Optional options for add.
 		var addOptions = {

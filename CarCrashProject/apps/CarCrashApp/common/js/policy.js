@@ -1,5 +1,5 @@
 	var policyNavigation=0;
-	
+	var policySaved=false;
 		function initPolicyPage(){
 			$("#listCountries").hide();
 			$("#listMarks").hide();
