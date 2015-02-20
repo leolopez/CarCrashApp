@@ -317,7 +317,7 @@ function initPolicyToList(name,insurance,policyDate,id,pic){
 		function popUpListPolicy(){
 			
 			$('.ui-popup-container').css({
-		        top: 50,
+		        top: 150,
 		          bottom:50
 		    }); 
 		}					
@@ -328,17 +328,19 @@ function initPolicyToList(name,insurance,policyDate,id,pic){
 		}
 		
 		var updatedPolicy=false;
-		function initPolicyDetails(){			
+		function initPolicyDetails(){
+			$("#searchMark").val("");					
+			$("#searchSubMark").val("");
 			findByIdPolicyVehicle(policyId);
 			setTimeout(
 					function() { 
 				var data=getJsonstoreResultsWrapperObject();
-				
+				$("#searchMark").val(""+data[0].json.Mark);					
+				$("#searchSubMark").val(""+data[0].json.SubMark);
 					$("#txtSeries").val(data[0].json.Serie);
 					$("#txtPlates").val(data[0].json.Plates);
 				$("#txtVehicleType").val(data[0].json.VehicleType);
-				$("#searchMark").val(data[0].json.Mark);
-				$("#searchSubMark").val(data[0].json.SubMark);
+				
 				$("#txtModel").val(data[0].json.Model);
 				$("#txtColor").val(data[0].json.Color);
 				$("#txtHolder").val(data[0].json.Holder);

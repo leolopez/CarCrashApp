@@ -342,8 +342,8 @@ subMarkParam,modelParam,colorParam, carPictureParam,holderParam){
 				//addPolicyToList(serieParam.val().trim(),insuranceParam.text().trim(),policyDateParam.val().trim());															
 				finAllPolicies();	
 				alert(Messages.msgDataSaved);
-				 WL.JSONStore.commitTransaction();
-				 jsonstoreResultsWrapper("true");
+				jsonstoreResultsWrapper("true");
+				return WL.JSONStore.commitTransaction();				 
 			})
 			.fail(function (errorObject) {		
 				// Handle failure for any of the previous JSONStore operation.
