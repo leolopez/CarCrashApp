@@ -5,12 +5,13 @@ function sendIncidenteInfo()
 	{
 		if($('#selectAuto').val() != 0)
 		{
-			alert('Posicion:\nLatitud - ' +
+			/*alert('Posicion:\nLatitud - ' +
 					currentLat +
 					'\nLongitud - ' + currentLng +
 					'\nAuto:\n' +
 					$('#selectAuto option:selected').text() +
-					'\nPlacas - HCM-2101\nPoliza - 11111111');
+					'\nPlacas - HCM-2101\nPoliza - 11111111');*/
+			
 			location.href = sPageNav;
 		}
 		else
