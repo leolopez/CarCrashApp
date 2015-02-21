@@ -20,7 +20,7 @@ function removetPolicyVehicleDataInfo(platesParam,insuranceParam,policyDateParam
 	    		PolicyVehicle : {
 	                searchFields: {mobileId: 'string',PolicyNo: 'string', PolicyDate: 'string', insurance: 'string', Plates: 'string', Serie: 'string'
 	                	, VehicleType: 'string', Mark: 'string', SubMark: 'string', Model: 'string', Color: 'string'
-	                		, carPicture: 'string', Holder: 'string'
+	                		, carPicture: 'string', Holder: 'string',  OwnerCellPhone: 'string'
 	                	}
 	            } 
 	    };   

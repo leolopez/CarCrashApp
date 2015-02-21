@@ -12,7 +12,7 @@
  */ 
 
 
-function countJSONStoreDocs(collectionName,collections){
+function countJSONStoreDocs(collectionName,collections){	
 	jsonstoreResultsWrapperObject=null;
 	WL.JSONStore.init(collections).then(function () {		
 		
