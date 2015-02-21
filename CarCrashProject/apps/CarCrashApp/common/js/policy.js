@@ -166,13 +166,14 @@
 		var subMark=$("#searchSubMark");
 		var model=$("#txtModel");
 		var color=$("#txtColor");
-		var holder=$("#txtHolder");	
+		var holder=$("#txtHolder");	 
+		var ownerCellPhone=$("#txtOwnerCellPhone");
 		var pic=getCarPictureUri();
 		
 		
 		if(policyDate.val().trim().length>0&&policy.val().trim().length>0&&aseg.text().trim().length>0
 			&&serie.val().trim().length>0&&plates.val().trim().length>0&&vehicleType.val().trim().length>0&&mark.val().trim().length>0	
-			&&subMark.val().trim().length>0&&model.val().trim().length>0&&color.val().trim().length>0&&holder.val().trim().length>0			
+			&&subMark.val().trim().length>0&&model.val().trim().length>0&&color.val().trim().length>0&&holder.val().trim().length>0	&&ownerCellPhone.val().trim().length>0			
 		){ 	
 			if(picUri.trim().length>0){ 
 			if(!updatedPolicy){ 
@@ -182,7 +183,7 @@
 							function() { 
 								var data=getJsonstoreResultsWrapperObject();
 								if(parseInt(data)<10){										
-									setPolicyVehicleDataTransaction(policy,policyDate,aseg,plates,serie,vehicleType,mark,subMark,model,color,pic,holder);
+									setPolicyVehicleDataTransaction(policy,policyDate,aseg,plates,serie,vehicleType,mark,subMark,model,color,pic,holder,ownerCellPhone);
 									
 									setTimeout(
 											function() { 
@@ -207,7 +208,7 @@
 					PolicyNo: policy.val().trim(), PolicyDate: policyDate.val().trim(), insurance: aseg.text().trim(),
 					Plates: plates.val().trim(),Serie: serie.val().trim(),VehicleType: vehicleType.val().trim(),Mark: mark.val().trim(),
 					SubMark: subMark.val().trim(),Model: model.val().trim(),Color: color.val().trim(),carPicture: pic.trim(),
-					Holder: holder.val().trim()
+					Holder: holder.val().trim(), OwnerCellPhone: ownerCellPhone.val().trim()
 					}
 				
 				}];
@@ -317,7 +318,7 @@ function initPolicyToList(name,insurance,policyDate,id,pic){
 		function popUpListPolicy(){
 			
 			$('.ui-popup-container').css({
-		        top: 150,
+		        top: 60,
 		          bottom:50
 		    }); 
 		}					
@@ -345,6 +346,7 @@ function initPolicyToList(name,insurance,policyDate,id,pic){
 						$("#txtModel").val(data[0].json.Model);
 						$("#txtColor").val(data[0].json.Color);
 						$("#txtHolder").val(data[0].json.Holder);
+						$("#txtOwnerCellPhone").val(data[0].json.OwnerCellPhone);
 						 policy=	 $("#txtPolicyNo");
 						 policy.val(data[0].json.PolicyNo);
 						 policyDate=	 $("#txtPolicyDate");
@@ -373,7 +375,8 @@ function initPolicyToList(name,insurance,policyDate,id,pic){
 		$("#txtColor").val("");
 		$("#txtHolder").val("");		  
 		$("#txtPolicyNo").val("");			
-		$("#txtPolicyDate").val("");									 
+		$("#txtPolicyDate").val("");	
+		$("#txtOwnerCellPhone").val("");
 		$( "select" ).selectmenu();
 		$('#selectInsurance').prop('selectedIndex',0);
 		$( "select" ).selectmenu( "refresh", true );
@@ -426,9 +429,7 @@ function initPolicyToList(name,insurance,policyDate,id,pic){
             $('#carPhotos').append(div);			
 		}
 		
-		function validUnsavedPolicy(){
-			
-							
+		function validUnsavedPolicy(){										
 							var serie=	$('#txtSeries');
 							var plates=	$("#txtPlates");
 							var vehicleType=$("#txtVehicleType");
@@ -437,6 +438,7 @@ function initPolicyToList(name,insurance,policyDate,id,pic){
 							var model=$("#txtModel");
 							var color=$("#txtColor");
 							var holder=$("#txtHolder");	
+							var ownerCellPhone=$("#txtOwnerCellPhone");
 							var pic=getCarPictureUri();
 							 policy=	 $('#txtPolicyNo');
 							 policyDate=	 $("#txtPolicyDate");
@@ -444,12 +446,13 @@ function initPolicyToList(name,insurance,policyDate,id,pic){
 							
 								if(!policySaved||(policyDate.val().trim().length>1||policy.val().trim().length>1||(parseInt(aseg.val())>1)
 										||serie.val().trim().length>1||plates.val().trim().length>1||vehicleType.val().trim().length>0||mark.val().trim().length>1
-										||subMark.val().trim().length>1||model.val().trim().length>1||color.val().trim().length>1||holder.val().trim().length>1||pic.trim().length>1)){
+										||subMark.val().trim().length>1||model.val().trim().length>1||color.val().trim().length>1||holder.val().trim().length>1||pic.trim().length>1||ownerCellPhone.val().trim().length>1)){
 									
 								
 								if(policyDate.val().trim().length>0&&policy.val().trim().length>0&&(parseInt(aseg.val())>0)
 								&&serie.val().trim().length>0&&plates.val().trim().length>0&&vehicleType.val().trim().length>0&&mark.val().trim().length>0	
-								&&subMark.val().trim().length>0&&model.val().trim().length>0&&color.val().trim().length>0&&holder.val().trim().length>0&&pic.trim().length>0){
+								&&subMark.val().trim().length>0&&model.val().trim().length>0&&color.val().trim().length>0&&holder.val().trim().length>0&&pic.trim().length>0
+								&&ownerCellPhone.val().trim().length>0){
 								
 									$('#liSUdata').show();
 									
@@ -458,7 +461,8 @@ function initPolicyToList(name,insurance,policyDate,id,pic){
 								}
 								if(policyDate.val().trim().length>0||policy.val().trim().length>0||(parseInt(aseg.val())>0)
 										||serie.val().trim().length>0||plates.val().trim().length>0||vehicleType.val().trim().length>0||mark.val().trim().length>0	
-										||subMark.val().trim().length>0||model.val().trim().length>0||color.val().trim().length>0||holder.val().trim().length>0||pic.trim().length>0){					
+										||subMark.val().trim().length>0||model.val().trim().length>0||color.val().trim().length>0||holder.val().trim().length>0||pic.trim().length>0
+										||ownerCellPhone.val().trim().length>0){					
 											$('#liKeepEd').show();
 											
 										}else{
@@ -470,10 +474,15 @@ function initPolicyToList(name,insurance,policyDate,id,pic){
 									
 									 cleanPolicyInputs();
 									location.href="#poliza"; 
-								}
-								
-							
-										 			 
+								}																									 			 
 							
 		}
+		
+		$(function(){
+			 $('#alistPolicies').on( "taphold", function( event ) {alert("ss"); } );
+			 
+			  function tapholdHandler( event ){
+			    $( event.target ).addEvent( "alert('dd');" );
+			  }
+			});
 		
