@@ -47,7 +47,7 @@ function accessSuccess(result){
 	if(oResult.value){
 		//Guardar datos en jsonstore
 		
-		saveLocalAccount();
+		//saveLocalAccount();
 		
 		location.href = "#perfil";
 	}
