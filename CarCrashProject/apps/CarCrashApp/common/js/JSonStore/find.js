@@ -137,12 +137,14 @@ function initPolicyVehicleDataInfo(){
 	    		PolicyVehicle : {
 	                searchFields: {mobileId: 'string',PolicyNo: 'string', PolicyDate: 'string', insurance: 'string', Plates: 'string', Serie: 'string'
 	                	, VehicleType: 'string', Mark: 'string', SubMark: 'string', Model: 'string', Color: 'string'
-	                		, carPicture: 'string', Holder: 'string', OwnerCellPhone: 'string'
+	                		, carPicture: 'string', Holder: 'string', OwnerCellPhone: 'string', PolicyContactName:'string',
+	    					PolicyContactFirstName:'string', PolicyContactLastName:'string',
+	    					PolicyContactCellPhon:'string'
 	                	}
 	            } 
 	    };   
-	    
-	WL.JSONStore.init(collections).then(function () {						 
+	
+	WL.JSONStore.init(collections).then(function () {					 
 		finAllPolicies();	
 	});	
 	}
@@ -173,7 +175,9 @@ function findPolicyVehicle(platesParam,insuranceParam,policyDateParam){
 	    		PolicyVehicle : {
 	                searchFields: {mobileId: 'string',PolicyNo: 'string', PolicyDate: 'string', insurance: 'string', Plates: 'string', Serie: 'string'
 	                	, VehicleType: 'string', Mark: 'string', SubMark: 'string', Model: 'string', Color: 'string'
-	                		, carPicture: 'string', Holder: 'string', OwnerCellPhone: 'string'
+	                		, carPicture: 'string', Holder: 'string', OwnerCellPhone: 'string', PolicyContactName:'string',
+	    					PolicyContactFirstName:'string', PolicyContactLastName:'string',
+	    					PolicyContactCellPhon:'string'
 	                	}
 	            } 
 	    }; 
@@ -231,12 +235,14 @@ function jsonstoreResultsWrapper(result){
 
 function findByIdPolicyVehicle(id){
 	var collectionName = 'PolicyVehicle';
-
+	 
 	  var collections = {
 	    		PolicyVehicle : {
 	                searchFields: {mobileId: 'string',PolicyNo: 'string', PolicyDate: 'string', insurance: 'string', Plates: 'string', Serie: 'string'
 	                	, VehicleType: 'string', Mark: 'string', SubMark: 'string', Model: 'string', Color: 'string'
-	                		, carPicture: 'string', Holder: 'string', OwnerCellPhone: 'string'
+	                		, carPicture: 'string', Holder: 'string', OwnerCellPhone: 'string',PolicyContactName:'string',
+	    					PolicyContactFirstName:'string', PolicyContactLastName:'string',
+	    					PolicyContactCellPhon:'string'
 	                	}
 	            } 
 	    }; 

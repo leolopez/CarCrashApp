@@ -12,6 +12,10 @@
 		var policy;
 		var policyDate;
 		var aseg;
+		var polContactNameGrl="";
+		var polContactFirstNameGrl="";
+		var polContactLastNameGrl="";	 
+		var polContactCellPhoneGrl="";
 		
 		var next=false;
 		
@@ -19,7 +23,14 @@
 	 policy=	 $("#txtPolicyNo");
 		 policyDate=	 $("#txtPolicyDate");
 		 aseg=$('#selectInsurance option:selected');
-		if(policyDate.val().trim().length>0&&policy.val().trim().length>0&&parseInt(aseg.val())>0){ 
+		  polContactNameGrl=$("#txtPolContactName");
+			 polContactFirstNameGrl=$("#txtPolContactFirstName");
+			 polContactLastNameGrl=$("#txtPolContactLastName");	 
+			polContactCellPhoneGrl=$("#txtPolContactCellPhone");
+		 
+		if(policyDate.val().trim().length>0&&policy.val().trim().length>0&&parseInt(aseg.val())>0
+				&&polContactNameGrl.val().trim().length>0&&polContactFirstNameGrl.val().trim().length>0&&polContactLastNameGrl.val().trim().length>0
+				&&polContactCellPhoneGrl.val().trim().length>0){ 
 			$("#listMarks").hide();
 			$("#listSubMarks").hide();
 			$("#policyCont").hide();
@@ -167,13 +178,15 @@
 		var model=$("#txtModel");
 		var color=$("#txtColor");
 		var holder=$("#txtHolder");	 
-		var ownerCellPhone=$("#txtOwnerCellPhone");
+		var ownerCellPhone=$("#txtOwnerCellPhone");		
 		var pic=getCarPictureUri();
 		
 		
 		if(policyDate.val().trim().length>0&&policy.val().trim().length>0&&aseg.text().trim().length>0
 			&&serie.val().trim().length>0&&plates.val().trim().length>0&&vehicleType.val().trim().length>0&&mark.val().trim().length>0	
-			&&subMark.val().trim().length>0&&model.val().trim().length>0&&color.val().trim().length>0&&holder.val().trim().length>0	&&ownerCellPhone.val().trim().length>0			
+			&&subMark.val().trim().length>0&&model.val().trim().length>0&&color.val().trim().length>0&&holder.val().trim().length>0	&&ownerCellPhone.val().trim().length>0
+			&&polContactNameGrl.val().trim().length>0&&polContactFirstNameGrl.val().trim().length>0&&polContactLastNameGrl.val().trim().length>0
+			&&polContactCellPhoneGrl.val().trim().length>0
 		){ 	
 			if(picUri.trim().length>0){ 
 			if(!updatedPolicy){ 
@@ -182,8 +195,9 @@
 					setTimeout(
 							function() { 
 								var data=getJsonstoreResultsWrapperObject();
-								if(parseInt(data)<10){										
-									setPolicyVehicleDataTransaction(policy,policyDate,aseg,plates,serie,vehicleType,mark,subMark,model,color,pic,holder,ownerCellPhone);
+								if(parseInt(data)<10||data==null){										
+									setPolicyVehicleDataTransaction(policy,policyDate,aseg,plates,serie,vehicleType,mark,subMark,model,color,pic,holder,ownerCellPhone
+											,polContactNameGrl,polContactFirstNameGrl,polContactLastNameGrl,polContactCellPhoneGrl);
 									
 									setTimeout(
 											function() { 
@@ -208,8 +222,10 @@
 					PolicyNo: policy.val().trim(), PolicyDate: policyDate.val().trim(), insurance: aseg.text().trim(),
 					Plates: plates.val().trim(),Serie: serie.val().trim(),VehicleType: vehicleType.val().trim(),Mark: mark.val().trim(),
 					SubMark: subMark.val().trim(),Model: model.val().trim(),Color: color.val().trim(),carPicture: pic.trim(),
-					Holder: holder.val().trim(), OwnerCellPhone: ownerCellPhone.val().trim()
-					}
+					Holder: holder.val().trim(), OwnerCellPhone: ownerCellPhone.val().trim(), PolicyContactName:polContactNameGrl.val().trim(),
+					PolicyContactFirstName:polContactFirstNameGrl.val().trim(), PolicyContactLastName:polContactLastNameGrl.val().trim(),
+					PolicyContactCellPhon:polContactCellPhoneGrl.val().trim(),
+					}							
 				
 				}];
 				var c='PolicyVehicle';
@@ -337,7 +353,7 @@ function initPolicyToList(name,insurance,policyDate,id,pic){
 				  location.href="#AgregarPoliza";	
 				  $(document).on('pagebeforeshow','#AgregarPoliza',function(e,data1){ 
 					  var data=getJsonstoreResultsWrapperObject();
-					  if(data.length>0){ 
+					  if(data!=null&&data.length>0){ 
 						$('#searchMark').val(""+data[0].json.Mark);									
 						$("#searchSubMark").val(""+data[0].json.SubMark);
 							$("#txtSeries").val(data[0].json.Serie);
@@ -347,6 +363,10 @@ function initPolicyToList(name,insurance,policyDate,id,pic){
 						$("#txtColor").val(data[0].json.Color);
 						$("#txtHolder").val(data[0].json.Holder);
 						$("#txtOwnerCellPhone").val(data[0].json.OwnerCellPhone);
+						$("#txtPolContactName").val(data[0].json.PolicyContactName);
+						$("#txtPolContactFirstName").val(data[0].json.PolicyContactFirstName);
+					    $("#txtPolContactLastName").val(data[0].json.PolicyContactLastName);	 
+						$("#txtPolContactCellPhone").val(data[0].json.PolicyContactCellPhon);
 						 policy=	 $("#txtPolicyNo");
 						 policy.val(data[0].json.PolicyNo);
 						 policyDate=	 $("#txtPolicyDate");
@@ -377,6 +397,10 @@ function initPolicyToList(name,insurance,policyDate,id,pic){
 		$("#txtPolicyNo").val("");			
 		$("#txtPolicyDate").val("");	
 		$("#txtOwnerCellPhone").val("");
+		$("#txtPolContactName").val("");
+		$("#txtPolContactFirstName").val("");
+	    $("#txtPolContactLastName").val("");	 
+		$("#txtPolContactCellPhone").val("");
 		$( "select" ).selectmenu();
 		$('#selectInsurance').prop('selectedIndex',0);
 		$( "select" ).selectmenu( "refresh", true );
@@ -392,7 +416,8 @@ function initPolicyToList(name,insurance,policyDate,id,pic){
 			setTimeout(
 					function() { 
 						var data=getJsonstoreResultsWrapperObject();
-						if(parseInt(data)<10){										
+						
+						if(parseInt(data)<10||data==null){										
 						location.href="#AgregarPoliza"; 
 						policySaved=true;
 						}else{
@@ -408,7 +433,9 @@ function initPolicyToList(name,insurance,policyDate,id,pic){
 			    		PolicyVehicle : {
 			                searchFields: {mobileId: 'string',PolicyNo: 'string', PolicyDate: 'string', insurance: 'string', Plates: 'string', Serie: 'string'
 			                	, VehicleType: 'string', Mark: 'string', SubMark: 'string', Model: 'string', Color: 'string'
-			                		, carPicture: 'string', Holder: 'string'
+			                		, carPicture: 'string', Holder: 'string', PolicyContactName:'string',
+	    	    					PolicyContactFirstName:'string', PolicyContactLastName:'string',
+	    	    					PolicyContactCellPhon:'string'
 			                	}
 			            } 
 			    }; 
@@ -438,21 +465,31 @@ function initPolicyToList(name,insurance,policyDate,id,pic){
 							var model=$("#txtModel");
 							var color=$("#txtColor");
 							var holder=$("#txtHolder");	
-							var ownerCellPhone=$("#txtOwnerCellPhone");
+							var ownerCellPhone=$("#txtOwnerCellPhone");							
 							var pic=getCarPictureUri();
 							 policy=	 $('#txtPolicyNo');
 							 policyDate=	 $("#txtPolicyDate");
 							 aseg=$('#selectInsurance option:selected');
+							 polContactNameGrl=$("#txtPolContactName");
+							 polContactFirstNameGrl=$("#txtPolContactFirstName");
+							 polContactLastNameGrl=$("#txtPolContactLastName");	 
+							polContactCellPhoneGrl=$("#txtPolContactCellPhone");
 							
 								if(!policySaved||(policyDate.val().trim().length>1||policy.val().trim().length>1||(parseInt(aseg.val())>1)
 										||serie.val().trim().length>1||plates.val().trim().length>1||vehicleType.val().trim().length>0||mark.val().trim().length>1
-										||subMark.val().trim().length>1||model.val().trim().length>1||color.val().trim().length>1||holder.val().trim().length>1||pic.trim().length>1||ownerCellPhone.val().trim().length>1)){
+										||subMark.val().trim().length>1||model.val().trim().length>1||color.val().trim().length>1||holder.val().trim().length>1
+										||pic.trim().length>1||ownerCellPhone.val().trim().length>1
+										||polContactNameGrl.val().trim().length>0||polContactFirstNameGrl.val().trim().length>0||polContactLastNameGrl.val().trim().length>0
+										||polContactCellPhoneGrl.val().trim().length>0
+								)){
 									
 								
 								if(policyDate.val().trim().length>0&&policy.val().trim().length>0&&(parseInt(aseg.val())>0)
 								&&serie.val().trim().length>0&&plates.val().trim().length>0&&vehicleType.val().trim().length>0&&mark.val().trim().length>0	
 								&&subMark.val().trim().length>0&&model.val().trim().length>0&&color.val().trim().length>0&&holder.val().trim().length>0&&pic.trim().length>0
-								&&ownerCellPhone.val().trim().length>0){
+								&&ownerCellPhone.val().trim().length>0
+								&&polContactNameGrl.val().trim().length>0&&polContactFirstNameGrl.val().trim().length>0&&polContactLastNameGrl.val().trim().length>0
+								&&polContactCellPhoneGrl.val().trim().length>0){
 								
 									$('#liSUdata').show();
 									
@@ -462,7 +499,10 @@ function initPolicyToList(name,insurance,policyDate,id,pic){
 								if(policyDate.val().trim().length>0||policy.val().trim().length>0||(parseInt(aseg.val())>0)
 										||serie.val().trim().length>0||plates.val().trim().length>0||vehicleType.val().trim().length>0||mark.val().trim().length>0	
 										||subMark.val().trim().length>0||model.val().trim().length>0||color.val().trim().length>0||holder.val().trim().length>0||pic.trim().length>0
-										||ownerCellPhone.val().trim().length>0){					
+										||ownerCellPhone.val().trim().length>0
+										||polContactNameGrl.val().trim().length>0||polContactFirstNameGrl.val().trim().length>0||polContactLastNameGrl.val().trim().length>0
+										||polContactCellPhoneGrl.val().trim().length>0		
+								){					
 											$('#liKeepEd').show();
 											
 										}else{

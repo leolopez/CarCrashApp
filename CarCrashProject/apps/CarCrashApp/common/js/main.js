@@ -294,10 +294,10 @@ function languageChanged(lang) {
 function initProfileTranslations (){
 	 $("#myAccName").text(Messages.myAccName);
 	    $("#enterDetails").text(Messages.enterDetails);
-	    $("#lblProfileName").text(Messages.lblProfileName);
-	    $("#lblFirstName").text(Messages.lblFirstName);
-	    $("#lblLastName").text(Messages.lblLastName);
-	    $("#lblCellPhone").text(Messages.lblCellPhone);
+	    $("label[id='lblProfileName']").text(Messages.lblProfileName);
+	    $("label[id='lblFirstName']").text(Messages.lblFirstName);
+	    $("label[id='lblLastName']").text(Messages.lblLastName);
+	    $("label[id='lblCellPhone']").text(Messages.lblCellPhone);
 	    $("#lblCityRes").text(Messages.lblCityRes);
 	    $("#lblCompany").text(Messages.lblCompany);
 	    $("#h1ConfirmCity").text(Messages.h1ConfirmCity);
@@ -316,7 +316,7 @@ function initShowPoliciesTranslations(){
 	    $("#aKeepEd").text(Messages.aKeepEd);
 	    $("#aRPoliza").text(Messages.aRPoliza);
 	    $("#liSelectPolicyOp").text(Messages.h3SelectPolicyOp);
-	    
+	    $("#pContact3").text(Messages.pContact3);
 }
 
 function initMedicalDataTranslations(){

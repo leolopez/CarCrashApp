@@ -61,6 +61,7 @@ Messages = {
 		placeholderDateFormat:"dd/mm/aaaa",
 		txtAseg:"Siguiente",
 		aRecordsList:"Listado de Registros",
+		pContact3:"Contacto",
 		//Add Vehicle translations
 		h3Vehicle: "Vehículo",
 		lblPlates:"Placa",
@@ -219,6 +220,7 @@ Messages = {
 		Messages.aSUdata="Guardar/Actualizar";
 		Messages.aKeepEd="Continuar editando";
 		Messages.aRPoliza="Ir a registros";		
+		Messages.pContact3="Contacto";
 	}
 	
 	function setSpanishMedicalData(){
@@ -364,6 +366,7 @@ function setEnglishProfile(){
 		Messages.aSUdata="Save/Update";
 		Messages.aKeepEd="Continue editing";
 		Messages.aRPoliza="Go to records";	
+		Messages.pContact3="Contact";
 	}
 	
 	function setEnglishMedicalData(){

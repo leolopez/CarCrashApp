@@ -13,9 +13,11 @@
 
 
 function countJSONStoreDocs(collectionName,collections){	
-	jsonstoreResultsWrapperObject=null;
+	jsonstoreResultsWrapperObject=null; 
+	
+	 
 	WL.JSONStore.init(collections).then(function () {		
-		
+		 
 		 WL.JSONStore.get(collectionName).count().then(function (numberOfDocuments) {			
 			 
 				jsonstoreResultsWrapper(numberOfDocuments);	

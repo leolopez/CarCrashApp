@@ -276,18 +276,21 @@ function setMedicalDataTransaction(imssp, bloodTypep, alergicsp, clinicalConditi
 
 function setPolicyVehicleDataTransaction(policyNoParam,
 		policyDateParam, insuranceParam, platesParam,serieParam,vehicleTypeParam,markParam,
-subMarkParam,modelParam,colorParam, carPictureParam,holderParam,OwnerCellPhonePrm){
+subMarkParam,modelParam,colorParam, carPictureParam,holderParam,OwnerCellPhonePrm,policyContactName,policyContactFirstName,policyContactLastName,
+policyContactCellPhone){ 
 	var collectionName = 'PolicyVehicle';    
 	jsonstoreResultsWrapper("false");
     	    var collections = {
     	    		PolicyVehicle : {
     	                searchFields: {mobileId: 'string',PolicyNo: 'string', PolicyDate: 'string', insurance: 'string', Plates: 'string', Serie: 'string'
     	                	, VehicleType: 'string', Mark: 'string', SubMark: 'string', Model: 'string', Color: 'string'
-    	                		, carPicture: 'string', Holder: 'string', OwnerCellPhone: 'string'
+    	                		, carPicture: 'string', Holder: 'string', OwnerCellPhone: 'string',PolicyContactName:'string',
+    	    					PolicyContactFirstName:'string', PolicyContactLastName:'string',
+    	    					PolicyContactCellPhon:'string'
     	                	}
     	            } 
     	    };       	        	 	   
-	  
+    	    
      WL.JSONStore.init(collections)	 	  
 	.then(function () {
 		
@@ -304,7 +307,11 @@ subMarkParam,modelParam,colorParam, carPictureParam,holderParam,OwnerCellPhonePr
         .equal('Color', colorParam.val().trim())
         .equal('carPicture',carPictureParam.trim())
         .equal('Holder',holderParam.val().trim())
-		.equal('OwnerCellPhone',OwnerCellPhonePrm.val().trim());
+		.equal('OwnerCellPhone',OwnerCellPhonePrm.val().trim())
+		.equal('PolicyContactName', policyContactName.val().trim())
+        .equal('PolicyContactFirstName',policyContactFirstName.val().trim())
+        .equal('PolicyContactLastName',policyContactLastName.val().trim())
+		.equal('PolicyContactCellPhon',policyContactCellPhone.val().trim());
 		
 		isJSONStoreDocRegistered(collectionName,collections,queryPart1);
 		
@@ -324,7 +331,10 @@ subMarkParam,modelParam,colorParam, carPictureParam,holderParam,OwnerCellPhonePr
 				var data = [{mobileId: device.uuid.trim(),PolicyNo: policyNoParam.val().trim(), PolicyDate: policyDateParam.val().trim(), insurance: insuranceParam.text().trim(),
 					Plates: platesParam.val().trim(),Serie: serieParam.val().trim(),VehicleType: vehicleTypeParam.val().trim(),Mark: markParam.val().trim(),
 					SubMark: subMarkParam.val().trim(),Model: modelParam.val().trim(),Color: colorParam.val().trim(),carPicture: carPictureParam.trim(),
-					Holder: holderParam.val().trim(), OwnerCellPhone: OwnerCellPhonePrm.val().trim()
+					Holder: holderParam.val().trim(), OwnerCellPhone: OwnerCellPhonePrm.val().trim(),
+					PolicyContactName:policyContactName.val().trim(),
+					PolicyContactFirstName:policyContactFirstName.val().trim(), PolicyContactLastName:policyContactLastName.val().trim(),
+					PolicyContactCellPhon:policyContactCellPhone.val().trim()
 		        	}];
 
 				// Optional options for add.

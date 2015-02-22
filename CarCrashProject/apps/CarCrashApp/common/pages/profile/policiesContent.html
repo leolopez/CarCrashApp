@@ -10,20 +10,36 @@
     		
     			<div id="policyCont"  >  
     			<h3 id="h3AddPolicies" align="center">Policies.</h3>   				   			    				    				
-<div style="margin-top:0 margin-bottom: 0;" class="ui-body ui-body-a ui-corner-all">
+<div style="margin-bottom: 0;" class="ui-body ui-body-a ui-corner-all">
 					<label id="lblPolicyNum" >Policy Number</label> 	    				    				    				     				
     				<input  id="txtPolicyNo" maxlength="30" type="text"/>  
     				<label id="lblPolicyExpiration">Policy Expiration</label>    				    							
     				<input  id="txtPolicyDate"  placeholder="dd/mm/yyyy"  type="date"/>     				    				        								    				
-    				<div class="ui-field-contain" style="margin-top:0 margin-bottom: 0;">
+    				     				 <div class="ui-field-contain" style="margin-top:0 margin-bottom: 0;">
     				<div> <label id="lblInsurance">Insurance</label> </div>
 					<div>		<select name="selectInsurance" id="selectInsurance">
 								<option id="opNoneInsurance" value="0" selected="selected">Select an insurance</option>
 								<option value="1">Mapfre</option>
 								<option value="2">AXA</option>
 							</select></div>
-						</div>     				
-    				    <input onclick="initVehicle();"  id="txtAseg" type="button" value="Next"/>     				   				
+						</div>   				
+    				    				</div>
+    				    				<br>
+    				    				<div style=" margin-bottom: 0;" class="ui-body ui-body-a ui-corner-all">
+    				    				<p align="center" id="pContact3">Contact </p> 
+					     				   	<label for="lblProfileName"  id="lblProfileName" >Name</label> 			      				    				  
+    				<input id="txtPolContactName" name="txtPolContactName" maxlength="40" type="text" /> 
+    				<label id="lblFirstName">First Name</label>     				 
+    				<input id="txtPolContactFirstName" type="text" maxlength="30" />
+    				<label id="lblLastName">Last Name</label>     				
+    				<input id="txtPolContactLastName" type="text" maxlength="30" />
+    				<label id="lblCellPhone">Cell Phone</label>      				 
+    				<input  id="txtPolContactCellPhone" type="text" maxlength="12"/>
+    				<br>			
+    				
+    				    				</div><br>  
+    				    				 <div style="margin-bottom: 0;" class="ui-body ui-body-a ui-corner-all"> 				    				    				
+    				    <input onclick="initVehicle();"  id="txtAseg" type="button" value="Next"/>
     				    				</div>
     				    				</div>
     				<div id="vehicleCont"  >    				   			    				
@@ -54,7 +70,7 @@
     				<hr></hr> 
     				<label id="lblOwnerName">Owner Name</label>
     				<input  id="txtHolder" maxlength="40" type="text" />     				
-    				<label id="lblOwnerCellPhone">CellPhone</label>
+    				<label id="lblCellPhone">CellPhone</label>
     				<input  id="txtOwnerCellPhone" maxlength="12" type="text" /> 
     				</div>    				
     				</div>
