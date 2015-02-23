@@ -1,32 +1,28 @@
-/**
- * @param 	pid - must be 0 if want to save new document
- * @param	pDocument - document object
- * @param	pCollectionName - collection name [string]
- * @param	pCollections - must be a collection/searchfields object [object]
- * 			var collections = {
-			  // Object that defines the 'people' collection.
-			  people : {
-			    // Object that defines the Search Fields for the 'people' collection.
-			    searchFields : {name: 'string', age: 'integer'}
-			  }
-			};
- * @param 	pOptions - options object
- * @param	pFnSuccess - function when success
- * @param	pFnFail - function when failure
- */
-function clsJsonStoreHelper(pid, pDocument, pCollectionName, pCollections, pOptions, pFnSuccess, pFnFail){
-	this._collectionName = pCollectionName;
-	this._collections = pCollections;
-	this._options = pOptions;
-	this._document = pDocument;
-	this._id = pid;
+function clsJsonStoreHelper(){
+	this.collectionName = "";
+	this.collections = {};
+	this.options = {};
+	this.document = {};
+	this.id = 0;
 	
 	this.save = _saveData;
 	this.remove = _removeData;
 	this.get = _getData;
+	this.existsCollection = _existsCollection;
+	this.destroy = _destroy;
 	
-	this._fnSuccess = pFnSuccess;
-	this._fnFail = pFnFail;
+	this.fnSuccess = function(){};
+	this.fnFail = function(){};
+}
+
+function _existsCollection(){
+	WL.JSONStore.init(this.collections);
+	if(undefined != WL.JSONStore.get(this.collectionName)){
+		return true;
+	}
+	else{
+		return false;
+	}
 }
 
 function _saveData(){
@@ -57,25 +53,29 @@ function _saveData(){
 			.then(fnSuccess)
 			.fail(fnFail);
 }
+function _destroy(){
+	var collections = this.collections;
+	WL.JSONStore.init(collections);
+	WL.JSONStore.destroy();
+}
 
 function _removeData(){
-	var collectionName = this._collectionName;
-	var id = this._id;
-	var collections = this._collections;
-	var fnSuccess = this._fnSuccess;
-	var fnFail = this._fnFail;
+	var collectionName = this.collectionName;
+	var id = this.id;
+	var collections = this.collections;
+	var fnSuccess = this.fnSuccess;
+	var fnFail = this.fnFail;
 	
 	if(id != 0){
 		//remove document
 		var queries = [{_id: id}];
 		var options = {exact: true};
 		
-		WL.JSONStore.init(collections).then(function () {
-			WL.JSONStore.get(collectionName)
-				.remove(queries, options)
-					.then(fnSuccess)
-					.fail(fnFail);
-		});
+		WL.JSONStore.init(collections);
+		WL.JSONStore.get(collectionName)
+			.remove(queries, options)
+				.then(fnSuccess)
+				.fail(fnFail);
 	}
 	else{
 		return false;

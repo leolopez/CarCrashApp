@@ -29,16 +29,16 @@ function saveAccountSuccess(result){
 		$("#frmSignUp")[0].reset();
 	}
 	else{
-		alert('Ocurrio un error al crear su cuenta, por favor intente de nuevo.')
+		alert('Ocurrio un error al crear su cuenta, por favor intente de nuevo.');
 	}
 }
-function saveAccountFailure(){
+function saveAccountFailure(error){
 	alert('Error al registrarse, asegurese de contar con conexion a internet.');
 }
 
 function accessAccount()
 {
-	var restHelper = new clsRestHelper('account','verifyLogin', this, accessSuccess, accessFailure);
+	var restHelper = new clsRestHelper('account','verifyLogin', {}, accessSuccess, accessFailure);
 	restHelper.callRestAdapter();
 }
 
@@ -46,46 +46,19 @@ function accessSuccess(result){
 	var oResult = result.invocationResult;
 	if(oResult.value){
 		//Guardar datos en jsonstore
-		
 		//saveLocalAccount();
-		
 		location.href = "#perfil";
 	}
 	else{
 		alert('E-Mail y Password incorrectos.');
+		$('#txtPass').val("").focus();
 	}
 }
 
-function accessFailure(){
+function accessFailure(error){
 	alert('Error, asegurese de contar con conexion a internet.');
 }
 
-function saveLocalAccount(){
-	var jsonStore = new clsJsonStoreHelper(
-			0, 
-			[{mail:"123@123.com"}],
-			"coll",
-			{coll:{
-				searchFields:{mail:'string', pass: 'string'}
-			}},
-			{
-				
-			},
-			success,
-			fail
-	);
-	//jsonStore.save();
-	jsonStore.get();
-	//jsonStore.remove();
-}
-
-function success(result){
-	
-}
-
-function fail(result){
-	
-}
 function logIn()
 {
 	var mail = $('#txtEmail').val();
