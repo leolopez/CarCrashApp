@@ -36,18 +36,33 @@ function saveAccountFailure(error){
 	alert('Error al registrarse, asegurese de contar con conexion a internet.');
 }
 
-function accessAccount()
+function accessAccount(pEmail, pPassword)
 {
-	var restHelper = new clsRestHelper('account','verifyLogin', {}, accessSuccess, accessFailure);
+	var restHelper = new clsRestHelper('account','verifyLogin', {email:pEmail, password:pPassword}, accessSuccess, accessFailure);
 	restHelper.callRestAdapter();
 }
 
 function accessSuccess(result){
 	var oResult = result.invocationResult;
-	if(oResult.value){
+	if(oResult.data){
 		//Guardar datos en jsonstore
-		//saveLocalAccount();
-		location.href = "#perfil";
+		var oJS = new clsJsonStoreHelper();
+		oJS.collectionName = "perfil";
+		oJS.document = oResult.data;
+		oJS.id = 0;
+		oJS.fnSuccess = function(numAdd){
+			if(numAdd > 0){
+				//redireccionar a perfil
+				location.href = "#perfil";
+			}
+			else{
+				alert('Ocurrio un error al guardar su usuario. Intentelo de nuevo.');
+			}
+		};
+		oJS.fnFail = function(){
+			alert('Ocurrio un error al guardar su usuario. Intentelo de nuevo.');
+		};
+		oJS.save();
 	}
 	else{
 		alert('E-Mail y Password incorrectos.');
@@ -68,7 +83,7 @@ function logIn()
 	oAcc.email = mail;
 	oAcc.password = pass;
 	
-	oAcc.access();
+	oAcc.access(mail,pass);
 }
 
 function signUp()

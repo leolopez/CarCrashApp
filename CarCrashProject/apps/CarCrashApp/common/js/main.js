@@ -13,7 +13,7 @@ function wlCommonInit(){
 	
 	// Common initialization code goes here
 	
-	
+	//WL.JSONStore.destroy();
 	
 	var pages = getPages(); //pages object
 	$.each(pages, function(idx, obj){
@@ -82,8 +82,6 @@ function wlCommonInit(){
 
 function initializeData()
 {
-	
-	location.href = '#login'; //First page to show
 	$('a').attr('data-transition','slide');	//general app transition
 	
 	initLanguage();
@@ -98,20 +96,19 @@ function initializeData()
 function checkUser(){
 	var oJS = new clsJsonStoreHelper();
 	oJS.collectionName = 'perfil';
-	oJS.collections = {
-		perfil:{
-			searchFields:{
-				email:'string'
-			}
-		}	
+	oJS.fnSuccess = function(numCnt){
+		if(numCnt > 0){
+			location.href = "#perfil";
+		}
+		else{
+			location.href = "#login";
+		}
 	};
-	
-	if(oJS.existsCollection()){
-		location.href = "#perfil";
-	}
-	else{
+	oJS.fnFail = function(){
+		alert('Error de base de datos interno.');
 		location.href = "#login";
-	}
+	};
+	oJS.count();
 }
 
 //Pages array to load on index
