@@ -91,6 +91,27 @@ function initializeData()
 	$("a[href='#sinisterReport']").click(function(){
     	getLocation();
     });
+	
+	checkUser();
+}
+
+function checkUser(){
+	var oJS = new clsJsonStoreHelper();
+	oJS.collectionName = 'perfil';
+	oJS.collections = {
+		perfil:{
+			searchFields:{
+				email:'string'
+			}
+		}	
+	};
+	
+	if(oJS.existsCollection()){
+		location.href = "#perfil";
+	}
+	else{
+		location.href = "#login";
+	}
 }
 
 //Pages array to load on index
