@@ -16,6 +16,22 @@ function registerAccount(objAccount)
  */
 function verifyLogin(objAccount)
 {
-	var ret = {value:true};
-	return ret;
+	var oAcc = {
+			firstName: "Diego",
+			lastName: "",
+			birthDay: "1991-03-10",
+			country: "",
+			state: "",
+			city: "",
+			email: "123@123.com",
+			cellPhone: "123123123123",
+			password: "123123"
+	};
+	
+	if(oAcc.email == objAccount.email && oAcc.password == objAccount.password){
+		return oAcc;
+	}
+	else{
+		return null;
+	}
 }
