@@ -261,7 +261,7 @@
 		}
 function initPolicyToList(name,insurance,policyDate,id,pic){
 			
-			$('#listPolicy').append('<li ><a data-rel="popup" data-position-to="window" data-transition="pop" href="#popupShosPolicyDetails" onclick="initSelectedPolicy(this);" class="ui-btn ui-btn-icon-right ui-icon-carat-r" > ' +
+			$('#listPolicy').append('<li class=" ui-li-has-thumb" ><a data-rel="popup" data-position-to="window" data-transition="pop" href="#popupShosPolicyDetails" onclick="initSelectedPolicy(this);" class="ui-btn ui-btn-icon-right ui-icon-carat-r" > ' +
 			        '<img height="100%" src="'+pic.trim()+'"> '+
 				    '<h2>'+name.trim()+'</h2>'+
 				    '<p>'+insurance.trim()+'</p>'+
