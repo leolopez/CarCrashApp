@@ -126,6 +126,21 @@ function getCollections(){
 			searchFields:{UserContactName:'string',		
 				UserContactFirstName:'string',UserContactLastName:'string',
 				UserContactCellPhon:'string' }
+		},
+		reports:{
+			searchFields:{
+				idPolicy:'string', date:'string', status:'boolean'
+			}
+		},
+		reportLocations:{
+			searchFields:{
+				idReport:"integer"
+			}
+		},
+		reportPictures:{
+			searchFields:{
+				idReport:"integer"
+			}
 		}
 	};
 }
