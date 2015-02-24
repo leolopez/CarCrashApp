@@ -129,7 +129,7 @@ function getCollections(){
 		},
 		reports:{
 			searchFields:{
-				idPolicy:'string', date:'string', status:'boolean'
+				idPolicy:'string', date:'string', status:'boolean', type:'string'
 			}
 		},
 		reportLocations:{
