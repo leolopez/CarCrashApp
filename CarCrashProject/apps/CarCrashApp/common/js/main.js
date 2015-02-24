@@ -357,6 +357,10 @@ function initShowPoliciesTranslations(){
 	    $('a[id="Details"]').text(Messages.aPolicyDetails);
 	    $('a[id="Delete"]').text(Messages.aDeletePolicy);
 	    $('a[id="New"]').text(Messages.aAddPolicy);
+	    $('a[id="aContactsList"]').text(Messages.aContactsList);
+	    $('h3[id="aContactsList"]').text(Messages.aContactsList);
+	    $("#h3AddContacts").text(Messages.h3AddContacts);  
+	   
 }
 
 function initMedicalDataTranslations(){
@@ -382,7 +386,7 @@ function initAddPolicyTranslations(){
 	    $("#lblInsurance").text(Messages.lblInsurance);
 	    $("#txtPolicyDate").attr("placeholder", Messages.placeholderDateFormat); 
 	    $("#txtAseg").val(Messages.txtAseg);  
-	    $("#aRecordsList").text(Messages.aRecordsList); 
+	    $('a[id="aRecordsList"]').text(Messages.aRecordsList); 
 	    //Vehicle section
 	    $("#h3Vehicle").text(Messages.h3Vehicle); 
 	    $("#lblPlates").text(Messages.lblPlates); 

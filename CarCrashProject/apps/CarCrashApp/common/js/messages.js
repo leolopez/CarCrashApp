@@ -41,6 +41,8 @@ Messages = {
 		aRPoliza:"Ir a registros",	
 		aEmergencies:"Emergencias",
 		aInsurances:"Aseguradoras",
+		aContactsList:"Lista de contactos",
+		h3AddContacts:"Contacto",
 		//Medical data translations
 		lblIMSSNum:"No. IMSS",	
 		lblBloodType:"Tipo de sangre",	
@@ -225,6 +227,8 @@ Messages = {
 		Messages.pContact3="Contacto";
 		Messages.aEmergencies="Emergencias";
 		Messages.aInsurances="Aseguradoras";
+		Messages.aContactsList="Lista de contactos";
+		Messages.h3AddContacts="Contacto"; 
 	}
 	
 	function setSpanishMedicalData(){
@@ -373,6 +377,8 @@ function setEnglishProfile(){
 		Messages.pContact3="Contact";
 		Messages.aEmergencies="Emergencies";
 		Messages.aInsurances="Insurances";
+		Messages.aContactsList="Contact list";
+		Messages.h3AddContacts="Contact"; 
 	}
 	
 	function setEnglishMedicalData(){
