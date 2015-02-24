@@ -132,7 +132,7 @@ function getCollections(){
 				idPolicy:'string', date:'string', status:'boolean', type:'string'
 			}
 		},
-		reportPictures:{
+		reportExtras:{
 			searchFields:{
 				idReport:"integer"
 			}
