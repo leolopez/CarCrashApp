@@ -132,11 +132,6 @@ function getCollections(){
 				idPolicy:'string', date:'string', status:'boolean', type:'string'
 			}
 		},
-		reportLocations:{
-			searchFields:{
-				idReport:"integer"
-			}
-		},
 		reportPictures:{
 			searchFields:{
 				idReport:"integer"
