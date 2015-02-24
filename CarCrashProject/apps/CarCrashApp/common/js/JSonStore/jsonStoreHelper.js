@@ -1,111 +1,126 @@
-/**
- * @param 	pid - must be 0 if want to save new document
- * @param	pDocument - document object
- * @param	pCollectionName - collection name [string]
- * @param	pCollections - must be a collection/searchfields object [object]
- * 			var collections = {
-			  // Object that defines the 'people' collection.
-			  people : {
-			    // Object that defines the Search Fields for the 'people' collection.
-			    searchFields : {name: 'string', age: 'integer'}
-			  }
-			};
- * @param 	pOptions - options object
- * @param	pFnSuccess - function when success
- * @param	pFnFail - function when failure
- */
-function clsJsonStoreHelper(pid, pDocument, pCollectionName, pCollections, pOptions, pFnSuccess, pFnFail){
-	this._collectionName = pCollectionName;
-	this._collections = pCollections;
-	this._options = pOptions;
-	this._document = pDocument;
-	this._id = pid;
+function clsJsonStoreHelper(){
+	this.collectionName = "";
+	//this.collections = {};
+	this.options = {};
+	this.document = {};
+	this.id = 0;
 	
 	this.save = _saveData;
 	this.remove = _removeData;
 	this.get = _getData;
+	this.count = _count;
 	
-	this._fnSuccess = pFnSuccess;
-	this._fnFail = pFnFail;
+	this.fnSuccess = function(){};
+	this.fnFail = function(){};
 }
 
 function _saveData(){
-	var collectionName = this._collectionName;
-	var collections = this._collections;
-	var options = this._options;
-	var document = this._document;
-	var id = this._id;
-	var fnSuccess = this._fnSuccess;
-	var fnFail = this._fnFail;
+	var collectionName = this.collectionName;
+	var collections = getCollections();
+	var document = this.document;
+	var id = this.id;
+	var fnSuccess = this.fnSuccess;
+	var fnFail = this.fnFail;
 	
-	WL.JSONStore.init(collections, options)
+	if(id == 0){
+		WL.JSONStore.init(collections, {})
 		.then(function(){
 			var data = document;
-			if(id == 0){
-				//save new document
-				return WL.JSONStore.get(collectionName).add(data);
-			}
-			else{
-				//edit existing document
-				var docs = [{_id: id, json: data}];
-				WL.JSONStore.get(collectionName)
-					.replace(docs)
-						.then(fnSuccess)
-						.fail(fnFail);
-			}
+			//save new document
+			return WL.JSONStore.get(collectionName).add(data, {markDirty:true});
 		})
+		.then(fnSuccess)
+		.fail(fnFail);
+	}else{
+		var docs = [{_id: parseInt(id), json: document}];
+		WL.JSONStore.init(collections, {})
+		.then(function(){
+			WL.JSONStore.get(collectionName)
+			.replace(docs)
+				.then(fnSuccess)
+				.fail(fnFail);
+		});
+	}
+}
+
+function _removeData(){
+	var collectionName = this.collectionName;
+	var id = this.id;
+	var collections = getCollections();
+	var fnSuccess = this.fnSuccess;
+	var fnFail = this.fnFail;
+	
+	//remove document
+	var queries = [{_id: parseInt(id)}];
+	var options = {exact: true, markDirty: true};
+	
+	WL.JSONStore.init(collections,{});
+	WL.JSONStore.get(collectionName)
+		.remove(queries, options)
 			.then(fnSuccess)
 			.fail(fnFail);
 }
 
-function _removeData(){
-	var collectionName = this._collectionName;
-	var id = this._id;
-	var collections = this._collections;
-	var fnSuccess = this._fnSuccess;
-	var fnFail = this._fnFail;
+function _getData(){
+	var collectionName = this.collectionName;
+	var options = this.options;
+	var document = this.document;
+	var collections = getCollections();
+	var fnSuccess = this.fnSuccess;
+	var fnFail = this.fnFail;
+	var id = parseInt(this.id);
 	
-	if(id != 0){
-		//remove document
-		var queries = [{_id: id}];
-		var options = {exact: true};
+	if(id == 0 || isNaN(id))
+	{	
+		var queryPart = WL.JSONStore.QueryPart();
+		$(document).each(function(){
+			switch(this.operator){
+			case "equal":
+				queryPart.equal(this.key, this.value);
+				break;
+			case "like":
+				queryPart.like(this.key, this.value);
+				break;
+			}
+		});
 		
-		WL.JSONStore.init(collections).then(function () {
+		WL.JSONStore.init(collections, {}).then(function () {
 			WL.JSONStore.get(collectionName)
-				.remove(queries, options)
+				.advancedFind([queryPart], options)
+					.then(fnSuccess)
+					.fail(fnFail);
+		});
+	}else{
+		WL.JSONStore.init(collections, {}).then(function(){
+			WL.JSONStore.get(collectionName)
+				.findById(parseInt(id))
 					.then(fnSuccess)
 					.fail(fnFail);
 		});
 	}
-	else{
-		return false;
-	}
 }
 
-function _getData(){
-	var collectionName = this._collectionName;
-	var options = this._options;
-	var document = this._document;
-	var collections = this._collections;
-	var fnSuccess = this._fnSuccess;
-	var fnFail = this._fnFail;
-	
-	var queryPart = WL.JSONStore.QueryPart();
-	$(document).each(function(){
-		switch(this.operator){
-		case "equal":
-			queryPart.equal(this.key, this.value);
-			break;
-		case "like":
-			queryPart.like(this.key, this.value);
-			break;
+function _count(){
+	var collectionName = this.collectionName;
+	var collections = getCollections();
+	var fnSuccess = this.fnSuccess;
+	var fnFail = this.fnFail;
+
+	WL.JSONStore.init(collections, {}).then(function(){
+		
+		WL.JSONStore.get(collectionName).count({},{exact:true})
+		.then(fnSuccess)
+		.fail(fnFail);
+		
+	});
+}
+
+function getCollections(){
+	return {
+		perfil:{
+			searchFields:{
+				email:"string", password:"string"
+			}
 		}
-	});
-	
-	WL.JSONStore.init(collections).then(function () {
-		WL.JSONStore.get(collectionName)
-			.advancedFind([queryPart], options)
-				.then(fnSuccess)
-				.fail(fnFail);
-	});
+	};
 }

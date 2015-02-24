@@ -14,7 +14,7 @@ function _callRestAdapter()
 	var invokeData = {
 			adapter : this.adapter,
             procedure : this.procedure,
-            parameters : [ this.parameters ]
+            parameters : [this.parameters]
 	};
 	
 	WL.Client.invokeProcedure(invokeData,{
