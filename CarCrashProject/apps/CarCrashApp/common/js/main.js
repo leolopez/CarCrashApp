@@ -268,7 +268,26 @@ function getPages()
 	        		"id":"alertsNav",
 	        		"url":"pages/general/left_panel.html"
 	        	}
-	        	}
+	        	},
+	        	{"id":"showContacts", "url":"pages/contacts/showContacts.html",
+		        	"header":{
+		        		"url":"pages/general/header.html"
+		        	},
+		        	"leftPanel":{
+		        		"id":"showContactsNav",
+		        		"url":"pages/general/left_panel.html"
+		        	}
+		        	},
+		        	{"id":"contactsContent", "url":"pages/contacts/contactsContent.html",
+			        	"header":{
+			        		"url":"pages/general/header.html",
+			        			"saveButton":"saveContact();"
+			        	},
+			        	"leftPanel":{
+			        		"id":"contactsContNav",
+			        		"url":"pages/general/left_panel.html"
+			        	}
+			        	}
 	];
 	
 }
