@@ -121,6 +121,11 @@ function getCollections(){
 			searchFields:{
 				email:"string", password:"string"
 			}
+		},
+		Contacts:{
+			searchFields:{UserContactName:'string',		
+				UserContactFirstName:'string',UserContactLastName:'string',
+				UserContactCellPhon:'string' }
 		}
 	};
 }

@@ -130,7 +130,8 @@ function saveContact(){
         .equal('UserContactLastName', userContactLastName.val().trim())
         .equal('UserContactCellPhon',userContactCellPhone.val().trim());
 		
-		jsonStore.advancedFind(queryPart1);
+		jsonStore.get();
+		//jsonStore.advancedFind(queryPart1);//
 		}
 		
 		setTimeout(
@@ -215,8 +216,8 @@ function initContacts(){
 			initSuccess,
 			initFail
 	);
-	
-	jsonStore.findAll();
+	//jsonStore.getAll();
+	jsonStore.get();
 	
 }
 
@@ -368,6 +369,7 @@ function ondeletedUpdateList(list){
 
 function countSuccess(result){
 	contactsCount=result;
+	
 }
 
 function countFail(result){
