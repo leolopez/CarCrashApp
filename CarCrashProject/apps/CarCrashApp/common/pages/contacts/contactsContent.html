@@ -1,0 +1,42 @@
+<!-- --------------------------- pageAddcontact ------------------------- -->
+    		
+    		<div data-role="page" id="{id}"  class="ui-page-header-fixed ui-page-footer-fixed">
+    		   			    		
+    			<div role="main" class="ui-content">
+    		
+    			<div id="contactCont"  >  
+    			<h3 id="h3AddContacts" align="center">Contacts</h3>   				   			    				    				
+    				    				<br>
+    				    				<div style=" margin-bottom: 0;" class="ui-body ui-body-a ui-corner-all">
+    				    				
+					     				   	<label for="lblProfileName"  id="lblProfileName" >Name</label> 			      				    				  
+    				<input id="txtUserContactName" name="txtUserContactName" maxlength="40" type="text" /> 
+    				<label id="lblFirstName">First Name</label>     				 
+    				<input id="txtUserContactFirstName" type="text" maxlength="30" />
+    				<label id="lblLastName">Last Name</label>     				
+    				<input id="txtUserContactLastName" type="text" maxlength="30" />
+    				<label id="lblCellPhone">Cell Phone</label>      				 
+    				<input  id="txtUserContactCellPhone" type="text" maxlength="12"/>
+    				<br>			    				
+    				    				</div><br>      				    				
+    				    				</div>    		    				    				    				     				    				 				
+    			</div>    			    			
+    			   		<div data-role="popup" id="popupMenuContactCont" data-theme="b">
+<ul data-role="listview" data-inset="true" style="min-width:210px;">
+<li id="liSelectOption" data-role="list-divider">Select an action</li>
+<li id="liSUdataC"><a id="aSUdata"  href="#" class="ui-btn" onclick=" $('#popupMenuContactCont' ).popup( 'close' ); saveContact();">Save/Update</a></li>
+<li id="liKeepEdC"><a id="aKeepEd" class="ui-btn" href=""  onclick="$('#popupMenuContactCont' ).popup( 'close' );">Continue editing</a></li>
+<li id="liUserContact"><a id="aRPoliza" class="ui-btn" href="#showContacts" onclick="cleanContactInputs();">Go to records</a></li>
+</ul>
+</div>		    			
+							    															
+    			<div data-tap-toggle="false" data-hide-during-focus="false" data-role="footer" data-position="fixed" data-fullscreen="true" class="bottomFooter">
+	   				<div data-role="navbar" data-iconpos="top">
+	   					<ul>
+	   					<li><a id="aRecordsList"  onclick="validUnsavedContact();" >List of contacts</a></li>
+							
+						</ul>
+					</div><!-- /navbar -->
+	   			</div>	
+				
+    		</div><!-- pageAddcontact -->

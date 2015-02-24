@@ -122,8 +122,22 @@
 		}		
 		$(document).on('pagebeforeshow','#AgregarPoliza',function(e,data){    			    
 		initPolicyPage();		
-		next=false;
-		
+		next=false;		
+		basicPersonFiltersNumber("txtOwnerCellPhone");		
+		basicPersonFiltersNumber("txtPolContactCellPhone");        	 
+   	 basicPersonNameFilters("txtPolContactFirstName");
+   	 basicPersonNameFilters("txtPolContactLastName");
+   	 $('#txtPolContactName').keypress(function(key) {        		
+   		 if((key.charCode < 97 || key.charCode > 122) && (key.charCode < 65 || key.charCode > 90) && (key.charCode != 32)
+   				 && (key.charCode != 225)&& (key.charCode != 233)&& (key.charCode != 237)&& (key.charCode != 243)&& (key.charCode != 250)&& (key.charCode != 241)
+   	   				&& (key.charCode != 193)&& (key.charCode != 201)&& (key.charCode != 205)&& (key.charCode != 211)&& (key.charCode != 218)&&  (key.charCode != 209) 
+   		 ){
+       		 return false;
+       	 }else{             		
+       	        return true;
+       	    }
+		});
+   	 
 		$('#txtPlates').keypress(function(key) {        		
    		 if((key.charCode < 97 || key.charCode > 122) && (key.charCode < 65 || key.charCode > 90) && (key.charCode != 45)&& (key.charCode != 46)
    				&& (key.charCode < 48 || key.charCode > 57)){
@@ -247,7 +261,7 @@
 		}
 function initPolicyToList(name,insurance,policyDate,id,pic){
 			
-			$('#listPolicy').append('<li class="ui-li-has-thumb ui-last-child" ><a data-rel="popup" data-position-to="window" data-transition="pop" href="#popupShosPolicyDetails" onclick="initSelectedPolicy(this);" class="ui-btn ui-btn-icon-right ui-icon-carat-r" > ' +
+			$('#listPolicy').append('<li ><a data-rel="popup" data-position-to="window" data-transition="pop" href="#popupShosPolicyDetails" onclick="initSelectedPolicy(this);" class="ui-btn ui-btn-icon-right ui-icon-carat-r" > ' +
 			        '<img height="100%" src="'+pic.trim()+'"> '+
 				    '<h2>'+name.trim()+'</h2>'+
 				    '<p>'+insurance.trim()+'</p>'+
