@@ -38,7 +38,9 @@ Messages = {
 		h1PolicyDetail:"Registros",
 		aSUdata:"Guardar/Actualizar",
 		aKeepEd:"Continuar editando",
-		aRPoliza:"Ir a registros",				
+		aRPoliza:"Ir a registros",	
+		aEmergencies:"Emergencias",
+		aInsurances:"Aseguradoras",
 		//Medical data translations
 		lblIMSSNum:"No. IMSS",	
 		lblBloodType:"Tipo de sangre",	
@@ -221,6 +223,8 @@ Messages = {
 		Messages.aKeepEd="Continuar editando";
 		Messages.aRPoliza="Ir a registros";		
 		Messages.pContact3="Contacto";
+		Messages.aEmergencies="Emergencias";
+		Messages.aInsurances="Aseguradoras";
 	}
 	
 	function setSpanishMedicalData(){
@@ -367,6 +371,8 @@ function setEnglishProfile(){
 		Messages.aKeepEd="Continue editing";
 		Messages.aRPoliza="Go to records";	
 		Messages.pContact3="Contact";
+		Messages.aEmergencies="Emergencies";
+		Messages.aInsurances="Insurances";
 	}
 	
 	function setEnglishMedicalData(){

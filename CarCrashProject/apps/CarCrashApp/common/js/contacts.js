@@ -28,24 +28,15 @@ function validNewContact(){
 },300);
 		}
 function countContacts(){
-	var jsonStore = new clsJsonStoreHelper(
-			parseInt(contactId), 
-			[{}],
-			"Contacts",
-			{Contacts:{
-				searchFields:{UserContactName:'string',		
-					UserContactFirstName:'string',UserContactLastName:'string',
-					UserContactCellPhon:'string' }
-			}},
+	var jsonStore = new clsJsonStoreHelper();
+	jsonStore.collectionName="Contacts";
+	jsonStore.document=
 			{
-				
-			},
-			countSuccess,
-			countFail
-	);
-	
-	jsonStore.count();		
-	
+			};
+	jsonStore.id=parseInt(contactId);
+	jsonStore.fnSuccess=countSuccess;
+	jsonStore.fnFail=countFail;
+	jsonStore.count();			
 }
 
 function validUnsavedContact(){										
@@ -109,27 +100,20 @@ function saveContact(){
 	){ 	
 						
 		if(!contactUpdate){ 
-		var jsonStore = new clsJsonStoreHelper(
-				0, 
-				[{}],
-				"Contacts",
-				{Contacts:{
-					searchFields:{UserContactName:'string',		
-						UserContactFirstName:'string',UserContactLastName:'string',
-						UserContactCellPhon:'string' }
-				}},
-				{
-					
+		var jsonStore = new clsJsonStoreHelper();
+		jsonStore.collectionName="Contacts";
+		jsonStore.document=
+				[{operator: "equal", key:'UserContactName',value:userContactName.val().trim()				
 				},
-				existSuccess,
-				existFail
-		);
-		var queryPart1 = WL.JSONStore.QueryPart()
-		.equal('UserContactName', userContactName.val().trim())
-        .equal('UserContactFirstName',userContactFirstName.val().trim())
-        .equal('UserContactLastName', userContactLastName.val().trim())
-        .equal('UserContactCellPhon',userContactCellPhone.val().trim());
-		
+				{					operator: "equal", key:'UserContactFirstName',value:userContactFirstName.val().trim()									
+				},
+				{	operator: "equal",key:'UserContactLastName',value:userContactLastName.val().trim()													
+				},
+				{					operator: "equal",key:'UserContactCellPhon',value:userContactCellPhone.val().trim()					
+				}];
+		jsonStore.id=0;
+		jsonStore.fnSuccess=existSuccess;
+		jsonStore.fnFail=existFail;
 		jsonStore.get();
 		//jsonStore.advancedFind(queryPart1);//
 		}
@@ -149,21 +133,12 @@ function saveContact(){
 					UserContactCellPhon:userContactCellPhone.val().trim()}];
 			}
 			
-		var jsonStore = new clsJsonStoreHelper(
-				parseInt(contactId),docs,
-				"Contacts",
-				{Contacts:{
-					searchFields:{UserContactName:'string',		
-						UserContactFirstName:'string',UserContactLastName:'string',
-						UserContactCellPhon:'string' }
-				}},
-				{
-					
-				},
-				success,
-				fail
-		);
-		
+		var jsonStore = new clsJsonStoreHelper();
+		jsonStore.collectionName="Contacts";
+		jsonStore.document=docs;				
+		jsonStore.id=parseInt(contactId);
+		jsonStore.fnSuccess=success;
+		jsonStore.fnFail=fail;						
 		jsonStore.save();				
 		
 		}else{	
@@ -201,21 +176,14 @@ function fail(result){
 }
 
 function initContacts(){
-	var jsonStore = new clsJsonStoreHelper(
-			0, 
-			[{}],
-			"Contacts",
-			{Contacts:{
-				searchFields:{UserContactName:'string',		
-					UserContactFirstName:'string',UserContactLastName:'string',
-					UserContactCellPhon:'string' }
-			}},
+	var jsonStore = new clsJsonStoreHelper();
+	jsonStore.collectionName="Contacts";
+	jsonStore.document=
 			{
-				
-			},
-			initSuccess,
-			initFail
-	);
+			};
+	jsonStore.id=0;
+	jsonStore.fnSuccess=initSuccess;
+	jsonStore.fnFail=initFail;
 	//jsonStore.getAll();
 	jsonStore.get();
 	
@@ -276,23 +244,15 @@ function initSelectedContact(v){
 function initContactDetails(){
 	//cleanPolicyInputs();
 	dataDetails=null;
-	var jsonStore = new clsJsonStoreHelper(
-			parseInt(contactId), 
-			[{}],
-			"Contacts",
-			{Contacts:{
-				searchFields:{UserContactName:'string',		
-					UserContactFirstName:'string',UserContactLastName:'string',
-					UserContactCellPhon:'string' }
-			}},
+	var jsonStore = new clsJsonStoreHelper();
+	jsonStore.collectionName="Contacts";
+	jsonStore.document=
 			{
-				
-			},
-			detailsSuccess,
-			detailsFail
-	);
-	
-	jsonStore.findById();	
+			};
+	jsonStore.id=parseInt(contactId);
+	jsonStore.fnSuccess=detailsSuccess;
+	jsonStore.fnFail=detailsFail;							
+	jsonStore.get();	
 	
 	setTimeout(
 			function() { 								
@@ -330,22 +290,15 @@ function initDelete(){
 
 function contactDeleted(){
 	
-	var jsonStore = new clsJsonStoreHelper(
-			parseInt(contactId), 
-			[{}],
-			"Contacts",
-			{Contacts:{
-				searchFields:{UserContactName:'string',		
-					UserContactFirstName:'string',UserContactLastName:'string',
-					UserContactCellPhon:'string' }
-			}},
-			{
-				
-			},
-			deleteSuccess,
-			deleteFail
-	);
+	var jsonStore = new clsJsonStoreHelper();
 	
+	jsonStore.collectionName="Contacts";
+	jsonStore.document=
+			{
+			};
+	jsonStore.id=parseInt(contactId);
+	jsonStore.fnSuccess=deleteSuccess;
+	jsonStore.fnFail=deleteFail;			
 	jsonStore.remove();		
 }
 

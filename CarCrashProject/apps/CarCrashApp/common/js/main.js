@@ -349,11 +349,14 @@ function initShowPoliciesTranslations(){
 	    $("#h3SelectPolicyOp").text(Messages.h3SelectPolicyOp);
 	    $("#aPolicyDetails").text(Messages.aPolicyDetails); 	   	
 	    $("#h1PolicyDetail").text(Messages.h1PolicyDetail); 
-	    $("#aSUdata").text(Messages.aSUdata);
-	    $("#aKeepEd").text(Messages.aKeepEd);
-	    $("#aRPoliza").text(Messages.aRPoliza);
-	    $("#liSelectPolicyOp").text(Messages.h3SelectPolicyOp);
+	    $('a[id="aSUdata"]').text(Messages.aSUdata);
+	    $('a[id="aKeepEd"]').text(Messages.aKeepEd);
+	    $('a[id="aRPoliza"]').text(Messages.aRPoliza);
+	    $('li[id="liSelectPolicyOp"]').text(Messages.h3SelectPolicyOp);
 	    $("#pContact3").text(Messages.pContact3);
+	    $('a[id="Details"]').text(Messages.aPolicyDetails);
+	    $('a[id="Delete"]').text(Messages.aDeletePolicy);
+	    $('a[id="New"]').text(Messages.aAddPolicy);
 }
 
 function initMedicalDataTranslations(){
@@ -451,7 +454,10 @@ function initLeftPanelTranslations(){
 	 $('a[sel="aLiTheftsList"]').text(Messages.aTheftList);  	 	 
 	 $('a[sel="aLiSinistersList"]').text(Messages.aSinisterList);  	 	 
 	 $('a[sel="aLiAlerts"]').text(Messages.aLiAlerts);  	 	 
-	 $('a[sel="aContacts"]').text(Messages.aContacts);  	 	 	 	   
+	 $('h2[sel="aContacts"]').text(Messages.aContacts);  
+	 $('a[sel="aEmergencies"]').text(Messages.aEmergencies);  
+	 $('a[sel="aInsurances"]').text(Messages.aInsurances);  
+	 
 }
 
 function initSingUpTranslations(){	
