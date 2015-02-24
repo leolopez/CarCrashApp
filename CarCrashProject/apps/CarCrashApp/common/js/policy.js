@@ -1,5 +1,26 @@
 	var policyNavigation=0;
 	var policySaved=false;
+	
+	function vehiclesPolicies()
+	{		
+		this.PolicyNo= "";	
+		this.PolicyDate= "";	
+		this.insurance= "";	
+		this.Plates= "";	
+		this.Serie= "";	
+		this.VehicleType= "";	
+		this.Mark= "";	
+		this.SubMark= "";	
+		this.Model= "";	
+		this.Color= "";	
+		this.carPicture= "";	
+		this.Holder= "";	
+		this.PolicyContactName= "";	
+		this.PolicyContactFirstName= "";	
+		this.PolicyContactLastName= "";					
+		this.PolicyContactCellPhon="";	
+	}
+	
 		function initPolicyPage(){
 			$("#listCountries").hide();
 			$("#listMarks").hide();

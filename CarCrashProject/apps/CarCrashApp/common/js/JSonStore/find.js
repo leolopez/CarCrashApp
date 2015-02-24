@@ -1,43 +1,26 @@
-/*
- *
-    COPYRIGHT LICENSE: This information contains sample code provided in source code form. You may copy, modify, and distribute
-    these sample programs in any form without payment to IBM® for the purposes of developing, using, marketing or distributing
-    application programs conforming to the application programming interface for the operating platform for which the sample code is written.
-    Notwithstanding anything to the contrary, IBM PROVIDES THE SAMPLE SOURCE CODE ON AN "AS IS" BASIS AND IBM DISCLAIMS ALL WARRANTIES,
-    EXPRESS OR IMPLIED, INCLUDING, BUT NOT LIMITED TO, ANY IMPLIED WARRANTIES OR CONDITIONS OF MERCHANTABILITY, SATISFACTORY QUALITY,
-    FITNESS FOR A PARTICULAR PURPOSE, TITLE, AND ANY WARRANTY OR CONDITION OF NON-INFRINGEMENT. IBM SHALL NOT BE LIABLE FOR ANY DIRECT,
-    INDIRECT, INCIDENTAL, SPECIAL OR CONSEQUENTIAL DAMAGES ARISING OUT OF THE USE OR OPERATION OF THE SAMPLE SOURCE CODE.
-    IBM HAS NO OBLIGATION TO PROVIDE MAINTENANCE, SUPPORT, UPDATES, ENHANCEMENTS OR MODIFICATIONS TO THE SAMPLE SOURCE CODE.
 
- */ 
-function initPerfilDataInfo(namep, firstnamep, lastnamep, cellPhonep,cityp,enterprisep){
-	//any changes to profile docs use this method:
-	//WL.JSONStore.destroy();	
-	
-	 var collections = {
-	            perfil : {
-	                searchFields: {mobileId: 'string', name: 'string', firstname: 'string', lastname: 'string', cellPhone: 'string',
-	                	city: 'string', enterprise: 'string',birthDate: 'string',email: 'string',pass: 'string'}
-	            } 
-	    };
-	    
-	WL.JSONStore.init(collections).then(function () {
-		var collectionName = 'perfil';
-		var options = {
-				  // Returns a maximum of 1 documents, default no limit.
-				  limit: 1
-				};
-		WL.JSONStore.get(collectionName).findAll(options).then(function (arrayResults) {			
-		if(arrayResults.length>0){			
-			namep.val(arrayResults[0].json.name);								
-				firstnamep.val(arrayResults[0].json.firstname);				
-				lastnamep.val(arrayResults[0].json.lastname);				
-				cityp.val(arrayResults[0].json.city);				
-				cellPhonep.val(arrayResults[0].json.cellPhone);				
-				enterprisep.val(arrayResults[0].json.enterprise);			
+function initPerfilDataInfo(){	
+	var jsonStore = new clsJsonStoreHelper();
+	jsonStore.collectionName="profile";
+	jsonStore.document=
+			{
+			};
+	jsonStore.id=0;
+	jsonStore.fnSuccess=function (arrayResults) {			
+		if(arrayResults.length>0){	
+			$("#txtProfileName").val(arrayResults[0].json.name);
+			$("#txtFirstName").val(arrayResults[0].json.firstname);	
+			$("#txtLastName").val(arrayResults[0].json.lastname);
+			$("#txtCellPhone").val(arrayResults[0].json.cellPhone);	
+			$("#searchCity").val(arrayResults[0].json.city);
+			$("#txtEmpresa").val(arrayResults[0].json.enterprise);	
 		}
-		});
-	});	
+	};
+	jsonStore.fnFail=function (fail) {			
+		
+	};
+	jsonStore.get();	
+	
 	}
 
 

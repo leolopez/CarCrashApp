@@ -1,3 +1,14 @@
+function profile(){
+	 this.name="";
+	 this.firstname="";
+	 this.lastname="";
+	 this.cellPhone="";
+	 this.city="";
+	 this.enterprise="";
+	 this.birthDate="";
+	 this.email="";
+	 this.pass="";	
+}
 
 $(
 initLeftPanelTranslations()
@@ -55,25 +66,19 @@ initLeftPanelTranslations()
 		}		
 				
 		$(document).on('pagebeforeshow','#perfil',function(e,data){    
-			initPerfil();
-		var n=	$("#txtProfileName");
-		var n1=	$("#txtFirstName");
-		var n2=	$("#txtLastName");
-		var n3=	$("#txtCellPhone");
-		var n4=	$("#searchCity");
-		var n5=	$("#txtEmpresa");	
-		initPerfilDataInfo(n,n1,n2,n3,n4,n5); 	 				  
+			initPerfil();		
+		initPerfilDataInfo(); 	 				  
 		});			
 		
 		function savePerfil(){
-			
+			/*
 			var pname =	$("#txtProfileName");
 			var firstName=	$("#txtFirstName");
 			var lastName=	$("#txtLastName");
 			var cellPhone=$("#txtCellPhone");
 			var serachCity=$("#searchCity");
-			var empresa=$("#txtEmpresa");						
-			setDataToTransaction(pname,firstName,lastName,cellPhone,serachCity,empresa);
+			var empresa=$("#txtEmpresa");	*/					
+			setDataToTransaction();
 			
 							
 		}

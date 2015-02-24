@@ -141,6 +141,10 @@ function getCollections(){
 			searchFields:{
 				idReport:"integer"
 			}
-		}
+		},
+		 profile : {
+             searchFields: {mobileId: 'string', name: 'string', firstname: 'string', lastname: 'string', cellPhone: 'string',
+             	city: 'string', enterprise: 'string',birthDate: 'string',email: 'string',password: 'string'}
+         }
 	};
 }
