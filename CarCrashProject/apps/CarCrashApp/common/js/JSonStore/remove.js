@@ -12,41 +12,4 @@
  */ 
 
 
-function removetPolicyVehicleDataInfo(platesParam,insuranceParam,policyDateParam){
-	
-	var collectionName = 'PolicyVehicle';    
 
-	  var collections = {
-	    		PolicyVehicle : {
-	                searchFields: {mobileId: 'string',PolicyNo: 'string', PolicyDate: 'string', insurance: 'string', Plates: 'string', Serie: 'string'
-	                	, VehicleType: 'string', Mark: 'string', SubMark: 'string', Model: 'string', Color: 'string'
-	                		, carPicture: 'string', Holder: 'string',  OwnerCellPhone: 'string',PolicyContactName:'string',
-	    					PolicyContactFirstName:'string', PolicyContactLastName:'string',
-	    					PolicyContactCellPhon:'string'
-	                	}
-	            } 
-	    };   
-	 
-	  	WL.JSONStore.init(collections).then(function () {		
-	  		
-		// Remove all documents that match the queries.
-		var queries = [{ insurance:insuranceParam.trim(), PolicyDate:policyDateParam.trim(),Plates:platesParam.trim()}];
-
-		var options = {
-
-				// Exact match (true) or fuzzy search (false), default fuzzy search.
-				exact: true,
-
-				// Mark data as dirty (true = yes, false = no), default true.
-				markDirty: true
-		};
-
-		return WL.JSONStore.get(collectionName).remove(queries, options);
-		
-	}).fail(function (errorObject) {
-		// Handle failure.
-
-		alert("No se ha podido eliminar el registro seleccionado");
-	});
-
-	}

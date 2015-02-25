@@ -70,17 +70,8 @@ initLeftPanelTranslations()
 		initPerfilDataInfo(); 	 				  
 		});			
 		
-		function savePerfil(){
-			/*
-			var pname =	$("#txtProfileName");
-			var firstName=	$("#txtFirstName");
-			var lastName=	$("#txtLastName");
-			var cellPhone=$("#txtCellPhone");
-			var serachCity=$("#searchCity");
-			var empresa=$("#txtEmpresa");	*/					
-			setDataToTransaction();
-			
-							
+		function savePerfil(){							
+			setDataToTransaction();										
 		}
 		function saveAnyPerfil(){						
 			switch(navigation){

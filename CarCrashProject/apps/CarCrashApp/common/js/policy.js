@@ -1,5 +1,8 @@
 	var policyNavigation=0;
 	var policySaved=false;
+	var policyupdate=false;
+	var policyCollectionName = 'PolicyVehicle';
+	var policyLimit=0;
 	
 	function vehiclesPolicies()
 	{		
@@ -126,12 +129,22 @@
 		}		
 				
 		function policyDeleted(){	
+			var jsonStore = new clsJsonStoreHelper();
 			
-			removetPolicyVehicleDataInfo(seriesSelected.text(),insuranceSelected.text(),expirationSelected.text().split(":")[1]);						
-			 var item2 = $("#listPolicy").find(listitem);
+			jsonStore.collectionName=policyCollectionName;
+			jsonStore.document=
+					{
+					};
+			jsonStore.id=policyId;
+			jsonStore.fnSuccess=function(success){
+				var item2 = $("#listPolicy").find(listitem);
 			    item2.remove();			    	
 			    ondeletedUpdatePolicy();
-			    
+			};
+			jsonStore.fnFail=function(success){
+				alert("No se ha podido eliminar el registro");
+			};			
+			jsonStore.remove();															 			    
 		}					
 		
 		function markSelected(){			
@@ -195,13 +208,11 @@
    		 
 		});	
 		
-		$(document).on('pagebeforeshow','#poliza',function(e,data){    			    
+		$(document).on('pagebeforeshow','#poliza',function(e,data){ 			  
 			initPolicyVehicleDataInfo();
 			updatedPolicy=false;
 			next=false;
-			});	
-		
-		
+			});					
 		
 		function savePolicy(){						
 			
@@ -229,8 +240,8 @@
 					initCountPolicies();
 					setTimeout(
 							function() { 
-								var data=getJsonstoreResultsWrapperObject();
-								if(parseInt(data)<10||data==null){										
+								
+								if(parseInt(policyLimit)<10){										
 									setPolicyVehicleDataTransaction(policy,policyDate,aseg,plates,serie,vehicleType,mark,subMark,model,color,pic,holder,ownerCellPhone
 											,polContactNameGrl,polContactFirstNameGrl,polContactLastNameGrl,polContactCellPhoneGrl);
 									
@@ -382,13 +393,18 @@ function initPolicyToList(name,insurance,policyDate,id,pic){
 		var updatedPolicy=false;
 		function initPolicyDetails(){
 			cleanPolicyInputs();
-			findByIdPolicyVehicle(policyId);
-			setTimeout(
-					function() { 								
-				  location.href="#AgregarPoliza";	
+			policyupdate=true;
+			var jsonStore = new clsJsonStoreHelper();
+			jsonStore.collectionName=policyCollectionName;
+			jsonStore.document=
+					{
+					};
+			jsonStore.id=policyId;
+			jsonStore.fnSuccess=function(data) { 
+				 location.href="#AgregarPoliza";	
 				  $(document).on('pagebeforeshow','#AgregarPoliza',function(e,data1){ 
-					  var data=getJsonstoreResultsWrapperObject();
-					  if(data!=null&&data.length>0){ 
+					  
+					  if(data!=null&&data.length>0&&policyupdate){ 
 						$('#searchMark').val(""+data[0].json.Mark);									
 						$("#searchSubMark").val(""+data[0].json.SubMark);
 							$("#txtSeries").val(data[0].json.Serie);
@@ -416,8 +432,13 @@ function initPolicyToList(name,insurance,policyDate,id,pic){
 				  });
 				  
 					updatedPolicy=true;
-				}, 300 );						
-		
+				
+				
+				};
+			jsonStore.fnFail=function(fail){
+				
+			};							
+			jsonStore.get();												
 		}
 		
 		function cleanPolicyInputs(){
@@ -443,16 +464,17 @@ function initPolicyToList(name,insurance,policyDate,id,pic){
 		aseg=  $("#selectInsurance option:selected");
 		picUri="";
 		policySaved=true;
+		policyupdate=false;
 		}
 		
 		
 		function validNewPolicy(){
+			 
 			initCountPolicies();
 			setTimeout(
-					function() { 
-						var data=getJsonstoreResultsWrapperObject();
-						
-						if(parseInt(data)<10||data==null){										
+					function() { 											
+						if(parseInt(policyLimit)<10){
+							cleanPolicyInputs();
 						location.href="#AgregarPoliza"; 
 						policySaved=true;
 						}else{
@@ -461,21 +483,17 @@ function initPolicyToList(name,insurance,policyDate,id,pic){
 						}, 300 );										
 		}
 		
-		function initCountPolicies(){
-			var collectionName = 'PolicyVehicle';
-
-			  var collections = {
-			    		PolicyVehicle : {
-			                searchFields: {mobileId: 'string',PolicyNo: 'string', PolicyDate: 'string', insurance: 'string', Plates: 'string', Serie: 'string'
-			                	, VehicleType: 'string', Mark: 'string', SubMark: 'string', Model: 'string', Color: 'string'
-			                		, carPicture: 'string', Holder: 'string', PolicyContactName:'string',
-	    	    					PolicyContactFirstName:'string', PolicyContactLastName:'string',
-	    	    					PolicyContactCellPhon:'string'
-			                	}
-			            } 
-			    }; 
-			countJSONStoreDocs(collectionName,collections);	
-				
+		function initCountPolicies(){									
+			 policyLimit=0;
+			var jsonStore = new clsJsonStoreHelper();
+			jsonStore.collectionName="PolicyVehicle";
+			jsonStore.document=
+					{
+					};
+			jsonStore.id=0;
+			jsonStore.fnSuccess=function(succes){ policyLimit=succes;};
+			jsonStore.fnFail=function(fail){ };
+			jsonStore.count();							
 		}
 		
 		function initPicture(data){

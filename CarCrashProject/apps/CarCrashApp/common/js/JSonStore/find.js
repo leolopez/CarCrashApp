@@ -22,34 +22,6 @@ function initPerfilDataInfo(){
 	jsonStore.get();	
 	
 	}
-
-
-
-function initPolicyDataInfo(namep, firstnamep, lastnamep, cellPhonep,cityp,enterprisep){
-	
-	 var collections = {
-	            poliza : {
-	            	 searchFields: {mobileId: 'string',policy: 'string', serie: 'string', plates: 'string', vehicleType: 'string',
- 	                	mark: 'string', submark: 'string',model: 'string',color: 'string',holder: 'string',
- 	                	conductor: 'string'}
-	            } 
-	    };
-	    
-	WL.JSONStore.init(collections).then(function () {
-		var collectionName = 'poliza';
-		var options = {
-				  // Returns a maximum of 1 documents, default no limit.
-				  limit: 1
-				};
-		WL.JSONStore.get(collectionName).findAll(options).then(function (arrayResults) {
-			
-				
-		}); 
-		
-	});
-	
-	}	
-
 	
 function initMedicalDataInfo(imssp, bloodTypep, alergicsp, clinicalConditionsp){
 	
@@ -115,28 +87,14 @@ function initMechanicDataInfo(MechanicNameParam, MechanicFirstNameParam, Mechani
 
 
 function initPolicyVehicleDataInfo(){  
-	
-	  var collections = {
-	    		PolicyVehicle : {
-	                searchFields: {mobileId: 'string',PolicyNo: 'string', PolicyDate: 'string', insurance: 'string', Plates: 'string', Serie: 'string'
-	                	, VehicleType: 'string', Mark: 'string', SubMark: 'string', Model: 'string', Color: 'string'
-	                		, carPicture: 'string', Holder: 'string', OwnerCellPhone: 'string', PolicyContactName:'string',
-	    					PolicyContactFirstName:'string', PolicyContactLastName:'string',
-	    					PolicyContactCellPhon:'string'
-	                	}
-	            } 
-	    };   
-	
-	WL.JSONStore.init(collections).then(function () {					 
-		finAllPolicies();	
-	});	
-	}
-
-function finAllPolicies(){
-	var collectionName = 'PolicyVehicle';  
-	
-	WL.JSONStore.get(collectionName).findAll().then(function (arrayResults) {			
-		 WL.Logger.debug("Retrieve success" +  JSON.stringify(arrayResults));
+	var jsonStore = new clsJsonStoreHelper();
+	jsonStore.collectionName="PolicyVehicle";
+	jsonStore.document=
+			{
+			};
+	jsonStore.id=0;
+	jsonStore.fnSuccess=function initSuccess(arrayResults){
+		
 		if(arrayResults.length>0){
 			var index;
 			$('#listPolicy').empty();
@@ -146,124 +104,20 @@ function finAllPolicies(){
 						arrayResults[index].json.PolicyDate, arrayResults[index]._id, arrayResults[index].json.carPicture);
 			}														
 	} 
-	});
-}
+	};
+	jsonStore.fnFail=function initFail(result){
+		
+	};
+	jsonStore.get();
+	}
+
 
 var jsonstoreResultsWrapperObject;
 
-function findPolicyVehicle(platesParam,insuranceParam,policyDateParam){
-	var collectionName = 'PolicyVehicle';
-
-	  var collections = {
-	    		PolicyVehicle : {
-	                searchFields: {mobileId: 'string',PolicyNo: 'string', PolicyDate: 'string', insurance: 'string', Plates: 'string', Serie: 'string'
-	                	, VehicleType: 'string', Mark: 'string', SubMark: 'string', Model: 'string', Color: 'string'
-	                		, carPicture: 'string', Holder: 'string', OwnerCellPhone: 'string', PolicyContactName:'string',
-	    					PolicyContactFirstName:'string', PolicyContactLastName:'string',
-	    					PolicyContactCellPhon:'string'
-	                	}
-	            } 
-	    }; 
-	// Find all documents that match the queries.
-	var queryPart1 = WL.JSONStore.QueryPart()
-	                   .equal('Plates', platesParam.trim())
-	                   .equal('PolicyDate',policyDateParam.trim())
-	                   .equal('insurance',insuranceParam.trim() );
-
-	var options = {
-	  // Returns a maximum of 1 documents, default no limit.
-	  limit: 1,
-
-	  // Skip 0 documents, default no offset.
-	  offset: 0
-	  
-	};
-	
-	
-	 WL.JSONStore.init(collections).then(function () {
-		
-		
-		WL.JSONStore.get(collectionName)
-
-	// Alternatives:
-	// - findById(1, options) which locates documents by their _id field
-	// - findAll(options) which returns all documents
-	// - find({'name': 'carlos', age: 10}, options) which finds all documents
-	// that match the query.
-	.advancedFind([queryPart1], options)
-
-	.then(function (arrayResults) {
-		
-	  // arrayResults = [{_id: 1, json: {name: 'carlos', age: 99}}]
-		//$('#lblPolicyDetalis').text(arrayResults[0].json.Serie);
-		
-	
-	})
-
-	.fail(function (errorObject) {
-	  // Handle failure.
-	});
-	
-	
-	
-	});
-	
-}
 
 function jsonstoreResultsWrapper(result){
 	
 	jsonstoreResultsWrapperObject=result;
-}
-
-
-function findByIdPolicyVehicle(id){
-	var collectionName = 'PolicyVehicle';
-	 
-	  var collections = {
-	    		PolicyVehicle : {
-	                searchFields: {mobileId: 'string',PolicyNo: 'string', PolicyDate: 'string', insurance: 'string', Plates: 'string', Serie: 'string'
-	                	, VehicleType: 'string', Mark: 'string', SubMark: 'string', Model: 'string', Color: 'string'
-	                		, carPicture: 'string', Holder: 'string', OwnerCellPhone: 'string',PolicyContactName:'string',
-	    					PolicyContactFirstName:'string', PolicyContactLastName:'string',
-	    					PolicyContactCellPhon:'string'
-	                	}
-	            } 
-	    }; 
-	
-
-	var options = {
-	  // Returns a maximum of 1 documents, default no limit.
-	  limit: 1,
-
-	  // Skip 0 documents, default no offset.
-	  offset: 0
-	  
-	};
-	
-	
-	 WL.JSONStore.init(collections).then(function () {
-		
-		
-		WL.JSONStore.get(collectionName)
-
-	// Alternatives:
-	// - findById(1, options) which locates documents by their _id field
-	// - findAll(options) which returns all documents
-	// - find({'name': 'carlos', age: 10}, options) which finds all documents
-	// that match the query.
-	.findById(parseInt(id), options)
-
-	.then(function (arrayResults) {		
-		jsonstoreResultsWrapperObject=null;
-		jsonstoreResultsWrapper(arrayResults);	  	
-	})
-
-	.fail(function (errorObject) {
-	  // Handle failure.
-	});		
-	
-	});
-	
 }
 
 function getJsonstoreResultsWrapperObject(){
