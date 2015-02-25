@@ -5,7 +5,7 @@
 
 var currentLat = 0;
 var currentLng = 0;
-function setMap(pLat, pLng)
+function setMap(pLat, pLng, pDiv)
 {
 	var myLatlng = new google.maps.LatLng(pLat, pLng);
     var mapOptions = {
@@ -13,7 +13,7 @@ function setMap(pLat, pLng)
       center: myLatlng,
       mapTypeId: google.maps.MapTypeId.ROADMAP
     };
-    var map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
+    var map = new google.maps.Map(document.getElementById(pDiv), mapOptions);
 
     var bounds = new google.maps.LatLngBounds();
     bounds.extend(myLatlng);
@@ -39,7 +39,7 @@ function onSuccess(position) {
     lng = position.coords.longitude;
     currentLat = lat;
     currentLng = lng;
-    setMap(lat,lng);
+    setMap(lat,lng,'map-canvas');
 }
 // onError Callback receives a PositionError object
 //

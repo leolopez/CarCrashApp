@@ -203,6 +203,15 @@ function getPages()
 	        		"url":"pages/general/left_panel.html"
 	        	}
 	        },
+	        {"id":"consultSinister", "url":"pages/sinister/consultSinister.html",
+	        	"header":{
+	        		"url":"pages/general/header.html"
+	        	},
+	        	"leftPanel":{
+	        		"id":"contactsNav",
+	        		"url":"pages/general/left_panel.html"
+	        	}
+	        },
 	        
 	        //Leo's scripts
 	        

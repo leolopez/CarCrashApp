@@ -202,7 +202,7 @@ function loadSinisterList(){
 			oJSAuto.id = item.json.idPolicy;
 			oJSAuto.fnSuccess = function(resultAuto){
 				$("#ulSinisters").append(	"<li>" +
-												"<a href=\"#\" onclick=\"alert('Details will be shown...');\">" +
+												"<a href=\"#\" onclick=\"showDetails('sinister', " + item._id + ", " + resultAuto[0]._id + ");\">" +
 													"<img src=\"" + resultAuto[0].json.carPicture + "\" height=\"100%\" width=\"100%\">" +
 													"<h2>" + resultAuto[0].json.Mark + "-" + resultAuto[0].json.SubMark + "</h2>" +
 													"<p><span dat=\"listDate\">Date: </span> " + item.json.date + " |<span rep=\"sinister\"> Report: </span> " + item._id + "</p>" +
@@ -237,7 +237,7 @@ function loadTheftList(){
 			oJSAuto.id = item.json.idPolicy;
 			oJSAuto.fnSuccess = function (resultAuto){
 				$("#ulThefts").append(	"<li>" +
-											"<a href=\"#\" onclick=\"alert('Details will be shown...');\">" +
+											"<a href=\"#\" onclick=\"showDetails('theft', " + item._id + ", " + resultAuto[0]._id + ");\">" +
 												"<img src=\"" + resultAuto[0].json.carPicture + "\" height=\"100%\" width=\"100%\">" +
 												"<h2>" + resultAuto[0].json.Mark + "-" + resultAuto[0].json.SubMark + "</h2>" +
 												"<p><span dat=\"listDate\">Date: </span> " + item.json.date + " |<span rep=\"sinister\"> Report: </span> " + item._id + "</p>" +
@@ -277,9 +277,86 @@ function loadVehiclesList(){
 	oJStore.get();
 }
 
+function loadSinisterData(){
+	$("#imgConsAuto").attr("src",$("#hidConsImgAuto").val());
+	
+	$("#tdConsMarca").text($("#hidConsMarca").val());
+	$("#tdConsSubMarca").text($("#hidConsSubmarca").val());
+	$("#tdConsModelo").text($("#hidConsModelo").val());
+	$("#tdConsPlacas").text($("#hidConsPlacas").val());
+	$("#tdConsColor").text($("#hidConsColor").val());
+	$("#tdConsPoliza").text($("#hidConsPoliza").val());
+	$("#tdConsExp").text($("#hidConsExp").val());
+	$("#tdConsAseguradora").text($("#hidConsAseguradora").val());
+	
+	$("#tdConsLegalAsis").text($("#hidConsLegalAsis").val());
+	$("#tdConsMedAsis").text($("#hidConsMedAsis").val());
+	$("#tdConsCom").text($("#hidConsComentarios").val());
+	
+	setMap(Number($("#hidConsLat").val()), Number($("#hidConsLng").val()), "mapConsultSinister");
+	var mapHeight = $(document).height() / 2;
+	$('#mapConsultSinister').css('height', mapHeight + 'px');
+}
+
+function showDetails(pType, pReportId, pAutoId){
+	var oJS = new clsJsonStoreHelper();
+	oJS.collectionName = "reports";
+	oJS.id = pReportId;
+	oJS.fnSuccess = function(report){
+		$("#hidConsLat").val(report[0].json.location.lat);
+		$("#hidConsLng").val(report[0].json.location.lng);
+		location.href = "#consultSinister";
+	};
+	oJS.fnFail = function(error){
+		
+	};
+	oJS.get();
+	
+	oJS.collectionName = "PolicyVehicle";
+	oJS.id = pAutoId;
+	oJS.fnSuccess = function(vehicle){
+		$("#hidConsImgAuto").val(vehicle[0].json.carPicture);
+		$("#hidConsMarca").val(vehicle[0].json.Mark);
+		$("#hidConsSubmarca").val(vehicle[0].json.SubMark);
+		$("#hidConsModelo").val(vehicle[0].json.Model);
+		$("#hidConsPlacas").val(vehicle[0].json.Plates);
+		$("#hidConsColor").val(vehicle[0].json.Color);
+		$("#hidConsPoliza").val(vehicle[0].json.PolicyNo);
+		$("#hidConsExp").val(vehicle[0].json.PolicyDate);
+		$("#hidConsAseguradora").val(vehicle[0].json.insurance);
+		location.href = "#consultSinister";
+	};
+	oJS.fnFail = function(error){
+		alert('Error al obtener los datos del vehiculo.');
+	};
+	oJS.get();
+	
+	switch(pType){
+	case "sinister":
+		$("#divConsExtras").show();
+		oJS.collectionName = "reportExtras";
+		oJS.id = 0;
+		oJS.document = [{key:"idReport", operator:"equal", value:pReportId.toString()}];
+		oJS.fnSuccess = function(extras){
+			$("#hidConsLegalAsis").val(extras[0].json.legalAssistance ? "Si" : "No");
+			$("#hidConsMedAsis").val(extras[0].json.medicalAssistance ? "Si" : "No");
+			$("#hidConsComentarios").val(extras[0].json.comments);
+		};
+		oJS.fnFail = function(error){
+			alert('Error al obtener los datos extras.');
+		};
+		oJS.get();
+		break;
+	case "theft":
+		$("#divConsExtras").hide();
+		break;
+	}
+}
+
 $(document).on("pageshow", "#sinisterList", function(event){loadSinisterList();});
 $(document).on("pageshow", "#theftsList", function(event){loadTheftList();});
 $(document).on("pageshow", "#sinisterReport", function(event){loadVehiclesList();});
+$(document).on("pageshow", "#consultSinister", function(event){loadSinisterData();});
 
 $(document).on('pagebeforeshow','#sinisterReport',function(e,data){    
 	initSinisterPopUpTranslations(); 				  
