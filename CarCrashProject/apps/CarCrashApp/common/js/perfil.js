@@ -16,6 +16,7 @@ initLeftPanelTranslations()
 );
 		
 		function initPerfil(){
+			$('div[id="backPerfilNav"]').hide();
 			$("#listCountries").hide();
 			$("#listMarks").hide();
 			$("#listSubMarks").hide();
@@ -29,11 +30,12 @@ initLeftPanelTranslations()
 		$("#perfilCont").hide();
 		}
 		
-		function backPerfilCont(){
+		function backPerfilCont(){			
 			$("#policyCont").hide();
 		$("#perfilCont").show();		
 		}
 		function backPerfilCountries(){
+			$('div[id="backPerfilNav"]').hide();
 			$("#listCountries").hide();
 			$("#perfilCont").show();		
 		}
@@ -43,11 +45,13 @@ initLeftPanelTranslations()
 			$("#listCountries").show();
 		}
 		function backPerfilCountries(){
+			$("#backPerfilNav").hide();
 			$("#listCountries").hide();
 			$("#perfilCont").show();		
 		}
 		
-		function initCountries(){	
+		function initCountries(){
+			$('div[id="backPerfilNav"]').show();
 		$("#perfilCont").hide();
 		$("#listCountries").show();
 		navigation=4;
@@ -65,7 +69,8 @@ initLeftPanelTranslations()
 			$("#lblCitySelected").text(""+$(cityData).text());			
 		}		
 				
-		$(document).on('pagebeforeshow','#perfil',function(e,data){    
+		$(document).on('pagebeforeshow','#perfil',function(e,data){
+			$('div[id="backPerfilNav"]').hide();
 			initPerfil();		
 		initPerfilDataInfo(); 	 				  
 		});			
@@ -84,7 +89,8 @@ initLeftPanelTranslations()
 			}			
 		}				
 		
-		function citySelected(){						
+		function citySelected(){
+			$('div[id="backPerfilNav"]').hide();
 			$("#perfilCont").show();
 			$("#listCities").hide();
 			$("#listCountries").hide();					
@@ -158,7 +164,7 @@ initLeftPanelTranslations()
        
          
          $(document).on('pagebeforeshow','#perfil',function(e,data){    			    
-        	 
+        	 $('div[id="backPerfilNav"]').hide();
         	 basicPersonFiltersNumber("txtCellPhone");        	 
         	 basicPersonNameFilters("txtFirstName");
         	 basicPersonNameFilters("txtLastName");

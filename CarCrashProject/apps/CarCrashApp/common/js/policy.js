@@ -26,6 +26,7 @@
 	}
 	
 		function initPolicyPage(){
+			$('div[id="backPerfilNav"]').hide();
 			$("#listCountries").hide();
 			$("#listMarks").hide();
 			$("#listSubMarks").hide();
@@ -55,7 +56,8 @@
 				polContactCellPhoneGrl=$("#txtPolContactCellPhone");
 		}
 		
-		function initVehicle(){			  	
+		function initVehicle(){
+			$('div[id="backPerfilNav"]').show();
 			getPolicyValues();
 		 
 		if(policyDate.val().trim().length>0&&policy.val().trim().length>0&&parseInt(aseg.val())>0
@@ -81,6 +83,7 @@
 		$("#perfilCont").hide();
 		}
 		function backPolicyCont(){
+			$('div[id="backPerfilNav"]').hide();
 			$("#policyCont").show();
 		$("#vehicleCont").hide();		
 		}
@@ -161,7 +164,8 @@
 			$("#searchMark").val(""+$(markData).html());
 			policyNavigation=0;
 		}		
-		$(document).on('pagebeforeshow','#AgregarPoliza',function(e,data){    			    
+		$(document).on('pagebeforeshow','#AgregarPoliza',function(e,data){  
+			$('div[id="backPerfilNav"]').hide();
 		initPolicyPage();		
 		next=false;		
 		basicPersonFiltersNumber("txtOwnerCellPhone");	
@@ -216,7 +220,8 @@
    		 
 		});	
 		
-		$(document).on('pagebeforeshow','#poliza',function(e,data){ 			  
+		$(document).on('pagebeforeshow','#poliza',function(e,data){
+			
 			initPolicyVehicleDataInfo();
 			updatedPolicy=false;
 			next=false;
@@ -439,7 +444,8 @@ function initPolicyToList(name,insurance,policyDate,id,pic){
 		}
 		var showDate=0;
 		
-		$(document).on('pagebeforeshow', '#AgregarPoliza', function(){       
+		$(document).on('pagebeforeshow', '#AgregarPoliza', function(){
+			$('div[id="backPerfilNav"]').hide();
 		if(showDate==0){
 			var now = new Date();
 			
@@ -481,7 +487,7 @@ function initPolicyToList(name,insurance,policyDate,id,pic){
 					};
 			jsonStore.id=policyId;
 			jsonStore.fnSuccess=function(data) { 
-				 location.href="#AgregarPoliza";	
+						location.href="#AgregarPoliza";			
 				  $(document).on('pagebeforeshow','#AgregarPoliza',function(e,data1){ 
 					  
 					  if(data!=null&&data.length>0&&policyupdate){ 
@@ -555,6 +561,7 @@ function initPolicyToList(name,insurance,policyDate,id,pic){
 					function() { 											
 						if(parseInt(policyLimit)<10){
 							cleanPolicyInputs();
+							
 						location.href="#AgregarPoliza"; 
 						policySaved=true;
 						}else{
