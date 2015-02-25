@@ -116,39 +116,10 @@ function saveContact(){
 		jsonStore.fnFail=existFail;
 		jsonStore.get();
 		
-		}
+		}else{
+			savingContact();	
+		}		
 		
-		setTimeout(
-				function() { 
-		if(!contactExist||contactUpdate){
-			
-			var docs="";
-			if(contactUpdate){
-				docs={UserContactName:userContactName.val().trim(),		
-						UserContactFirstName:userContactFirstName.val().trim(),UserContactLastName:userContactLastName.val().trim(),
-						UserContactCellPhon:userContactCellPhone.val().trim()};
-			}else{
-				docs=[{UserContactName:userContactName.val().trim(),		
-					UserContactFirstName:userContactFirstName.val().trim(),UserContactLastName:userContactLastName.val().trim(),
-					UserContactCellPhon:userContactCellPhone.val().trim()}];
-			}
-			
-		var jsonStore = new clsJsonStoreHelper();
-		jsonStore.collectionName="Contacts";
-		jsonStore.document=docs;				
-		jsonStore.id=parseInt(contactId);
-		jsonStore.fnSuccess=success;
-		jsonStore.fnFail=fail;						
-		jsonStore.save();				
-		
-		}else{	
-			 if(contactExist){
-				alert(Messages.dataExist);
-			 }
-			
-			
-		}
-				},300);
 	    } else {		    			
 			alert(Messages.requiredData);			
 	    }	
@@ -159,6 +130,36 @@ function saveContact(){
 	    
 	},300);
 	}
+
+function savingContact(){
+	var	userContactName=$("#txtUserContactName");
+	var	userContactFirstName=$("#txtUserContactFirstName");
+	var	userContactLastName=$("#txtUserContactLastName");	 
+	var	userContactCellPhone=$("#txtUserContactCellPhone");
+	if(!contactExist||contactUpdate){
+		
+		var docs="";
+		if(contactUpdate){
+			docs={UserContactName:userContactName.val().trim(),		
+					UserContactFirstName:userContactFirstName.val().trim(),UserContactLastName:userContactLastName.val().trim(),
+					UserContactCellPhon:userContactCellPhone.val().trim()};
+		}else{
+			docs=[{UserContactName:userContactName.val().trim(),		
+				UserContactFirstName:userContactFirstName.val().trim(),UserContactLastName:userContactLastName.val().trim(),
+				UserContactCellPhon:userContactCellPhone.val().trim()}];
+		}
+		
+	var jsonStore = new clsJsonStoreHelper();
+	jsonStore.collectionName="Contacts";
+	jsonStore.document=docs;				
+	jsonStore.id=parseInt(contactId);
+	jsonStore.fnSuccess=success;
+	jsonStore.fnFail=fail;						
+	jsonStore.save();				
+	
+	}
+	
+}
 
 function success(result){
 	if(contactUpdate){
@@ -208,9 +209,9 @@ function initFail(result){
 function existSuccess(result){
 	
 	if(result.length>0){		
-		contactExist=true;
+		alert(Messages.dataExist);
 	}else{
-		contactExist=false;		
+		 savingContact();		
 	} 
 }
 
