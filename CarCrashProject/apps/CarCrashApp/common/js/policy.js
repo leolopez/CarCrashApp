@@ -3,6 +3,7 @@
 	var policyupdate=false;
 	var policyCollectionName = 'PolicyVehicle';
 	var policyLimit=0;
+	var policyExist=false;
 	
 	function vehiclesPolicies()
 	{		
@@ -42,15 +43,20 @@
 		var polContactCellPhoneGrl="";
 		
 		var next=false;
+	
+		
+		function getPolicyValues(){
+			 policy=	 $("#txtPolicyNo");
+			 policyDate=	 $("#txtPolicyDate");
+			 aseg=$('#selectInsurance option:selected');
+			  polContactNameGrl=$("#txtPolContactName");
+				 polContactFirstNameGrl=$("#txtPolContactFirstName");
+				 polContactLastNameGrl=$("#txtPolContactLastName");	 
+				polContactCellPhoneGrl=$("#txtPolContactCellPhone");
+		}
 		
 		function initVehicle(){			  	
-	 policy=	 $("#txtPolicyNo");
-		 policyDate=	 $("#txtPolicyDate");
-		 aseg=$('#selectInsurance option:selected');
-		  polContactNameGrl=$("#txtPolContactName");
-			 polContactFirstNameGrl=$("#txtPolContactFirstName");
-			 polContactLastNameGrl=$("#txtPolContactLastName");	 
-			polContactCellPhoneGrl=$("#txtPolContactCellPhone");
+			getPolicyValues();
 		 
 		if(policyDate.val().trim().length>0&&policy.val().trim().length>0&&parseInt(aseg.val())>0
 				&&polContactNameGrl.val().trim().length>0&&polContactFirstNameGrl.val().trim().length>0&&polContactLastNameGrl.val().trim().length>0
@@ -128,7 +134,8 @@
 			popUpListPolicy();		
 		}		
 				
-		function policyDeleted(){	
+		function policyDeleted(){				
+			$( "#popupDialogEliminar" ).popup( "close" );	
 			var jsonStore = new clsJsonStoreHelper();
 			
 			jsonStore.collectionName=policyCollectionName;
@@ -214,78 +221,148 @@
 			next=false;
 			});					
 		
-		function savePolicy(){						
-			
-		var serie=	$("#txtSeries");
-		var plates=	$("#txtPlates");
-		var vehicleType=$("#txtVehicleType");
-		var mark=$("#searchMark");
-		var subMark=$("#searchSubMark");
-		var model=$("#txtModel");
-		var color=$("#txtColor");
-		var holder=$("#txtHolder");	 
-		var ownerCellPhone=$("#txtOwnerCellPhone");		
-		var pic=getCarPictureUri();
-		
-		
-		if(policyDate.val().trim().length>0&&policy.val().trim().length>0&&aseg.text().trim().length>0
-			&&serie.val().trim().length>0&&plates.val().trim().length>0&&vehicleType.val().trim().length>0&&mark.val().trim().length>0	
-			&&subMark.val().trim().length>0&&model.val().trim().length>0&&color.val().trim().length>0&&holder.val().trim().length>0	&&ownerCellPhone.val().trim().length>0
-			&&polContactNameGrl.val().trim().length>0&&polContactFirstNameGrl.val().trim().length>0&&polContactLastNameGrl.val().trim().length>0
-			&&polContactCellPhoneGrl.val().trim().length>0
-		){ 	
-			if(picUri.trim().length>0){ 
-			if(!updatedPolicy){ 
-				if(next){
-					initCountPolicies();
-					setTimeout(
-							function() { 
-								
-								if(parseInt(policyLimit)<10){										
-									setPolicyVehicleDataTransaction(policy,policyDate,aseg,plates,serie,vehicleType,mark,subMark,model,color,pic,holder,ownerCellPhone
-											,polContactNameGrl,polContactFirstNameGrl,polContactLastNameGrl,polContactCellPhoneGrl);
-									
-									setTimeout(
-											function() { 
-												var data=getJsonstoreResultsWrapperObject();
-												if(data){										
-													policySaved=true;								
-												}else{
-													policySaved=false;						
-												}				
-												}, 300 );
-									
-								}else{
-									alert(Messages.PoliciesLimitNo);							
-								}				
-								}, 300 );		
-		    		
-			}
+		function savePolicy(){									
+
+			initCountPolicies();
+			setTimeout(function (){ 
 				
-			}else{
-				if(next){
-				var docs = [{_id: parseInt(policyId), json: {
-					PolicyNo: policy.val().trim(), PolicyDate: policyDate.val().trim(), insurance: aseg.text().trim(),
-					Plates: plates.val().trim(),Serie: serie.val().trim(),VehicleType: vehicleType.val().trim(),Mark: mark.val().trim(),
-					SubMark: subMark.val().trim(),Model: model.val().trim(),Color: color.val().trim(),carPicture: pic.trim(),
-					Holder: holder.val().trim(), OwnerCellPhone: ownerCellPhone.val().trim(), PolicyContactName:polContactNameGrl.val().trim(),
-					PolicyContactFirstName:polContactFirstNameGrl.val().trim(), PolicyContactLastName:polContactLastNameGrl.val().trim(),
-					PolicyContactCellPhon:polContactCellPhoneGrl.val().trim(),
-					}							
+			if(parseInt(policyLimit)<10||policyupdate){			
+				getPolicyValues();
+				var serie=	$("#txtSeries");
+				var plates=	$("#txtPlates");
+				var vehicleType=$("#txtVehicleType");
+				var mark=$("#searchMark");
+				var subMark=$("#searchSubMark");
+				var model=$("#txtModel");
+				var color=$("#txtColor");
+				var holder=$("#txtHolder");	 
+				var ownerCellPhone=$("#txtOwnerCellPhone");		
+				var pic=getCarPictureUri();
 				
-				}];
-				var c='PolicyVehicle';
-				updateJsonCollection(c,docs);	
+				
+				if(policyDate.val().trim().length>0&&policy.val().trim().length>0&&aseg.text().trim().length>0
+					&&serie.val().trim().length>0&&plates.val().trim().length>0&&vehicleType.val().trim().length>0&&mark.val().trim().length>0	
+					&&subMark.val().trim().length>0&&model.val().trim().length>0&&color.val().trim().length>0&&holder.val().trim().length>0	&&ownerCellPhone.val().trim().length>0
+					&&polContactNameGrl.val().trim().length>0&&polContactFirstNameGrl.val().trim().length>0&&polContactLastNameGrl.val().trim().length>0
+					&&polContactCellPhoneGrl.val().trim().length>0
+				){ 	
+					if(picUri.trim().length>0){	
+						policyExist=false;			
+				if(!policyupdate){ 
+					
+				var jsonStore = new clsJsonStoreHelper();
+				jsonStore.collectionName=policyCollectionName;
+				jsonStore.document=
+						[{operator: "equal", key:'mobileId',value:device.uuid.trim()				
+						},
+						{operator: "equal", key:'PolicyNo',value:policy.val().trim()									
+						},
+						{operator: "equal",key:'PolicyDate',value:policyDate.val().trim()													
+						},
+						{operator: "equal",key:'insurance',value:aseg.text().trim()					
+						},
+						{operator: "equal",key:'Plates',value:plates.val().trim()					
+						},
+						{operator: "equal",key:'Serie',value:serie.val().trim()				
+						},
+						{operator: "equal",key:'VehicleType',value:vehicleType.val().trim()				
+						},
+						{operator: "equal",key:'Mark',value:mark.val().trim()					
+						},
+						{operator: "equal",key:'SubMark',value:subMark.val().trim()					
+						},
+						{operator: "equal",key:'Model',value:model.val().trim()					
+						},
+						{operator: "equal",key:'Color',value:color.val().trim()					
+						},
+						{operator: "equal",key:'carPicture',value:pic.trim()				
+						},
+						{operator: "equal",key:'Holder',value:holder.val().trim()				
+						},
+						{operator: "equal",key:'OwnerCellPhone',value:ownerCellPhone.val().trim()					
+						},
+						{operator: "equal",key:'PolicyContactName',value:polContactNameGrl.val().trim()					
+						},
+						{operator: "equal",key:'PolicyContactFirstName',value:polContactFirstNameGrl.val().trim()					
+						},
+						{operator: "equal",key:'PolicyContactLastName',value:polContactLastNameGrl.val().trim()					
+						},
+						{operator: "equal",key:'PolicyContactCellPhon',value:polContactCellPhoneGrl.val().trim()					
+						}
+						];
+				jsonStore.id=0;
+				jsonStore.fnSuccess=function(success){if(success.length>0){policyExist=true;}};
+				jsonStore.fnFail=function(fail){};
+				jsonStore.get();
+				
 				}
-			}
-			} else {		    			
-				alert(Messages.pictureMsg);			
-		    }
+				
+				setTimeout(
+						function() { 
+				if(!policyExist||policyupdate){
+					
+					var docs="";
+					if(policyupdate){
+						docs={mobileId: device.uuid.trim(),PolicyNo: policy.val().trim(), PolicyDate: policyDate.val().trim(), insurance: aseg.text().trim(),
+								Plates: plates.val().trim(),Serie: serie.val().trim(),VehicleType: vehicleType.val().trim(),Mark: mark.val().trim(),
+								SubMark: subMark.val().trim(),Model: model.val().trim(),Color: color.val().trim(),carPicture: pic.trim(),
+								Holder: holder.val().trim(), OwnerCellPhone: ownerCellPhone.val().trim(),
+								PolicyContactName:polContactNameGrl.val().trim(),
+								PolicyContactFirstName:polContactFirstNameGrl.val().trim(), PolicyContactLastName:polContactLastNameGrl.val().trim(),
+								PolicyContactCellPhon:polContactCellPhoneGrl.val().trim()
+					        	};
+					}else{
+						policySaved=false;
+						policyId=0;
+						docs=[{mobileId: device.uuid.trim(),PolicyNo: policy.val().trim(), PolicyDate: policyDate.val().trim(), insurance: aseg.text().trim(),
+							Plates: plates.val().trim(),Serie: serie.val().trim(),VehicleType: vehicleType.val().trim(),Mark: mark.val().trim(),
+							SubMark: subMark.val().trim(),Model: model.val().trim(),Color: color.val().trim(),carPicture: pic.trim(),
+							Holder: holder.val().trim(), OwnerCellPhone: ownerCellPhone.val().trim(),
+							PolicyContactName:polContactNameGrl.val().trim(),
+							PolicyContactFirstName:polContactFirstNameGrl.val().trim(), PolicyContactLastName:polContactLastNameGrl.val().trim(),
+							PolicyContactCellPhon:polContactCellPhoneGrl.val().trim()
+				        	}];
+
+					}
+					
+				var jsonStore = new clsJsonStoreHelper();
+				jsonStore.collectionName=policyCollectionName;
+				jsonStore.document=docs;				
+				jsonStore.id=parseInt(policyId);
+				jsonStore.fnSuccess=function(success){alert(Messages.msgDataSaved);
+								
+				policySaved=true;
+				};
+				jsonStore.fnFail=function(errorObject){alert("Error: "+errorObject.msg);};						
+				jsonStore.save();	
+				
+				if(policySaved){
+				setTimeout(
+						function() { 														
+								initPolicyVehicleDataInfo();					
+																		
+							}, 300 );
+				}
+				}else{	
+					 if(policyExist){
+						alert(Messages.dataExist);
+					 }										
+				}
+						},300);
+			    } else {		    			
+					alert(Messages.pictureMsg);			
+			    }	
 			
-		    } else {		    			
-				alert(Messages.requiredData);			
-		    }		    
-		   
+				} else {		    			
+					alert(Messages.requiredData);			
+			    }
+				
+			    } else {		    			
+					alert(Messages.PoliciesLimitNo);			
+			    }
+			    
+			},300);
+		
 		}
 		function addPolicyToList(name,insurance,policyDate,id,pic){			
 			initPolicyToList(name,insurance,policyDate,id,pic);
@@ -463,7 +540,7 @@ function initPolicyToList(name,insurance,policyDate,id,pic){
 		cleanPicture();
 		aseg=  $("#selectInsurance option:selected");
 		picUri="";
-		policySaved=true;
+		policySaved=false;
 		policyupdate=false;
 		}
 		
@@ -561,8 +638,9 @@ function initPolicyToList(name,insurance,policyDate,id,pic){
 										}else{
 											$('#liKeepEd').hide();
 										}
-								popUpListPolicy();
-								$( "#popupMenu" ).popup( "open" );
+								popUpListPolicy();																																				
+									$( "#popupMenu" ).popup( "open" );																													
+								
 								}else{
 									
 									 cleanPolicyInputs();

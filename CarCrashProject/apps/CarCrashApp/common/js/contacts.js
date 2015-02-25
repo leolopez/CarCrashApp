@@ -115,7 +115,7 @@ function saveContact(){
 		jsonStore.fnSuccess=existSuccess;
 		jsonStore.fnFail=existFail;
 		jsonStore.get();
-		//jsonStore.advancedFind(queryPart1);//
+		
 		}
 		
 		setTimeout(
