@@ -23,64 +23,50 @@ function initPerfilDataInfo(){
 	
 	}
 	
-function initMedicalDataInfo(imssp, bloodTypep, alergicsp, clinicalConditionsp){
-	
-	var collectionName = 'MedicalData';    
-
-    var collections = {
-    		MedicalData : {
-                searchFields: {mobileId: 'string',IMSS: 'string', bloodType: 'string', alergics: 'string', clinicalConditions: 'string'
-                	}
-            } 
-    }; 
-	    
-	WL.JSONStore.init(collections).then(function () {
-		
-		var options = {
-				  // Returns a maximum of 1 documents, default no limit.
-				  limit: 1
-				};
-		WL.JSONStore.get(collectionName).findAll(options).then(function (arrayResults) {			
-		if(arrayResults.length>0){
-			imssp.val(arrayResults[0].json.IMSS);
-			bloodTypep.val(arrayResults[0].json.bloodType);
-			alergicsp.val(arrayResults[0].json.alergics);
-			clinicalConditionsp.val(arrayResults[0].json.clinicalConditions);
+function initMedicalDataInfo(){
+	var jsonStore = new clsJsonStoreHelper();
+	jsonStore.collectionName="MedicalData";
+	jsonStore.document=
+			{
+			};
+	jsonStore.id=0;
+	jsonStore.fnSuccess=function (arrayResults) {			
+		if(arrayResults.length>0){	
+			$("#txtNoIMSS").val(arrayResults[0].json.IMSS);
+			$("#txtBloodType").val(arrayResults[0].json.bloodType);
+			$("#txtAlergics").val(arrayResults[0].json.alergics);
+			$("#txtClinicalConditions").val(arrayResults[0].json.clinicalConditions);	
 		}
-		});
-	});	
+	};
+	jsonStore.fnFail=function (fail) {			
+		
+	};
+	jsonStore.get();	
 	}
 
 
 
-function initMechanicDataInfo(MechanicNameParam, MechanicFirstNameParam, MechanicLastNameParam, MechanicCellPhoneParam,MechanicAddressParam){
+function initMechanicDataInfo(){
 	
-	var collectionName = 'MechanicData';    
-
-    var collections = {
-    		MechanicData : {
-                searchFields: {mobileId: 'string',MechanicName: 'string',  MechanicFirstName: 'string', MechanicLastName: 'string', MechanicCellPhone: 'string',
-                	MechanicAddress: 'string'}
-            } 
-    };  
-	    
-	WL.JSONStore.init(collections).then(function () {
-		
-		var options = {
-				  // Returns a maximum of 1 documents, default no limit.
-				  limit: 1
-				};
-		WL.JSONStore.get(collectionName).findAll(options).then(function (arrayResults) {			
-		if(arrayResults.length>0){
-			MechanicNameParam.val(arrayResults[0].json.MechanicName);
-			MechanicFirstNameParam.val(arrayResults[0].json.MechanicFirstName);
-			MechanicLastNameParam.val(arrayResults[0].json.MechanicLastName);
-			MechanicCellPhoneParam.val(arrayResults[0].json.MechanicCellPhone);
-			MechanicAddressParam.val(arrayResults[0].json.MechanicAddress);
-			
+	var jsonStore = new clsJsonStoreHelper();
+	jsonStore.collectionName="MechanicData";
+	jsonStore.document=
+			{
+			};
+	jsonStore.id=0;
+	jsonStore.fnSuccess=function (arrayResults) {			
+		if(arrayResults.length>0){	
+			$("#txtMechanicName").val(arrayResults[0].json.MechanicName);
+			$("#txtMechanicFirstName").val(arrayResults[0].json.MechanicFirstName);
+			$("#txtMechanicLastName").val(arrayResults[0].json.MechanicLastName);
+			$("#txtMechanicCellPhone").val(arrayResults[0].json.MechanicCellPhone);
+			$("#txtMechanicAddress").val(arrayResults[0].json.MechanicAddress);
 		}
-		});
-	});	
+	};
+	jsonStore.fnFail=function (fail) {			
+		
+	};
+	jsonStore.get();		
 	}
 
 

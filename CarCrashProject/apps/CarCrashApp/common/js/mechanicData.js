@@ -5,8 +5,8 @@
 			var vMechanicAddress;
 			
 		$(document).on('pagebeforeshow','#DatosMecanico',function(e,data){   		    			
-			getMechanicValues();
-			initMechanicDataInfo(vMechanicName,vMechanicFirstName,vMechanicLastName,vMechanicCellPhone,vMechanicAddress); 
+			
+			initMechanicDataInfo(); 
 			 basicPersonFiltersNumber("txtMechanicCellPhone");        	 
         	 basicPersonNameFilters("txtMechanicFirstName");
         	 basicPersonNameFilters("txtMechanicLastName");
@@ -22,9 +22,8 @@
  			});
 		});			
 		
-		function saveMechanicData(){	
-			getMechanicValues();
-			setMechanicDataTransaction(vMechanicName,vMechanicFirstName,vMechanicLastName,vMechanicCellPhone,vMechanicAddress);						
+		function saveMechanicData(){			
+			setMechanicDataTransaction();						
 		}
 		
 		function getMechanicValues(){

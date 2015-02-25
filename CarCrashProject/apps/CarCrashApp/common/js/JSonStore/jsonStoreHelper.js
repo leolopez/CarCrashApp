@@ -148,6 +148,14 @@ function getCollections(){
  					PolicyContactFirstName:'string', PolicyContactLastName:'string',
  					PolicyContactCellPhon:'string'
              	}
+         },
+         MedicalData : {
+             searchFields: {IMSS: 'string', bloodType: 'string', alergics: 'string', clinicalConditions: 'string'
+             	}
+         },
+         MechanicData : {
+             searchFields: { MechanicName: 'string',  MechanicFirstName: 'string', MechanicLastName: 'string', MechanicCellPhone: 'string',
+             	MechanicAddress: 'string'}
          }
 	};
 }
