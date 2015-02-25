@@ -221,8 +221,8 @@
 			next=false;
 			});					
 		
-		function savePolicy(){									
-
+		function savePolicy(){	
+			
 			initCountPolicies();
 			setTimeout(function (){ 
 				
@@ -291,64 +291,14 @@
 						}
 						];
 				jsonStore.id=0;
-				jsonStore.fnSuccess=function(success){if(success.length>0){policyExist=true;}};
+				jsonStore.fnSuccess=function(success){if(success.length>0){alert(Messages.dataExist);  }else{savingPolicy();}};
 				jsonStore.fnFail=function(fail){};
 				jsonStore.get();
 				
-				}
+				}else{
+					savingPolicy();
+				}				
 				
-				setTimeout(
-						function() { 
-				if(!policyExist||policyupdate){
-					
-					var docs="";
-					if(policyupdate){
-						docs={mobileId: device.uuid.trim(),PolicyNo: policy.val().trim(), PolicyDate: policyDate.val().trim(), insurance: aseg.text().trim(),
-								Plates: plates.val().trim(),Serie: serie.val().trim(),VehicleType: vehicleType.val().trim(),Mark: mark.val().trim(),
-								SubMark: subMark.val().trim(),Model: model.val().trim(),Color: color.val().trim(),carPicture: pic.trim(),
-								Holder: holder.val().trim(), OwnerCellPhone: ownerCellPhone.val().trim(),
-								PolicyContactName:polContactNameGrl.val().trim(),
-								PolicyContactFirstName:polContactFirstNameGrl.val().trim(), PolicyContactLastName:polContactLastNameGrl.val().trim(),
-								PolicyContactCellPhon:polContactCellPhoneGrl.val().trim()
-					        	};
-					}else{
-						policySaved=false;
-						policyId=0;
-						docs=[{mobileId: device.uuid.trim(),PolicyNo: policy.val().trim(), PolicyDate: policyDate.val().trim(), insurance: aseg.text().trim(),
-							Plates: plates.val().trim(),Serie: serie.val().trim(),VehicleType: vehicleType.val().trim(),Mark: mark.val().trim(),
-							SubMark: subMark.val().trim(),Model: model.val().trim(),Color: color.val().trim(),carPicture: pic.trim(),
-							Holder: holder.val().trim(), OwnerCellPhone: ownerCellPhone.val().trim(),
-							PolicyContactName:polContactNameGrl.val().trim(),
-							PolicyContactFirstName:polContactFirstNameGrl.val().trim(), PolicyContactLastName:polContactLastNameGrl.val().trim(),
-							PolicyContactCellPhon:polContactCellPhoneGrl.val().trim()
-				        	}];
-
-					}
-					
-				var jsonStore = new clsJsonStoreHelper();
-				jsonStore.collectionName=policyCollectionName;
-				jsonStore.document=docs;				
-				jsonStore.id=parseInt(policyId);
-				jsonStore.fnSuccess=function(success){alert(Messages.msgDataSaved);
-								
-				policySaved=true;
-				};
-				jsonStore.fnFail=function(errorObject){alert("Error: "+errorObject.msg);};						
-				jsonStore.save();	
-				
-				if(policySaved){
-				setTimeout(
-						function() { 														
-								initPolicyVehicleDataInfo();					
-																		
-							}, 300 );
-				}
-				}else{	
-					 if(policyExist){
-						alert(Messages.dataExist);
-					 }										
-				}
-						},300);
 			    } else {		    			
 					alert(Messages.pictureMsg);			
 			    }	
@@ -361,9 +311,70 @@
 					alert(Messages.PoliciesLimitNo);			
 			    }
 			    
-			},300);
-		
+			},300);			
 		}
+		
+		function savingPolicy(){
+			getPolicyValues();
+			var serie=	$("#txtSeries");
+			var plates=	$("#txtPlates");
+			var vehicleType=$("#txtVehicleType");
+			var mark=$("#searchMark");
+			var subMark=$("#searchSubMark");
+			var model=$("#txtModel");
+			var color=$("#txtColor");
+			var holder=$("#txtHolder");	 
+			var ownerCellPhone=$("#txtOwnerCellPhone");		
+			var pic=getCarPictureUri();
+			if(!policyExist||policyupdate){
+				
+				var docs="";
+				if(policyupdate){
+					docs={mobileId: device.uuid.trim(),PolicyNo: policy.val().trim(), PolicyDate: policyDate.val().trim(), insurance: aseg.text().trim(),
+							Plates: plates.val().trim(),Serie: serie.val().trim(),VehicleType: vehicleType.val().trim(),Mark: mark.val().trim(),
+							SubMark: subMark.val().trim(),Model: model.val().trim(),Color: color.val().trim(),carPicture: pic.trim(),
+							Holder: holder.val().trim(), OwnerCellPhone: ownerCellPhone.val().trim(),
+							PolicyContactName:polContactNameGrl.val().trim(),
+							PolicyContactFirstName:polContactFirstNameGrl.val().trim(), PolicyContactLastName:polContactLastNameGrl.val().trim(),
+							PolicyContactCellPhon:polContactCellPhoneGrl.val().trim()
+				        	};
+				}else{
+					policySaved=false;
+					policyId=0;
+					docs=[{mobileId: device.uuid.trim(),PolicyNo: policy.val().trim(), PolicyDate: policyDate.val().trim(), insurance: aseg.text().trim(),
+						Plates: plates.val().trim(),Serie: serie.val().trim(),VehicleType: vehicleType.val().trim(),Mark: mark.val().trim(),
+						SubMark: subMark.val().trim(),Model: model.val().trim(),Color: color.val().trim(),carPicture: pic.trim(),
+						Holder: holder.val().trim(), OwnerCellPhone: ownerCellPhone.val().trim(),
+						PolicyContactName:polContactNameGrl.val().trim(),
+						PolicyContactFirstName:polContactFirstNameGrl.val().trim(), PolicyContactLastName:polContactLastNameGrl.val().trim(),
+						PolicyContactCellPhon:polContactCellPhoneGrl.val().trim()
+			        	}];
+
+				}
+				
+			var jsonStore = new clsJsonStoreHelper();
+			jsonStore.collectionName=policyCollectionName;
+			jsonStore.document=docs;				
+			jsonStore.id=parseInt(policyId);
+			jsonStore.fnSuccess=function(success){alert(Messages.msgDataSaved);
+							
+			policySaved=true;
+			};
+			jsonStore.fnFail=function(errorObject){alert("Error: "+errorObject.msg);};						
+			jsonStore.save();	
+			
+			if(policySaved){
+			setTimeout(
+					function() { 														
+							initPolicyVehicleDataInfo();					
+																	
+						}, 300 );
+			}
+			}else{	
+				
+		}
+		}
+		
 		function addPolicyToList(name,insurance,policyDate,id,pic){			
 			initPolicyToList(name,insurance,policyDate,id,pic);
 	        

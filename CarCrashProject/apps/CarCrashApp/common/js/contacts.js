@@ -171,8 +171,8 @@ function success(result){
 		
 }
 
-function fail(result){
-	
+function fail(errorObject){
+	alert("Error: "+errorObject.msg);
 }
 
 function initContacts(){
@@ -184,7 +184,6 @@ function initContacts(){
 	jsonStore.id=0;
 	jsonStore.fnSuccess=initSuccess;
 	jsonStore.fnFail=initFail;
-	//jsonStore.getAll();
 	jsonStore.get();
 	
 }
@@ -292,8 +291,8 @@ function detailsSuccess(result){
 	contactUpdate=true;
 }
 
-function detailsFail(result){
-	
+function detailsFail(errorObject){
+	alert("Error: "+errorObject.msg);
 }
 
 function initDelete(){
@@ -321,8 +320,8 @@ function deleteSuccess(result){
     ondeletedUpdateList('listContact');
 }
 
-function deleteFail(result){
-
+function deleteFail(errorObject){
+	alert("Error: "+errorObject.msg);
 }
 
 function ondeletedUpdateList(list){
