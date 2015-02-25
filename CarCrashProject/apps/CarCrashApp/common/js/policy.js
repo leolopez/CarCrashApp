@@ -164,7 +164,8 @@
 		$(document).on('pagebeforeshow','#AgregarPoliza',function(e,data){    			    
 		initPolicyPage();		
 		next=false;		
-		basicPersonFiltersNumber("txtOwnerCellPhone");		
+		basicPersonFiltersNumber("txtOwnerCellPhone");	
+		basicPersonFiltersNumber("txtModel");	
 		basicPersonFiltersNumber("txtPolContactCellPhone");        	 
    	 basicPersonNameFilters("txtPolContactFirstName");
    	 basicPersonNameFilters("txtPolContactLastName");

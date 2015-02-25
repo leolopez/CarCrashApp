@@ -73,7 +73,7 @@ Messages = {
 		lblVehicleType:"Tipo de Vehículo",
 		lblMark:"Marca",
 		lblSubMark:"SubMarca",
-		lblModel:"Modelo",
+		lblModel:"Año",
 		lblColor:"Color",
 		aTakeCarPict:"Tomar Foto",
 		lblOwnerName:"Nombre del Titular",
@@ -263,7 +263,7 @@ Messages = {
 		Messages.lblVehicleType = "Tipo de Vehículo";
 		Messages.lblMark = "Marca";
 		Messages.lblSubMark = "SubMarca";
-		Messages.lblModel = "Modelo";
+		Messages.lblModel = "Año";
 		Messages.lblColor = "Color";
 		Messages.aTakeCarPict = "Tomar Foto";
 		Messages.lblOwnerName = "Nombre del Titular"; 
@@ -413,7 +413,7 @@ function setEnglishProfile(){
 		Messages.lblVehicleType = "Vehicle Type";
 		Messages.lblMark = "Mark";
 		Messages.lblSubMark = "SubMark";
-		Messages.lblModel = "Model";
+		Messages.lblModel = "Year";
 		Messages.lblColor = "Color";
 		Messages.aTakeCarPict = "Take picture";
 		Messages.lblOwnerName = "Owner Name";
