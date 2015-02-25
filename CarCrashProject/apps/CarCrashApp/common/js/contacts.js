@@ -169,7 +169,7 @@ function success(result){
 	alert(Messages.msgDataSaved);
 	contactSaved=true;
 	}
-		
+	location.href="#showContacts";	
 }
 
 function fail(errorObject){

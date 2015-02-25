@@ -356,23 +356,14 @@
 			jsonStore.collectionName=policyCollectionName;
 			jsonStore.document=docs;				
 			jsonStore.id=parseInt(policyId);
-			jsonStore.fnSuccess=function(success){alert(Messages.msgDataSaved);
-							
+			jsonStore.fnSuccess=function(success){alert(Messages.msgDataSaved);							
 			policySaved=true;
+			initPolicyVehicleDataInfo();					
+			location.href="#poliza";
 			};
 			jsonStore.fnFail=function(errorObject){alert("Error: "+errorObject.msg);};						
-			jsonStore.save();	
-			
-			if(policySaved){
-			setTimeout(
-					function() { 														
-							initPolicyVehicleDataInfo();					
-																	
-						}, 300 );
+			jsonStore.save();							
 			}
-			}else{	
-				
-		}
 		}
 		
 		function addPolicyToList(name,insurance,policyDate,id,pic){			
