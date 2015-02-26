@@ -1,16 +1,17 @@
-
+var profileId;
 function initPerfilDataInfo(){	
 	var jsonStore = new clsJsonStoreHelper();
-	jsonStore.collectionName="profile";
+	jsonStore.collectionName="perfil";
 	jsonStore.document=
 			{
 			};
 	jsonStore.id=0;
 	jsonStore.fnSuccess=function (arrayResults) {			
-		if(arrayResults.length>0){	
-			$("#txtProfileName").val(arrayResults[0].json.name);
-			$("#txtFirstName").val(arrayResults[0].json.firstname);	
-			$("#txtLastName").val(arrayResults[0].json.lastname);
+		if(arrayResults.length>0){			
+			profileId=arrayResults[0]._id;
+			$("#txtProfileName").val(arrayResults[0].json.firstName);
+			$("#txtFirstName").val(arrayResults[0].json.lastName);	
+			$("#txtLastName").val(arrayResults[0].json.secondLastName);
 			$("#txtCellPhone").val(arrayResults[0].json.cellPhone);	
 			$("#searchCity").val(arrayResults[0].json.city);
 			$("#txtEmpresa").val(arrayResults[0].json.enterprise);	
@@ -23,6 +24,10 @@ function initPerfilDataInfo(){
 	
 	}
 	
+function getProfileId(){
+	return profileId;
+}
+
 function initMedicalDataInfo(){
 	var jsonStore = new clsJsonStoreHelper();
 	jsonStore.collectionName="MedicalData";
