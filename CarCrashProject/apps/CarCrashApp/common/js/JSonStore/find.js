@@ -91,7 +91,7 @@ function initPolicyVehicleDataInfo(){
 			$('#listPolicy').empty();
 			for (index = 0; index < arrayResults.length; ++index) {				   
 				
-				initPolicyToList(arrayResults[index].json.Plates,arrayResults[index].json.insurance,
+				initPolicyToList(arrayResults[index].json.Plates,arrayResults[index].json.Insurance,
 						arrayResults[index].json.PolicyDate, arrayResults[index]._id, arrayResults[index].json.carPicture);
 			}														
 	} 

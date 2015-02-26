@@ -109,7 +109,7 @@ function saveContact(){
 				},
 				{	operator: "equal",key:'UserContactLastName',value:userContactLastName.val().trim()													
 				},
-				{					operator: "equal",key:'UserContactCellPhon',value:userContactCellPhone.val().trim()					
+				{					operator: "equal",key:'UserContactCellPhone',value:userContactCellPhone.val().trim()					
 				}];
 		jsonStore.id=0;
 		jsonStore.fnSuccess=existSuccess;
@@ -142,11 +142,11 @@ function savingContact(){
 		if(contactUpdate){
 			docs={UserContactName:userContactName.val().trim(),		
 					UserContactFirstName:userContactFirstName.val().trim(),UserContactLastName:userContactLastName.val().trim(),
-					UserContactCellPhon:userContactCellPhone.val().trim()};
+					UserContactCellPhone:userContactCellPhone.val().trim()};
 		}else{
 			docs=[{UserContactName:userContactName.val().trim(),		
 				UserContactFirstName:userContactFirstName.val().trim(),UserContactLastName:userContactLastName.val().trim(),
-				UserContactCellPhon:userContactCellPhone.val().trim()}];
+				UserContactCellPhone:userContactCellPhone.val().trim()}];
 		}
 		
 	var jsonStore = new clsJsonStoreHelper();
