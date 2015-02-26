@@ -123,8 +123,8 @@ function getCollections(){
 			}
 		},
 		Contacts:{
-			searchFields:{UserContactName:'string',		
-				UserContactFirstName:'string',UserContactLastName:'string',
+			searchFields:{UserContactFirstName:'string',		
+				UserContactLastName:'string',UserContactSecondLastName:'string',
 				UserContactCellPhone:'string' }
 		},
 		reports:{
@@ -140,8 +140,8 @@ function getCollections(){
          PolicyVehicle : {
              searchFields: {PolicyNo: 'string', PolicyDate: 'string', Insurance: 'string', Plates: 'string', Serie: 'string'
              	, VehicleType: 'string', Mark: 'string', SubMark: 'string', Model: 'string', Color: 'string'
-             		, carPicture: 'string', Holder: 'string', OwnerCellPhone: 'string', PolicyContactName:'string',
- 					PolicyContactFirstName:'string', PolicyContactLastName:'string',
+             		, carPicture: 'string', Holder: 'string', OwnerCellPhone: 'string', PolicyContactFirstName:'string',
+ 					PolicyContactLastName:'string', PolicyContactSecondLastName:'string',
  					PolicyContactCellPhone:'string'
              	}
          },
@@ -150,7 +150,7 @@ function getCollections(){
              	}
          },
          MechanicData : {
-             searchFields: { MechanicName: 'string',  MechanicFirstName: 'string', MechanicLastName: 'string', MechanicCellPhone: 'string',
+             searchFields: { MechanicFirstName: 'string',  MechanicLastName: 'string', MechanicSecondLastName: 'string', MechanicCellPhone: 'string',
              	MechanicAddress: 'string'}
          }
 	};

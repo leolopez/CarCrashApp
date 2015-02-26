@@ -40,7 +40,7 @@ function setMechanicDataTransaction(){
 		var jsonStore = new clsJsonStoreHelper();
 		jsonStore.collectionName="MechanicData";
 		jsonStore.document=
-			 [{MechanicName: $("#txtMechanicName").val().trim(), MechanicFirstName: $("#txtMechanicFirstName").val().trim(), MechanicLastName: $("#txtMechanicLastName").val().trim(),
+			 [{MechanicFirstName: $("#txtMechanicName").val().trim(), MechanicLastName: $("#txtMechanicFirstName").val().trim(), MechanicSecondLastName: $("#txtMechanicLastName").val().trim(),
 				 MechanicCellPhone: $("#txtMechanicCellPhone").val().trim(),
 					MechanicAddress: $("#txtMechanicAddress").val().trim()}];
 		jsonStore.id=0;

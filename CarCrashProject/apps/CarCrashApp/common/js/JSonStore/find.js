@@ -61,9 +61,9 @@ function initMechanicDataInfo(){
 	jsonStore.id=0;
 	jsonStore.fnSuccess=function (arrayResults) {			
 		if(arrayResults.length>0){	
-			$("#txtMechanicName").val(arrayResults[0].json.MechanicName);
-			$("#txtMechanicFirstName").val(arrayResults[0].json.MechanicFirstName);
-			$("#txtMechanicLastName").val(arrayResults[0].json.MechanicLastName);
+			$("#txtMechanicName").val(arrayResults[0].json.MechanicFirstName);
+			$("#txtMechanicFirstName").val(arrayResults[0].json.MechanicLastName);
+			$("#txtMechanicLastName").val(arrayResults[0].json.MechanicSecondLastName);
 			$("#txtMechanicCellPhone").val(arrayResults[0].json.MechanicCellPhone);
 			$("#txtMechanicAddress").val(arrayResults[0].json.MechanicAddress);
 		}

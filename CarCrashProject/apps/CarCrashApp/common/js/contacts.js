@@ -103,11 +103,11 @@ function saveContact(){
 		var jsonStore = new clsJsonStoreHelper();
 		jsonStore.collectionName="Contacts";
 		jsonStore.document=
-				[{operator: "equal", key:'UserContactName',value:userContactName.val().trim()				
+				[{operator: "equal", key:'UserContactFirstName',value:userContactName.val().trim()				
 				},
-				{					operator: "equal", key:'UserContactFirstName',value:userContactFirstName.val().trim()									
+				{					operator: "equal", key:'UserContactLastName',value:userContactFirstName.val().trim()									
 				},
-				{	operator: "equal",key:'UserContactLastName',value:userContactLastName.val().trim()													
+				{	operator: "equal",key:'UserContactSecondLastName',value:userContactLastName.val().trim()													
 				},
 				{					operator: "equal",key:'UserContactCellPhone',value:userContactCellPhone.val().trim()					
 				}];
@@ -140,12 +140,12 @@ function savingContact(){
 		
 		var docs="";
 		if(contactUpdate){
-			docs={UserContactName:userContactName.val().trim(),		
-					UserContactFirstName:userContactFirstName.val().trim(),UserContactLastName:userContactLastName.val().trim(),
+			docs={UserContactFirstName:userContactName.val().trim(),		
+					UserContactLastName:userContactFirstName.val().trim(),UserContactSecondLastName:userContactLastName.val().trim(),
 					UserContactCellPhone:userContactCellPhone.val().trim()};
 		}else{
-			docs=[{UserContactName:userContactName.val().trim(),		
-				UserContactFirstName:userContactFirstName.val().trim(),UserContactLastName:userContactLastName.val().trim(),
+			docs=[{UserContactFirstName:userContactName.val().trim(),		
+				UserContactLastName:userContactFirstName.val().trim(),UserContactSecondLastName:userContactLastName.val().trim(),
 				UserContactCellPhone:userContactCellPhone.val().trim()}];
 		}
 		
@@ -196,8 +196,8 @@ function initSuccess(result){
 		$('#listContact').empty();
 		for (index = 0; index < result.length; ++index) {				   
 			
-			initContactToList(result[index].json.UserContactName,result[index].json.UserContactFirstName+" "+
-					result[index].json.UserContactLastName, result[index]._id);
+			initContactToList(result[index].json.UserContactFirstName,result[index].json.UserContactLastName+" "+
+					result[index].json.UserContactSecondLastName, result[index]._id);
 		}														
 } 
 }
@@ -274,9 +274,9 @@ function initContactDetails(){
 			 
 			  if(dataDetails!=null&&dataDetails.length>0&&contactUpdate){ 
 				
-				$("#txtUserContactName").val(dataDetails[0].json.UserContactName);
-				$("#txtUserContactFirstName").val(dataDetails[0].json.UserContactFirstName);
-				$("#txtUserContactLastName").val(dataDetails[0].json.UserContactLastName);
+				$("#txtUserContactName").val(dataDetails[0].json.UserContactFirstName);
+				$("#txtUserContactFirstName").val(dataDetails[0].json.UserContactLastName);
+				$("#txtUserContactLastName").val(dataDetails[0].json.UserContactSecondLastName);
 			    $("#txtUserContactCellPhone").val(dataDetails[0].json.UserContactCellPhon);	
 			    
 			  }

@@ -287,11 +287,11 @@
 						},
 						{operator: "equal",key:'OwnerCellPhone',value:ownerCellPhone.val().trim()					
 						},
-						{operator: "equal",key:'PolicyContactName',value:polContactNameGrl.val().trim()					
+						{operator: "equal",key:'PolicyContactFirstName',value:polContactNameGrl.val().trim()					
 						},
-						{operator: "equal",key:'PolicyContactFirstName',value:polContactFirstNameGrl.val().trim()					
+						{operator: "equal",key:'PolicyContactLastName',value:polContactFirstNameGrl.val().trim()					
 						},
-						{operator: "equal",key:'PolicyContactLastName',value:polContactLastNameGrl.val().trim()					
+						{operator: "equal",key:'PolicyContactSecondLastName',value:polContactLastNameGrl.val().trim()					
 						},
 						{operator: "equal",key:'PolicyContactCellPhone',value:polContactCellPhoneGrl.val().trim()					
 						}
@@ -340,8 +340,8 @@
 							Plates: plates.val().trim(),Serie: serie.val().trim(),VehicleType: vehicleType.val().trim(),Mark: mark.val().trim(),
 							SubMark: subMark.val().trim(),Model: model.val().trim(),Color: color.val().trim(),carPicture: pic.trim(),
 							Holder: holder.val().trim(), OwnerCellPhone: ownerCellPhone.val().trim(),
-							PolicyContactName:polContactNameGrl.val().trim(),
-							PolicyContactFirstName:polContactFirstNameGrl.val().trim(), PolicyContactLastName:polContactLastNameGrl.val().trim(),
+							PolicyContactFirstName:polContactNameGrl.val().trim(),
+							PolicyContactLastName:polContactFirstNameGrl.val().trim(), PolicyContactSecondLastName:polContactLastNameGrl.val().trim(),
 							PolicyContactCellPhone:polContactCellPhoneGrl.val().trim()
 				        	};
 				}else{
@@ -351,8 +351,8 @@
 						Plates: plates.val().trim(),Serie: serie.val().trim(),VehicleType: vehicleType.val().trim(),Mark: mark.val().trim(),
 						SubMark: subMark.val().trim(),Model: model.val().trim(),Color: color.val().trim(),carPicture: pic.trim(),
 						Holder: holder.val().trim(), OwnerCellPhone: ownerCellPhone.val().trim(),
-						PolicyContactName:polContactNameGrl.val().trim(),
-						PolicyContactFirstName:polContactFirstNameGrl.val().trim(), PolicyContactLastName:polContactLastNameGrl.val().trim(),
+						PolicyContactFirstName:polContactNameGrl.val().trim(),
+						PolicyContactLastName:polContactFirstNameGrl.val().trim(), PolicyContactSecondLastName:polContactLastNameGrl.val().trim(),
 						PolicyContactCellPhone:polContactCellPhoneGrl.val().trim()
 			        	}];
 
@@ -500,9 +500,9 @@ function initPolicyToList(name,insurance,policyDate,id,pic){
 						$("#txtColor").val(data[0].json.Color);
 						$("#txtHolder").val(data[0].json.Holder);
 						$("#txtOwnerCellPhone").val(data[0].json.OwnerCellPhone);
-						$("#txtPolContactName").val(data[0].json.PolicyContactName);
-						$("#txtPolContactFirstName").val(data[0].json.PolicyContactFirstName);
-					    $("#txtPolContactLastName").val(data[0].json.PolicyContactLastName);	 
+						$("#txtPolContactName").val(data[0].json.PolicyContactFirstName);
+						$("#txtPolContactFirstName").val(data[0].json.PolicyContactLastName);
+					    $("#txtPolContactLastName").val(data[0].json.PolicyContactSecondLastName);	 
 						$("#txtPolContactCellPhone").val(data[0].json.PolicyContactCellPhone);
 						 policy=	 $("#txtPolicyNo");
 						 policy.val(data[0].json.PolicyNo);

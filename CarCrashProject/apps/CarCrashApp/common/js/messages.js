@@ -350,9 +350,9 @@ Messages = {
 function setEnglishProfile(){
 		Messages.myAccName = "My Account";
 		Messages.enterDetails = "Enter your details.";
-		Messages.lblProfileName = "Name";
-		Messages.lblFirstName = "First Name";
-		Messages.lblLastName = "Last Name";
+		Messages.lblProfileName = "First Name";
+		Messages.lblFirstName = "Last Name";
+		Messages.lblLastName = "Second Last Name";
 		Messages.lblCellPhone = "Cell Phone";
 		Messages.lblCityRes = "City of residence";
 		Messages.lblCompany = "Company or Flotilla";
