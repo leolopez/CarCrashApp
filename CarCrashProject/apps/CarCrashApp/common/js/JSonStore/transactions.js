@@ -1,18 +1,18 @@
 
 var initPass =0;
 function setDataToTransaction(){				 
-	
+	/*
 	  WL.JSONStore.init(getCollections()).then(function () {   			
 			   WL.JSONStore.get("profile").clear(); 
 		})
-		.then(function (errorObject) {	
+		.then(function (errorObject) {	*/
 							
 			var jsonStore = new clsJsonStoreHelper();
-			jsonStore.collectionName="profile";
+			jsonStore.collectionName="perfil";
 			jsonStore.document=
-				 [{mobileId: device.uuid.trim(),name: $("#txtProfileName").val().trim(), firstname: $("#txtFirstName").val().trim(), lastname: $("#txtLastName").val().trim(), cellPhone: $("#txtCellPhone").val().trim(),
-		        	city: $("#searchCity").val().trim(), enterprise: $("#txtEmpresa").val().trim(), birthDate: '',email: '',pass: ''}];
-			jsonStore.id=0;
+				 {firstName: $("#txtProfileName").val().trim(), lastName: $("#txtFirstName").val().trim(), secondLastName: $("#txtLastName").val().trim(), cellPhone: $("#txtCellPhone").val().trim(),
+		        	city: $("#searchCity").val().trim(), enterprise: $("#txtEmpresa").val().trim()};
+			jsonStore.id=getProfileId();
 			jsonStore.fnSuccess=function (succes) {			
 				alert(Messages.msgDataSaved);
 			};
@@ -20,11 +20,13 @@ function setDataToTransaction(){
 				alert("Error: "+errorObject.msg);
 			};
 			jsonStore.save();			
-		})
+		
+/*})
 		.fail(function (errorObject) {		   			   			
 			
 			
-		});	  		
+		});	  
+		*/		
 }
 
 

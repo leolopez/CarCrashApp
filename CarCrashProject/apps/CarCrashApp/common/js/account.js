@@ -2,6 +2,7 @@ function account()
 {
 	this.firstName = "";
 	this.lastName = "";
+	this.secondLastName = "";
 	this.birthDay = "";
 	this.country = "";
 	this.state = "";
