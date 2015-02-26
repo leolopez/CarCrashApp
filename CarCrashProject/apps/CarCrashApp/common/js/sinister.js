@@ -44,7 +44,7 @@ function _saveSinister(){
 	var rest = new clsRestHelper("sinisters", "saveSinister", {}, 
 			//OnSuccess
 			function(result){
-				if(result.invocationResult.data){
+				if(result.invocationResult.isSuccessful){
 					var oJS = new clsJsonStoreHelper();
 					oJS.collectionName = "reports";
 					oJS.document = doc;
@@ -120,7 +120,7 @@ function _saveExtras(){
 	var rest = new clsRestHelper("sinisters", "saveExtraSinister", {}, 
 			//OnSuccess
 			function (result){
-				if(result.invocationResult.data){
+				if(result.invocationResult.isSuccessful){
 					var oJS = new clsJsonStoreHelper();
 					oJS.collectionName = "reportExtras";
 					oJS.document = doc;
@@ -151,7 +151,7 @@ function takePicture()
 	        function(e) {
 	            console.log("Error getting picture: " + e);
 	        },
-	        { quality: 50, destinationType: navigator.camera.DestinationType.FILE_URI, sourceType : navigator.camera.PictureSourceType.CAMERA});
+	        { quality: 50, destinationType: navigator.camera.DestinationType.FILE_URI, sourceType : navigator.camera.PictureSourceType.CAMERA, saveToPhotoAlbum: true});
 }
 
 function enviarExtras()
@@ -267,9 +267,9 @@ function loadVehiclesList(){
 		$("#selectAuto").append("<option id=\"opSelectCar\" value=\"0\">Select your car</option>");
 		$(result).each(function(idx, item){
 			$("#selectAuto").append("<option value=\"" + item._id + "\">" + item.json.Mark + "-" + item.json.SubMark  + "</option>");
-			$("#selectAuto").listview('refresh').trigger('create');
 		});
-		$('#selectAuto').val("0");
+		$('#selectAuto').value = "1";
+		//$("#selectAuto").listview('refresh').trigger('create');
 	};
 	oJStore.fnFail = function(error){
 		alert('Error al obtener los autos registrados.');
