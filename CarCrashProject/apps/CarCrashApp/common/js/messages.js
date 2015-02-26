@@ -65,7 +65,7 @@ Messages = {
 		placeholderDateFormat:"dd/mm/aaaa",
 		txtAseg:"Siguiente",
 		aRecordsList:"Listado de Registros",
-		pContact3:"Contacto",
+		pContact3:"Agente de Seguros",
 		//Add Vehicle translations
 		h3Vehicle: "Vehículo",
 		lblPlates:"Placa",
@@ -224,7 +224,7 @@ Messages = {
 		Messages.aSUdata="Guardar/Actualizar";
 		Messages.aKeepEd="Continuar editando";
 		Messages.aRPoliza="Ir a registros";		
-		Messages.pContact3="Contacto";
+		Messages.pContact3="Agente de Seguros";
 		Messages.aEmergencies="Emergencias";
 		Messages.aInsurances="Aseguradoras";
 		Messages.aContactsList="Lista de contactos";
@@ -374,7 +374,7 @@ function setEnglishProfile(){
 		Messages.aSUdata="Save/Update";
 		Messages.aKeepEd="Continue editing";
 		Messages.aRPoliza="Go to records";	
-		Messages.pContact3="Contact";
+		Messages.pContact3="Insurance agent";
 		Messages.aEmergencies="Emergencies";
 		Messages.aInsurances="Insurances";
 		Messages.aContactsList="Contact list";
