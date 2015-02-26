@@ -2,8 +2,8 @@ var sPageNav = "";
 function clsSinister(){
 	this.data = {
 		idPolicy: 0,
-		date: new Date().getDate(),
-		time: new Date().getTime(),
+		date: (new Date().getDate()) + '-' + (new Date().getMonth()) + '-' + (new Date().getFullYear()),
+		time: (new Date().getHours()) + ':' + (new Date().getMinutes()) + ':' + (new Date().getSeconds()),
 		type: "",
 		activo: true,
 		location: new clsLocation()
