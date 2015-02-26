@@ -259,8 +259,7 @@
 				var jsonStore = new clsJsonStoreHelper();
 				jsonStore.collectionName=policyCollectionName;
 				jsonStore.document=
-						[{operator: "equal", key:'mobileId',value:device.uuid.trim()				
-						},
+						[
 						{operator: "equal", key:'PolicyNo',value:policy.val().trim()									
 						},
 						{operator: "equal",key:'PolicyDate',value:policyDate.val().trim()													
@@ -660,7 +659,7 @@ function initPolicyToList(name,insurance,policyDate,id,pic){
 		}
 		
 		$(function(){
-			 $('#alistPolicies').on( "taphold", function( event ) {alert("ss"); } );
+			 $('#aPolicyDetails').bind( "taphold", function( event ) {alert("ss"); } );
 			 
 			  function tapholdHandler( event ){
 			    $( event.target ).addEvent( "alert('dd');" );

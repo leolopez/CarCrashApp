@@ -1,11 +1,6 @@
 
 var initPass =0;
 function setDataToTransaction(){				 
-	/*
-	  WL.JSONStore.init(getCollections()).then(function () {   			
-			   WL.JSONStore.get("profile").clear(); 
-		})
-		.then(function (errorObject) {	*/
 							
 			var jsonStore = new clsJsonStoreHelper();
 			jsonStore.collectionName="perfil";
@@ -20,13 +15,7 @@ function setDataToTransaction(){
 				alert("Error: "+errorObject.msg);
 			};
 			jsonStore.save();			
-		
-/*})
-		.fail(function (errorObject) {		   			   			
 			
-			
-		});	  
-		*/		
 }
 
 
@@ -86,9 +75,7 @@ function setMedicalDataTransaction(){
 		
 }
 
-function encripData(){
-	
-	
+function encripData(){	
 	
 	return options = { 
 			   username: 'solutia', //default: 'jsonstore'
