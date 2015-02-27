@@ -23,7 +23,7 @@ function saveAccount(pAccount)
 }
 function saveAccountSuccess(result){
 	var oResult = result.invocationResult;
-	if(oResult.isSuccessful && oResult.value)
+	if(oResult.isSuccessful && oResult.isSuccessful)
 	{
 		alert("Registrado correctamente, ahora inicie sesion con su e-mail y password");
 		location.href = "#login";
