@@ -376,15 +376,18 @@
 	        
 		}
 function initPolicyToList(name,insurance,policyDate,id,pic){
-			
-			$('#listPolicy').append('<li class=" ui-li-has-thumb" ><a data-rel="popup" data-position-to="window" data-transition="pop" href="#popupShosPolicyDetails" onclick="initSelectedPolicy(this);" class="ui-btn ui-btn-icon-right ui-icon-carat-r" > ' +
+	
+			$('#listPolicy').append('<li class=" ui-li-has-thumb" ><a id="aPoliciesList" data-rel="popup" data-position-to="window" data-transition="pop" href="" onclick="initSelectedPolicy(this); initPolicyDetails();" class="ui-btn ui-btn-icon-right ui-icon-carat-r" > ' +
 			        '<img height="100%" src="'+pic.trim()+'"> '+
 				    '<h2>'+name.trim()+'</h2>'+
 				    '<p>'+insurance.trim()+'</p>'+
 				    '<p>'+Messages.spnExpiration+policyDate.trim()+'</p>'+
 				    ' <input type="hidden" value="'+id+'" />'+
 				   ' </a>'+
-				   ' </li>');		
+				   ' </li>');	
+			$('a[id="aPoliciesList"]').on("taphold",function(){				
+				initSelectedPolicy(this);	 popUpListPolicy(); initDeletePolicy();
+				});
 		}
 		
 	function ondeletedUpdatePolicy(){
@@ -658,11 +661,4 @@ function initPolicyToList(name,insurance,policyDate,id,pic){
 							
 		}
 		
-		$(function(){
-			 $('#aPolicyDetails').bind( "taphold", function( event ) {alert("ss"); } );
-			 
-			  function tapholdHandler( event ){
-			    $( event.target ).addEvent( "alert('dd');" );
-			  }
-			});
 		
