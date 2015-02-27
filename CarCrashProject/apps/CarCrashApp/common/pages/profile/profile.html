@@ -22,9 +22,27 @@
     				<label id="lblCellPhone">Cell Phone</label>      				 
     				<input  id="txtCellPhone" type="text" maxlength="12"/>
     				<br>     				 
-    				<hr></hr>   
-    				<label id="lblCityRes">City of residence</label>  							    																												
-					<input value="" class= "ui-icon-right" type="search" readonly="readonly"   name="search"  id="searchCity" onclick="initCountries();"/>						    				
+    				<hr></hr>  
+    				<label id="lblAddress">Address</label>     				
+    				<div id="locationField">
+      <input id="autocomplete" placeholder="Enter your complete address"
+             onFocus="geolocate()" type="text" maxlength="190"></input>
+    </div>
+<label id="lblStreetNum" >Street number</label> 
+<input sel="pStreetNumber" style="font-weight: bold;" id="street_number" disabled="true"></input>
+<label id="lblStreetNam">Street name</label> 
+<input sel="pStreet" style="font-weight: bold;" id="route" disabled="true"></input>
+<label id="lblCity">City</label> 
+<input  sel="pCity" style="font-weight: bold;" id="locality" disabled="true"></input>
+<label id="lblState">State</label> 
+<input  sel="pState" style="font-weight: bold;" id="administrative_area_level_1" disabled="true"></input>
+<label id="lblZipCode">Zip code</label> 
+<input  sel="pPostalCode" style="font-weight: bold;" id="postal_code"  disabled="true"></input>
+<label id="lblCountry">Country</label> 
+<input  sel="pCountry" style="font-weight: bold;" id="country" disabled="true"></input>                      
+    				<br>     				 
+    				<hr></hr>  
+    				<br>   										    				
     				<label id="lblCompany" >Company or Flotilla</label>
     				<input  id="txtEmpresa" maxlength="60" type="text" />      				
     				<br>     				     				    				     				     				    				

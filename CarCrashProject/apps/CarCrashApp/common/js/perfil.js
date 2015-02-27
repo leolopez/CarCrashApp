@@ -71,12 +71,17 @@ initLeftPanelTranslations()
 				
 		$(document).on('pagebeforeshow','#perfil',function(e,data){
 			$('div[id="backPerfilNav"]').hide();
+			initializeAddress();
 			initPerfil();		
 		initPerfilDataInfo(); 	 				  
 		});			
 		
-		function savePerfil(){							
-			setDataToTransaction();										
+		function savePerfil(){
+			if(!checkAddress()){ 
+			setDataToTransaction();	
+			}else{
+				alert("Ingrese "+Messages.streetNumber+" en la busqueda del "+Messages.address);				
+			}
 		}
 		function saveAnyPerfil(){						
 			switch(navigation){
@@ -221,4 +226,12 @@ initLeftPanelTranslations()
         	
         }
         
-        
+        function checkAddress(){
+        	if(($('input[sel="pCity"]').val().trim().length>0||$('input[sel="pStreet"]').val().trim().length>0||$('label[id="lblZipCode"]').val().trim().length>0
+        			||$('input[sel="pState"]').val().trim().length>0||$('input[sel="pCountry"]').val().trim().length>0)&& $('input[sel="pStreetNumber"]').val().trim().length<1
+        			){
+        		return true;
+        	}else{
+        		return false;
+        	}        	
+        }

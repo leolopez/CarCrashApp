@@ -6,7 +6,10 @@ function setDataToTransaction(){
 			jsonStore.collectionName="perfil";
 			jsonStore.document=
 				 {firstName: $("#txtProfileName").val().trim(), lastName: $("#txtFirstName").val().trim(), secondLastName: $("#txtLastName").val().trim(), cellPhone: $("#txtCellPhone").val().trim(),
-		        	city: $("#searchCity").val().trim(), enterprise: $("#txtEmpresa").val().trim()};
+		        	city: $('input[sel="pCity"]').val().trim(), enterprise: $("#txtEmpresa").val().trim(),
+		        	streetNumber:$('input[sel="pStreetNumber"]').val().trim(),street:$('input[sel="pStreet"]').val().trim(),State:$('input[sel="pState"]').val().trim(),
+		        	postalCode:$('input[sel="pPostalCode"]').val().trim(),Country:$('input[sel="pCountry"]').val().trim()
+				 };
 			jsonStore.id=getProfileId();
 			jsonStore.fnSuccess=function (succes) {			
 				alert(Messages.msgDataSaved);

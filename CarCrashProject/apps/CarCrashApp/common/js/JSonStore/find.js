@@ -13,8 +13,13 @@ function initPerfilDataInfo(){
 			$("#txtFirstName").val(arrayResults[0].json.lastName);	
 			$("#txtLastName").val(arrayResults[0].json.secondLastName);
 			$("#txtCellPhone").val(arrayResults[0].json.cellPhone);	
-			$("#searchCity").val(arrayResults[0].json.city);
-			$("#txtEmpresa").val(arrayResults[0].json.enterprise);	
+			$('input[sel="pCity"]').val(arrayResults[0].json.city);
+			$("#txtEmpresa").val(arrayResults[0].json.enterprise);
+			$('input[sel="pStreetNumber"]').val(arrayResults[0].json.streetNumber);
+			$('input[sel="pStreet"]').val(arrayResults[0].json.street);
+			$('input[sel="pState"]').val(arrayResults[0].json.State);
+        	$('input[sel="pPostalCode"]').val(arrayResults[0].json.postalCode);
+        	$('input[sel="pCountry"]').val(arrayResults[0].json.Country);
 		}
 	};
 	jsonStore.fnFail=function (fail) {			

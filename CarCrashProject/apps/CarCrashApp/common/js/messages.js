@@ -139,7 +139,14 @@ Messages = {
 		popContent:"Esta acción enviara su ubicación y datos a su aseguradora.",
 		//general Translations
 		dataUpdate:"Datos actualizados con éxito",
-		pictureMsg: "Capture una foto"
+		pictureMsg: "Capture una foto",
+		address:"Domicilio",
+		streetNumber:"No. Calle",
+		street:"Calle",
+		state:"Estado",
+		postalCode:"Código postal",
+		country:"País",
+		placeAddress:"Introduzca su dirección completa",
 	};
 
 	function setSpanish(){
@@ -152,6 +159,13 @@ Messages = {
 		Messages.requiredData = "Ingrese los datos solicitados";	
 		Messages.dataUpdate = "Datos actualizados con éxito";
 		Messages.pictureMsg= "Capture una foto";
+		Messages.address="Domicilio";
+		Messages.streetNumber="No. Calle";
+		Messages.street="Calle";
+		Messages.state="Estado";
+		Messages.postalCode="Código postal";
+		Messages.country="País";
+		Messages.placeAddress="Introduzca su dirección completa";
 		
 		setSpanishProfile();
 		setSpanishShowPolicies();
@@ -179,6 +193,13 @@ Messages = {
 		Messages.requiredData = "Enter all required data";
 		Messages.dataUpdate = "Data updated successfully";
 		Messages.pictureMsg= "Take a picture";
+		Messages.address="Address";
+		Messages.streetNumber="Street number";
+		Messages.street="Street name";
+		Messages.state="State";
+		Messages.postalCode="Zip code";
+		Messages.country="Country";
+		Messages.placeAddress="Enter your full address";
 		
 		setEnglishProfile();
 		setEnglishShowPolicies();

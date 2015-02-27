@@ -335,6 +335,7 @@ function languageChanged(lang) {
     initLeftPanelTranslations();
     initSingUpTranslations();
     initLogInTranslations();
+    initGeneralOptions();
 }
 
 function initProfileTranslations (){
@@ -514,4 +515,16 @@ function initSinisterPopUpTranslations(){
 	$('h1[h1pop="popHeader"]').text(Messages.popHeader);
 	$('h3[h3pop="popTitle"]').text(Messages.popTitle);
 	$('p[ppop="popContent"]').text(Messages.popContent);
+}
+
+function initGeneralOptions(){
+	$('label[id="lblStreetNum"]').text(Messages.streetNumber);
+	$('label[id="lblStreetNam"]').text(Messages.street);
+	$('label[id="lblState"]').text(Messages.state);
+	$('label[id="lblZipCode"]').text(Messages.postalCode);
+	$('label[id="lblCountry"]').text(Messages.country);
+	$('label[id="lblAddress"]').text(Messages.address);	
+	$('label[id="lblCity"]').text(Messages.txtCiudad);
+	$('input[id="autocomplete"]').attr("placeholder", Messages.placeAddress); 
+	
 }
