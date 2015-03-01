@@ -465,12 +465,21 @@ function initPolicyToList(name,insurance,policyDate,id,pic){
 		}
 		});
 		
-		function popUpListPolicy(){
-			
-			$('.ui-popup-container').css({
-		        top: 60,
-		          bottom:50
-		    }); 
+		function popUpListPolicy(){	
+			var sc= $(document).scrollTop();
+					if(sc>80){
+				$('.ui-popup-container').css({
+					top:100,
+					bottom:90    
+			    });	
+			}else{
+				$('.ui-popup-container').css({
+					top:"auto",
+					bottom:50	       
+			    });	
+				
+			}
+			 
 		}					
 		
 		function initDeletePolicy(){
