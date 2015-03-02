@@ -266,7 +266,7 @@
 						},
 						{operator: "equal",key:'PolicyDate',value:policyDate.val().trim()													
 						},
-						{operator: "equal",key:'insurance',value:aseg.text().trim()					
+						{operator: "equal",key:'insurance',value:aseg.val().trim()					
 						},
 						{operator: "equal",key:'Plates',value:plates.val().trim()					
 						},
@@ -274,7 +274,7 @@
 						},
 						{operator: "equal",key:'VehicleType',value:vehicleType.val().trim()				
 						},
-						{operator: "equal",key:'Mark',value:markSelected.text().trim()					
+						{operator: "equal",key:'Mark',value:markSelected.val().trim()					
 						},
 						{operator: "equal",key:'SubMark',value:subMark.val().trim()					
 						},
@@ -339,7 +339,7 @@
 				var docs="";
 				if(policyupdate){
 					docs={PolicyNo: policy.val().trim(), PolicyDate: policyDate.val().trim(), Insurance: aseg.text().trim(),
-							Plates: plates.val().trim(),Serie: serie.val().trim(),VehicleType: vehicleType.val().trim(),Mark: markSelected.text().trim(),
+							Plates: plates.val().trim(),Serie: serie.val().trim(),VehicleType: vehicleType.val().trim(),Mark: markSelected.val().trim(),
 							SubMark: subMark.val().trim(),Model: model.val().trim(),Color: color.val().trim(),carPicture: pic.trim(),
 							Holder: holder.val().trim(), OwnerCellPhone: ownerCellPhone.val().trim(),
 							PolicyContactFirstName:polContactNameGrl.val().trim(),
@@ -350,7 +350,7 @@
 					policySaved=false;
 					policyId=0;
 					docs=[{PolicyNo: policy.val().trim(), PolicyDate: policyDate.val().trim(), Insurance: aseg.text().trim(),
-						Plates: plates.val().trim(),Serie: serie.val().trim(),VehicleType: vehicleType.val().trim(),Mark: markSelected.text().trim(),
+						Plates: plates.val().trim(),Serie: serie.val().trim(),VehicleType: vehicleType.val().trim(),Mark: markSelected.val().trim(),
 						SubMark: subMark.val().trim(),Model: model.val().trim(),Color: color.val().trim(),carPicture: pic.trim(),
 						Holder: holder.val().trim(), OwnerCellPhone: ownerCellPhone.val().trim(),
 						PolicyContactFirstName:polContactNameGrl.val().trim(),
@@ -526,7 +526,8 @@ function initPolicyToList(name,insurance,policyDate,id,pic){
 						  $('#selectInsurance option:contains("'+data[0].json.Insurance+'")').prop('selected', true);						  
 						  $( "select" ).selectmenu( "refresh", true );		
 						  $( "select" ).selectmenu();
-						  $('#selectMark option:contains("'+data[0].json.Mark+'")').prop('selected', true);
+						  $('#selectMark').prop('selectedIndex', parseInt(data[0].json.Mark));
+						
 						  $( "select" ).selectmenu( "refresh", true );
 						  aseg=  $("#selectInsurance option:selected");	
 						  markSelected= $("#selectMark option:selected");	
