@@ -43,6 +43,7 @@ Messages = {
 		aInsurances:"Aseguradoras",
 		aContactsList:"Lista de contactos",
 		h3AddContacts:"Contacto",
+		opNoneMark:"Seleccionar marca",
 		//Medical data translations
 		lblIMSSNum:"No. IMSS",	
 		lblBloodType:"Tipo de sangre",	
@@ -250,6 +251,7 @@ Messages = {
 		Messages.aInsurances="Aseguradoras";
 		Messages.aContactsList="Lista de contactos";
 		Messages.h3AddContacts="Contacto"; 
+		Messages.opNoneMark="Seleccionar marca"; 		
 	}
 	
 	function setSpanishMedicalData(){
@@ -400,6 +402,7 @@ function setEnglishProfile(){
 		Messages.aInsurances="Insurances";
 		Messages.aContactsList="Contact list";
 		Messages.h3AddContacts="Contact"; 
+		Messages.opNoneMark="Select mark";
 	}
 	
 	function setEnglishMedicalData(){

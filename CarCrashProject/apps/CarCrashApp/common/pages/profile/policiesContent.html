@@ -53,10 +53,57 @@
     				<input   id="txtVehicleType" maxlength="30" type="text" /> 
     			    <label id="lblModel">Año</label> 
     				<input  id="txtModel" maxlength="5" type="text" />
-    			    <label id="lblMark">Mark</label>     				
-    				<input type="search" data-iconpos="center"  readonly="readonly" name="search" onclick="initMarks();"  id="searchMark"/>
+    			    <label id="lblMark">Mark</label>
+    			    <div>		<select name="selectMark" id="selectMark">
+								<option id="opNoneMark" value="0" selected="selected">Select mark</option>
+								<option value="1">ACURA</option>
+								<option value="2">ALFA ROMEO</option>
+								<option value="3">ASTON MARTIN</option>
+								<option value="4">AUDI</option>
+								<option value="5">BENTLEY</option>
+								<option value="6">BMW</option>
+								<option value="7">BUGATTI</option>
+								<option value="8">CHEVROLET</option>
+								<option value="9">CHRYSLER</option>
+								<option value="10">FAW</option>
+								<option value="11">FERRARI</option>
+								<option value="12">FIAT</option>
+								<option value="13">FORD</option>
+								<option value="14">GIANT MOTORS</option>
+								<option value="15">HONDA</option>
+								<option value="16">HYUNDAI</option>
+								<option value="17">INFINITI</option>
+								<option value="18">LAMBORGHINI</option>
+								<option value="19">LAND ROVER</option>
+								<option value="20">LEXUS</option>
+								<option value="21">LOTUS</option>
+								<option value="22">MASERATI</option>
+								<option value="23">MASTRETTA</option>
+								<option value="24">MAYBACH</option>
+								<option value="25">MAZDA</option>
+								<option value="26">MERCEDES BENZ</option>
+								<option value="27">MERCURY</option>
+								<option value="28">MG</option>
+								<option value="29">MILES</option>
+								<option value="30">MITSUBISHI MOTORS</option>
+								<option value="31">NISSAN</option>
+								<option value="32">PEUGEOT</option>
+								<option value="33">PIAGGIO/DATSUN</option>
+								<option value="34">PORSCHE</option>
+								<option value="35">RENAULT</option>
+								<option value="36">ROVER</option>
+								<option value="37">SEAT</option>
+								<option value="38">SMART</option>
+								<option value="39">SUBARU</option>
+								<option value="40">SUZUKI</option>
+								<option value="41">TESLA</option>
+								<option value="42">TOYOTA</option>
+								<option value="43">VOLKSWAGEN</option>
+								<option value="44">VOLVO</option>
+							</select></div>    			         				
+    				
     			    <label id="lblSubMark">SubMark</label>  
-    				<input type="search" readonly="readonly" onclick="initMarks();" name="search"  id="searchSubMark">
+    				<input type="text"  name="search" maxlength="50" id="searchSubMark">
     			    
     				<label id="lblColor">Color</label>
     				<input  id="txtColor" maxlength="25" type="text" />
