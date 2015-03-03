@@ -407,6 +407,7 @@ function initAddPolicyTranslations(){
 	    $("#lblPolicyNum").text(Messages.lblPolicyNum); 
 	    $("#lblPolicyExpiration").text(Messages.lblPolicyExpiration); 
 	    $("#opNoneInsurance").text(Messages.opNoneInsurance); 
+	    $("#opNoneMark").text(Messages.opNoneMark); 
 	    $("#lblInsurance").text(Messages.lblInsurance);
 	    $("#txtPolicyDate").attr("placeholder", Messages.placeholderDateFormat); 
 	    $("#txtAseg").val(Messages.txtAseg);  
