@@ -235,3 +235,58 @@ initLeftPanelTranslations()
         		return false;
         	}        	
         }
+        
+        function setDataToTransaction(){				 
+			
+			var jsonStore = new clsJsonStoreHelper();
+			jsonStore.collectionName="perfil";
+			jsonStore.document=
+				 {firstName: $("#txtProfileName").val().trim(), lastName: $("#txtFirstName").val().trim(), secondLastName: $("#txtLastName").val().trim(), cellPhone: $("#txtCellPhone").val().trim(),
+		        	city: $('input[sel="pCity"]').val().trim(), enterprise: $("#txtEmpresa").val().trim(),
+		        	streetNumber:$('input[sel="pStreetNumber"]').val().trim(),street:$('input[sel="pStreet"]').val().trim(),State:$('input[sel="pState"]').val().trim(),
+		        	postalCode:$('input[sel="pPostalCode"]').val().trim(),Country:$('input[sel="pCountry"]').val().trim()
+				 };
+			jsonStore.id=getProfileId();
+			jsonStore.fnSuccess=function (succes) {			
+				alert(Messages.msgDataSaved);
+			};
+			jsonStore.fnFail=function (errorObject) {			
+				alert("Error: "+errorObject.msg);
+			};
+			jsonStore.save();			
+			
+}
+        var profileId;
+        function initPerfilDataInfo(){	
+        	var jsonStore = new clsJsonStoreHelper();
+        	jsonStore.collectionName="perfil";
+        	jsonStore.document=
+        			{
+        			};
+        	jsonStore.id=0;
+        	jsonStore.fnSuccess=function (arrayResults) {			
+        		if(arrayResults.length>0){			
+        			profileId=arrayResults[0]._id;
+        			$("#txtProfileName").val(arrayResults[0].json.firstName);
+        			$("#txtFirstName").val(arrayResults[0].json.lastName);	
+        			$("#txtLastName").val(arrayResults[0].json.secondLastName);
+        			$("#txtCellPhone").val(arrayResults[0].json.cellPhone);	
+        			$('input[sel="pCity"]').val(arrayResults[0].json.city);
+        			$("#txtEmpresa").val(arrayResults[0].json.enterprise);
+        			$('input[sel="pStreetNumber"]').val(arrayResults[0].json.streetNumber);
+        			$('input[sel="pStreet"]').val(arrayResults[0].json.street);
+        			$('input[sel="pState"]').val(arrayResults[0].json.State);
+                	$('input[sel="pPostalCode"]').val(arrayResults[0].json.postalCode);
+                	$('input[sel="pCountry"]').val(arrayResults[0].json.Country);
+        		}
+        	};
+        	jsonStore.fnFail=function (fail) {			
+        		
+        	};
+        	jsonStore.get();	
+        	
+        	}
+        	
+        function getProfileId(){
+        	return profileId;
+        }

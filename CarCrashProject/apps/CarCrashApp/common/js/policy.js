@@ -681,4 +681,28 @@ function initPolicyToList(name,insurance,policyDate,id,pic){
 							
 		}
 		
+		function initPolicyVehicleDataInfo(){  
+			var jsonStore = new clsJsonStoreHelper();
+			jsonStore.collectionName="PolicyVehicle";
+			jsonStore.document=
+					{
+					};
+			jsonStore.id=0;
+			jsonStore.fnSuccess=function initSuccess(arrayResults){
+				
+				if(arrayResults.length>0){
+					var index;
+					$('#listPolicy').empty();
+					for (index = 0; index < arrayResults.length; ++index) {				   
+						
+						initPolicyToList(arrayResults[index].json.Plates,arrayResults[index].json.Insurance,
+								arrayResults[index].json.PolicyDate, arrayResults[index]._id, arrayResults[index].json.carPicture);
+					}														
+			} 
+			};
+			jsonStore.fnFail=function initFail(result){
+				
+			};
+			jsonStore.get();
+			}
 		

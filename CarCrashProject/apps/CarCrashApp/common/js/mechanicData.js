@@ -33,3 +33,51 @@
 			 vMechanicCellPhone=$("#txtMechanicCellPhone");		
 			 vMechanicAddress=$("#txtMechanicAddress");			
 		}
+		
+		function setMechanicDataTransaction(){			
+			  			
+				   WL.JSONStore.get("MechanicData").clear()			
+			.then(function (errorObject) {	
+								
+				var jsonStore = new clsJsonStoreHelper();
+				jsonStore.collectionName="MechanicData";
+				jsonStore.document=
+					 [{MechanicFirstName: $("#txtMechanicName").val().trim(), MechanicLastName: $("#txtMechanicFirstName").val().trim(), MechanicSecondLastName: $("#txtMechanicLastName").val().trim(),
+						 MechanicCellPhone: $("#txtMechanicCellPhone").val().trim(),
+							MechanicAddress: $("#txtMechanicAddress").val().trim()}];
+				jsonStore.id=0;
+				jsonStore.fnSuccess=function (succes) {			
+					alert(Messages.msgDataSaved);
+				};
+				jsonStore.fnFail=function (errorObject) {			
+					alert("Error: "+errorObject.msg);
+				};
+				jsonStore.save();			
+			})
+			.fail(function (errorObject) {		   			   					
+				
+			});		
+		}
+		
+		function initMechanicDataInfo(){
+			
+			var jsonStore = new clsJsonStoreHelper();
+			jsonStore.collectionName="MechanicData";
+			jsonStore.document=
+					{
+					};
+			jsonStore.id=0;
+			jsonStore.fnSuccess=function (arrayResults) {			
+				if(arrayResults.length>0){	
+					$("#txtMechanicName").val(arrayResults[0].json.MechanicFirstName);
+					$("#txtMechanicFirstName").val(arrayResults[0].json.MechanicLastName);
+					$("#txtMechanicLastName").val(arrayResults[0].json.MechanicSecondLastName);
+					$("#txtMechanicCellPhone").val(arrayResults[0].json.MechanicCellPhone);
+					$("#txtMechanicAddress").val(arrayResults[0].json.MechanicAddress);
+				}
+			};
+			jsonStore.fnFail=function (fail) {			
+				
+			};
+			jsonStore.get();		
+			}
