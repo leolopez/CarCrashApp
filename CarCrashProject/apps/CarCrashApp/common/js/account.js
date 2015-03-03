@@ -3,7 +3,7 @@ function account()
 	this.firstName = "";
 	this.lastName = "";
 	this.secondLastName = "";
-	this.birthDay = "";
+	this.birthDate = "";
 	this.country = "";
 	this.state = "";
 	this.city = "";
@@ -18,7 +18,7 @@ function account()
 
 function saveAccount(pAccount)
 {	
-	var restHelper = new clsRestHelper('account','registerAccount',pAccount, saveAccountSuccess, saveAccountFailure);
+	var restHelper = new clsRestHelper('account','saveAccount',pAccount, saveAccountSuccess, saveAccountFailure);
 	restHelper.callRestAdapter();
 }
 function saveAccountSuccess(result){
@@ -39,17 +39,17 @@ function saveAccountFailure(error){
 
 function accessAccount(pEmail, pPassword)
 {
-	var restHelper = new clsRestHelper('account','verifyLogin', {email:pEmail, password:pPassword}, accessSuccess, accessFailure);
+	var restHelper = new clsRestHelper('account','accessAccount', {email:pEmail, password:pPassword}, accessSuccess, accessFailure);
 	restHelper.callRestAdapter();
 }
 
 function accessSuccess(result){
-	var oResult = result.invocationResult;
-	if(oResult.data){
+	var oResult = result.invocationResult.resultSet[0];
+	if(oResult){
 		//Guardar datos en jsonstore
 		var oJS = new clsJsonStoreHelper();
 		oJS.collectionName = "perfil";
-		oJS.document = oResult.data;
+		oJS.document = oResult;
 		oJS.id = 0;
 		oJS.fnSuccess = function(numAdd){
 			if(numAdd > 0){
@@ -63,7 +63,7 @@ function accessSuccess(result){
 		oJS.fnFail = function(){
 			alert('Ocurrio un error al guardar su usuario. Intentelo de nuevo.');
 		};
-		oJS.save();
+		oJS.save(false, false);
 	}
 	else{
 		alert('E-Mail y Password incorrectos.');
@@ -118,8 +118,8 @@ function signUp()
 			//Enviar datos a server
 			var oAccount = new account();
 			oAccount.firstName = $("#txtName").val();
-			oAccount.birthDay = $("#txtNacimiento").val();
-			oAccount.email = $("#txtEmail").val();
+			oAccount.birthDate = $("#txtNacimiento").val();
+			oAccount.email = $("#txtEmailSu").val();
 			oAccount.password = $("#txtPass").val();
 			oAccount.cellPhone = $("#txtCelular").val();
 			
