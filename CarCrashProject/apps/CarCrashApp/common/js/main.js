@@ -98,6 +98,7 @@ function checkUser(){
 	oJS.collectionName = 'perfil';
 	oJS.fnSuccess = function(numCnt){
 		if(numCnt > 0){
+			getGlobalData();
 			location.href = "#perfil";
 		}
 		else{
@@ -109,6 +110,19 @@ function checkUser(){
 		location.href = "#login";
 	};
 	oJS.count();
+}
+
+function getGlobalData(){
+	var oJS = new clsJsonStoreHelper();
+	oJS.collectionName = 'perfil';
+	oJS.id = 1;
+	oJS.fnSuccess = function(result){
+		globalMail = result[0].json.email;
+	};
+	oJS.fnFail = function(error){
+		
+	};
+	oJS.get();
 }
 
 //Pages array to load on index
