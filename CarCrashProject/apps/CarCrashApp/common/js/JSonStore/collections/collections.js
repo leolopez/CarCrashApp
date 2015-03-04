@@ -24,7 +24,7 @@
 	        	city: 'string', enterprise: 'string',birthDate: 'string',email: 'string',password: 'string'}
 	    },
 	    PolicyVehicle : {
-	        searchFields: {mobileId: 'string',PolicyNo: 'string', PolicyDate: 'string', insurance: 'string', Plates: 'string', Serie: 'string'
+	        searchFields: {identifier: 'integer',PolicyNo: 'string', PolicyDate: 'string', insurance: 'string', Plates: 'string', Serie: 'string'
 	        	, VehicleType: 'string', Mark: 'string', SubMark: 'string', Model: 'string', Color: 'string'
 	         		, carPicture: 'string', Holder: 'string', OwnerCellPhone: 'string', PolicyContactName:'string',
 						PolicyContactFirstName:'string', PolicyContactLastName:'string',

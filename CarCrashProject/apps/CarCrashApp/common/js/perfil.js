@@ -267,6 +267,7 @@ initLeftPanelTranslations()
         	jsonStore.fnSuccess=function (arrayResults) {			
         		if(arrayResults.length>0){			
         			profileId=arrayResults[0]._id;
+        			  WL.Logger.debug("Retrieve success" +  JSON.stringify(arrayResults));
         			$("#txtProfileName").val(arrayResults[0].json.firstName);
         			$("#txtFirstName").val(arrayResults[0].json.lastName);	
         			$("#txtLastName").val(arrayResults[0].json.secondLastName);

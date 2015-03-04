@@ -5,12 +5,15 @@
 	var policyLimit=0;
 	var policyExist=false;
 	var markSelected;
+	var $last=null;
+	var dataToDelete=null;
+	var dataToUpdate=null;
 	
 	function vehiclesPolicies()
 	{		
 		this.PolicyNo= "";	
 		this.PolicyDate= "";	
-		this.insurance= "";	
+		this.Insurance= "";	
 		this.Plates= "";	
 		this.Serie= "";	
 		this.VehicleType= "";	
@@ -18,8 +21,9 @@
 		this.SubMark= "";	
 		this.Model= "";	
 		this.Color= "";	
-		this.carPicture= "";	
-		this.Holder= "";	
+		this.PictureURL= "";	
+		this.OwnerName= "";
+		this.Cellphone= "";
 		this.PolicyContactName= "";	
 		this.PolicyContactFirstName= "";	
 		this.PolicyContactLastName= "";					
@@ -151,6 +155,7 @@
 				var item2 = $("#listPolicy").find(listitem);
 			    item2.remove();			    	
 			    ondeletedUpdatePolicy();
+			    getPolicyVehicleToDelete();
 			};
 			jsonStore.fnFail=function(success){
 				alert("No se ha podido eliminar el registro");
@@ -165,7 +170,8 @@
 			$("#searchMark").val(""+$(markData).html());
 			policyNavigation=0;
 		}		
-		$(document).on('pagebeforeshow','#AgregarPoliza',function(e,data){  
+		$(document).on('pagebeforeshow','#AgregarPoliza',function(e,data){
+			getInsurancesFromServer();
 			$('div[id="backPerfilNav"]').hide();
 		initPolicyPage();		
 		next=false;		
@@ -266,7 +272,7 @@
 						},
 						{operator: "equal",key:'PolicyDate',value:policyDate.val().trim()													
 						},
-						{operator: "equal",key:'insurance',value:aseg.val().trim()					
+						{operator: "equal",key:'Insurance',value:aseg.val().trim()					
 						},
 						{operator: "equal",key:'Plates',value:plates.val().trim()					
 						},
@@ -338,25 +344,25 @@
 				
 				var docs="";
 				if(policyupdate){
-					docs={PolicyNo: policy.val().trim(), PolicyDate: policyDate.val().trim(), Insurance: aseg.text().trim(),
+					docs={PolicyNo: policy.val().trim(), PolicyDate: policyDate.val().trim(), Insurance: aseg.val().trim(),
 							Plates: plates.val().trim(),Serie: serie.val().trim(),VehicleType: vehicleType.val().trim(),Mark: markSelected.val().trim(),
 							SubMark: subMark.val().trim(),Model: model.val().trim(),Color: color.val().trim(),carPicture: pic.trim(),
 							Holder: holder.val().trim(), OwnerCellPhone: ownerCellPhone.val().trim(),
 							PolicyContactFirstName:polContactNameGrl.val().trim(),
 							PolicyContactLastName:polContactFirstNameGrl.val().trim(), PolicyContactSecondLastName:polContactLastNameGrl.val().trim(),
-							PolicyContactCellPhone:polContactCellPhoneGrl.val().trim()
+							PolicyContactCellPhone:polContactCellPhoneGrl.val().trim(),InsuranceName:aseg.text().trim()
 				        	};
 				}else{
 					policySaved=false;
 					policyId=0;
-					docs=[{PolicyNo: policy.val().trim(), PolicyDate: policyDate.val().trim(), Insurance: aseg.text().trim(),
+					docs={PolicyNo: policy.val().trim(), PolicyDate: policyDate.val().trim(), Insurance: aseg.val().trim(),
 						Plates: plates.val().trim(),Serie: serie.val().trim(),VehicleType: vehicleType.val().trim(),Mark: markSelected.val().trim(),
 						SubMark: subMark.val().trim(),Model: model.val().trim(),Color: color.val().trim(),carPicture: pic.trim(),
 						Holder: holder.val().trim(), OwnerCellPhone: ownerCellPhone.val().trim(),
 						PolicyContactFirstName:polContactNameGrl.val().trim(),
 						PolicyContactLastName:polContactFirstNameGrl.val().trim(), PolicyContactSecondLastName:polContactLastNameGrl.val().trim(),
-						PolicyContactCellPhone:polContactCellPhoneGrl.val().trim()
-			        	}];
+						PolicyContactCellPhone:polContactCellPhoneGrl.val().trim(), InsuranceName:aseg.text().trim()
+			        	};
 
 				}
 				
@@ -364,7 +370,25 @@
 			jsonStore.collectionName=policyCollectionName;
 			jsonStore.document=docs;				
 			jsonStore.id=parseInt(policyId);
-			jsonStore.fnSuccess=function(success){alert(Messages.msgDataSaved);							
+			jsonStore.fnSuccess=function(success){
+				if(!policyupdate){
+					 getLastPolicyVehicle();					 
+				}else{
+					var param=	{"operation":'replace',
+							 "json" : {
+								 "PolicyNo": policy.val().trim(), "PolicyDate": policyDate.val().trim(), "Insurance": aseg.val().trim(),
+									"Plates": plates.val().trim(), "Serie": serie.val().trim(), "VehicleType": vehicleType.val().trim(), "Mark": markSelected.val().trim(),
+									"SubMark": subMark.val().trim(), "Model": model.val().trim(), "Color": color.val().trim(), "carPicture": pic.trim(),
+									"Holder":holder.val().trim(), "OwnerCellPhone": ownerCellPhone.val().trim(),
+									"PolicyContactFirstName":polContactNameGrl.val().trim(),
+									"PolicyContactLastName":polContactFirstNameGrl.val().trim(), "PolicyContactSecondLastName":polContactLastNameGrl.val().trim(),
+									"PolicyContactCellPhone":polContactCellPhoneGrl.val().trim(), "email": dataToUpdate[0].json.email, "identifier":dataToUpdate[0].json.identifier
+							 }
+							};	
+					updateVehiclePolicy(param);
+				}
+				
+				alert(Messages.msgDataSaved);							
 			policySaved=true;
 			initPolicyVehicleDataInfo();					
 			location.href="#poliza";
@@ -372,6 +396,26 @@
 			jsonStore.fnFail=function(errorObject){alert("Error: "+errorObject.msg);};						
 			jsonStore.save();							
 			}
+		}
+		
+		function saveVehicle(pVehicle)
+		{	
+			var restHelper = new clsRestHelper('vehiclesPolicies','saveVehiclePolicies',pVehicle, saveVehicleSuccess, saveVehicleFailure);
+			restHelper.callRestAdapter();
+		}
+		function saveVehicleSuccess(result){
+			var oResult = result.invocationResult;
+			if(oResult.isSuccessful)
+			{
+				
+				
+			}
+			else{
+				alert('Ocurrio un error, por favor intente de nuevo.');
+			}
+		}
+		function saveVehicleFailure(error){
+			alert('Error al registrar, asegurese de contar con conexion a internet.');
 		}
 		
 		function addPolicyToList(name,insurance,policyDate,id,pic){			
@@ -486,12 +530,14 @@ function initPolicyToList(name,insurance,policyDate,id,pic){
 		}					
 		
 		function initDeletePolicy(){
+			initPolicyVehicleToDelete();
 			$( "#popupShosPolicyDetails" ).popup( "close" );
 			setTimeout(function() { $( "#popupDialogEliminar" ).popup( "open" ).attr('data-transition','pop'); }, 300 );
 		}
 		
 		var updatedPolicy=false;
 		function initPolicyDetails(){
+			dataToDelete=null;
 			cleanPolicyInputs();
 			policyupdate=true;
 			var jsonStore = new clsJsonStoreHelper();
@@ -503,9 +549,9 @@ function initPolicyToList(name,insurance,policyDate,id,pic){
 			jsonStore.fnSuccess=function(data) { 
 						location.href="#AgregarPoliza";			
 				  $(document).on('pagebeforeshow','#AgregarPoliza',function(e,data1){ 
-					  
+					 
 					  if(data!=null&&data.length>0&&policyupdate){ 
-													
+						  dataToUpdate=data;					
 						$("#searchSubMark").val(""+data[0].json.SubMark);
 							$("#txtSeries").val(data[0].json.Serie);
 							$("#txtPlates").val(data[0].json.Plates);
@@ -523,12 +569,19 @@ function initPolicyToList(name,insurance,policyDate,id,pic){
 						 policyDate=	 $("#txtPolicyDate");
 						 policyDate.val(data[0].json.PolicyDate);									 
 						 $( "select" ).selectmenu();
-						  $('#selectInsurance option:contains("'+data[0].json.Insurance+'")').prop('selected', true);						  
-						  $( "select" ).selectmenu( "refresh", true );		
-						  $( "select" ).selectmenu();
+						  //$('#selectInsurance option:contains("'+data[0].json.Insurance+'")').prop('selected', true);
+						  $('#selectInsurance').prop('selectedIndex', parseInt(data[0].json.Insurance.trim()));
+						 
 						  $('#selectMark').prop('selectedIndex', parseInt(data[0].json.Mark));
 						
 						  $( "select" ).selectmenu( "refresh", true );
+						  setTimeout(function(){
+							  $( "select" ).selectmenu();
+							  $('#selectInsurance').prop('selectedIndex', parseInt(data[0].json.Insurance.trim()));														
+							  $( "select" ).selectmenu( "refresh", true );
+							  
+						  },300);
+						  
 						  aseg=  $("#selectInsurance option:selected");	
 						  markSelected= $("#selectMark option:selected");	
 						  initPicture(data[0].json.carPicture);
@@ -695,10 +748,11 @@ function initPolicyToList(name,insurance,policyDate,id,pic){
 					$('#listPolicy').empty();
 					for (index = 0; index < arrayResults.length; ++index) {				   
 						
-						initPolicyToList(arrayResults[index].json.Plates,arrayResults[index].json.Insurance,
+						initPolicyToList(arrayResults[index].json.Plates,arrayResults[index].json.InsuranceName,
 								arrayResults[index].json.PolicyDate, arrayResults[index]._id, arrayResults[index].json.carPicture);
 					}														
-			} 
+			
+				} 
 			};
 			jsonStore.fnFail=function initFail(result){
 				
@@ -706,3 +760,120 @@ function initPolicyToList(name,insurance,policyDate,id,pic){
 			jsonStore.get();
 			}
 		
+		function getLastPolicyVehicle(){  
+		 
+			var jsonStore = new clsJsonStoreHelper();
+			jsonStore.collectionName="PolicyVehicle";
+			jsonStore.document=
+					{
+					};
+			jsonStore.id=0;
+			jsonStore.fnSuccess=function initSuccess(arrayResults){				
+				if(arrayResults.length>0){
+				var	 $last = arrayResults[arrayResults.length - 1];
+			var c=	{"operation":'add',
+					 "json" : $last.json 
+					};				
+					 saveVehicle(c);																						
+				} 
+			};
+			jsonStore.fnFail=function initFail(result){
+				
+			};
+			jsonStore.get();
+			}
+		
+		
+		function deleteVehiclePolicy(pVehicle)
+		{	
+			var restHelper = new clsRestHelper('vehiclesPolicies','saveVehiclePolicies',pVehicle, deleteVehiclePolicySuccess, deleteVehiclePolicyFailure);
+			restHelper.callRestAdapter();
+		}
+		function deleteVehiclePolicySuccess(result){
+			var oResult = result.invocationResult;
+			if(oResult.isSuccessful)
+			{
+				dataToDelete=null;
+				alert("Registro eliminado correctamente");
+				
+			}
+			else{
+				alert('Ocurrio un error, por favor intente de nuevo.');
+			}
+		}
+		function deleteVehiclePolicyFailure(error){
+			alert('Error al eliminar, asegurese de contar con conexion a internet.');
+		}
+		
+		function initPolicyVehicleToDelete(){  
+			 
+						
+			var jsonStore = new clsJsonStoreHelper();
+			jsonStore.collectionName="PolicyVehicle";
+			jsonStore.document=
+					{
+					};
+			jsonStore.id=policyId;
+			jsonStore.fnSuccess=function initSuccess(arrayResults){				
+				if(arrayResults.length>0){
+					dataToDelete = arrayResults;																					
+				} 
+			};
+			jsonStore.fnFail=function initFail(result){
+				
+			};
+			jsonStore.get();
+		}
+		function getPolicyVehicleToDelete(){  			 
+			
+			if(dataToDelete!=null&&dataToDelete.length>0){				
+		var c=	{"operation":'remove',
+				 "json" : dataToDelete[0].json 
+				};				
+		deleteVehiclePolicy(c);																						
+		
+		}
+		}
+		
+		function updateVehiclePolicy(pVehicle)
+		{	
+			var restHelper = new clsRestHelper('vehiclesPolicies','saveVehiclePolicies',pVehicle, updateVehiclePolicySuccess, updateVehiclePolicyFailure);
+			restHelper.callRestAdapter();
+		}
+		function updateVehiclePolicySuccess(result){
+			var oResult = result.invocationResult;
+			if(oResult.isSuccessful)
+			{				
+				dataToUpdate=null;
+			}
+			else{
+				alert('Ocurrio un error, por favor intente de nuevo.');
+			}
+		}
+		function updateVehiclePolicyFailure(error){
+			alert('Error al actualizar, asegurese de contar con conexion a internet.');
+		}		
+		
+		function getInsurancesFromServer()
+		{	
+			$('option', '#selectInsurance').remove();
+			var restHelper = new clsRestHelper('insurance','getInsurances',null, InsurancesSuccess, InsurancesFailure);
+			restHelper.callRestAdapter();
+		}
+		function InsurancesSuccess(result){
+			var oResult = result.invocationResult;
+			if(oResult.isSuccessful)
+			{		$( "select" ).selectmenu();			
+				$('#selectInsurance').append('<option id="opNoneInsurance" value="0" selected="selected">'+Messages.opNoneInsurance+'</option>');
+				for(var c=0;c<oResult.resultSet.length;c++){
+				$('#selectInsurance').append('<option value="'+oResult.resultSet[c].IDInsuranceCompanies+'">'+oResult.resultSet[c].Name+'</option>');
+				}
+				 $( "select" ).selectmenu( "refresh", true );
+			}
+			else{
+				alert('Ocurrio un error, por favor intente de nuevo.');
+			}
+		}
+		function InsurancesFailure(error){
+			alert('Error al actualizar, asegurese de contar con conexion a internet.');
+		}
