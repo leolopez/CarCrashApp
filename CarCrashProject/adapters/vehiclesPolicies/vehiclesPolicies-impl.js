@@ -35,6 +35,7 @@ function getVehiclesPolicies(oData) {
 		parameters : [oData.email]
 	});
 	var oReturn = [];
+	if(result.resultSet!=undefined){ 
 	for(var i = 0; i < result.resultSet.length; i++){
 		var data = {
 				identifier: result.resultSet[i].identifier, 
@@ -63,6 +64,8 @@ function getVehiclesPolicies(oData) {
 		
 		
 		oReturn.push(data);
+	}
+	
 	}
 	return {data: oReturn};
 }

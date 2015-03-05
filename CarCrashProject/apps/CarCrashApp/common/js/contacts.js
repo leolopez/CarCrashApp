@@ -5,6 +5,7 @@ var contactExist=false;
 var dataDetails=null;
 var contactUpdate=false;
 var contactsCount=0;
+var dataToConDelete=null;
 function contact()
 {
 	this.userContactName = "";
@@ -131,6 +132,8 @@ function saveContact(){
 	},300);
 	}
 
+var docs;
+
 function savingContact(){
 	var	userContactName=$("#txtUserContactName");
 	var	userContactFirstName=$("#txtUserContactFirstName");
@@ -138,15 +141,15 @@ function savingContact(){
 	var	userContactCellPhone=$("#txtUserContactCellPhone");
 	if(!contactExist||contactUpdate){
 		
-		var docs="";
+		 docs="";
 		if(contactUpdate){
 			docs={UserContactFirstName:userContactName.val().trim(),		
 					UserContactLastName:userContactFirstName.val().trim(),UserContactSecondLastName:userContactLastName.val().trim(),
 					UserContactCellPhone:userContactCellPhone.val().trim()};
 		}else{
-			docs=[{UserContactFirstName:userContactName.val().trim(),		
+			docs={UserContactFirstName:userContactName.val().trim(),		
 				UserContactLastName:userContactFirstName.val().trim(),UserContactSecondLastName:userContactLastName.val().trim(),
-				UserContactCellPhone:userContactCellPhone.val().trim()}];
+				UserContactCellPhone:userContactCellPhone.val().trim()};
 		}
 		
 	var jsonStore = new clsJsonStoreHelper();
@@ -162,10 +165,27 @@ function savingContact(){
 }
 
 function success(result){
+	
+	var data=	{"operation":'add',
+			 "json" : docs
+			};	
+	
 	if(contactUpdate){
+		
+		var dataUp=	{"operation":'replace',
+				 "json" : {
+					 UserContactFirstName:$("#txtUserContactName").val().trim(),		
+						UserContactLastName:$("#txtUserContactFirstName").val().trim(),UserContactSecondLastName:$("#txtUserContactLastName").val().trim(),
+						UserContactCellPhone:$("#txtUserContactCellPhone").val().trim(),
+						email:dataDetails[0].json.email,identifier:dataDetails[0].json.identifier
+				 }
+				};		
+		
+		updateEmergencyContacts(dataUp);
 		alert(Messages.dataUpdate);
 		contactSaved=false;
-	}else{ 
+	}else{
+		saveEmergencyContacts(data);
 	alert(Messages.msgDataSaved);
 	contactSaved=true;
 	}
@@ -269,18 +289,7 @@ function initContactDetails(){
 	
 	setTimeout(
 			function() { 								
-		  location.href="#contactsContent";	
-		  $(document).on('pagebeforeshow','#contactsContent',function(e,data1){ 
-			 
-			  if(dataDetails!=null&&dataDetails.length>0&&contactUpdate){ 
-				
-				$("#txtUserContactName").val(dataDetails[0].json.UserContactFirstName);
-				$("#txtUserContactFirstName").val(dataDetails[0].json.UserContactLastName);
-				$("#txtUserContactLastName").val(dataDetails[0].json.UserContactSecondLastName);
-			    $("#txtUserContactCellPhone").val(dataDetails[0].json.UserContactCellPhon);	
-			    
-			  }
-		  });
+		
 		  
 			//updatedPolicy=true;
 		}, 300 );						
@@ -289,6 +298,19 @@ function initContactDetails(){
 
 function detailsSuccess(result){
 	dataDetails=result;
+	location.href="#contactsContent";	
+	  $(document).on('pagebeforeshow','#contactsContent',function(e,data1){ 
+		 
+		  if(dataDetails!=null&&dataDetails.length>0&&contactUpdate){ 
+			
+			$("#txtUserContactName").val(dataDetails[0].json.UserContactFirstName);
+			$("#txtUserContactFirstName").val(dataDetails[0].json.UserContactLastName);
+			$("#txtUserContactLastName").val(dataDetails[0].json.UserContactSecondLastName);
+		    $("#txtUserContactCellPhone").val(dataDetails[0].json.UserContactCellPhone);	
+		    
+		  }
+	  });
+	
 	contactUpdate=true;
 }
 
@@ -297,6 +319,15 @@ function detailsFail(errorObject){
 }
 
 function initDelete(){
+	var jsonStore = new clsJsonStoreHelper();
+	jsonStore.collectionName="Contacts";
+	jsonStore.document=
+			{
+			};
+	jsonStore.id=parseInt(contactId);
+	jsonStore.fnSuccess=function(succes){ dataToConDelete=succes; };
+	jsonStore.fnFail=detailsFail;							
+	jsonStore.get();
 	$( "#popupMenuContact" ).popup( "close" );
 	setTimeout(function(){ $( "#popupDialogDelContact" ).popup( "open" ); },300);
 }
@@ -319,6 +350,10 @@ function deleteSuccess(result){
 	var item2 = $("#listContact").find(listitem);
     item2.remove();			    	
     ondeletedUpdateList('listContact');
+    var data=	{"operation":'remove',
+			 "json" : dataToConDelete[0].json
+			};	
+    deleteEmergencyContacts(data);
 }
 
 function deleteFail(errorObject){
@@ -340,4 +375,63 @@ function countSuccess(result){
 
 function countFail(result){
 
+}
+
+function saveEmergencyContacts(pContact)
+{	
+	var restHelper = new clsRestHelper('EmergencyContacts','saveEmergencyContacts',pContact, saveEmergencyContactsSuccess, saveEmergencyContactsFailure);
+	restHelper.callRestAdapter();
+}
+function saveEmergencyContactsSuccess(result){
+	var oResult = result.invocationResult;
+	if(oResult.isSuccessful)
+	{				
+		
+	}
+	else{
+		alert('Ocurrio un error, por favor intente de nuevo.');
+	}
+}
+function saveEmergencyContactsFailure(error){
+	alert('Error al actualizar, asegurese de contar con conexion a internet.');
+}
+
+function deleteEmergencyContacts(pContact)
+{	
+	var restHelper = new clsRestHelper('EmergencyContacts','saveEmergencyContacts',pContact, deleteEmergencyContactsSuccess, deleteEmergencyContactsFailure);
+	restHelper.callRestAdapter();
+}
+function deleteEmergencyContactsSuccess(result){
+	var oResult = result.invocationResult;
+	if(oResult.isSuccessful)
+	{			
+		 dataToConDelete=null;
+		alert("Registro eliminado con exito.");
+	}
+	else{
+		alert('Ocurrio un error, por favor intente de nuevo.');
+	}
+}
+function deleteEmergencyContactsFailure(error){
+	alert('Error al actualizar, asegurese de contar con conexion a internet.');
+}
+
+function updateEmergencyContacts(pContact)
+{	
+	var restHelper = new clsRestHelper('EmergencyContacts','saveEmergencyContacts',pContact, updateEmergencyContactsSuccess, updateEmergencyContactsFailure);
+	restHelper.callRestAdapter();
+}
+function updateEmergencyContactsSuccess(result){
+	var oResult = result.invocationResult;
+	if(oResult.isSuccessful)
+	{			
+		dataDetails=null;
+		
+	}
+	else{
+		alert('Ocurrio un error, por favor intente de nuevo.');
+	}
+}
+function updateEmergencyContactsFailure(error){
+	alert('Error al actualizar, asegurese de contar con conexion a internet.');
 }

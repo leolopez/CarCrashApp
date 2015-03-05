@@ -5,7 +5,7 @@
 			searchFields: {email:"string", password:"string"}
 		},
 		Contacts:{
-			searchFields:{UserContactName:'string',		
+			searchFields:{identifier:"integer", UserContactName:'string',		
 				UserContactFirstName:'string',UserContactLastName:'string',
 				UserContactCellPhon:'string' }
 		},
