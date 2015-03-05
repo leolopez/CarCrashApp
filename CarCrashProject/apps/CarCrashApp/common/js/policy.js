@@ -73,7 +73,8 @@
 			$("#policyCont").hide();
 			$("#vehicleCont").show();
 			policyNavigation=0;
-			next=true;
+			next=true;			
+			
 			}else{				
 				alert(Messages.requiredData);
 			} 
@@ -171,6 +172,7 @@
 			policyNavigation=0;
 		}		
 		$(document).on('pagebeforeshow','#AgregarPoliza',function(e,data){
+			getBrandsFromServer();
 			getInsurancesFromServer();
 			$('div[id="backPerfilNav"]').hide();
 		initPolicyPage();		
@@ -567,20 +569,7 @@ function initPolicyToList(name,insurance,policyDate,id,pic){
 						 policy=	 $("#txtPolicyNo");
 						 policy.val(data[0].json.PolicyNo);
 						 policyDate=	 $("#txtPolicyDate");
-						 policyDate.val(data[0].json.PolicyDate);									 
-						 $( "select" ).selectmenu();
-						  //$('#selectInsurance option:contains("'+data[0].json.Insurance+'")').prop('selected', true);
-						  $('#selectInsurance').prop('selectedIndex', parseInt(data[0].json.Insurance.trim()));
-						 
-						  $('#selectMark').prop('selectedIndex', parseInt(data[0].json.Mark));
-						
-						  $( "select" ).selectmenu( "refresh", true );
-						  setTimeout(function(){
-							  $( "select" ).selectmenu();
-							  $('#selectInsurance').prop('selectedIndex', parseInt(data[0].json.Insurance.trim()));														
-							  $( "select" ).selectmenu( "refresh", true );
-							  
-						  },300);
+						 policyDate.val(data[0].json.PolicyDate);									 						 					  
 						  
 						  aseg=  $("#selectInsurance option:selected");	
 						  markSelected= $("#selectMark option:selected");	
@@ -869,11 +858,46 @@ function initPolicyToList(name,insurance,policyDate,id,pic){
 				$('#selectInsurance').append('<option value="'+oResult.resultSet[c].IDInsuranceCompanies+'">'+oResult.resultSet[c].Name+'</option>');
 				}
 				 $( "select" ).selectmenu( "refresh", true );
+				 if(policyupdate){
+					 $( "select" ).selectmenu();
+					  $('#selectInsurance').prop('selectedIndex', parseInt(dataToUpdate[0].json.Insurance));	
+					  $( "select" ).selectmenu( "refresh", true );
+				 }
 			}
 			else{
 				alert('Ocurrio un error, por favor intente de nuevo.');
 			}
 		}
 		function InsurancesFailure(error){
-			alert('Error al actualizar, asegurese de contar con conexion a internet.');
+			alert('Error al obtener Aseguradoras, asegurese de contar con conexion a internet.');
+		}
+		
+		function getBrandsFromServer()
+		{	
+			$('option', '#selectMark').remove();
+			var restHelper = new clsRestHelper('brands','getVehicleBrands',null, brandsSuccess, brandsFailure);
+			restHelper.callRestAdapter();
+		}
+		function brandsSuccess(result){
+			var oResult = result.invocationResult;
+			if(oResult.isSuccessful)
+			{		$( "select" ).selectmenu();			
+				$('#selectMark').append('<option  id="opNoneMark" value="0" selected="selected">'+Messages.opNoneMark+'</option>');
+				for(var c=0;c<oResult.resultSet.length;c++){
+				$('#selectMark').append('<option value="'+oResult.resultSet[c].IDVehicleBrands+'">'+oResult.resultSet[c].Name+'</option>');
+				}
+				$( "select" ).selectmenu( "refresh", true );
+				
+				if(policyupdate){
+				 $( "select" ).selectmenu();							
+				  $('#selectMark option[value='+dataToUpdate[0].json.Mark+']').prop('selected',true);
+				  $( "select" ).selectmenu( "refresh", true );
+				}
+			}
+			else{
+				alert('Ocurrio un error, por favor intente de nuevo.');
+			}
+		}
+		function brandsFailure(error){
+			alert('Error al obtener marcas de Autos, asegurese de contar con conexion a internet.');
 		}
