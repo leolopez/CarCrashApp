@@ -1,6 +1,7 @@
 var addStatement = WL.Server.createSQLStatement("insert into Accounts (FirstName, BirthDate, Email, CellPhone, Password) values (?, ?, ?, ?, ?)");
 var selectStatement = WL.Server.createSQLStatement("select FirstName AS 'firstName', LastName As 'lastName', SecondLastName As 'secondLastName', BirthDate As 'birthDate', Country AS 'country', State AS 'state', City AS 'city', Email AS 'email', CellPhone AS 'cellPhone', Password AS 'password' FROM Accounts WHERE Email = ? AND Password = ?");
 
+var updateStatement = WL.Server.createSQLStatement(" update Accounts set FirstName=?,LastName=?,SecondLastName=?,Country=?,State=?,City=?,CellPhone=?,StreetNumber=?,StreetName=?,ZipCode=?,Company=? where Email=? ");
 /************************************************************************
  * Implementation code for procedure - 'procedure1'
  *
@@ -27,3 +28,13 @@ function saveAccount(account) {
 	});
 }
 
+
+function updateAccount(perfil){
+	
+	return WL.Server.invokeSQLStatement({
+		preparedStatement : updateStatement,
+		parameters : [perfil.firstName, perfil.lastName, perfil.secondLastName, 
+		              perfil.Country,perfil.State, perfil.city, perfil.cellPhone,perfil.streetNumber,perfil.street,perfil.postalCode,perfil.enterprise, 
+		              perfil.email ]
+	});
+}

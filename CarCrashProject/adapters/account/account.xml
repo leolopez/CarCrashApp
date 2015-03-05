@@ -30,5 +30,6 @@
 	<!-- Replace this with appropriate procedures -->
 	<procedure name="accessAccount"/>
 	<procedure name="saveAccount"/>
+	<procedure name="updateAccount"/>	
 
 </wl:adapter>

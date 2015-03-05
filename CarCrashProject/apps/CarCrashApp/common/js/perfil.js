@@ -10,6 +10,8 @@ function profile(){
 	 this.pass="";	
 }
 
+var updateProfile=null;
+
 $(
 initLeftPanelTranslations()
 
@@ -247,7 +249,10 @@ initLeftPanelTranslations()
 		        	postalCode:$('input[sel="pPostalCode"]').val().trim(),Country:$('input[sel="pCountry"]').val().trim()
 				 };
 			jsonStore.id=getProfileId();
-			jsonStore.fnSuccess=function (succes) {			
+			jsonStore.fnSuccess=function (succes) {
+				jsonStore.document["email"]=updateProfile[0].json.email;
+				
+				updateAccount(jsonStore.document);
 				alert(Messages.msgDataSaved);
 			};
 			jsonStore.fnFail=function (errorObject) {			
@@ -265,7 +270,8 @@ initLeftPanelTranslations()
         			};
         	jsonStore.id=0;
         	jsonStore.fnSuccess=function (arrayResults) {			
-        		if(arrayResults.length>0){			
+        		if(arrayResults.length>0){
+        			updateProfile=arrayResults;
         			profileId=arrayResults[0]._id;
         			  WL.Logger.debug("Retrieve success" +  JSON.stringify(arrayResults));
         			$("#txtProfileName").val(arrayResults[0].json.firstName);
@@ -290,4 +296,25 @@ initLeftPanelTranslations()
         	
         function getProfileId(){
         	return profileId;
+        }
+        
+        
+        function updateAccount(perfil)
+        {	
+        	var restHelper = new clsRestHelper('account','updateAccount',perfil, updateperfilSuccess, updateperfilFailure);
+        	restHelper.callRestAdapter();
+        }
+        function updateperfilSuccess(result){
+        	var oResult = result.invocationResult;
+        	if(oResult.isSuccessful)
+        	{			
+        		
+        		
+        	}
+        	else{
+        		alert('Ocurrio un error, por favor intente de nuevo.');
+        	}
+        }
+        function updateperfilFailure(error){
+        	alert('Error al actualizar en el servidor, asegurese de contar con conexion a internet.');
         }
