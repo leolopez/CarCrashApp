@@ -129,14 +129,17 @@ function getGlobalData(){
 function getServerData(){
 	var oJS = new clsJsonStoreHelper();
 	oJS.fnSuccess = function(ret){
-		
+		oJS.collectionName = "reports";
+		oJS.fnSuccess = function(){};
+		oJS.fnFail = function(){};
+		oJS.getFromServer("sinisters", "getSinisters");
 	};
 	oJS.fnFail = function(error){
 		
 	};
+	oJS.collectionName = "PolicyVehicle";
+	oJS.getFromServer("vehiclesPolicies", "getVehiclesPolicies");
 	
-	oJS.collectionName = "reports";
-	oJS.getFromServer("sinisters", "getSinisters");
 }
 
 //Pages array to load on index
