@@ -191,12 +191,13 @@ function _getFromServer(pAdapter, pProcedure){
 	var invocationData = {
 	  adapter : pAdapter, 
 	  procedure : pProcedure, 
-	  parameters : [],
+	  parameters : [{email:globalMail}],
 	  compressResponse: true
 	};
 	WL.Client.invokeProcedure(invocationData)
 	.then(function(response){
 		var data = response.invocationResult.resultSet;
+		data = typeof data !== 'undefined' ? data : response.invocationResult.data;
 		var changeOptions = { 
 			    // default will use all search fields
 			    // and are part of the data that is received.

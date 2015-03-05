@@ -1,12 +1,14 @@
 var sPageNav = "";
+var oCurrentSinister = new clsSinister();
 function clsSinister(){
 	this.data = {
 		idPolicy: 0,
 		date: (new Date().getDate()) + '-' + (new Date().getMonth()) + '-' + (new Date().getFullYear()),
 		time: (new Date().getHours()) + ':' + (new Date().getMinutes()) + ':' + (new Date().getSeconds()),
 		type: "",
-		activo: true,
-		location: new clsLocation()
+		status: 0,
+		location: new clsLocation(),
+		extras: new clsReportExtras()
 	};
 	
 	this.save = _saveSinister;
@@ -18,50 +20,29 @@ function clsSinister(){
 }
 
 function clsLocation(){
-	this.idReport = 0;
 	this.lat = "";
 	this.lng = "";
 }
 
 function clsReportExtras(){
-	this.data = {
-		idReport: 0,
-		pictures: [],
-		medicalAssistance: false,
-		legalAssistance: false,
-		comments: ""
-	};
-	
-	this.saveExtras = _saveExtras;
-	this.fnSuccess = function(){};
-	this.fnFail = function(){};
+		this.pictures = [];
+		this.medicalAssistance = false;
+		this.legalAssistance = false;
+		this.comments = "";
 }
 
 function _saveSinister(){
 	var fnSuccess = this.fnSuccess;
 	var fnFail = this.fnFail;
 	var doc = this.data;
-	var rest = new clsRestHelper("sinisters", "saveSinister", {}, 
-			//OnSuccess
-			function(result){
-				if(result.invocationResult.isSuccessful){
-					var oJS = new clsJsonStoreHelper();
-					oJS.collectionName = "reports";
-					oJS.document = doc;
-					oJS.id = 0;
-					oJS.fnSuccess = fnSuccess;
-					oJS.fnFail = fnFail;
-					oJS.save();
-				}
-				else{
-					alert('Error al reportar el siniestro');
-				}
-			}, 
-			//OnFailure
-			function(error){
-				alert('Error, asegurese de contar con una conexion a internet.');
-			});
-	rest.callRestAdapter();
+
+	var oJS = new clsJsonStoreHelper();
+	oJS.collectionName = "reports";
+	oJS.document = doc;
+	oJS.id = 0;
+	oJS.fnSuccess = fnSuccess;
+	oJS.fnFail = fnFail;
+	oJS.save();
 }
 
 function sendIncidenteInfo()
@@ -70,35 +51,41 @@ function sendIncidenteInfo()
 	{
 		if($('#selectAuto').val() != 0)
 		{
-			var oJS = new clsJsonStoreHelper();
-			oJS.collectionName = "reports";
-			
-			oJS.fnSuccess = function(numReg){
-				var newId = numReg + 1;
-				$('#hidIdReport').val(newId);
-				
-				var oSin = new clsSinister();
-				oSin.data.idPolicy = parseInt($('#selectAuto').val());
-				if(sPageNav == "#reportSinisterDet"){
-					oSin.data.type = "sinister";
-				}else{
-					oSin.data.type = "theft";
-				}
-				oSin.data.activo = true;
-				oSin.fnSuccess = function(){
-					alert('Reporte generado.');
-					location.href = sPageNav;
+			oCurrentSinister.data.idPolicy = parseInt($('#selectAuto').val());
+			oCurrentSinister.data.status = 0;
+			oCurrentSinister.data.location.lat = currentLat;
+			oCurrentSinister.data.location.lng = currentLng;
+			if(sPageNav == "#reportSinisterDet"){
+				oCurrentSinister.data.type = "sinister";
+			}else{
+				oCurrentSinister.data.type = "theft";
+				oCurrentSinister.fnSuccess = function(numadd){
+					//save local success
+					var oJS = new clsJsonStoreHelper();
+					oJS.collectionName = 'reports';
+					oJS.fnSuccess = function(response){
+						//save server success
+						oJS.fnSuccess = function(response){
+							//get server success
+						};
+						oJS.fnFail = function(error){
+							alert('Error al actualizar status de reportes.');
+						};
+						oJS.getFromServer("sinisters", "getSinisters");
+						alert('Reportado exitosamente');
+						return true;
+					};
+					oJS.fnFail = function(error){
+						alert('No se pudo conectar al servidor, reintente.');
+					};
+					oJS.saveToServer("sinisters", "saveSinisters");
 				};
-				oSin.fnFail = function(error){
-					alert('Error de almacenamiento.');
+				oCurrentSinister.fnFail = function(error){
+					alert('Error al generar el reporte, intentelo de nuevo.');
 				};
-				oSin.data.location.idReport = newId;
-				oSin.data.location.lat = currentLat;
-				oSin.data.location.lng = currentLng;
-				oSin.save();
-			};
-			oJS.fnFail = function(){};
-			oJS.count();
+				oCurrentSinister.save();
+			}
+			location.href = sPageNav;
 		}
 		else
 		{
@@ -111,32 +98,6 @@ function sendIncidenteInfo()
 		alert(Messages.alertLocation);
 		parent.history.back();
 	}
-}
-
-function _saveExtras(){
-	var fnSuccess = this.fnSuccess;
-	var fnFail = this.fnFail;
-	var doc = this.data;
-	var rest = new clsRestHelper("sinisters", "saveExtraSinister", {}, 
-			//OnSuccess
-			function (result){
-				if(result.invocationResult.isSuccessful){
-					var oJS = new clsJsonStoreHelper();
-					oJS.collectionName = "reportExtras";
-					oJS.document = doc;
-					oJS.id = 0;
-					oJS.fnSuccess = fnSuccess;
-					oJS.fnFail = fnFail;
-					oJS.save();
-				}else{
-					alert('Error al reportar datos extra del siniestro');
-				}
-			}, 
-			//OnFailure
-			function(error){
-				alert('Error, asegurese de contar con una conexion a internet.');
-			});
-	rest.callRestAdapter();
 }
 
 function takePicture()
@@ -161,25 +122,42 @@ function enviarExtras()
 	var legal = $('#flipLegal').val();
 	var observaciones = $('#txtObservaciones').val();
 	
-	var oEx = new clsReportExtras();
-	oEx.data.idReport = $('#hidIdReport').val();
-	oEx.data.medicalAssistance = ambulancia == 'on' ? true : false;
-	oEx.data.legalAssistance = legal == 'on' ? true : false;
-	oEx.data.comments = observaciones;
+	oCurrentSinister.data.extras.medicalAssistance = ambulancia == 'on' ? true : false;
+	oCurrentSinister.data.extras.legalAssistance = legal == 'on' ? true : false;
+	oCurrentSinister.data.extras.comments = observaciones;
 	
 	$('img[ident="pics"]').each(function(idx,item){
 		var imgSrc = $(item).attr("src");
-		oEx.data.pictures.push({url:imgSrc});
+		oCurrentSinister.data.extras.pictures.push({url:imgSrc});
 	});
 	
-	oEx.fnSuccess = function(){
+	oCurrentSinister.fnSuccess = function(){
+		var oJS = new clsJsonStoreHelper();
+		oJS.collectionName = 'reports';
+		oJS.fnSuccess = function(response){
+			//save server success
+			oJS.fnSuccess = function(response){
+				//get server success
+			};
+			oJS.fnFail = function(error){
+				alert('Error al actualizar status de reportes.');
+			};
+			oJS.getFromServer("sinisters", "getSinisters");
+			alert('Reportado exitosamente.');
+			return true;
+		};
+		oJS.fnFail = function(error){
+			alert('No se pudo conectar al servidor, reintente.');
+		};
+		oJS.saveToServer("sinisters", "saveSinisters");
+		
 		alert('Detalles enviados con exito.');
 		location.href="#sinisterList";
 	};
-	oEx.fnFail = function(){
-		alert('Error al enviar detalle de siniestro.');
+	oCurrentSinister.fnFail = function(){
+		alert('Error al generar el reporte, intentelo de nuevo.');
 	};
-	oEx.saveExtras();
+	oCurrentSinister.save();
 }
 
 function reportar(page)
@@ -305,10 +283,22 @@ function showDetails(pType, pReportId, pAutoId){
 	oJS.fnSuccess = function(report){
 		$("#hidConsLat").val(report[0].json.location.lat);
 		$("#hidConsLng").val(report[0].json.location.lng);
+		switch(pType){
+		case "sinister":
+			$("#divConsExtras").show();
+			$("#hidConsLegalAsis").val(report[0].json.extras.legalAssistance ? "Si" : "No");
+			$("#hidConsMedAsis").val(report[0].json.extras.medicalAssistance ? "Si" : "No");
+			$("#hidConsComentarios").val(report[0].json.extras.comments);
+			break;
+		case "theft":
+			$("#divConsExtras").hide();
+			break;
+		}
 		location.href = "#consultSinister";
 	};
 	oJS.fnFail = function(error){
-		
+		alert('Error al obtener los datos del siniestro.');
+		parent.history.back();
 	};
 	oJS.get();
 	
@@ -328,34 +318,14 @@ function showDetails(pType, pReportId, pAutoId){
 	};
 	oJS.fnFail = function(error){
 		alert('Error al obtener los datos del vehiculo.');
+		parent.history.back();
 	};
 	oJS.get();
-	
-	switch(pType){
-	case "sinister":
-		$("#divConsExtras").show();
-		oJS.collectionName = "reportExtras";
-		oJS.id = 0;
-		oJS.document = [{key:"idReport", operator:"equal", value:pReportId.toString()}];
-		oJS.fnSuccess = function(extras){
-			$("#hidConsLegalAsis").val(extras[0].json.legalAssistance ? "Si" : "No");
-			$("#hidConsMedAsis").val(extras[0].json.medicalAssistance ? "Si" : "No");
-			$("#hidConsComentarios").val(extras[0].json.comments);
-		};
-		oJS.fnFail = function(error){
-			alert('Error al obtener los datos extras.');
-		};
-		oJS.get();
-		break;
-	case "theft":
-		$("#divConsExtras").hide();
-		break;
-	}
 }
 
 $(document).on("pageshow", "#sinisterList", function(event){loadSinisterList();});
 $(document).on("pageshow", "#theftsList", function(event){loadTheftList();});
-$(document).on("pageshow", "#sinisterReport", function(event){loadVehiclesList();});
+$(document).on("pageshow", "#sinisterReport", function(event){loadVehiclesList(); oCurrentSinister = new clsSinister();});
 $(document).on("pageshow", "#consultSinister", function(event){loadSinisterData();});
 
 $(document).on('pagebeforeshow','#sinisterReport',function(e,data){    

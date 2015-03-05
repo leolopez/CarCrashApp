@@ -11,14 +11,14 @@
 		},
 		reports:{
 			searchFields:{
-				idPolicy:'string', date:'string', status:'boolean', type:'string'
+				identifier:'integer', email:'string', idPolicy:'string', date:'string', status:'boolean', type:'string'
 			}
 		},
-		reportExtras:{
+		/*reportExtras:{
 			searchFields:{
 				idReport:"integer"
 			}
-		},
+		},*/
 		profile : {
 	        searchFields: {mobileId: 'string', name: 'string', firstname: 'string', lastname: 'string', cellPhone: 'string',
 	        	city: 'string', enterprise: 'string',birthDate: 'string',email: 'string',password: 'string'}
