@@ -172,6 +172,7 @@
 			policyNavigation=0;
 		}		
 		$(document).on('pagebeforeshow','#AgregarPoliza',function(e,data){
+			
 			getBrandsFromServer();
 			getInsurancesFromServer();
 			$('div[id="backPerfilNav"]').hide();
@@ -900,4 +901,14 @@ function initPolicyToList(name,insurance,policyDate,id,pic){
 		}
 		function brandsFailure(error){
 			alert('Error al obtener marcas de Autos, asegurese de contar con conexion a internet.');
+		}
+		
+		function checkNetwork(){
+			WL.Device.getNetworkInfo(function (networkInfo) {
+		        alert (networkInfo.isNetworkConnected);
+		        if (networkInfo.isNetworkConnected) { // if true, then
+		            // connect to the Worklight Server or do something else...
+		        }
+		    });
+			
 		}
