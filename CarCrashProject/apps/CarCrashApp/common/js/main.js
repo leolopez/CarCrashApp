@@ -118,11 +118,25 @@ function getGlobalData(){
 	oJS.id = 1;
 	oJS.fnSuccess = function(result){
 		globalMail = result[0].json.email;
+		getServerData();
 	};
 	oJS.fnFail = function(error){
 		
 	};
 	oJS.get();
+}
+
+function getServerData(){
+	var oJS = new clsJsonStoreHelper();
+	oJS.fnSuccess = function(ret){
+		
+	};
+	oJS.fnFail = function(error){
+		
+	};
+	
+	oJS.collectionName = "reports";
+	oJS.getFromServer("sinisters", "getSinisters");
 }
 
 //Pages array to load on index

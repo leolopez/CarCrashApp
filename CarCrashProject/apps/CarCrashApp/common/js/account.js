@@ -54,6 +54,7 @@ function accessSuccess(result){
 		oJS.fnSuccess = function(numAdd){
 			if(numAdd > 0){
 				//redireccionar a perfil
+				getGlobalData();
 				location.href = "#perfil";
 			}
 			else{
