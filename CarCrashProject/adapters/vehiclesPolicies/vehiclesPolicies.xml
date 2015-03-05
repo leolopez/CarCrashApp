@@ -29,7 +29,7 @@
 
 	<!-- Replace this with appropriate procedures -->
 	
-	<procedure name="getSqlAdapters"/>
+	<procedure name="getVehiclesPolicies"/>
 	<procedure name="saveVehiclePolicies"/>
 
 </wl:adapter>

@@ -1,5 +1,15 @@
 
-var selectStatement = WL.Server.createSQLStatement("select * from Vehicle");
+var selectStatement = WL.Server.createSQLStatement("select v.Identifier as identifier,v.Email as email,v.Plates, v.Serie, v.IDVehicleBrand as Mark, "+
+" V.Model AS SubMark, v.Year as Model, v.Color, v.PictureURL as carPicture,"+
+" v.OwnerName, v.Cellphone as OwnerCellPhone, ipo.PolicyNumber as PolicyNo, ipo.ExpirationDate as PolicyDate,"+
+" ipo.IDInsuranceCompany as Insurance,  iag.FirstName as PolicyContactFirstName,"+
+" iag.LastName as PolicyContactLastName, iag.SecondLastName as PolicyContactSecondLastName,"+
+" iag.CellPhone as PolicyContactCellPhone, ico.Name as InsuranceName   from vehicle v"+
+" inner join InsurancePolicies ipo on v.email=ipo.email"+
+" inner join InsuranceAgents  iag on iag.Email=ipo.Email"+
+" inner join InsuranceCompanies ico on ico.IDInsuranceCompanies=ipo.IDInsuranceCompany"+
+" where v.Email=?");
+
 var addStatement = WL.Server.createSQLStatement(" insert into InsuranceAgents(Identifier,Email,FirstName,LastName,SecondLastName,CellPhone) values(?,?,?,?,?,?)" +
 		" insert into InsurancePolicies(Email,PolicyNumber,ExpirationDate,IDInsuranceCompany,Identifier) values(?,?,?,?,?)" +
 		" insert into Vehicle (Plates,Serie,VehicleType,IDVehicleBrand,Model,Year,Color,PictureURL,OwnerName,Cellphone, Email, Identifier) values ( ?, ?, ?, ?, ?, ?, ?,?,?,?,?,?)"
@@ -19,11 +29,42 @@ var deleteStatement = WL.Server.createSQLStatement("delete InsuranceAgents where
 	 * @return - invocationResult
 	 */
 
-function getSqlAdapters() {
-	return WL.Server.invokeSQLStatement({
+function getVehiclesPolicies(oData) {
+	var result = WL.Server.invokeSQLStatement({
 		preparedStatement : selectStatement,
-		parameters : []
+		parameters : [oData.email]
 	});
+	var oReturn = [];
+	for(var i = 0; i < result.resultSet.length; i++){
+		var data = {
+				identifier: result.resultSet[i].identifier, 
+				email: result.resultSet[i].email, 
+					PolicyNo: result.resultSet[i].PolicyNo, 
+					PolicyDate:result.resultSet[i].PolicyDate, 
+					Insurance: result.resultSet[i].Insurance,
+					Plates: result.resultSet[i].Plates,
+					Serie: result.resultSet[i].Serie,
+					VehicleType: result.resultSet[i].VehicleType,
+					Mark: result.resultSet[i].Mark,
+					SubMark:result.resultSet[i].SubMark,
+					Model: result.resultSet[i].Model,
+					Color: result.resultSet[i].Color,
+					carPicture: result.resultSet[i].carPicture,
+					Holder: result.resultSet[i].Holder,
+					OwnerCellPhone: result.resultSet[i].OwnerCellPhone,
+					PolicyContactFirstName:result.resultSet[i].PolicyContactFirstName,
+					PolicyContactLastName:result.resultSet[i].PolicyContactLastName, 
+					PolicyContactSecondLastName:result.resultSet[i].PolicyContactSecondLastName,
+					PolicyContactCellPhone:result.resultSet[i].PolicyContactCellPhone,
+					InsuranceName:result.resultSet[i].InsuranceName
+					
+					
+				};
+		
+		
+		oReturn.push(data);
+	}
+	return {data: oReturn};
 }
 
 function saveVehiclePolicies(param1) {
