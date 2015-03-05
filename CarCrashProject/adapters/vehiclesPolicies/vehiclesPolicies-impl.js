@@ -1,7 +1,7 @@
 
 var selectStatement = WL.Server.createSQLStatement("select v.Identifier as identifier,v.Email as email,v.Plates, v.Serie, v.IDVehicleBrand as Mark, "+
-" V.Model AS SubMark, v.Year as Model, v.Color, v.PictureURL as carPicture,"+
-" v.OwnerName, v.Cellphone as OwnerCellPhone, ipo.PolicyNumber as PolicyNo, ipo.ExpirationDate as PolicyDate,"+
+" V.Model AS SubMark, v.Year as Model, v.Color, v.VehicleType, v.PictureURL as carPicture,"+
+" v.ownerName as Holder, v.Cellphone as OwnerCellPhone, ipo.PolicyNumber as PolicyNo, LEFT(CONVERT(varchar, ipo.ExpirationDate, 120) ,10)  as PolicyDate,"+
 " ipo.IDInsuranceCompany as Insurance,  iag.FirstName as PolicyContactFirstName,"+
 " iag.LastName as PolicyContactLastName, iag.SecondLastName as PolicyContactSecondLastName,"+
 " iag.CellPhone as PolicyContactCellPhone, ico.Name as InsuranceName   from vehicle v"+
