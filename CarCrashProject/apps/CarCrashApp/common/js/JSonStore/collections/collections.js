@@ -1,11 +1,10 @@
-;(function () {
-
-	WL.JSONStore.init({
+function getCollections(){
+	return {
 		perfil : {
-			searchFields: {email:"string", password:"string"}
+			searchFields: {identifier:"integer", email:"string", password:"string"}
 		},
 		Contacts:{
-			searchFields:{identifier:"integer", UserContactName:'string',		
+			searchFields:{UserContactName:'string',		
 				UserContactFirstName:'string',UserContactLastName:'string',
 				UserContactCellPhon:'string' }
 		},
@@ -39,7 +38,12 @@
 	         searchFields: {identifier: 'integer', MechanicName: 'string',  MechanicFirstName: 'string', MechanicLastName: 'string', MechanicCellPhone: 'string',
 	         	MechanicAddress: 'string'}
 	     }
-	}, {
+	};
+}
+
+;(function () {
+
+	WL.JSONStore.init(getCollections(), {
 		// password : 'PleaseChangeThisPassword'
 	})
 

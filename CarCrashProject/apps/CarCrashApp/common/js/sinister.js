@@ -67,6 +67,7 @@ function sendIncidenteInfo()
 						//save server success
 						oJS.fnSuccess = function(response){
 							//get server success
+							loadTheftList();
 						};
 						oJS.fnFail = function(error){
 							alert('Error al actualizar status de reportes.');
@@ -138,6 +139,7 @@ function enviarExtras()
 			//save server success
 			oJS.fnSuccess = function(response){
 				//get server success
+				loadSinisterList();
 			};
 			oJS.fnFail = function(error){
 				alert('Error al actualizar status de reportes.');
@@ -151,7 +153,6 @@ function enviarExtras()
 		};
 		oJS.saveToServer("sinisters", "saveSinisters");
 		
-		alert('Detalles enviados con exito.');
 		location.href="#sinisterList";
 	};
 	oCurrentSinister.fnFail = function(){

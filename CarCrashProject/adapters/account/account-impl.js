@@ -1,5 +1,12 @@
 var addStatement = WL.Server.createSQLStatement("insert into Accounts (FirstName, BirthDate, Email, CellPhone, Password) values (?, ?, ?, ?, ?)");
-var selectStatement = WL.Server.createSQLStatement("select FirstName AS 'firstName', LastName As 'lastName', SecondLastName As 'secondLastName', BirthDate As 'birthDate', Country AS 'country', State AS 'state', City AS 'city', Email AS 'email', CellPhone AS 'cellPhone', Password AS 'password' FROM Accounts WHERE Email = ? AND Password = ?");
+var selectStatement = WL.Server.createSQLStatement(
+		"select FirstName AS 'firstName', LastName As 'lastName', SecondLastName As 'secondLastName', " +
+		"BirthDate As 'birthDate', Country, State, City AS 'city', " +
+		"Email AS 'email', CellPhone AS 'cellPhone', Password AS 'password', StreetNumber AS 'streetNumber', " +
+		"StreetName AS 'street', ZipCode AS 'postalCode', Company AS 'enterprise' " +
+		"FROM Accounts " +
+		"WHERE Email = ? AND Password = ?"
+		);
 
 var updateStatement = WL.Server.createSQLStatement(" update Accounts set FirstName=?,LastName=?,SecondLastName=?,Country=?,State=?,City=?,CellPhone=?,StreetNumber=?,StreetName=?,ZipCode=?,Company=? where Email=? ");
 /************************************************************************
