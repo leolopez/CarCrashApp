@@ -4,7 +4,7 @@ function getCollections(){
 			searchFields: {identifier:"integer", email:"string", password:"string"}
 		},
 		Contacts:{
-			searchFields:{UserContactName:'string',		
+			searchFields:{identifier: 'integer', UserContactName:'string',		
 				UserContactFirstName:'string',UserContactLastName:'string',
 				UserContactCellPhon:'string' }
 		},
@@ -18,10 +18,7 @@ function getCollections(){
 				idReport:"integer"
 			}
 		},*/
-		profile : {
-	        searchFields: {mobileId: 'string', name: 'string', firstname: 'string', lastname: 'string', cellPhone: 'string',
-	        	city: 'string', enterprise: 'string',birthDate: 'string',email: 'string',password: 'string'}
-	    },
+		
 	    PolicyVehicle : {
 	        searchFields: {identifier: 'integer',PolicyNo: 'string', PolicyDate: 'string', insurance: 'string', Plates: 'string', Serie: 'string'
 	        	, VehicleType: 'string', Mark: 'string', SubMark: 'string', Model: 'string', Color: 'string'
