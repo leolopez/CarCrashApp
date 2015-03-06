@@ -32,11 +32,11 @@
 	         	}
 	     },
 	     MedicalData : {
-	         searchFields: {IMSS: 'string', bloodType: 'string', alergics: 'string', clinicalConditions: 'string'
+	         searchFields: {identifier: 'integer', IMSS: 'string', bloodType: 'string', alergics: 'string', clinicalConditions: 'string'
 	         	}
 	     },
 	     MechanicData : {
-	         searchFields: { MechanicName: 'string',  MechanicFirstName: 'string', MechanicLastName: 'string', MechanicCellPhone: 'string',
+	         searchFields: {identifier: 'integer', MechanicName: 'string',  MechanicFirstName: 'string', MechanicLastName: 'string', MechanicCellPhone: 'string',
 	         	MechanicAddress: 'string'}
 	     }
 	}, {
