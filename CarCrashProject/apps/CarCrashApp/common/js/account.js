@@ -134,3 +134,9 @@ function signUp()
 		$("#txtPassConfirm").val("");
 	}
 }
+function logOut(){
+	if(confirm('Are you sure?')){
+		WL.JSONStore.destroy();
+		location.href = "#login";
+	}
+}
