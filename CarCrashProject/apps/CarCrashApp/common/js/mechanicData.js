@@ -1,4 +1,12 @@
-		var vMechanicName;
+function mechanicData(){
+	this.MechanicFirstName="";
+	this.MechanicLastName="";
+	this.MechanicSecondLastName="";
+	this.MechanicCellPhone="";
+	this.MechanicAddress="";	
+}		
+
+var vMechanicName;
 			var vMechanicFirstName;
 			var vMechanicLastName;
 			var vMechanicCellPhone;		
@@ -55,7 +63,7 @@
 					jsonStore.id=success;
 					jsonStore.fnSuccess=function (arrayResults) {			
 						if(arrayResults.length>0){	
-							alert(JSON.stringify(arrayResults[0]));
+							
 							saveMechanic(arrayResults[0].json);	
 						}
 						

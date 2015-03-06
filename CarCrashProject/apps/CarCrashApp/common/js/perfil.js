@@ -7,7 +7,11 @@ function profile(){
 	 this.enterprise="";
 	 this.birthDate="";
 	 this.email="";
-	 this.pass="";	
+	 this.streetNumber="";
+	 this.street="";
+	 this.State="";
+	 this.postalCode="";
+	 this.Country="";
 }
 
 var updateProfile=null;
