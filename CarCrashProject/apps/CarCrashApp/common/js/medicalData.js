@@ -1,5 +1,12 @@
-		$(document).on('pagebeforeshow','#DatosMedicos',function(e,data){   		    		
-		
+function MedicalData(){
+	this.IMSS="";
+	this.bloodType="";
+	this.alergics="";
+	this.clinicalConditions="";
+}		
+
+$(document).on('pagebeforeshow','#DatosMedicos',function(e,data){   		    		
+	basicPersonFiltersNumber("txtNoIMSS");
 			initMedicalDataInfo(); 	 				  
 		});			
 		
@@ -7,9 +14,7 @@
 			setMedicalDataTransaction();				
 		}
 		
-		function setMedicalDataTransaction(){
-			
-			  			
+		function setMedicalDataTransaction(){						  			
 				   WL.JSONStore.get("MedicalData").clear() 
 			
 			.then(function (errorObject) {	
@@ -17,11 +22,28 @@
 				var jsonStore = new clsJsonStoreHelper();
 				jsonStore.collectionName="MedicalData";
 				jsonStore.document=
-					 [{IMSS: $("#txtNoIMSS").val().trim(), bloodType: $("#txtBloodType").val().trim(), 
+					 {IMSS: $("#txtNoIMSS").val().trim(), bloodType: $("#txtBloodType").val().trim(), 
 						 alergics: $("#txtAlergics").val().trim(), clinicalConditions: $("#txtClinicalConditions").val().trim()
-			        	}];
+			        	};
 				jsonStore.id=0;
-				jsonStore.fnSuccess=function (succes) {			
+				jsonStore.fnSuccess=function (succes) {
+					
+					var jsonStore = new clsJsonStoreHelper();
+					jsonStore.collectionName="MedicalData";
+					jsonStore.document=
+							{
+							};
+					jsonStore.id=succes;
+					jsonStore.fnSuccess=function (arrayResults) {			
+						if(arrayResults.length>0){	
+							saveMedicalData(arrayResults[0].json);
+						}
+					};
+					jsonStore.fnFail=function (fail) {			
+						
+					};
+					jsonStore.get();
+					
 					alert(Messages.msgDataSaved);
 				};
 				jsonStore.fnFail=function (errorObject) {			
@@ -56,3 +78,22 @@
 			};
 			jsonStore.get();	
 			}
+		
+		function saveMedicalData(pMedicalData)
+		{	
+			var restHelper = new clsRestHelper('medicalData','saveMedicalData',pMedicalData, saveMedicalDataSuccess, saveMedicalDataFailure);
+			restHelper.callRestAdapter();
+		}
+		function saveMedicalDataSuccess(result){
+			var oResult = result.invocationResult;
+			if(oResult.isSuccessful)
+			{							
+				
+			}
+			else{
+				alert('Ocurrio un error, por favor intente de nuevo.');
+			}
+		}
+		function saveMedicalDataFailure(error){
+			alert('Error al enviar al servidor, asegurese de contar con conexion a internet.');
+		}

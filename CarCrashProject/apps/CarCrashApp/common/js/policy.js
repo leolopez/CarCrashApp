@@ -21,9 +21,9 @@
 		this.SubMark= "";	
 		this.Model= "";	
 		this.Color= "";	
-		this.PictureURL= "";	
-		this.OwnerName= "";
-		this.Cellphone= "";
+		this.carPicture= "";	
+		this.Holder= "";
+		this.OwnerCellphone= "";
 		this.PolicyContactName= "";	
 		this.PolicyContactFirstName= "";	
 		this.PolicyContactLastName= "";					
