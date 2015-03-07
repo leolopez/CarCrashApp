@@ -4,9 +4,9 @@ function getCollections(){
 			searchFields: {identifier:"integer", email:"string", password:"string"}
 		},
 		Contacts:{
-			searchFields:{identifier: 'integer', UserContactName:'string',		
+			searchFields:{identifier:'integer', UserContactSecondLastName:'string',		
 				UserContactFirstName:'string',UserContactLastName:'string',
-				UserContactCellPhon:'string' }
+				UserContactCellPhone:'string' }
 		},
 		reports:{
 			searchFields:{
@@ -18,21 +18,24 @@ function getCollections(){
 				idReport:"integer"
 			}
 		},*/
-		
+		profile : {
+	        searchFields: {mobileId: 'string', name: 'string', firstname: 'string', lastname: 'string', cellPhone: 'string',
+	        	city: 'string', enterprise: 'string',birthDate: 'string',email: 'string',password: 'string'}
+	    },
 	    PolicyVehicle : {
-	        searchFields: {identifier: 'integer',PolicyNo: 'string', PolicyDate: 'string', insurance: 'string', Plates: 'string', Serie: 'string'
+	        searchFields: {identifier: 'integer',PolicyNo: 'string', PolicyDate: 'string', Insurance: 'string', Plates: 'string', Serie: 'string'
 	        	, VehicleType: 'string', Mark: 'string', SubMark: 'string', Model: 'string', Color: 'string'
-	         		, carPicture: 'string', Holder: 'string', OwnerCellPhone: 'string', PolicyContactName:'string',
+	         		, carPicture: 'string', Holder: 'string', OwnerCellPhone: 'string', PolicyContactSecondLastName:'string',
 						PolicyContactFirstName:'string', PolicyContactLastName:'string',
-						PolicyContactCellPhon:'string'
+						PolicyContactCellPhone:'string'
 	         	}
 	     },
 	     MedicalData : {
-	         searchFields: {identifier: 'integer', IMSS: 'string', bloodType: 'string', alergics: 'string', clinicalConditions: 'string'
+	         searchFields: {identifier:'integer', IMSS: 'string', bloodType: 'string', alergics: 'string', clinicalConditions: 'string'
 	         	}
 	     },
 	     MechanicData : {
-	         searchFields: {identifier: 'integer', MechanicName: 'string',  MechanicFirstName: 'string', MechanicLastName: 'string', MechanicCellPhone: 'string',
+	         searchFields: {identifier:'integer', MechanicName: 'string',  MechanicFirstName: 'string', MechanicLastName: 'string', MechanicCellPhone: 'string',
 	         	MechanicAddress: 'string'}
 	     }
 	};
