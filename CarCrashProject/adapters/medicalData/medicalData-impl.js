@@ -24,10 +24,10 @@ function getMedicalData(oData) {
 		var data = {
 				identifier: result.resultSet[i].Identifier, 
 				email: result.resultSet[i].Email, 
-				IMSS:result.resultSet[i].IMSS,
-				bloodType:result.resultSet[i].bloodType, 
-				alergics:result.resultSet[i].alergics,
-				clinicalConditions:result.resultSet[i].clinicalConditions
+				IMSS:result.resultSet[i].InsuranceNumber,
+				bloodType:result.resultSet[i].TypeBlood, 
+				alergics:result.resultSet[i].Alergies,
+				clinicalConditions:result.resultSet[i].Ailment
 				};
 		
 	

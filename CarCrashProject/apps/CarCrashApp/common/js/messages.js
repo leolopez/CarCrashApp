@@ -22,7 +22,7 @@ Messages = {
 		lblLastName:"Ap. Materno",
 		lblCellPhone:"Celular",
 		lblCityRes:"Ciudad de Residencia",
-		lblCompany:"Compañia o Flotilla",
+		lblCompany:"Observaciones",
 		h1ConfirmCity:"Confirmar?",
 		h3SelectedCity:"Ciudad seleccionada:",
 		h3RecordsList:"Registros.", 
@@ -228,7 +228,7 @@ Messages = {
 		Messages.lblLastName = "Ap. Materno";
 		Messages.lblCellPhone = "Celular";
 		Messages.lblCityRes = "Ciudad de Residencia";
-		Messages.lblCompany = "Compañia o Flotilla";
+		Messages.lblCompany = "Observaciones";
 		Messages.h1ConfirmCity = "Confirmar?";
 		Messages.h3SelectedCity = "Ciudad seleccionada:";
 	}
@@ -378,7 +378,7 @@ function setEnglishProfile(){
 		Messages.lblLastName = "Second Last Name";
 		Messages.lblCellPhone = "Cell Phone";
 		Messages.lblCityRes = "City of residence";
-		Messages.lblCompany = "Company or Flotilla";
+		Messages.lblCompany = "Observations";
 		Messages.h1ConfirmCity = "Confirm?";
 		Messages.h3SelectedCity = "Selected city:";
 	}
