@@ -129,13 +129,21 @@ function getGlobalData(){
 function getServerData(){
 	var oJS = new clsJsonStoreHelper();
 	oJS.fnSuccess = function(ret){
-		oJS.collectionName = "reports";
-		oJS.fnSuccess = function(){};
-		oJS.fnFail = function(){};
-		oJS.getFromServer("sinisters", "getSinisters");
+		var collectionsToGet = [
+		                        {collection:'reports', adapter:'sinisters', procedure:'getSinisters'},
+		                        {collection:'Contacts', adapter:'EmergencyContacts', procedure:'getEmergencyContacts'},
+		                        {collection:'MedicalData', adapter:'medicalData', procedure:'getMedicalData'}, 
+		                        {collection:'MechanicData', adapter:'mechanic', procedure:'getMechanic'}
+		                        ];
+		$(collectionsToGet).each(function(idx,col){
+			oJS.collectionName = col.collection;
+			oJS.fnSuccess = function(){};
+			oJS.fnFail = function(){};
+			oJS.getFromServer(col.adapter, col.procedure);
+		});
 	};
 	oJS.fnFail = function(error){
-		
+		alert('Error al obtener los datos de la cuenta.');
 	};
 	oJS.collectionName = "PolicyVehicle";
 	oJS.getFromServer("vehiclesPolicies", "getVehiclesPolicies");
