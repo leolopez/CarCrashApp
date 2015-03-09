@@ -156,7 +156,9 @@
 				var item2 = $("#listPolicy").find(listitem);
 			    item2.remove();			    	
 			    ondeletedUpdatePolicy();
-			    getPolicyVehicleToDelete();
+			    
+			    saveAllVehiclePolicy();
+			   // getPolicyVehicleToDelete();
 			};
 			jsonStore.fnFail=function(success){
 				alert("No se ha podido eliminar el registro");
@@ -374,7 +376,7 @@
 			jsonStore.document=docs;				
 			jsonStore.id=parseInt(policyId);
 			jsonStore.fnSuccess=function(success){
-				if(!policyupdate){
+				/*if(!policyupdate){
 					 getLastPolicyVehicle();					 
 				}else{
 					var param=	{"operation":'replace',
@@ -389,8 +391,8 @@
 							 }
 							};	
 					updateVehiclePolicy(param);
-				}
-				
+				}*/
+				saveAllVehiclePolicy();
 				alert(Messages.msgDataSaved);							
 			policySaved=true;
 			initPolicyVehicleDataInfo();					
@@ -764,7 +766,8 @@ function initPolicyToList(name,insurance,policyDate,id,pic){
 			var c=	{"operation":'add',
 					 "json" : $last.json 
 					};				
-					 saveVehicle(c);																						
+					 //saveVehicle(c);
+					 saveAllVehiclePolicy();
 				} 
 			};
 			jsonStore.fnFail=function initFail(result){
@@ -912,3 +915,22 @@ function initPolicyToList(name,insurance,policyDate,id,pic){
 		    });
 			
 		}
+		
+		
+		function saveAllVehiclePolicy()
+		{	
+			var jsonStore = new clsJsonStoreHelper();
+			jsonStore.collectionName="PolicyVehicle";
+			jsonStore.document=
+					{
+					};
+			jsonStore.id=0;
+			jsonStore.fnSuccess=function initSuccess(arrayResults){				
+				 alert(JSON.stringify(arrayResults));
+			};
+			jsonStore.fnFail=function initFail(result){
+				alert("error");
+			};
+			jsonStore.saveToServer("vehiclesPolicies", "saveVehiclePolicies");
+		}
+			

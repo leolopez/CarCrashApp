@@ -10,6 +10,8 @@ var selectStatement = WL.Server.createSQLStatement("select v.Identifier as ident
 " inner join InsuranceCompanies ico on ico.IDInsuranceCompanies=ipo.IDInsuranceCompany"+
 " where v.Email=?");
 
+var existStatement = WL.Server.createSQLStatement("select * from Vehicle where Identifier=? and Email=?");
+
 var addStatement = WL.Server.createSQLStatement(" insert into InsuranceAgents(Identifier,Email,FirstName,LastName,SecondLastName,CellPhone) values(?,?,?,?,?,?)" +
 		" insert into InsurancePolicies(Email,PolicyNumber,ExpirationDate,IDInsuranceCompany,Identifier) values(?,?,?,?,?)" +
 		" insert into Vehicle (Plates,Serie,VehicleType,IDVehicleBrand,Model,Year,Color,PictureURL,OwnerName,Cellphone, Email, Identifier) values ( ?, ?, ?, ?, ?, ?, ?,?,?,?,?,?)"
@@ -70,8 +72,37 @@ function getVehiclesPolicies(oData) {
 	return {data: oReturn};
 }
 
-function saveVehiclePolicies(param1) {
-	switch(param1.operation){
+function saveVehiclePolicies(param1) {		
+	
+	var policiesdocs = param1;
+	var ret = [];
+	for(var a = 0; a<policiesdocs.length; a++){
+		var policies = policiesdocs[a];
+		
+		if(policies._operation!="remove"){
+			
+			 result = WL.Server.invokeSQLStatement({
+					preparedStatement : existStatement,
+					parameters : [policies.json.identifier,policies.json.email]
+				});
+				
+				if(result.resultSet!=undefined){
+				if(result.resultSet.length>0){
+					
+					ret.push(update(policies.json));
+				}else{
+					ret.push(save(policies.json));
+				}
+				}
+		}else{
+			ret.push(remove(policies.json));
+		}
+		
+		
+	}
+	return {data:ret};		
+		
+	/*switch(param1.operation){
 	case "add":
 		save(param1.json);
 		break;
@@ -82,7 +113,7 @@ function saveVehiclePolicies(param1) {
 		remove(param1.json);
 		break;
 	}		
-		return {};
+		return {};*/
 }
 
 function save(pVehiclesPolicies){
