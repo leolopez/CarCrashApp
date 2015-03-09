@@ -1,5 +1,7 @@
 var selectStatement = WL.Server.createSQLStatement("select * from EmergencyContacts where Email=?");
 
+var existStatement = WL.Server.createSQLStatement("select * from EmergencyContacts where Identifier=? and Email=?");
+
 var addStatement = WL.Server.createSQLStatement(" insert into EmergencyContacts(Identifier,Email,FirstName,LastName,SecondLastName,CellPhone) values(?,?,?,?,?,?)" 
 	);
 var updateStatement = WL.Server.createSQLStatement(" update EmergencyContacts set FirstName=?,LastName=?,SecondLastName=?,CellPhone=? where Identifier=?  and Email=? ");
@@ -23,8 +25,8 @@ function getEmergencyContacts(oData) {
 	if(result.resultSet!=undefined){
 	for(var i = 0; i < result.resultSet.length; i++){
 		var data = {
-				identifier: result.resultSet[i].identifier, 
-				email: result.resultSet[i].email, 
+				identifier: result.resultSet[i].Identifier, 
+				email: result.resultSet[i].Email, 
 				UserContactFirstName:result.resultSet[i].FirstName,
 				UserContactLastName:result.resultSet[i].LastName, 
 				UserContactSecondLastName:result.resultSet[i].SecondLastName,
@@ -40,6 +42,36 @@ function getEmergencyContacts(oData) {
 }
 
 function saveEmergencyContacts(param1) {
+	
+	
+	var contactsdocs = param1;
+	var ret = [];
+	for(var a = 0; a<contactsdocs.length; a++){
+		var contact = contactsdocs[a];
+		
+		if(contact._operation!="remove"){
+			
+			 result = WL.Server.invokeSQLStatement({
+					preparedStatement : existStatement,
+					parameters : [contact.json.identifier,contact.json.email]
+				});
+				
+				if(result.resultSet!=undefined){
+				if(result.resultSet.length>0){
+					
+					ret.push(update(contact.json));
+				}else{
+					ret.push(save(contact.json));
+				}
+				}
+		}else{
+			ret.push(remove(contact.json));
+		}
+		
+		
+	}
+	return {data:ret};
+	/*
 	switch(param1.operation){
 	case "add":
 		save(param1.json);
@@ -51,7 +83,7 @@ function saveEmergencyContacts(param1) {
 		remove(param1.json);
 		break;
 	}		
-		return {};
+		return {};*/
 }
 
 function save(pEmergencyContacts){

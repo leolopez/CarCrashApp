@@ -180,12 +180,13 @@ function success(result){
 						email:dataDetails[0].json.email,identifier:dataDetails[0].json.identifier
 				 }
 				};		
-		
-		updateEmergencyContacts(dataUp);
+		 saveAllContacts();
+		//updateEmergencyContacts(dataUp);
 		alert(Messages.dataUpdate);
 		contactSaved=false;
 	}else{
-		saveEmergencyContacts(data);
+		saveAllContacts();
+		//saveEmergencyContacts(data);
 	alert(Messages.msgDataSaved);
 	contactSaved=true;
 	}
@@ -353,7 +354,9 @@ function deleteSuccess(result){
     var data=	{"operation":'remove',
 			 "json" : dataToConDelete[0].json
 			};	
-    deleteEmergencyContacts(data);
+    //deleteEmergencyContacts(data);
+    
+    saveAllContacts();
 }
 
 function deleteFail(errorObject){
@@ -435,3 +438,22 @@ function updateEmergencyContactsSuccess(result){
 function updateEmergencyContactsFailure(error){
 	alert('Error al actualizar, asegurese de contar con conexion a internet.');
 }
+
+
+function saveAllContacts()
+{	
+	var jsonStore = new clsJsonStoreHelper();
+	jsonStore.collectionName="Contacts";
+	jsonStore.document=
+			{
+			};
+	jsonStore.id=0;
+	jsonStore.fnSuccess=function initSuccess(arrayResults){				
+		
+	};
+	jsonStore.fnFail=function initFail(result){
+		alert("error");
+	};
+	jsonStore.saveToServer("EmergencyContacts", "saveEmergencyContacts");
+}
+	
