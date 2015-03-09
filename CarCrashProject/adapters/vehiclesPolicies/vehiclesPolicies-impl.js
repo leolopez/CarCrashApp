@@ -5,8 +5,8 @@ var selectStatement = WL.Server.createSQLStatement("select v.Identifier as ident
 " ipo.IDInsuranceCompany as Insurance,  iag.FirstName as PolicyContactFirstName,"+
 " iag.LastName as PolicyContactLastName, iag.SecondLastName as PolicyContactSecondLastName,"+
 " iag.CellPhone as PolicyContactCellPhone, ico.Name as InsuranceName   from vehicle v"+
-" inner join InsurancePolicies ipo on v.email=ipo.email"+
-" inner join InsuranceAgents  iag on iag.Email=ipo.Email"+
+" inner join InsurancePolicies ipo on v.email=ipo.email  and v.Identifier=ipo.Identifier "+
+" inner join InsuranceAgents  iag on iag.Email=ipo.Email  and iag.Identifier=v.Identifier "+
 " inner join InsuranceCompanies ico on ico.IDInsuranceCompanies=ipo.IDInsuranceCompany"+
 " where v.Email=?");
 
