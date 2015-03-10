@@ -926,7 +926,7 @@ function initPolicyToList(name,insurance,policyDate,id,pic){
 					};
 			jsonStore.id=0;
 			jsonStore.fnSuccess=function initSuccess(arrayResults){				
-				 
+				 return true;
 			};
 			jsonStore.fnFail=function initFail(result){
 				alert("error");
