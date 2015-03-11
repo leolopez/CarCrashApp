@@ -72,9 +72,28 @@
 			$("#listSubMarks").hide();
 			$("#policyCont").hide();
 			$("#vehicleCont").show();
-			policyNavigation=0;
-			next=true;			
 			
+			if(!policyupdate){ 
+			var jsonStore = new clsJsonStoreHelper();
+        	jsonStore.collectionName="perfil";
+        	jsonStore.document=
+        			{
+        			};
+        	jsonStore.id=0;
+        	jsonStore.fnSuccess=function (arrayResults) {			
+        		if(arrayResults.length>0){        			        		        			
+        			$("#txtHolder").val(arrayResults[0].json.firstName);
+        			$("#txtOwnerCellPhone").val(arrayResults[0].json.cellPhone);
+        			//$("#txtHolder").prop('disabled', true);        			
+        		}
+        	};
+        	jsonStore.fnFail=function (fail) {			
+        		alert("Error al obtener datos de la cuenta");
+        	};
+        	jsonStore.get();
+			}
+			policyNavigation=0;
+			next=true;									
 			}else{				
 				alert(Messages.requiredData);
 			} 
