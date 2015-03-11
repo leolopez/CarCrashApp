@@ -85,7 +85,8 @@ function initializeData()
 	$('a').attr('data-transition','slide');	//general app transition
 	
 	initLanguage();
-	
+	$('#map-canvas').css('height', ($(document).height() / 2) + 'px');
+	$('#mapConsultSinister').css('height', ($(document).height() / 2) + 'px');
 	$("a[href='#sinisterReport']").click(function(){
     	getLocation();
     });
@@ -106,8 +107,11 @@ function checkUser(){
 		}
 	};
 	oJS.fnFail = function(){
-		alert('Error de base de datos interno.');
-		location.href = "#login";
+		navigator.notification.alert(
+		'Error de base de datos interno.',
+		function onSuccess() {
+			location.href = "#login";
+		}, "Error");
 	};
 	oJS.count();
 }
@@ -143,7 +147,10 @@ function getServerData(){
 		});
 	};
 	oJS.fnFail = function(error){
-		alert('Error al obtener los datos de la cuenta.');
+		navigator.notification.alert(
+		'Error al obtener los datos de la cuenta.',
+		function onSuccess() {
+		}, "Error");
 	};
 	oJS.collectionName = "PolicyVehicle";
 	oJS.getFromServer("vehiclesPolicies", "getVehiclesPolicies");
@@ -209,7 +216,7 @@ function getPages()
 	        	"leftPanel":{
 	        		"id":"reportSinisterNav",
 	        		"url":"pages/general/left_panel.html"
-	        	},
+	        	}/*,
 	        	"popup":[
 	        	         {
 	        	        	 "url":"pages/general/popup.html",
@@ -220,7 +227,7 @@ function getPages()
 	        	        	 "okButton":{"action":"sendIncidenteInfo();","location":"#","text":"OK"}, 
 	        	        	 "cancelButton":{"action":"","location":"#","text":"Cancel"}
 	        	         }
-	        	         ]
+	        	         ]*/
 	        },
 	        
 	        {"id":"reportSinisterDet", "url":"pages/sinister/reportSinisterDet.html",
