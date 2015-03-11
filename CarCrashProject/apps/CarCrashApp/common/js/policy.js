@@ -394,23 +394,7 @@
 			jsonStore.collectionName=policyCollectionName;
 			jsonStore.document=docs;				
 			jsonStore.id=parseInt(policyId);
-			jsonStore.fnSuccess=function(success){
-				/*if(!policyupdate){
-					 getLastPolicyVehicle();					 
-				}else{
-					var param=	{"operation":'replace',
-							 "json" : {
-								 "PolicyNo": policy.val().trim(), "PolicyDate": policyDate.val().trim(), "Insurance": aseg.val().trim(),
-									"Plates": plates.val().trim(), "Serie": serie.val().trim(), "VehicleType": vehicleType.val().trim(), "Mark": markSelected.val().trim(),
-									"SubMark": subMark.val().trim(), "Model": model.val().trim(), "Color": color.val().trim(), "carPicture": pic.trim(),
-									"Holder":holder.val().trim(), "OwnerCellPhone": ownerCellPhone.val().trim(),
-									"PolicyContactFirstName":polContactNameGrl.val().trim(),
-									"PolicyContactLastName":polContactFirstNameGrl.val().trim(), "PolicyContactSecondLastName":polContactLastNameGrl.val().trim(),
-									"PolicyContactCellPhone":polContactCellPhoneGrl.val().trim(), "email": dataToUpdate[0].json.email, "identifier":dataToUpdate[0].json.identifier
-							 }
-							};	
-					updateVehiclePolicy(param);
-				}*/
+			jsonStore.fnSuccess=function(success){				
 				saveAllVehiclePolicy();
 				alert(Messages.msgDataSaved);							
 			policySaved=true;
