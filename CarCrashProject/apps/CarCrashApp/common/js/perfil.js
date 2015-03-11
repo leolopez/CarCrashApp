@@ -6,12 +6,6 @@ function profile(){
 	 this.city="";
 	 this.enterprise="";
 	 this.birthDate="";
-	 this.email="";
-	 this.streetNumber="";
-	 this.street="";
-	 this.State="";
-	 this.postalCode="";
-	 this.Country="";
 }
 
 var updateProfile=null;
@@ -79,7 +73,8 @@ initLeftPanelTranslations()
 			$('div[id="backPerfilNav"]').hide();
 			initializeAddress();
 			initPerfil();		
-		initPerfilDataInfo(); 	 				  
+		initPerfilDataInfo(); 
+		
 		});			
 		
 		function savePerfil(){
@@ -321,4 +316,47 @@ initLeftPanelTranslations()
         }
         function updateperfilFailure(error){
         	alert('Error al actualizar en el servidor, asegurese de contar con conexion a internet.');
+        }
+        
+ function validateProfile(){
+        	
+        	var form = $("#profileForm");
+    		form.validate({
+    			errorElement:'div',
+    			rules:{    				
+    				txtProfileName:{
+    					required: true,
+    					minlength: 2
+    				},
+    				txtFirstName:{
+    					required: true,
+    					minlength: 2
+    				},
+    				txtLastName:{
+    					required: true,
+    					minlength: 2
+    				},
+    				txtCellPhone:{
+    					required: true,
+    					minlength: 10
+    				}
+    			},
+    			 messages: {    				 
+    				 txtProfileName:{ required: 'Ingrese un nombre',minlength:'Mínimo  2 caracteres'},
+    				 txtFirstName: { required: 'Ingrese ap. paterno',minlength:'Mínimo  2 caracteres'},
+     				txtLastName:{ required: 'Ingrese ap. materno',minlength:'Mínimo  2 caracteres'},
+     				txtCellPhone:{required: 'Ingrese numero de celular',minlength:'Mínimo 10 numeros'}
+                 },
+                 errorPlacement: function (error, element) {
+                     error.insertAfter(element);
+                     error.addClass('error'); 
+                     error.css("color", "red");
+                     error.css("text-align", "center");
+                 }
+    		});
+    		if(form.valid())
+    		{    			
+    			savePerfil();
+    		}
+        	
         }

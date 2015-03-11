@@ -297,7 +297,7 @@ function getPages()
 		    {"id":"perfil", "url":"pages/profile/profile.html",
 	        	"header":{
 	        		"url":"pages/general/header.html",
-	        		"saveButton":"saveAnyPerfil();"
+	        		"saveButton":"validateProfile();"
 	        	},
 	        	"leftPanel":{
 	        		"id":"profileNav",
