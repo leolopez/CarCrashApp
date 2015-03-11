@@ -3,7 +3,7 @@ var oCurrentSinister = new clsSinister();
 function clsSinister(){
 	this.data = {
 		idPolicy: 0,
-		date: (new Date().getDate()) + '-' + (new Date().getMonth()) + '-' + (new Date().getFullYear()),
+		date: (new Date().getFullYear()) + '-' + ((new Date().getMonth()) + 1) + '-' + (new Date().getDate()),
 		time: (new Date().getHours()) + ':' + (new Date().getMinutes()) + ':' + (new Date().getSeconds()),
 		type: "",
 		status: 0,
@@ -70,19 +70,31 @@ function sendIncidenteInfo()
 							loadTheftList();
 						};
 						oJS.fnFail = function(error){
-							alert('Error al actualizar status de reportes.');
+							navigator.notification.alert(
+							'Error al actualizar status de reportes.',
+							function onSuccess() {
+							}, "Error");
 						};
 						oJS.getFromServer("sinisters", "getSinisters");
-						alert('Reportado exitosamente');
+						navigator.notification.alert(
+						'Reportado exitosamente',
+						function onSuccess() {
+						});
 						return true;
 					};
 					oJS.fnFail = function(error){
-						alert('No se pudo conectar al servidor, reintente.');
+						navigator.notification.alert(
+						'No se pudo conectar al servidor, reintente.',
+						function onSuccess() {
+						}, "Error");
 					};
 					oJS.saveToServer("sinisters", "saveSinisters");
 				};
 				oCurrentSinister.fnFail = function(error){
-					alert('Error al generar el reporte, intentelo de nuevo.');
+					navigator.notification.alert(
+					'Error al generar el reporte, intentelo de nuevo.',
+					function onSuccess() {
+					});
 				};
 				oCurrentSinister.save();
 			}
@@ -90,14 +102,20 @@ function sendIncidenteInfo()
 		}
 		else
 		{
-			alert(Messages.selectAuto);
-			parent.history.back();
+			navigator.notification.alert(
+			Messages.selectAuto,
+			function onSuccess() {
+				parent.history.back();
+			});
 		}
 	}
 	else
 	{
-		alert(Messages.alertLocation);
-		parent.history.back();
+		navigator.notification.alert(
+		Messages.alertLocation,
+		function onSuccess() {
+			parent.history.back();
+		});
 	}
 }
 
@@ -142,21 +160,33 @@ function enviarExtras()
 				loadSinisterList();
 			};
 			oJS.fnFail = function(error){
-				alert('Error al actualizar status de reportes.');
+				navigator.notification.alert(
+				'Error al actualizar status de reportes.',
+				function onSuccess() {
+				}, "Error");
 			};
 			oJS.getFromServer("sinisters", "getSinisters");
-			alert('Reportado exitosamente.');
+			navigator.notification.alert(
+			'Reportado exitosamente.',
+			function onSuccess() {
+			});
 			return true;
 		};
 		oJS.fnFail = function(error){
-			alert('No se pudo conectar al servidor, reintente.');
+			navigator.notification.alert(
+			'No se pudo conectar al servidor, reintente.',
+			function onSuccess() {
+			}, "Error");
 		};
 		oJS.saveToServer("sinisters", "saveSinisters");
 		
 		location.href="#sinisterList";
 	};
 	oCurrentSinister.fnFail = function(){
-		alert('Error al generar el reporte, intentelo de nuevo.');
+		navigator.notification.alert(
+		'Error al generar el reporte, intentelo de nuevo.',
+		function onSuccess() {
+		}, "Error");
 	};
 	oCurrentSinister.save();
 }
@@ -164,9 +194,33 @@ function enviarExtras()
 function reportar(page)
 {
 	sPageNav = page;
+	navigator.notification.confirm(
+	// Shows a customizable confirmation dialog box.
+
+	// Confirm dialog message (String)
+	"Esta seguro que desea levantar un reporte? Esta accion enviara su ubicacion y datos a su aseguradora.",
+	// Callback to invoke with index of button pressed (1, 2 or 3)
+	function onConfirm(result) {
+		if(result == 1){
+			sendIncidenteInfo();
+		}
+	},
+	"Reportar?");
 }
 
 function loadSinisterList(){
+	var oJStore = new clsJsonStoreHelper();
+	oJStore.collectionName = "reports";
+	oJStore.fnSuccess = function(){
+		showLocalReports();
+	};
+	oJStore.fnFail = function(){
+		showLocalReports();
+	};
+	oJStore.getFromServer("sinisters", "getSinisters");
+}
+
+function showLocalReports(){
 	var oJStore = new clsJsonStoreHelper();
 	oJStore.collectionName = "reports";
 	oJStore.options = {};
@@ -196,7 +250,10 @@ function loadSinisterList(){
 		});
 	};
 	oJStore.fnFail = function(error){
-		alert('Error al cargar listado de siniestros.');
+		navigator.notification.alert(
+		'Error al cargar listado de siniestros.',
+		function onSuccess() {
+		}, "Error");
 	};
 	oJStore.get();
 }
@@ -215,7 +272,7 @@ function loadTheftList(){
 			oJSAuto.document = {};
 			oJSAuto.id = item.json.idPolicy;
 			oJSAuto.fnSuccess = function (resultAuto){
-				$("#ulThefts").append(	"<li>" +
+				$("#ulThefts").append(	"<li ele='a'>" +
 											"<a href=\"#\" onclick=\"showDetails('theft', " + item._id + ", " + resultAuto[0]._id + ");\">" +
 												"<img src=\"" + resultAuto[0].json.carPicture + "\" height=\"100%\" width=\"100%\">" +
 												"<h2><span><img style=\"width:10px;height:10px;\" src=\"images/general/" + (item.json.status == 0 ? "red" : item.json.status == 1 ? "yellow" : item.json.status == 2 ? "green" : "gray") + "_dot.png\"/></span>  " + resultAuto[0].json.Mark + "-" + resultAuto[0].json.SubMark + "</h2>" +
@@ -225,13 +282,19 @@ function loadTheftList(){
 				$('#ulThefts').listview('refresh').trigger('create');
 			};
 			oJSAuto.fnFail = function (errorAuto){
-				alert('Error al obtener datos del vehiculo.');
+				navigator.notification.alert(
+				'Error al obtener datos del vehiculo.',
+				function onSuccess() {
+				}, "Error");
 			};
 			oJSAuto.get();
 		});
 	};
 	oJStore.fnFail = function(error){
-		alert('Error al cargar listado de siniestros.');
+		navigator.notification.alert(
+		'Error al cargar listado de siniestros.',
+		function onSuccess() {
+		}, "Error");
 	};
 	oJStore.get();
 }
@@ -242,16 +305,21 @@ function loadVehiclesList(){
 	oJStore.options = {};
 	oJStore.document = {};
 	oJStore.fnSuccess = function(result){
-		$("#selectAuto").html('');
-		$("#selectAuto").append("<option id=\"opSelectCar\" value=\"0\">Select your car</option>");
+		$("option","#selectAuto").remove();
+		//$( "select" ).selectmenu();	
+		$("#selectAuto").append('<option id="opSelectCar" value="0" selected="selected">Select your car</option>');
 		$(result).each(function(idx, item){
-			$("#selectAuto").append("<option value=\"" + item._id + "\">" + item.json.Mark + "-" + item.json.SubMark  + "</option>");
+			$("#selectAuto").append('<option value="' + item._id + '">' + item.json.Mark + '-' + item.json.SubMark  + '</option>');
 		});
-		$('#selectAuto').value = "1";
+		$('#selectAuto').value = "0";
+		$( "#selectAuto" ).selectmenu( "refresh", true );
 		//$("#selectAuto").listview('refresh').trigger('create');
 	};
 	oJStore.fnFail = function(error){
-		alert('Error al obtener los autos registrados.');
+		navigator.notification.alert(
+		'Error al obtener los autos registrados.',
+		function onSuccess() {
+		}, "Error");
 	};
 	oJStore.get();
 }
@@ -272,9 +340,7 @@ function loadSinisterData(){
 	$("#tdConsMedAsis").text($("#hidConsMedAsis").val());
 	$("#tdConsCom").text($("#hidConsComentarios").val());
 	
-	setMap(Number($("#hidConsLat").val()), Number($("#hidConsLng").val()), "mapConsultSinister");
-	var mapHeight = $(document).height() / 2;
-	$('#mapConsultSinister').css('height', mapHeight + 'px');
+	setMap(Number($("#hidConsLat").val()), Number($("#hidConsLng").val()), "mapConsultSinister");	
 }
 
 function showDetails(pType, pReportId, pAutoId){
@@ -298,8 +364,11 @@ function showDetails(pType, pReportId, pAutoId){
 		location.href = "#consultSinister";
 	};
 	oJS.fnFail = function(error){
-		alert('Error al obtener los datos del siniestro.');
-		parent.history.back();
+		navigator.notification.alert(
+		'Error al obtener los datos del siniestro.',
+		function onSuccess() {
+			parent.history.back();
+		}, "Error");
 	};
 	oJS.get();
 	
@@ -318,16 +387,20 @@ function showDetails(pType, pReportId, pAutoId){
 		location.href = "#consultSinister";
 	};
 	oJS.fnFail = function(error){
-		alert('Error al obtener los datos del vehiculo.');
-		parent.history.back();
+		navigator.notification.alert(
+		'Error al obtener los datos del vehiculo.',
+		function onSuccess() {
+			parent.history.back();
+		}, "Error");
 	};
 	oJS.get();
 }
 
 $(document).on("pageshow", "#sinisterList", function(event){loadSinisterList();});
 $(document).on("pageshow", "#theftsList", function(event){loadTheftList();});
-$(document).on("pageshow", "#sinisterReport", function(event){loadVehiclesList(); oCurrentSinister = new clsSinister();});
+$(document).on("pageshow", "#sinisterReport", function(event){oCurrentSinister = new clsSinister();});
 $(document).on("pageshow", "#consultSinister", function(event){loadSinisterData();});
+$(document).on("pageinit", "#sinisterReport", function(event){loadVehiclesList();});
 
 $(document).on('pagebeforeshow','#sinisterReport',function(e,data){    
 	initSinisterPopUpTranslations(); 				  

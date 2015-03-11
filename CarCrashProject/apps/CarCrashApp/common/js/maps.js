@@ -25,8 +25,8 @@ function setMap(pLat, pLng, pDiv)
 
 //A button click will call this function
 function getLocation() {	
-	var mapHeight = $(document).height() / 2;
-	$('#map-canvas').css('height', mapHeight + 'px');
+	/*var mapHeight = $(document).height() / 2;
+	$('#map-canvas').css('height', mapHeight + 'px');*/
     navigator.geolocation.getCurrentPosition(onSuccess, onError, { enableHighAccuracy: true });
 }
 
@@ -44,18 +44,23 @@ function onSuccess(position) {
 // onError Callback receives a PositionError object
 //
 function onError(error) {
+	var msge = "";
 	switch(error.code)
 	{
 		case 1:
-			alert('El usuario no aceptó la petición de geolocalización.');
+			msge = 'El usuario no aceptó la petición de geolocalización.';
 			break;
 		
 		case 2:
-			alert('Ubicación no disponible.');
+			msge = 'Ubicación no disponible.';
 			break;
 			
 		case 3:
-			alert('Timeout obteniendo la ubicación.');
+			msge = 'Timeout obteniendo la ubicación.';
 			break;
 	}
+	navigator.notification.alert(
+	msge,
+	function onSuccess() {
+	}, "Error");
 }

@@ -25,16 +25,23 @@ function saveAccountSuccess(result){
 	var oResult = result.invocationResult;
 	if(oResult.isSuccessful && oResult.isSuccessful)
 	{
-		alert("Registrado correctamente, ahora inicie sesion con su e-mail y password");
-		location.href = "#login";
-		$("#frmSignUp")[0].reset();
+		navigator.notification.alert(
+				"Registrado correctamente, ahora inicie sesion con su e-mail y password",
+				function(){
+			location.href = "#login";
+			$("#frmSignUp")[0].reset();
+		});
 	}
 	else{
-		alert('Ocurrio un error al crear su cuenta, por favor intente de nuevo.');
+		navigator.notification.alert(
+		'Ocurrio un error al crear su cuenta, por favor intente de nuevo.',
+		function() {});
 	}
 }
 function saveAccountFailure(error){
-	alert('Error al registrarse, asegurese de contar con conexion a internet.');
+	navigator.notification.alert(
+	'Error al registrarse, asegurese de contar con conexion a internet.',
+	function(){}, "Error");
 }
 
 function accessAccount(pEmail, pPassword)
@@ -58,22 +65,34 @@ function accessSuccess(result){
 				location.href = "#perfil";
 			}
 			else{
-				alert('Ocurrio un error al guardar su usuario. Intentelo de nuevo.');
+				navigator.notification.alert(
+				'Ocurrio un error al guardar su usuario. Intentelo de nuevo.',
+				function onSuccess() {
+				});
 			}
 		};
 		oJS.fnFail = function(){
-			alert('Ocurrio un error al guardar su usuario. Intentelo de nuevo.');
+			navigator.notification.alert(
+			'Ocurrio un error al guardar su usuario. Intentelo de nuevo.',
+			function onSuccess() {
+			}, "Error");
 		};
 		oJS.save(false, false);
 	}
 	else{
-		alert('E-Mail y Password incorrectos.');
-		$('#txtPass').val("").focus();
+		navigator.notification.alert(
+		'E-Mail y Password incorrectos.',
+		function onSuccess() {
+			$('#txtPass').val("").focus();
+		});
 	}
 }
 
 function accessFailure(error){
-	alert('Error, asegurese de contar con conexion a internet.');
+	navigator.notification.alert(
+	'Error, asegurese de contar con conexion a internet.',
+	function onSuccess() {
+	}, "Error");
 }
 
 function logIn()
@@ -128,15 +147,22 @@ function signUp()
 		}
 	}
 	else{
-		alert('Los campos de password no coinciden.');
-		$("#txtPass").focus();
-		$("#txtPass").val("");
-		$("#txtPassConfirm").val("");
+		navigator.notification.alert('Los campos de password no coinciden.',
+		function onSuccess() {
+			$("#txtPass").focus();
+			$("#txtPass").val("");
+			$("#txtPassConfirm").val("");
+		});
 	}
 }
 function logOut(){
-	if(confirm('Are you sure?')){
-		WL.JSONStore.destroy();
-		location.href = "#login";
-	}
+	navigator.notification.confirm(
+	"Are you sure?",
+	function onConfirm(result) {
+		if(result == 1){
+			WL.JSONStore.destroy();
+			location.href = "#login";
+		}
+	},
+	"Logout");
 }
