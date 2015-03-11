@@ -1,9 +1,9 @@
 var selectStatement = WL.Server.createSQLStatement("select * from Mechanic where Email=?");
-var existStatement = WL.Server.createSQLStatement("select * from Mechanic where Identifier=? and Email=?");
+var existStatement = WL.Server.createSQLStatement("select * from Mechanic where Email=?");
 
 var addStatement = WL.Server.createSQLStatement(" insert into Mechanic(Identifier,Email,FirstName,LastName,SecondLastName,CellPhone,Address) values(?,?,?,?,?,?,?)" 
 	);
-var updateStatement = WL.Server.createSQLStatement(" update Mechanic set FirstName=?,LastName=?,SecondLastName=?,CellPhone=?,Address=? where Identifier=?  and Email=? ");
+var updateStatement = WL.Server.createSQLStatement(" update Mechanic set FirstName=?,LastName=?,SecondLastName=?,CellPhone=?,Address=? where Email=? ");
 
 
 	/************************************************************************
@@ -41,7 +41,7 @@ function getMechanic(oData) {
 function saveMechanic(param1) {
 	var result = WL.Server.invokeSQLStatement({
 		preparedStatement : existStatement,
-		parameters : [param1.identifier,param1.email]
+		parameters : [param1.email]
 	});
 	
 	if(result.resultSet!=undefined){
@@ -51,7 +51,7 @@ function saveMechanic(param1) {
 		save(param1);
 	}
 	}		
-		return {data: result};;
+		return {data: result};
 }
 
 function save(pMechanic){
@@ -69,7 +69,7 @@ function update(pMechanic){
 		preparedStatement : updateStatement,
 		parameters : [pMechanic.MechanicFirstName, pMechanic.MechanicLastName, 
 		               pMechanic.MechanicSecondLastName, pMechanic.MechanicCellPhone, pMechanic.MechanicAddress
-		              ,pMechanic.identifier, pMechanic.email ]
+		              , pMechanic.email ]
 	});
 }
 

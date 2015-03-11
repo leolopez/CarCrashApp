@@ -1,9 +1,9 @@
 var selectStatement = WL.Server.createSQLStatement("select * from medicalData where Email=?");
-var existStatement = WL.Server.createSQLStatement("select * from medicalData where Identifier=? and Email=?");
+var existStatement = WL.Server.createSQLStatement("select * from medicalData where  Email=?");
 
 var addStatement = WL.Server.createSQLStatement(" insert into medicalData(Identifier,Email,InsuranceNumber,TypeBlood,Alergies,Ailment) values(?,?,?,?,?,?)" 
 	);
-var updateStatement = WL.Server.createSQLStatement(" update medicalData set InsuranceNumber=?,TypeBlood=?,Alergies=?,Ailment=? where Identifier=?  and Email=? ");
+var updateStatement = WL.Server.createSQLStatement(" update medicalData set InsuranceNumber=?,TypeBlood=?,Alergies=?,Ailment=? where  Email=? ");
 
 
 	/************************************************************************
@@ -40,7 +40,7 @@ function getMedicalData(oData) {
 function saveMedicalData(param1) {
 	var result = WL.Server.invokeSQLStatement({
 		preparedStatement : existStatement,
-		parameters : [param1.identifier, param1.email]
+		parameters : [ param1.email]
 	});
 	
 	if(result.resultSet!=undefined){
@@ -68,7 +68,7 @@ function update(pMedicalData){
 		preparedStatement : updateStatement,
 		parameters : [pMedicalData.IMSS, pMedicalData.bloodType, 
 		              pMedicalData.alergics, pMedicalData.clinicalConditions,
-		              ,pMedicalData.identifier, pMedicalData.email ]
+		              , pMedicalData.email ]
 	});
 }
 
