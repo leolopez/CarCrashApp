@@ -427,7 +427,12 @@ function saveAllContacts()
 			{
 			};
 	jsonStore.id=0;
-	jsonStore.fnSuccess=function initSuccess(arrayResults){				
+	jsonStore.fnSuccess=function initSuccess(arrayResults){	
+		if(arrayResults.invocationResult.isSuccessful&&arrayResults.invocationResult.data.length>0){
+			//alert("enviado al servidor");
+		}else{
+			alert("No se ha podido enviar datos al servidor, intente mas tarde");
+		}
 		return true;
 	};
 	jsonStore.fnFail=function initFail(result){
