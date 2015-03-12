@@ -160,7 +160,7 @@ function _count(){
 	});
 }
 
-function _saveToServer(pAdapter, pProcedure){
+function _saveToServer(pAdapter, pProcedure, id){
 	var collectionName = this.collectionName;
 	var fnSuccess = this.fnSuccess;
 	var fnFail = this.fnFail;
@@ -170,6 +170,10 @@ function _saveToServer(pAdapter, pProcedure){
 		WL.JSONStore.get(collectionName).getAllDirty()
 		.then(function (arrayOfDirtyDocuments) {
 		  dirtyDocs = arrayOfDirtyDocuments;
+		  
+		  if(id){
+			  dirtyDocs = dirtyDocs.filter(function(x){return x._id == id;});
+		  }
 		  
 		  $(dirtyDocs).each(function(idx, item){
 			  item["email"] = globalMail;
@@ -196,6 +200,7 @@ function _saveToServer(pAdapter, pProcedure){
 				return;
 			}
 		})
+		.fail(fnFail)
 
 		.then(function () {
 		  // Handle markClean success.

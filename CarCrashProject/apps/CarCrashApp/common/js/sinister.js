@@ -234,7 +234,7 @@ function showLocalReports(){
 			oJSAuto.document = {};
 			oJSAuto.id = item.json.idPolicy;
 			oJSAuto.fnSuccess = function(resultAuto){
-				$("#ulSinisters").append(	"<li>" +
+				$("#ulSinisters").append(	"<li item='" + (item.json.status == 0 ? item._id : "0") + "'>" +
 												"<a href=\"#\" onclick=\"showDetails('sinister', " + item._id + ", " + resultAuto[0]._id + ");\">" +
 													"<img src=\"" + resultAuto[0].json.carPicture + "\" height=\"100%\" width=\"100%\">" +
 													"<h2><span><img style=\"width:10px;height:10px;\" src=\"images/general/" + (item.json.status == 0 ? "red" : item.json.status == 1 ? "yellow" : item.json.status == 2 ? "green" : "gray") + "_dot.png\"/></span>  " + resultAuto[0].json.Mark + "-" + resultAuto[0].json.SubMark + "</h2>" +
@@ -272,7 +272,7 @@ function loadTheftList(){
 			oJSAuto.document = {};
 			oJSAuto.id = item.json.idPolicy;
 			oJSAuto.fnSuccess = function (resultAuto){
-				$("#ulThefts").append(	"<li ele='a'>" +
+				$("#ulThefts").append(	"<li auto='" + resultAuto[0]._id + "' item='" + (item.json.status == 0 ? item._id : "0") + "'>" +
 											"<a href=\"#\" onclick=\"showDetails('theft', " + item._id + ", " + resultAuto[0]._id + ");\">" +
 												"<img src=\"" + resultAuto[0].json.carPicture + "\" height=\"100%\" width=\"100%\">" +
 												"<h2><span><img style=\"width:10px;height:10px;\" src=\"images/general/" + (item.json.status == 0 ? "red" : item.json.status == 1 ? "yellow" : item.json.status == 2 ? "green" : "gray") + "_dot.png\"/></span>  " + resultAuto[0].json.Mark + "-" + resultAuto[0].json.SubMark + "</h2>" +
@@ -306,14 +306,12 @@ function loadVehiclesList(){
 	oJStore.document = {};
 	oJStore.fnSuccess = function(result){
 		$("option","#selectAuto").remove();
-		//$( "select" ).selectmenu();	
 		$("#selectAuto").append('<option id="opSelectCar" value="0" selected="selected">Select your car</option>');
 		$(result).each(function(idx, item){
 			$("#selectAuto").append('<option value="' + item._id + '">' + item.json.Mark + '-' + item.json.SubMark  + '</option>');
 		});
 		$('#selectAuto').value = "0";
 		$( "#selectAuto" ).selectmenu( "refresh", true );
-		//$("#selectAuto").listview('refresh').trigger('create');
 	};
 	oJStore.fnFail = function(error){
 		navigator.notification.alert(
@@ -394,6 +392,37 @@ function showDetails(pType, pReportId, pAutoId){
 		}, "Error");
 	};
 	oJS.get();
+}
+
+function reSendReport(idReport){
+	var oJS = new clsJsonStoreHelper();
+	oJS.collectionName = "reports";
+	oJS.fnSuccess = function(){
+		navigator.notification.alert(
+				"Reportado con exito",
+				function onSuccess() {
+					oJS.fnSuccess = function(){
+						loadTheftList();
+						loadSinisterList();
+					};
+					oJS.fnFail = function(){
+						
+					};
+					oJS.getFromServer("sinisters", "getSinisters");
+					parent.history.back();
+				}
+			);
+		return true;
+	};
+	oJS.fnFail = function(){
+		navigator.notification.alert(
+		"Error al reportar, intentelo de nuevo.",
+		function onSuccess() {
+			parent.history.back();
+		},
+		"Error");
+	};
+	oJS.saveToServer("sinisters", "saveSinisters", idReport);
 }
 
 $(document).on("pageshow", "#sinisterList", function(event){loadSinisterList();});
