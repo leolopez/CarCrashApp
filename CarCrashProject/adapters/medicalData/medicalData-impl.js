@@ -1,9 +1,9 @@
-var selectStatement = WL.Server.createSQLStatement("select * from medicalData where Email=?");
-var existStatement = WL.Server.createSQLStatement("select * from medicalData where  Email=?");
+var selectStatement = WL.Server.createSQLStatement("select * from MedicalData where Email=?");
+var existStatement = WL.Server.createSQLStatement("select * from MedicalData where  Email=?");
 
-var addStatement = WL.Server.createSQLStatement(" insert into medicalData(Identifier,Email,InsuranceNumber,TypeBlood,Alergies,Ailment) values(?,?,?,?,?,?)" 
+var addStatement = WL.Server.createSQLStatement(" insert into MedicalData(Identifier,Email,InsuranceNumber,TypeBlood,Alergies,Ailment) values(?,?,?,?,?,?)" 
 	);
-var updateStatement = WL.Server.createSQLStatement(" update medicalData set InsuranceNumber=?,TypeBlood=?,Alergies=?,Ailment=? where  Email=? ");
+var updateStatement = WL.Server.createSQLStatement(" update MedicalData set InsuranceNumber=?,TypeBlood=?,Alergies=?,Ailment=? where  Email=? ");
 
 
 	/************************************************************************
@@ -72,3 +72,11 @@ function update(pMedicalData){
 	});
 }
 
+function saveProcedure(pMedicalData){
+	return WL.Server.invokeSQLStoredProcedure({
+		procedure : "sp_saveVehiclesPolicies",
+		parameters : [  pMedicalData.email, pMedicalData.IMSS, pMedicalData.bloodType, 
+			               pMedicalData.alergics, pMedicalData.clinicalConditions, pMedicalData.identifier		              
+		                ]
+	});
+}

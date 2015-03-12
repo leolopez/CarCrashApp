@@ -30,5 +30,7 @@
 	<!-- Replace this with appropriate procedures -->
 	<procedure name="getMedicalData"/>
 	<procedure name="saveMedicalData"/>
+		<procedure name="saveProcedure"/>
+	
 
 </wl:adapter>

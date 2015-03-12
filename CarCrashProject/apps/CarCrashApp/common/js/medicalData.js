@@ -81,7 +81,7 @@ $(document).on('pagebeforeshow','#DatosMedicos',function(e,data){
 		
 		function saveMedicalData(pMedicalData)
 		{	
-			var restHelper = new clsRestHelper('medicalData','saveMedicalData',pMedicalData, saveMedicalDataSuccess, saveMedicalDataFailure);
+			var restHelper = new clsRestHelper('medicalData','saveProcedure',pMedicalData, saveMedicalDataSuccess, saveMedicalDataFailure);
 			restHelper.callRestAdapter();
 		}
 		function saveMedicalDataSuccess(result){
