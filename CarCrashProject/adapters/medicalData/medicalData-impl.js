@@ -66,7 +66,7 @@ function update(pMedicalData){
 	
 	return WL.Server.invokeSQLStatement({
 		preparedStatement : updateStatement,
-		parameters : [pMedicalData.IMSS, pMedicalData.bloodType, 
+		parameters : [pMedicalData.IMSS, pMedicalData.bloodType,  
 		              pMedicalData.alergics, pMedicalData.clinicalConditions,
 		              pMedicalData.email ]
 	});
