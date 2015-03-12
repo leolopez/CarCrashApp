@@ -58,7 +58,7 @@ function save(pMechanic){
 	return WL.Server.invokeSQLStatement({
 		preparedStatement : addStatement,
 		parameters : [  pMechanic.identifier, pMechanic.email,
-		               ,pMechanic.MechanicFirstName, pMechanic.MechanicLastName, 
+		               pMechanic.MechanicFirstName, pMechanic.MechanicLastName, 
 		               pMechanic.MechanicSecondLastName, pMechanic.MechanicCellPhone, pMechanic.MechanicAddress
 		                ]
 	});

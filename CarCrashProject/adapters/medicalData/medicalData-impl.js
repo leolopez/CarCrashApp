@@ -57,7 +57,7 @@ function save(pMedicalData){
 	return WL.Server.invokeSQLStatement({
 		preparedStatement : addStatement,
 		parameters : [  pMedicalData.identifier, pMedicalData.email,
-		               ,pMedicalData.IMSS, pMedicalData.bloodType, 
+		               pMedicalData.IMSS, pMedicalData.bloodType, 
 		               pMedicalData.alergics, pMedicalData.clinicalConditions
 		                ]
 	});
@@ -68,7 +68,7 @@ function update(pMedicalData){
 		preparedStatement : updateStatement,
 		parameters : [pMedicalData.IMSS, pMedicalData.bloodType, 
 		              pMedicalData.alergics, pMedicalData.clinicalConditions,
-		              , pMedicalData.email ]
+		              pMedicalData.email ]
 	});
 }
 
