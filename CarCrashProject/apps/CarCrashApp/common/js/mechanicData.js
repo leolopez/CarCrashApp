@@ -60,7 +60,7 @@ var vMechanicName;
 					jsonStore.document=
 							{
 							};
-					jsonStore.id=success;
+					jsonStore.id=0;
 					jsonStore.fnSuccess=function (arrayResults) {			
 						if(arrayResults.length>0){	
 							

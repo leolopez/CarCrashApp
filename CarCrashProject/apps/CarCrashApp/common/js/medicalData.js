@@ -33,8 +33,9 @@ $(document).on('pagebeforeshow','#DatosMedicos',function(e,data){
 					jsonStore.document=
 							{
 							};
-					jsonStore.id=succes;
-					jsonStore.fnSuccess=function (arrayResults) {			
+					jsonStore.id=0;
+					jsonStore.fnSuccess=function (arrayResults) {
+						 WL.Logger.debug(">> medical data local: " + JSON.stringify(arrayResults));
 						if(arrayResults.length>0){	
 							saveMedicalData(arrayResults[0].json);
 						}
@@ -80,12 +81,13 @@ $(document).on('pagebeforeshow','#DatosMedicos',function(e,data){
 			}
 		
 		function saveMedicalData(pMedicalData)
-		{	
+		{	WL.Logger.debug(">> medical data send server: " + JSON.stringify(pMedicalData));
 			var restHelper = new clsRestHelper('medicalData','saveProcedure',pMedicalData, saveMedicalDataSuccess, saveMedicalDataFailure);
 			restHelper.callRestAdapter();
 		}
 		function saveMedicalDataSuccess(result){
 			var oResult = result.invocationResult;
+			 WL.Logger.debug(">> medical data: " + JSON.stringify(result));
 			if(oResult.isSuccessful)
 			{							
 				
@@ -95,5 +97,6 @@ $(document).on('pagebeforeshow','#DatosMedicos',function(e,data){
 			}
 		}
 		function saveMedicalDataFailure(error){
+			 WL.Logger.debug(">> medical data fail: " + error);
 			alert('Error al enviar al servidor, asegurese de contar con conexion a internet.');
 		}
