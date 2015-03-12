@@ -1,16 +1,9 @@
 <!-- --------------------- Thefts List ----------------------- -->
 <div data-role="page" id="{id}" class="ui-page-header-fixed ui-page-footer-fixed">
-	
 	<div role="main" class="ui-content">
 		<h3 id="h3TheftsList" align="center">Thefts list</h3>
 		<ul id="ulThefts" data-role="listview" data-inset="true">
-			<!-- <li>
-				<a href="#" onclick="alert('Details will be shown...');">
-					<img src="http://2.bp.blogspot.com/-88hrqbeIiTg/UqYYFWd15oI/AAAAAAAPZVM/y5ylC5nSK4E/s1600/Vossen-Wheels-2015-Mustang-Ford-%23.jpg" height="100%" width="100%">
-					<h2>Mustang</h2>
-					<p><span dat="listDate">Date: </span> 10/01/2015 |<span rep="sinister"> Report: </span> 00000004</p>
-				</a>
-			</li>-->
+
 		</ul>
 	</div>
 	
@@ -22,4 +15,12 @@
 			</ul>
 		</div><!-- /navbar -->
 	</div>	
+	
+	<div data-role="popup" id="popTheftMenu">
+		<ul data-role="listview" data-inset="true">
+			<li data-role="list-divider">Choose an action</li>
+			<li><a href="#" id="aTheftDetails">Details</a></li>
+			<li><a href="#" id="aTheftSendReport">Send Report</a></li>
+		</ul>
+	</div>
 </div>

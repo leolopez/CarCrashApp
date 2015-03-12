@@ -92,6 +92,33 @@ function initializeData()
     });
 	
 	checkUser();
+	
+	$("#ulThefts").on("taphold",function(event){
+		var item = $(event.target).closest("li").attr("item");
+		var auto = $(event.target).closest("li").attr("auto");
+		$("#aTheftDetails").attr("onclick","showDetails('theft', " + item + ", " + auto + ")");
+		$("#aTheftSendReport").attr("onclick","reSendReport(" + item + ")");
+		
+		if(item == 0){
+			$("#aTheftSendReport").css("display","none");
+		}else{
+			$("#aTheftSendReport").css("display","inline");
+		}
+		$("#popTheftMenu").popup("open");
+	});
+	$("#ulSinisters").on("taphold",function(event){
+		var item = $(event.target).closest("li").attr("item");
+		var auto = $(event.target).closest("li").attr("auto");
+		$("#aSinisterDetails").attr("onclick","showDetails('sinister', " + item + ", " + auto + ")");
+		$("#aSinisterSendReport").attr("onclick","reSendReport(" + item + ")");
+				
+		if(item == 0){
+			$("#aSinisterSendReport").css("display","none");
+		}else{
+			$("#aSinisterSendReport").css("display","inline");
+		}
+		$("#popSinisterMenu").popup("open");
+	});
 }
 
 function checkUser(){
