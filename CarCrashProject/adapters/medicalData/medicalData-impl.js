@@ -1,10 +1,4 @@
 var selectStatement = WL.Server.createSQLStatement("select * from MedicalData where Email=?");
-var existStatement = WL.Server.createSQLStatement("select * from MedicalData where  Email=?");
-
-var addStatement = WL.Server.createSQLStatement(" insert into MedicalData(Identifier,Email,InsuranceNumber,TypeBlood,Alergies,Ailment) values(?,?,?,?,?,?)" 
-	);
-var updateStatement = WL.Server.createSQLStatement(" update MedicalData set InsuranceNumber=?,TypeBlood=?,Alergies=?,Ailment=? where  Email=? ");
-
 
 	/************************************************************************
 	 * Implementation code for procedure - 'procedure2'
@@ -37,46 +31,13 @@ function getMedicalData(oData) {
 	return {data: oReturn};
 }
 
-function saveMedicalData(param1) {
-	var result = WL.Server.invokeSQLStatement({
-		preparedStatement : existStatement,
-		parameters : [ param1.email]
-	});
-	
-	if(result.resultSet!=undefined){
-	if(result.resultSet.length>0){
-		update(param1);
-	}else{
-		save(param1);
-	}
-	}		
-		return {data: result};
-}
-
-function save(pMedicalData){
-	return WL.Server.invokeSQLStatement({
-		preparedStatement : addStatement,
-		parameters : [  pMedicalData.identifier, pMedicalData.email,
-		               pMedicalData.IMSS, pMedicalData.bloodType, 
-		               pMedicalData.alergics, pMedicalData.clinicalConditions
-		                ]
-	});
-}
-function update(pMedicalData){
-	
-	return WL.Server.invokeSQLStatement({
-		preparedStatement : updateStatement,
-		parameters : [pMedicalData.IMSS, pMedicalData.bloodType,  
-		              pMedicalData.alergics, pMedicalData.clinicalConditions,
-		              pMedicalData.email ]
-	});
-}
 
 function saveProcedure(pMedicalData){
-	return WL.Server.invokeSQLStoredProcedure({
+	 return WL.Server.invokeSQLStoredProcedure({
 		procedure : "sp_saveVehiclesPolicies",
 		parameters : [  pMedicalData.email, pMedicalData.IMSS, pMedicalData.bloodType, 
 			               pMedicalData.alergics, pMedicalData.clinicalConditions, pMedicalData.identifier		              
 		                ]
 	});
+
 }

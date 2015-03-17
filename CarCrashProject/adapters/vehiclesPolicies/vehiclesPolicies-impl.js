@@ -4,10 +4,11 @@ var selectStatement = WL.Server.createSQLStatement("select v.Identifier as ident
 " v.ownerName as Holder, v.Cellphone as OwnerCellPhone, ipo.PolicyNumber as PolicyNo, LEFT(CONVERT(varchar, ipo.ExpirationDate, 120) ,10)  as PolicyDate,"+
 " ipo.IDInsuranceCompany as Insurance,  iag.FirstName as PolicyContactFirstName,"+
 " iag.LastName as PolicyContactLastName, iag.SecondLastName as PolicyContactSecondLastName,"+
-" iag.CellPhone as PolicyContactCellPhone, ico.Name as InsuranceName   from vehicle v"+
+" iag.CellPhone as PolicyContactCellPhone, ico.Name as InsuranceName, vb.Name as MarkName    from vehicle v"+
 " inner join InsurancePolicies ipo on v.email=ipo.email  and v.Identifier=ipo.Identifier "+
 " inner join InsuranceAgents  iag on iag.Email=ipo.Email  and iag.Identifier=v.Identifier "+
 " inner join InsuranceCompanies ico on ico.IDInsuranceCompanies=ipo.IDInsuranceCompany"+
+" inner join VehicleBrands vb on vb.IDVehicleBrands = v.IDVehicleBrand "+
 " where v.Email=?");
 
 var existStatement = WL.Server.createSQLStatement("select * from Vehicle where Identifier=? and Email=?");
@@ -59,7 +60,8 @@ function getVehiclesPolicies(oData) {
 					PolicyContactLastName:result.resultSet[i].PolicyContactLastName, 
 					PolicyContactSecondLastName:result.resultSet[i].PolicyContactSecondLastName,
 					PolicyContactCellPhone:result.resultSet[i].PolicyContactCellPhone,
-					InsuranceName:result.resultSet[i].InsuranceName
+					InsuranceName:result.resultSet[i].InsuranceName,
+					MarkName:result.resultSet[i].MarkName
 					
 					
 				};

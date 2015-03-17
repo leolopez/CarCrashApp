@@ -44,11 +44,17 @@ $(document).on('pagebeforeshow','#DatosMedicos',function(e,data){
 						
 					};
 					jsonStore.get();
-					
-					alert(Messages.msgDataSaved);
+										
+					navigator.notification.alert(
+							Messages.msgDataSaved,
+		        			function onSuccess() {
+		        			}, "Info");
 				};
-				jsonStore.fnFail=function (errorObject) {			
-					alert("Error: "+errorObject.msg);
+				jsonStore.fnFail=function (errorObject) {								
+					navigator.notification.alert(
+							errorObject.msg,
+		        			function onSuccess() {
+		        			}, "Error");
 				};
 				jsonStore.save();			
 			})
@@ -92,11 +98,17 @@ $(document).on('pagebeforeshow','#DatosMedicos',function(e,data){
 			{							
 				
 			}
-			else{
-				alert('Ocurrio un error, por favor intente de nuevo.');
+			else{			
+				navigator.notification.alert(
+						'Ocurrio un error, por favor intente de nuevo.',
+	        			function onSuccess() {
+	        			}, "Error");
 			}
 		}
 		function saveMedicalDataFailure(error){
-			 WL.Logger.debug(">> medical data fail: " + error);
-			alert('Error al enviar al servidor, asegurese de contar con conexion a internet.');
+			 WL.Logger.debug(">> medical data fail: " + error);			
+			navigator.notification.alert(
+					'Error al enviar al servidor, asegurese de contar con conexion a internet.',
+        			function onSuccess() {
+        			}, "Error");
 		}

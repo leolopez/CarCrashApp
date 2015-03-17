@@ -131,31 +131,7 @@ initLeftPanelTranslations()
 				 navigation=4;
 			break;	
 			}
-		}		 		
-		
-		  function getTest() {
-              var invocationData = {
-                      adapter : 'testXML',
-                      procedure : 'CreateXML',
-                      invocationContext: {}
-                  };
-
-              WL.Client.invokeProcedure(invocationData,{
-                  onSuccess : successHandler,
-                  onFailure : failureHandler,
-              });
-          }					
-          
-          function successHandler(result)
-          {
-          WL.Logger.debug("Retrieve success" +  JSON.stringify(result));
-          alert('res '+result.invocationResult.result);  
-          }
-          
-          function failureHandler(result)
-          {
-          	alert(result.errorMsg);
-          }	
+		}		 						 	
 		 
          function dataStatus(status){
         	 
@@ -252,7 +228,11 @@ initLeftPanelTranslations()
 				jsonStore.document["email"]=updateProfile[0].json.email;
 				
 				updateAccount(jsonStore.document);
-				alert(Messages.msgDataSaved);
+				navigator.notification.alert(
+						''+Messages.msgDataSaved,
+						function onSuccess() {
+						}, "Info");
+				
 			};
 			jsonStore.fnFail=function (errorObject) {			
 				alert("Error: "+errorObject.msg);
@@ -311,11 +291,17 @@ initLeftPanelTranslations()
         		
         	}
         	else{
-        		alert('Ocurrio un error, por favor intente de nuevo.');
+        		navigator.notification.alert(
+        				'Ocurrio un error al guardar datos. Intentelo de nuevo.',
+        				function onSuccess() {
+        				}, "Error");
         	}
         }
         function updateperfilFailure(error){
-        	alert('Error al actualizar en el servidor, asegurese de contar con conexion a internet.');
+        	navigator.notification.alert(
+        			'Error al actualizar en el servidor, asegurese de contar con conexion a internet.',
+        			function onSuccess() {
+        			}, "Error");
         }
         
  function validateProfile(){
