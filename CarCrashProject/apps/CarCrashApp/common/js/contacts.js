@@ -23,8 +23,11 @@ function validNewContact(){
 		contactUpdate=false;
 		contactSaved=false;
 		contactId=0;
-	}else{
-		alert("limite maximo de registros");
+	}else{	
+		navigator.notification.alert(
+				'limite maximo de registros',
+				function onSuccess() {
+				}, "Info");	
 	}
 },300);
 		}
@@ -121,12 +124,18 @@ function saveContact(){
 			savingContact();	
 		}		
 		
-	    } else {		    			
-			alert(Messages.requiredData);			
+	    } else {		    							
+			navigator.notification.alert(
+					Messages.requiredData+'',
+					function onSuccess() {
+					}, "Info");	
 	    }	
 	
-	}else{
-		alert("limite maximo de registros");
+	}else{		
+		navigator.notification.alert(
+				'limite maximo de registros',
+				function onSuccess() {
+				}, "Info");	
 	}
 	    
 	},300);
@@ -166,19 +175,28 @@ function savingContact(){
 
 function success(result){		
 	if(contactUpdate){						
-		 saveAllContacts();
-		alert(Messages.dataUpdate);
+		 saveAllContacts();		
+		navigator.notification.alert(
+				Messages.dataUpdate+'',
+				function onSuccess() {
+				}, "Info");	
 		contactSaved=false;
 	}else{
 		saveAllContacts();
-	alert(Messages.msgDataSaved);
+	navigator.notification.alert(
+			Messages.msgDataSaved+'',
+			function onSuccess() {
+			}, "Info");	
 	contactSaved=true;
 	}
 	location.href="#showContacts";	
 }
 
 function fail(errorObject){
-	alert("Error: "+errorObject.msg);
+	navigator.notification.alert(
+			"Error: "+errorObject.msg,
+			function onSuccess() {
+			}, "Error");
 }
 
 function initContacts(){
@@ -213,8 +231,11 @@ function initFail(result){
 
 function existSuccess(result){
 	
-	if(result.length>0){		
-		alert(Messages.dataExist);
+	if(result.length>0){			
+		navigator.notification.alert(
+				Messages.dataExist+'',
+				function onSuccess() {
+				}, "Info");
 	}else{
 		 savingContact();		
 	} 
@@ -294,8 +315,11 @@ function detailsSuccess(result){
 	contactUpdate=true;
 }
 
-function detailsFail(errorObject){
-	alert("Error: "+errorObject.msg);
+function detailsFail(errorObject){	
+	navigator.notification.alert(
+			"Error: "+errorObject.msg,
+			function onSuccess() {
+			}, "Error");
 }
 
 function initDelete(){
@@ -338,8 +362,11 @@ function deleteSuccess(result){
     saveAllContacts();
 }
 
-function deleteFail(errorObject){
-	alert("Error: "+errorObject.msg);
+function deleteFail(errorObject){	
+	navigator.notification.alert(
+			"Error: "+errorObject.msg,
+			function onSuccess() {
+			}, "Error");
 }
 
 function ondeletedUpdateList(list){
@@ -370,12 +397,18 @@ function saveEmergencyContactsSuccess(result){
 	{				
 		
 	}
-	else{
-		alert('Ocurrio un error, por favor intente de nuevo.');
+	else{		
+		navigator.notification.alert(
+				'Ocurrio un error, por favor intente de nuevo.',
+				function onSuccess() {
+				}, "Error");
 	}
 }
 function saveEmergencyContactsFailure(error){
-	alert('Error al actualizar, asegurese de contar con conexion a internet.');
+	navigator.notification.alert(
+			'Error al actualizar, asegurese de contar con conexion a internet.',
+			function onSuccess() {
+			}, "Error");
 }
 
 function deleteEmergencyContacts(pContact)
@@ -387,15 +420,24 @@ function deleteEmergencyContactsSuccess(result){
 	var oResult = result.invocationResult;
 	if(oResult.isSuccessful)
 	{			
-		 dataToConDelete=null;
-		alert("Registro eliminado con exito.");
+		 dataToConDelete=null;		
+		navigator.notification.alert(
+				'Registro eliminado con exito.',
+				function onSuccess() {
+				}, "Info");
 	}
-	else{
-		alert('Ocurrio un error, por favor intente de nuevo.');
+	else{	
+		navigator.notification.alert(
+				'Ocurrio un error, por favor intente de nuevo.',
+				function onSuccess() {
+				}, "Error");
 	}
 }
-function deleteEmergencyContactsFailure(error){
-	alert('Error al actualizar, asegurese de contar con conexion a internet.');
+function deleteEmergencyContactsFailure(error){	
+	navigator.notification.alert(
+			'Error al actualizar, asegurese de contar con conexion a internet.',
+			function onSuccess() {
+			}, "Error");
 }
 
 function updateEmergencyContacts(pContact)
@@ -410,8 +452,11 @@ function updateEmergencyContactsSuccess(result){
 		dataDetails=null;
 		
 	}
-	else{
-		alert('Ocurrio un error, por favor intente de nuevo.');
+	else{		
+		navigator.notification.alert(
+				'Ocurrio un error, por favor intente de nuevo.',
+				function onSuccess() {
+				}, "Error");
 	}
 }
 function updateEmergencyContactsFailure(error){
@@ -430,13 +475,20 @@ function saveAllContacts()
 	jsonStore.fnSuccess=function initSuccess(arrayResults){	
 		if(arrayResults.invocationResult.isSuccessful&&arrayResults.invocationResult.data.length>0){
 			//alert("enviado al servidor");
-		}else{
-			alert("No se ha podido enviar datos al servidor, intente mas tarde");
+		}else{		
+			navigator.notification.alert(
+					'No se ha podido enviar datos al servidor, intente mas tarde',
+					function onSuccess() {
+					}, "Error");
 		}
 		return true;
 	};
 	jsonStore.fnFail=function initFail(result){
-		alert("error");
+		
+		navigator.notification.alert(
+				'Error, intente mas tarde.',
+				function onSuccess() {
+				}, "Error");
 	};
 	jsonStore.saveToServer("EmergencyContacts", "saveEmergencyContacts");
 }
