@@ -469,7 +469,7 @@ function initAddPolicyTranslations(){
 	    $("#opNoneInsurance").text(Messages.opNoneInsurance); 
 	    $("#opNoneMark").text(Messages.opNoneMark); 
 	    $("#lblInsurance").text(Messages.lblInsurance);
-	    $("#txtPolicyDate").attr("placeholder", Messages.placeholderDateFormat); 
+	    //$("#txtPolicyDate").attr("placeholder", Messages.placeholderDateFormat); 
 	    $("#txtAseg").val(Messages.txtAseg);  
 	    $('a[id="aRecordsList"]').text(Messages.aRecordsList); 
 	    //Vehicle section
