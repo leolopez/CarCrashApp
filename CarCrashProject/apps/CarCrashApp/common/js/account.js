@@ -89,6 +89,7 @@ function accessSuccess(result){
 }
 
 function accessFailure(error){
+	 WL.Logger.debug(">> accessFailure : " + JSON.stringify(error));
 	navigator.notification.alert(
 	'Error, asegurese de contar con conexion a internet.',
 	function onSuccess() {
@@ -159,10 +160,15 @@ function logOut(){
 	navigator.notification.confirm(
 	"Are you sure?",
 	function onConfirm(result) {
-		if(result == 1){
+		if(result == 1){		
+			cleanProfileInputs();
 			WL.JSONStore.destroy();
 			location.href = "#login";
 		}
 	},
 	"Logout");
+}
+
+function cleanProfileInputs(){	
+	$('input').text("");
 }

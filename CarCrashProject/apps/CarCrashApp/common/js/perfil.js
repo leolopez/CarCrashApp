@@ -325,13 +325,43 @@ initLeftPanelTranslations()
     				txtCellPhone:{
     					required: true,
     					minlength: 10
-    				}
+    				},
+    				street_number:{
+    					required: true,
+    					minlength: 1
+    				},
+    				route:{
+    					required: true,
+    					minlength: 2
+    				},
+    				locality:{
+    					required: true,
+    					minlength: 2
+    				},
+    				administrative_area_level_1:{
+    					required: true,
+    					minlength: 2
+    				},
+    				postal_code:{
+    					required: true,
+    					minlength: 2
+    				},
+    				country:{
+    					required: true,
+    					minlength: 2
+    				},
     			},
     			 messages: {    				 
     				 txtProfileName:{ required: 'Ingrese un nombre',minlength:'Mínimo  2 caracteres'},
     				 txtFirstName: { required: 'Ingrese ap. paterno',minlength:'Mínimo  2 caracteres'},
      				txtLastName:{ required: 'Ingrese ap. materno',minlength:'Mínimo  2 caracteres'},
-     				txtCellPhone:{required: 'Ingrese numero de celular',minlength:'Mínimo 10 numeros'}
+     				txtCellPhone:{required: 'Ingrese numero de celular',minlength:'Mínimo 1 caracter'},
+     				street_number:{ required: 'Ingrese no. calle',minlength:'Mínimo  2 caracteres'},
+     				route: { required: 'Ingrese nombre calle',minlength:'Mínimo  2 caracteres'},
+     				locality:{ required: 'Ingrese ciudad',minlength:'Mínimo  2 caracteres'},
+     				administrative_area_level_1:{required: 'Ingrese estado',minlength:'Mínimo 2 caracteres'},
+     				postal_code:{ required: 'Ingrese código postal',minlength:'Mínimo  2 caracteres'},
+     				country: { required: 'Ingrese país',minlength:'Mínimo  2 caracteres'}
                  },
                  errorPlacement: function (error, element) {
                      error.insertAfter(element);

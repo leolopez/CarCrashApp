@@ -4,14 +4,22 @@ function MedicalData(){
 	this.alergics="";
 	this.clinicalConditions="";
 }		
-
+var bt="";
 $(document).on('pagebeforeshow','#DatosMedicos',function(e,data){   		    		
 	basicPersonFiltersNumber("txtNoIMSS");
 			initMedicalDataInfo(); 	 				  
 		});			
 		
-		function saveUserMedicalData(){			
+		function saveUserMedicalData(){	
+			bt=$('#selectBloodType option:selected');
+			if( bt.val().trim().length>0){
 			setMedicalDataTransaction();				
+			}else{
+				navigator.notification.alert(
+						Messages.opNoneBType,
+	        			function onSuccess() {
+	        			}, "Info");				
+			}
 		}
 		
 		function setMedicalDataTransaction(){						  			
@@ -22,7 +30,7 @@ $(document).on('pagebeforeshow','#DatosMedicos',function(e,data){
 				var jsonStore = new clsJsonStoreHelper();
 				jsonStore.collectionName="MedicalData";
 				jsonStore.document=
-					 {IMSS: $("#txtNoIMSS").val().trim(), bloodType: $("#txtBloodType").val().trim(), 
+					 {IMSS: $("#txtNoIMSS").val().trim(), bloodType: bt.val().trim(), 
 						 alergics: $("#txtAlergics").val().trim(), clinicalConditions: $("#txtClinicalConditions").val().trim()
 			        	};
 				jsonStore.id=0;
@@ -74,8 +82,10 @@ $(document).on('pagebeforeshow','#DatosMedicos',function(e,data){
 			jsonStore.id=0;
 			jsonStore.fnSuccess=function (arrayResults) {			
 				if(arrayResults.length>0){	
-					$("#txtNoIMSS").val(arrayResults[0].json.IMSS);
-					$("#txtBloodType").val(arrayResults[0].json.bloodType);
+					$("#txtNoIMSS").val(arrayResults[0].json.IMSS);										
+					$( "select" ).selectmenu();					 
+					  $('#selectBloodType option[value='+arrayResults[0].json.bloodType+']').prop('selected',true);
+					  $( "select" ).selectmenu( "refresh", true );					  
 					$("#txtAlergics").val(arrayResults[0].json.alergics);
 					$("#txtClinicalConditions").val(arrayResults[0].json.clinicalConditions);	
 				}
@@ -112,3 +122,5 @@ $(document).on('pagebeforeshow','#DatosMedicos',function(e,data){
         			function onSuccess() {
         			}, "Error");
 		}
+		
+		

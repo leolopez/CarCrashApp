@@ -7,7 +7,20 @@
     				<label id="lblIMSSNum">IMSS Number</label>    					    				    				    				     				
     				<input  id="txtNoIMSS" maxlength="15"  type="text"/>  
     				<label id="lblBloodType" >Blood type</label>    			    				
-    				<input  id="txtBloodType" maxlength="10" type="text" /> 
+    				 <form id="medicalForm"> 
+    				<div>		<select name="selectBloodType" id="selectBloodType">
+								<option id="opNoneBType" value="" selected="selected">Select blood type</option>
+								<option  value="AB+" >AB+</option>
+								<option  value="AB-" >AB-</option>
+								<option  value="A+" >A+</option>
+								<option  value="A-" >A-</option>
+								<option  value="B+" >B+</option>
+								<option  value="B-" >B-</option>
+								<option  value="O+" >O+</option>
+								<option  value="O-" >O-</option>
+								
+							</select></div>
+    				 </form>
     				<label id="lblAllergies">Allergies</label>    				 
     				<input  id="txtAlergics" maxlength="100" type="text" /> 
     				<label id="lblConditions">Conditions</label>    				 

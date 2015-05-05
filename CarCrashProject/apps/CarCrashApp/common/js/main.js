@@ -452,7 +452,8 @@ function initMedicalDataTranslations(){
 	    $("#lblAllergies").text(Messages.lblAllergies); 
 	    $("#lblConditions").text(Messages.lblConditions); 
 	    $("#h3MedicalData").text(Messages.h3MedicalData); 
-}
+	    $("#opNoneBType").text(Messages.opNoneBType); 	    
+} 
 function initMechanicDataTranslations(){
 	 $("#h3MechanicDetails").text(Messages.h3MechanicDetails); 
 	    $("#lblMechanicName").text(Messages.lblMechanicName); 

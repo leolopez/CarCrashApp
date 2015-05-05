@@ -21,7 +21,7 @@
     				<input id="txtLastName" name="txtLastName" type="text" maxlength="30" />
     				<label id="lblCellPhone">Cell Phone</label>      				 
     				<input  id="txtCellPhone" name="txtCellPhone" type="text" maxlength="12"/>
-    				</form>
+    				
     				<br>     				 
     				<hr></hr>  
     				<label id="lblAddress">Address</label>     				
@@ -30,17 +30,18 @@
              onFocus="geolocate()" type="text" maxlength="190"></input>
     </div>
 <label id="lblStreetNum" >Street number</label> 
-<input sel="pStreetNumber" style="font-weight: bold;" id="street_number" disabled="true"></input>
+<input sel="pStreetNumber" style="font-weight: bold;"  id="street_number" maxlength="20"  name="street_number" ></input>
 <label id="lblStreetNam">Street name</label> 
-<input sel="pStreet" style="font-weight: bold;" id="route" disabled="true"></input>
+<input sel="pStreet" style="font-weight: bold;" id="route" maxlength="255" name="route"></input>
 <label id="lblCity">City</label> 
-<input  sel="pCity" style="font-weight: bold;" id="locality" ></input>
+<input  sel="pCity" style="font-weight: bold;" id="locality" maxlength="50" name="locality" ></input>
 <label id="lblState">State</label> 
-<input  sel="pState" style="font-weight: bold;" id="administrative_area_level_1" disabled="true"></input>
+<input  sel="pState" style="font-weight: bold;" id="administrative_area_level_1" maxlength="50" name="administrative_area_level_1" ></input>
 <label id="lblZipCode">Zip code</label> 
-<input  sel="pPostalCode" style="font-weight: bold;" id="postal_code"  disabled="true"></input>
+<input  sel="pPostalCode" style="font-weight: bold;" id="postal_code" maxlength="20" name="postal_code"  ></input>
 <label id="lblCountry">Country</label> 
-<input  sel="pCountry" style="font-weight: bold;" id="country" disabled="true"></input>                      
+<input  sel="pCountry" style="font-weight: bold;" id="country" maxlength="50" name="country" ></input>   
+</form>                   
     				<br>     				 
     				<hr></hr>  
     				<br>   										    				

@@ -50,6 +50,7 @@ Messages = {
 		lblAllergies:"Alergias",	
 		lblConditions:"Padecimientos",
 		h3MedicalData:"Datos Medicos",
+		opNoneBType:"Seleccione tipo de sangre",
 		//Mechanic data translations
 		h3MechanicDetails:"Introduzca los datos de un mecánico automotriz.",
 		lblMechanicName:"Nombre",
@@ -260,6 +261,7 @@ Messages = {
 		Messages.lblAllergies = "Alergias";
 		Messages.lblConditions = "Padecimientos";
 		Messages.h3MedicalData="Datos Medicos";
+		Messages.opNoneBType="Seleccione tipo de sangre";
 	}
 	
 	function setSpanishMechanicData(){
@@ -411,6 +413,7 @@ function setEnglishProfile(){
 		Messages.lblAllergies = "Allergies";
 		Messages.lblConditions = "Conditions";
 		Messages.h3MedicalData="Medical Data";
+		Messages.opNoneBType="Select blood type";
 	}
 	
 	function setEnglishMechanicData(){
